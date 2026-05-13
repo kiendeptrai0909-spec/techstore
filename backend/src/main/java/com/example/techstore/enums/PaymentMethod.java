@@ -1,4 +1,6 @@
 package com.example.techstore.enums;
 
-public class PaymentMethod {
+public enum PaymentMethod {
+    COD,
+    MOCK_BANKING
 }

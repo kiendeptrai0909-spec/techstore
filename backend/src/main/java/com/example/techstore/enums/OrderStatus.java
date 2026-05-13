@@ -1,4 +1,9 @@
 package com.example.techstore.enums;
 
-public class OrderStatus {
+public enum OrderStatus {
+    PENDING,
+    CONFIRMED,
+    SHIPPING,
+    COMPLETED,
+    CANCELLED
 }

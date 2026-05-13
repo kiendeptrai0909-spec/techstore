@@ -1,4 +1,7 @@
 package com.example.techstore.enums;
 
-public class UserRole {
+public enum UserRole {
+    ROLE_CUSTOMER,
+    ROLE_STAFF,
+    ROLE_ADMIN
 }

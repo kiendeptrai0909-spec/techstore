@@ -1,4 +1,6 @@
 package com.example.techstore.enums;
 
-public class UserStatus {
+public enum UserStatus {
+    ACTIVE,
+    BLOCKED
 }
