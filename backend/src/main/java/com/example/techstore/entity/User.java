@@ -3,7 +3,7 @@ import com.example.techstore.enums.UserRole;
 import com.example.techstore.enums.UserStatus;
 import jakarta.persistence.*;
 import lombok.*;
-
+import com.example.techstore.enums.Gender;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -34,8 +34,9 @@ public class User {
     @Column(length = 20)
     private String phone;
 
+    @Enumerated(EnumType.STRING)
     @Column(length = 10)
-    private String gender;
+    private Gender gender;
 
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
