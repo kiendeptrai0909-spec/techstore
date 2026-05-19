@@ -1,4 +1,278 @@
 package com.example.techstore.service;
 
+import com.example.techstore.dto.request.CreateOrderRequest;
+import com.example.techstore.dto.response.OrderItemResponse;
+import com.example.techstore.dto.response.OrderResponse;
+import com.example.techstore.dto.response.PaymentResponse;
+import com.example.techstore.entity.Cart;
+import com.example.techstore.entity.CartItem;
+import com.example.techstore.entity.Order;
+import com.example.techstore.entity.OrderItem;
+import com.example.techstore.entity.Payment;
+import com.example.techstore.entity.Product;
+import com.example.techstore.entity.ProductVariant;
+import com.example.techstore.entity.User;
+import com.example.techstore.enums.OrderStatus;
+import com.example.techstore.enums.PaymentStatus;
+import com.example.techstore.enums.ProductStatus;
+import com.example.techstore.exception.BadRequestException;
+import com.example.techstore.exception.ResourceNotFoundException;
+import com.example.techstore.repository.CartItemRepository;
+import com.example.techstore.repository.CartRepository;
+import com.example.techstore.repository.OrderItemRepository;
+import com.example.techstore.repository.OrderRepository;
+import com.example.techstore.repository.PaymentRepository;
+import com.example.techstore.repository.ProductVariantRepository;
+import com.example.techstore.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Random;
+
+@Service
+@RequiredArgsConstructor
 public class OrderService {
+
+    private static final BigDecimal DEFAULT_SHIPPING_FEE = new BigDecimal("30000");
+
+    private final UserRepository userRepository;
+    private final CartRepository cartRepository;
+    private final CartItemRepository cartItemRepository;
+    private final OrderRepository orderRepository;
+    private final OrderItemRepository orderItemRepository;
+    private final PaymentRepository paymentRepository;
+    private final ProductVariantRepository productVariantRepository;
+
+    @Transactional
+    public OrderResponse createOrder(CreateOrderRequest request) {
+        User user = getCurrentUser();
+
+        Cart cart = cartRepository.findByUserId(user.getId())
+                .orElseThrow(() -> new BadRequestException("Giỏ hàng đang trống"));
+
+        List<CartItem> cartItems = cartItemRepository.findByCartId(cart.getId());
+
+        if (cartItems.isEmpty()) {
+            throw new BadRequestException("Giỏ hàng đang trống");
+        }
+
+        if (request.getCouponCode() != null && !request.getCouponCode().trim().isEmpty()) {
+            throw new BadRequestException("Chức năng mã giảm giá sẽ được xử lý ở bước sau");
+        }
+
+        validateCartItems(cartItems);
+
+        BigDecimal subtotalAmount = calculateSubtotal(cartItems);
+        BigDecimal shippingFee = DEFAULT_SHIPPING_FEE;
+        BigDecimal discountAmount = BigDecimal.ZERO;
+        BigDecimal finalAmount = subtotalAmount.add(shippingFee).subtract(discountAmount);
+
+        Order order = Order.builder()
+                .user(user)
+                .orderCode(generateOrderCode())
+                .subtotalAmount(subtotalAmount)
+                .shippingFee(shippingFee)
+                .discountAmount(discountAmount)
+                .finalAmount(finalAmount)
+                .orderStatus(OrderStatus.PENDING)
+                .receiverName(request.getReceiverName())
+                .receiverPhone(request.getReceiverPhone())
+                .shippingAddress(request.getShippingAddress())
+                .note(request.getNote())
+                .couponCode(null)
+                .build();
+
+        Order savedOrder = orderRepository.save(order);
+
+        for (CartItem cartItem : cartItems) {
+            ProductVariant variant = cartItem.getProductVariant();
+            Product product = variant.getProduct();
+
+            BigDecimal price = getFinalPrice(variant);
+            BigDecimal totalPrice = price.multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+
+            OrderItem orderItem = OrderItem.builder()
+                    .order(savedOrder)
+                    .product(product)
+                    .productVariant(variant)
+                    .productName(product.getName())
+                    .variantName(variant.getName())
+                    .productSku(variant.getSku())
+                    .price(price)
+                    .quantity(cartItem.getQuantity())
+                    .totalPrice(totalPrice)
+                    .build();
+
+            orderItemRepository.save(orderItem);
+
+            variant.setStock(variant.getStock() - cartItem.getQuantity());
+            productVariantRepository.save(variant);
+        }
+
+        Payment payment = Payment.builder()
+                .order(savedOrder)
+                .method(request.getPaymentMethod())
+                .status(PaymentStatus.PENDING)
+                .amount(finalAmount)
+                .transactionCode(null)
+                .paidAt(null)
+                .build();
+
+        paymentRepository.save(payment);
+
+        cartItemRepository.deleteByCartId(cart.getId());
+
+        return toOrderResponse(savedOrder);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<OrderResponse> getMyOrders(Pageable pageable) {
+        User user = getCurrentUser();
+
+        return orderRepository.findByUserId(user.getId(), pageable)
+                .map(this::toOrderResponse);
+    }
+
+    @Transactional(readOnly = true)
+    public OrderResponse getMyOrderById(Long orderId) {
+        User user = getCurrentUser();
+
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy đơn hàng"));
+
+        if (!order.getUser().getId().equals(user.getId())) {
+            throw new ResourceNotFoundException("Không tìm thấy đơn hàng");
+        }
+
+        return toOrderResponse(order);
+    }
+
+    private void validateCartItems(List<CartItem> cartItems) {
+        for (CartItem cartItem : cartItems) {
+            ProductVariant variant = cartItem.getProductVariant();
+            Product product = variant.getProduct();
+
+            if (product.getStatus() != ProductStatus.ACTIVE) {
+                throw new BadRequestException("Sản phẩm " + product.getName() + " hiện không hoạt động");
+            }
+
+            if (variant.getStatus() != ProductStatus.ACTIVE) {
+                throw new BadRequestException("Biến thể " + variant.getName() + " hiện không hoạt động");
+            }
+
+            if (cartItem.getQuantity() <= 0) {
+                throw new BadRequestException("Số lượng sản phẩm không hợp lệ");
+            }
+
+            if (cartItem.getQuantity() > variant.getStock()) {
+                throw new BadRequestException(
+                        "Sản phẩm " + product.getName() + " - " + variant.getName()
+                                + " chỉ còn " + variant.getStock() + " sản phẩm"
+                );
+            }
+        }
+    }
+
+    private BigDecimal calculateSubtotal(List<CartItem> cartItems) {
+        return cartItems.stream()
+                .map(cartItem -> {
+                    BigDecimal price = getFinalPrice(cartItem.getProductVariant());
+                    return price.multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+                })
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+    }
+
+    private BigDecimal getFinalPrice(ProductVariant variant) {
+        if (variant.getSalePrice() != null && variant.getSalePrice().compareTo(BigDecimal.ZERO) > 0) {
+            return variant.getSalePrice();
+        }
+
+        return variant.getPrice();
+    }
+
+    private String generateOrderCode() {
+        String datePart = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        Random random = new Random();
+
+        String orderCode;
+
+        do {
+            int randomNumber = random.nextInt(9000) + 1000;
+            orderCode = "ORD" + datePart + randomNumber;
+        } while (orderRepository.existsByOrderCode(orderCode));
+
+        return orderCode;
+    }
+
+    private User getCurrentUser() {
+        String email = SecurityContextHolder.getContext()
+                .getAuthentication()
+                .getName();
+
+        return userRepository.findByEmailIgnoreCase(email)
+                .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy tài khoản"));
+    }
+
+    private OrderResponse toOrderResponse(Order order) {
+        List<OrderItemResponse> items = orderItemRepository.findByOrderId(order.getId())
+                .stream()
+                .map(this::toOrderItemResponse)
+                .toList();
+
+        PaymentResponse payment = paymentRepository.findByOrderId(order.getId())
+                .map(this::toPaymentResponse)
+                .orElse(null);
+
+        return OrderResponse.builder()
+                .id(order.getId())
+                .orderCode(order.getOrderCode())
+                .orderStatus(order.getOrderStatus())
+                .subtotalAmount(order.getSubtotalAmount())
+                .shippingFee(order.getShippingFee())
+                .discountAmount(order.getDiscountAmount())
+                .finalAmount(order.getFinalAmount())
+                .couponCode(order.getCouponCode())
+                .receiverName(order.getReceiverName())
+                .receiverPhone(order.getReceiverPhone())
+                .shippingAddress(order.getShippingAddress())
+                .note(order.getNote())
+                .payment(payment)
+                .items(items)
+                .createdAt(order.getCreatedAt())
+                .updatedAt(order.getUpdatedAt())
+                .build();
+    }
+
+    private OrderItemResponse toOrderItemResponse(OrderItem orderItem) {
+        return OrderItemResponse.builder()
+                .id(orderItem.getId())
+                .productId(orderItem.getProduct().getId())
+                .productVariantId(orderItem.getProductVariant().getId())
+                .productName(orderItem.getProductName())
+                .variantName(orderItem.getVariantName())
+                .productSku(orderItem.getProductSku())
+                .price(orderItem.getPrice())
+                .quantity(orderItem.getQuantity())
+                .totalPrice(orderItem.getTotalPrice())
+                .build();
+    }
+
+    private PaymentResponse toPaymentResponse(Payment payment) {
+        return PaymentResponse.builder()
+                .id(payment.getId())
+                .method(payment.getMethod())
+                .status(payment.getStatus())
+                .amount(payment.getAmount())
+                .transactionCode(payment.getTransactionCode())
+                .paidAt(payment.getPaidAt())
+                .build();
+    }
 }
