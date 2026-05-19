@@ -26,24 +26,50 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
+
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
+
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
-                                "/api/v1/auth/**",
-                                "/api/v1/products/**",
-                                "/api/v1/categories/**",
-                                "/api/v1/brands/**",
+                                "/api/v1/auth/register",
+                                "/api/v1/auth/login"
+                        ).permitAll()
+
+                        .requestMatchers(
+                                "/api/v1/categories",
+                                "/api/v1/categories/**"
+                        ).permitAll()
+
+                        .requestMatchers(
+                                "/api/v1/brands",
+                                "/api/v1/brands/**"
+                        ).permitAll()
+
+                        .requestMatchers(
+                                "/api/v1/products",
+                                "/api/v1/products/**"
+                        ).permitAll()
+
+                        .requestMatchers(
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/v3/api-docs/**"
                         ).permitAll()
+
                         .requestMatchers("/api/v1/admin/**").hasAuthority("ROLE_ADMIN")
+
                         .anyRequest().authenticated()
                 )
+
                 .authenticationProvider(authenticationProvider())
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+
+                .addFilterBefore(
+                        jwtAuthenticationFilter,
+                        UsernamePasswordAuthenticationFilter.class
+                )
+
                 .build();
     }
 

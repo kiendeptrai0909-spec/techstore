@@ -6,23 +6,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findBySlug(String slug);
 
-    boolean existsByNameIgnoreCase(String name);
-
-    boolean existsBySlug(String slug);
-
-    Page<Product> findByStatus(ProductStatus status, Pageable pageable);
-
     Page<Product> findByFeaturedTrueAndStatus(ProductStatus status, Pageable pageable);
-
-    Page<Product> findByCategoryIdAndStatus(Long categoryId, ProductStatus status, Pageable pageable);
-
-    Page<Product> findByBrandIdAndStatus(Long brandId, ProductStatus status, Pageable pageable);
 
     @Query("""
             select distinct p
@@ -31,7 +22,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             left join p.brand b
             left join ProductVariant v on v.product = p
             where p.status = :status
-              and (:keyword is null or lower(p.name) like lower(concat('%', :keyword, '%')))
+              and (:keyword = '' or lower(p.name) like concat('%', :keyword, '%'))
               and (:categoryId is null or c.id = :categoryId)
               and (:brandId is null or b.id = :brandId)
               and (:minPrice is null or v.price >= :minPrice)
@@ -41,8 +32,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             String keyword,
             Long categoryId,
             Long brandId,
-            java.math.BigDecimal minPrice,
-            java.math.BigDecimal maxPrice,
+            BigDecimal minPrice,
+            BigDecimal maxPrice,
             ProductStatus status,
             Pageable pageable
     );
