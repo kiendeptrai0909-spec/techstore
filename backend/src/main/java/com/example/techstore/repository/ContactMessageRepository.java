@@ -8,7 +8,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ContactMessageRepository extends JpaRepository<ContactMessage, Long> {
 
-    Page<ContactMessage> findByStatus(ContactStatus status, Pageable pageable);
+    Page<ContactMessage> findByDeletedAtIsNull(Pageable pageable);
 
-    long countByStatus(ContactStatus status);
+    Page<ContactMessage> findByStatusAndDeletedAtIsNull(
+            ContactStatus status,
+            Pageable pageable
+    );
 }

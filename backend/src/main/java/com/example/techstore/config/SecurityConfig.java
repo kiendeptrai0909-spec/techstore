@@ -89,7 +89,10 @@ public class SecurityConfig {
 
                         // Admin APIs
                         .requestMatchers("/api/v1/admin/**").hasAuthority("ROLE_ADMIN")
-
+                        .requestMatchers(
+                                HttpMethod.POST,
+                                "/api/v1/contact-messages"
+                        ).permitAll()
                         // Other APIs require login
                         .anyRequest().authenticated()
                 )

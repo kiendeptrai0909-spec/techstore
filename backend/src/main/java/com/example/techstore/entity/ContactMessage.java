@@ -19,7 +19,7 @@ public class ContactMessage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "full_name", nullable = false, length = 100)
+    @Column(name = "full_name", nullable = false, length = 150)
     private String fullName;
 
     @Column(nullable = false, length = 150)
@@ -28,7 +28,7 @@ public class ContactMessage {
     @Column(length = 20)
     private String phone;
 
-    @Column(length = 255)
+    @Column(nullable = false, length = 255)
     private String subject;
 
     @Column(nullable = false, columnDefinition = "TEXT")
@@ -43,4 +43,7 @@ public class ContactMessage {
 
     @Column(name = "updated_at", insertable = false, updatable = false)
     private LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
 }
