@@ -6,6 +6,7 @@ import com.example.techstore.dto.response.OrderResponse;
 import com.example.techstore.dto.response.PaymentResponse;
 import com.example.techstore.entity.Cart;
 import com.example.techstore.entity.CartItem;
+import com.example.techstore.entity.Coupon;
 import com.example.techstore.entity.Order;
 import com.example.techstore.entity.OrderItem;
 import com.example.techstore.entity.Payment;
@@ -50,6 +51,7 @@ public class OrderService {
     private final OrderItemRepository orderItemRepository;
     private final PaymentRepository paymentRepository;
     private final ProductVariantRepository productVariantRepository;
+    private final CouponService couponService;
 
     @Transactional
     public OrderResponse createOrder(CreateOrderRequest request) {
@@ -64,19 +66,29 @@ public class OrderService {
             throw new BadRequestException("Giỏ hàng đang trống");
         }
 
-        if (request.getCouponCode() != null && !request.getCouponCode().trim().isEmpty()) {
-            throw new BadRequestException("Chức năng mã giảm giá sẽ được xử lý ở bước sau");
-        }
-
         validateCartItems(cartItems);
 
         BigDecimal subtotalAmount = calculateSubtotal(cartItems);
         BigDecimal shippingFee = DEFAULT_SHIPPING_FEE;
-        BigDecimal discountAmount = BigDecimal.ZERO;
-        BigDecimal finalAmount = subtotalAmount.add(shippingFee).subtract(discountAmount);
+
+        Coupon coupon = couponService.getValidCouponForCheckout(
+                request.getCouponCode(),
+                subtotalAmount
+        );
+
+        BigDecimal discountAmount = couponService.calculateDiscountAmount(
+                coupon,
+                subtotalAmount
+        );
+
+        BigDecimal finalAmount = subtotalAmount
+                .add(shippingFee)
+                .subtract(discountAmount);
 
         Order order = Order.builder()
                 .user(user)
+                .coupon(coupon)
+                .couponCode(coupon != null ? coupon.getCode() : null)
                 .orderCode(generateOrderCode())
                 .subtotalAmount(subtotalAmount)
                 .shippingFee(shippingFee)
@@ -87,7 +99,6 @@ public class OrderService {
                 .receiverPhone(request.getReceiverPhone())
                 .shippingAddress(request.getShippingAddress())
                 .note(request.getNote())
-                .couponCode(null)
                 .build();
 
         Order savedOrder = orderRepository.save(order);
@@ -127,6 +138,8 @@ public class OrderService {
                 .build();
 
         paymentRepository.save(payment);
+
+        couponService.markCouponAsUsed(coupon, user, savedOrder);
 
         cartItemRepository.deleteByCartId(cart.getId());
 
