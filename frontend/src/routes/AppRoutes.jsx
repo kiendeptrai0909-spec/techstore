@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router'
 import MainLayout from '../layouts/MainLayout'
 import HomePage from '../pages/public/HomePage'
-
+import ProductListPage from '../pages/public/ProductListPage'
 function PlaceholderPage({ title }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16">
@@ -16,10 +16,7 @@ function AppRoutes() {
     <Routes>
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
-        <Route
-          path="/products"
-          element={<PlaceholderPage title="Danh sách sản phẩm" />}
-        />
+        <Route path="/products" element={<ProductListPage />} />
         <Route
           path="/products/:slug"
           element={<PlaceholderPage title="Chi tiết sản phẩm" />}
