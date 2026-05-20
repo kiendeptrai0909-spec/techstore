@@ -11,6 +11,9 @@ import CheckoutPage from '../pages/user/CheckoutPage'
 import OrderSuccessPage from '../pages/user/OrderSuccessPage'
 import MyOrdersPage from '../pages/user/MyOrdersPage'
 import OrderDetailPage from '../pages/user/OrderDetailPage'
+import AdminProtectedRoute from '../components/common/AdminProtectedRoute'
+import AdminLayout from '../layouts/AdminLayout'
+import AdminDashboardPage from '../pages/admin/AdminDashboardPage'
 function PlaceholderPage({ title }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16">
@@ -40,6 +43,16 @@ function AppRoutes() {
         />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route
+  path="/admin"
+  element={
+    <AdminProtectedRoute>
+      <AdminLayout />
+    </AdminProtectedRoute>
+  }
+>
+  <Route index element={<AdminDashboardPage />} />
+</Route>
         <Route
           path="/account/orders"
           element={
