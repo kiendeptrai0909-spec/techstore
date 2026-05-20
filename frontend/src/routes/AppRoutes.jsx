@@ -22,6 +22,8 @@ import AdminCouponPage from '../pages/admin/AdminCouponPage'
 import AdminCouponFormPage from '../pages/admin/AdminCouponFormPage'
 import AdminBannerPage from '../pages/admin/AdminBannerPage'
 import AdminBannerFormPage from '../pages/admin/AdminBannerFormPage'
+import AdminNewsPage from '../pages/admin/AdminNewsPage'
+import AdminNewsFormPage from '../pages/admin/AdminNewsFormPage'
 function PlaceholderPage({ title }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16">
@@ -71,6 +73,9 @@ function AppRoutes() {
           <Route path="banners" element={<AdminBannerPage />} />
           <Route path="banners/create" element={<AdminBannerFormPage />} />
           <Route path="banners/:bannerId/edit" element={<AdminBannerFormPage />} />
+          <Route path="news" element={<AdminNewsPage />} />
+          <Route path="news/create" element={<AdminNewsFormPage />} />
+          <Route path="news/:newsId/edit" element={<AdminNewsFormPage />} />
         </Route>
         <Route
           path="/account/orders"
