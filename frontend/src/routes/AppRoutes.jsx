@@ -24,6 +24,8 @@ import AdminBannerPage from '../pages/admin/AdminBannerPage'
 import AdminBannerFormPage from '../pages/admin/AdminBannerFormPage'
 import AdminNewsPage from '../pages/admin/AdminNewsPage'
 import AdminNewsFormPage from '../pages/admin/AdminNewsFormPage'
+import AdminFaqPage from '../pages/admin/AdminFaqPage'
+import AdminFaqFormPage from '../pages/admin/AdminFaqFormPage'
 function PlaceholderPage({ title }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16">
@@ -76,6 +78,9 @@ function AppRoutes() {
           <Route path="news" element={<AdminNewsPage />} />
           <Route path="news/create" element={<AdminNewsFormPage />} />
           <Route path="news/:newsId/edit" element={<AdminNewsFormPage />} />
+          <Route path="faqs" element={<AdminFaqPage />} />
+<Route path="faqs/create" element={<AdminFaqFormPage />} />
+<Route path="faqs/:faqId/edit" element={<AdminFaqFormPage />} />
         </Route>
         <Route
           path="/account/orders"
