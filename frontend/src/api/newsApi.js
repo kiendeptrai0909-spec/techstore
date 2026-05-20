@@ -6,6 +6,6 @@ export const newsApi = {
   },
 
   getNewsBySlug: (slug) => {
-    return axiosClient.get(`/news/${slug}`)
+    return axiosClient.get(`/news/slug/${slug}`)
   },
 }

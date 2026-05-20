@@ -30,6 +30,8 @@ import AdminContactMessagePage from '../pages/admin/AdminContactMessagePage'
 import AdminContactMessageDetailPage from '../pages/admin/AdminContactMessageDetailPage'
 import FaqPage from '../pages/public/FaqPage'
 import ContactPage from '../pages/public/ContactPage'
+import NewsListPage from '../pages/public/NewsListPage'
+import NewsDetailPage from '../pages/public/NewsDetailPage'
 function PlaceholderPage({ title }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16">
@@ -46,7 +48,8 @@ function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/products" element={<ProductListPage />} />
         <Route path="/products/:slug" element={<ProductDetailPage />} />
-        <Route path="/news" element={<PlaceholderPage title="Tin tức" />} />
+        <Route path="/news" element={<NewsListPage />} />
+        <Route path="/news/:slug" element={<NewsDetailPage />} />
         <Route path="/faqs" element={<FaqPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route
