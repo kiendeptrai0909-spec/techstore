@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
+import { useAuth } from '../../contexts/AuthContext'
 import {
   Menu,
   Search,
@@ -18,7 +19,8 @@ import {
 
 function Header() {
   const navigate = useNavigate()
-  const token = localStorage.getItem('accessToken')
+  const { user, isAuthenticated, logout } = useAuth()
+
   const [keyword, setKeyword] = useState('')
 
   const handleSearch = (event) => {
@@ -35,20 +37,19 @@ function Header() {
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('accessToken')
-    localStorage.removeItem('user')
+    logout()
     navigate('/login')
   }
 
   return (
     <header className="sticky top-0 z-50 shadow-sm">
-      <div className="bg-blue-600 py-2 text-center text-base font-black text-white md:text-2xl">
+      <div className="bg-blue-600 py-2 text-center text-sm font-black text-white md:text-xl">
         MUA PC | TECHSTORE | TẶNG MÀN OLED 240Hz
       </div>
 
       <div className="bg-red-600 text-white">
         <div className="mx-auto flex max-w-7xl items-center gap-3 px-4 py-3">
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex shrink-0 items-center gap-2">
             <div className="flex h-10 w-10 items-center justify-center rounded bg-white text-xl font-black text-red-600">
               T
             </div>
@@ -63,10 +64,13 @@ function Header() {
             </div>
           </Link>
 
-          <button className="hidden items-center gap-2 rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800 md:flex">
+          <Link
+            to="/products"
+            className="hidden shrink-0 items-center gap-2 rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800 md:flex"
+          >
             <Menu size={19} />
             Danh mục
-          </button>
+          </Link>
 
           <form
             onSubmit={handleSearch}
@@ -79,15 +83,16 @@ function Header() {
               placeholder="Bạn cần tìm gì?"
               className="h-full flex-1 px-4 text-sm text-gray-800 outline-none"
             />
+
             <button
               type="submit"
-              className="flex h-full w-12 items-center justify-center text-gray-700 hover:bg-gray-100"
+              className="flex h-full w-12 shrink-0 items-center justify-center text-gray-700 hover:bg-gray-100"
             >
               <Search size={21} />
             </button>
           </form>
 
-          <div className="hidden items-center gap-2 text-sm font-bold lg:flex">
+          <div className="hidden shrink-0 items-center gap-2 text-sm font-bold lg:flex">
             <Phone size={22} />
             <span className="leading-tight">
               Hotline
@@ -96,7 +101,7 @@ function Header() {
             </span>
           </div>
 
-          <div className="hidden items-center gap-2 text-sm font-bold lg:flex">
+          <div className="hidden shrink-0 items-center gap-2 text-sm font-bold lg:flex">
             <MapPin size={22} />
             <span className="leading-tight">
               Hệ thống
@@ -107,7 +112,7 @@ function Header() {
 
           <Link
             to="/account/orders"
-            className="hidden items-center gap-2 text-sm font-bold lg:flex"
+            className="hidden shrink-0 items-center gap-2 text-sm font-bold lg:flex"
           >
             <ClipboardList size={22} />
             <span className="leading-tight">
@@ -119,7 +124,7 @@ function Header() {
 
           <Link
             to="/cart"
-            className="relative flex items-center gap-2 rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800"
+            className="relative flex shrink-0 items-center gap-2 rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800"
           >
             <ShoppingCart size={22} />
             <span className="hidden sm:inline">
@@ -127,23 +132,35 @@ function Header() {
               <br />
               hàng
             </span>
+
             <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-yellow-300 text-xs font-black text-red-600">
               0
             </span>
           </Link>
 
-          {token ? (
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800"
-            >
-              <LogOut size={22} />
-              <span className="hidden sm:inline">Thoát</span>
-            </button>
+          {isAuthenticated ? (
+            <div className="flex shrink-0 items-center gap-2">
+              <Link
+                to="/account/orders"
+                className="hidden max-w-[130px] truncate rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800 md:block"
+                title={user?.fullName || user?.email || 'Tài khoản'}
+              >
+                {user?.fullName || 'Tài khoản'}
+              </Link>
+
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="flex items-center gap-2 rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800"
+              >
+                <LogOut size={22} />
+                <span className="hidden sm:inline">Thoát</span>
+              </button>
+            </div>
           ) : (
             <Link
               to="/login"
-              className="flex items-center gap-2 rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800"
+              className="flex shrink-0 items-center gap-2 rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800"
             >
               <User size={22} />
               <span>
@@ -158,27 +175,42 @@ function Header() {
 
       <div className="border-b bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between overflow-x-auto px-4 py-2 text-sm font-semibold text-gray-800">
-          <Link to="/products" className="flex min-w-max items-center gap-2 px-3 hover:text-red-600">
+          <Link
+            to="/products"
+            className="flex min-w-max items-center gap-2 px-3 hover:text-red-600"
+          >
             <Wrench size={17} />
             BUILD PC tặng màn hình 240Hz
           </Link>
 
-          <Link to="/products" className="flex min-w-max items-center gap-2 px-3 hover:text-red-600">
+          <Link
+            to="/products?keyword=thanh-ly"
+            className="flex min-w-max items-center gap-2 px-3 hover:text-red-600"
+          >
             <RefreshCcw size={17} />
             Xả Kho Thanh Lý
           </Link>
 
-          <Link to="/news" className="flex min-w-max items-center gap-2 px-3 hover:text-red-600">
+          <Link
+            to="/news"
+            className="flex min-w-max items-center gap-2 px-3 hover:text-red-600"
+          >
             <Newspaper size={17} />
             Tin tức
           </Link>
 
-          <Link to="/contact" className="flex min-w-max items-center gap-2 px-3 hover:text-red-600">
+          <Link
+            to="/contact"
+            className="flex min-w-max items-center gap-2 px-3 hover:text-red-600"
+          >
             <Truck size={17} />
             Dịch vụ kỹ thuật tại nhà
           </Link>
 
-          <Link to="/faqs" className="flex min-w-max items-center gap-2 px-3 hover:text-red-600">
+          <Link
+            to="/faqs"
+            className="flex min-w-max items-center gap-2 px-3 hover:text-red-600"
+          >
             <ShieldCheck size={17} />
             Tra cứu bảo hành
           </Link>

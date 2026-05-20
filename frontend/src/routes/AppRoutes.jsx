@@ -3,6 +3,8 @@ import MainLayout from '../layouts/MainLayout'
 import HomePage from '../pages/public/HomePage'
 import ProductListPage from '../pages/public/ProductListPage'
 import ProductDetailPage from '../pages/public/ProductDetailPage'
+import LoginPage from '../pages/auth/LoginPage'
+import RegisterPage from '../pages/auth/RegisterPage'
 function PlaceholderPage({ title }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16">
@@ -23,11 +25,8 @@ function AppRoutes() {
         <Route path="/faqs" element={<PlaceholderPage title="FAQ" />} />
         <Route path="/contact" element={<PlaceholderPage title="Liên hệ" />} />
         <Route path="/cart" element={<PlaceholderPage title="Giỏ hàng" />} />
-        <Route path="/login" element={<PlaceholderPage title="Đăng nhập" />} />
-        <Route
-          path="/register"
-          element={<PlaceholderPage title="Đăng ký" />}
-        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route
           path="/account/orders"
           element={<PlaceholderPage title="Đơn hàng của tôi" />}
