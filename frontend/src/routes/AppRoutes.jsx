@@ -5,6 +5,8 @@ import ProductListPage from '../pages/public/ProductListPage'
 import ProductDetailPage from '../pages/public/ProductDetailPage'
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
+import CartPage from '../pages/user/CartPage'
+import ProtectedRoute from '../components/common/ProtectedRoute'
 function PlaceholderPage({ title }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16">
@@ -24,7 +26,14 @@ function AppRoutes() {
         <Route path="/news" element={<PlaceholderPage title="Tin tức" />} />
         <Route path="/faqs" element={<PlaceholderPage title="FAQ" />} />
         <Route path="/contact" element={<PlaceholderPage title="Liên hệ" />} />
-        <Route path="/cart" element={<PlaceholderPage title="Giỏ hàng" />} />
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <CartPage />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route
