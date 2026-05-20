@@ -3,10 +3,12 @@ import { Link, useParams } from 'react-router'
 import { ArrowLeft, MapPin, PackageCheck, Phone, User } from 'lucide-react'
 
 import { orderApi } from '../../api/orderApi'
+import { reviewApi } from '../../api/reviewApi'
 import { formatCurrency } from '../../utils/formatCurrency'
 import OrderStatusBadge from '../../components/order/OrderStatusBadge'
 import PaymentStatusBadge from '../../components/order/PaymentStatusBadge'
 import OrderItemList from '../../components/order/OrderItemList'
+import ReviewModal from '../../components/review/ReviewModal'
 
 function OrderDetailPage() {
   const { orderId } = useParams()
@@ -15,21 +17,25 @@ function OrderDetailPage() {
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('')
 
-  useEffect(() => {
-    const fetchOrder = async () => {
-      setLoading(true)
-      setMessage('')
+  const [reviewProduct, setReviewProduct] = useState(null)
+  const [reviewSubmitting, setReviewSubmitting] = useState(false)
+  const [reviewMessage, setReviewMessage] = useState('')
 
-      try {
-        const data = await orderApi.getOrderById(orderId)
-        setOrder(data)
-      } catch (error) {
-        setMessage(error.message || 'Không thể tải chi tiết đơn hàng')
-      } finally {
-        setLoading(false)
-      }
+  const fetchOrder = async () => {
+    setLoading(true)
+    setMessage('')
+
+    try {
+      const data = await orderApi.getOrderById(orderId)
+      setOrder(data)
+    } catch (error) {
+      setMessage(error.message || 'Không thể tải chi tiết đơn hàng')
+    } finally {
+      setLoading(false)
     }
+  }
 
+  useEffect(() => {
     fetchOrder()
   }, [orderId])
 
@@ -48,6 +54,43 @@ function OrderDetailPage() {
 
     return []
   }, [order])
+
+  const handleOpenReview = (item) => {
+    setReviewProduct(item)
+    setReviewMessage('')
+  }
+
+  const handleCloseReview = () => {
+    if (reviewSubmitting) {
+      return
+    }
+
+    setReviewProduct(null)
+  }
+
+  const handleSubmitReview = async ({ rating, comment }) => {
+    if (!reviewProduct?.productId) {
+      setReviewMessage('Không xác định được sản phẩm cần đánh giá')
+      return
+    }
+
+    setReviewSubmitting(true)
+    setReviewMessage('')
+
+    try {
+      await reviewApi.createReview(reviewProduct.productId, {
+        rating,
+        comment,
+      })
+
+      setReviewProduct(null)
+      setReviewMessage('Đánh giá sản phẩm thành công')
+    } catch (error) {
+      setReviewMessage(error.message || 'Không thể gửi đánh giá')
+    } finally {
+      setReviewSubmitting(false)
+    }
+  }
 
   if (loading) {
     return (
@@ -72,9 +115,7 @@ function OrderDetailPage() {
               Không tìm thấy đơn hàng
             </h1>
 
-            {message && (
-              <p className="mt-2 text-red-600">{message}</p>
-            )}
+            {message && <p className="mt-2 text-red-600">{message}</p>}
 
             <Link
               to="/account/orders"
@@ -108,6 +149,14 @@ function OrderDetailPage() {
 
   return (
     <div className="bg-[#e9e9e9]">
+      <ReviewModal
+        open={Boolean(reviewProduct)}
+        product={reviewProduct}
+        onClose={handleCloseReview}
+        onSubmit={handleSubmitReview}
+        submitting={reviewSubmitting}
+      />
+
       <div className="mx-auto max-w-7xl px-4 py-6">
         <div className="mb-4 rounded-md bg-white p-4 shadow-sm">
           <Link
@@ -139,6 +188,18 @@ function OrderDetailPage() {
           </div>
         </div>
 
+        {reviewMessage && (
+          <div className="mb-4 rounded border border-green-200 bg-green-50 px-4 py-3 text-sm font-semibold text-green-700">
+            {reviewMessage}
+          </div>
+        )}
+
+        {message && (
+          <div className="mb-4 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">
+            {message}
+          </div>
+        )}
+
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_370px]">
           <div className="space-y-5">
             <div className="rounded-md bg-white p-5 shadow-sm">
@@ -147,7 +208,11 @@ function OrderDetailPage() {
                 Sản phẩm trong đơn hàng
               </h2>
 
-              <OrderItemList items={items} orderStatus={orderStatus} />
+              <OrderItemList
+                items={items}
+                orderStatus={orderStatus}
+                onOpenReview={handleOpenReview}
+              />
             </div>
 
             <div className="rounded-md bg-white p-5 shadow-sm">
@@ -203,10 +268,7 @@ function OrderDetailPage() {
                   value={<PaymentStatusBadge status={paymentStatus} />}
                 />
 
-                <SummaryRow
-                  label="Tạm tính"
-                  value={formatCurrency(subtotal)}
-                />
+                <SummaryRow label="Tạm tính" value={formatCurrency(subtotal)} />
 
                 <SummaryRow
                   label="Giảm giá"
@@ -247,11 +309,9 @@ function OrderDetailPage() {
                 />
 
                 <TimelineItem
-                  active={[
-                    'CONFIRMED',
-                    'SHIPPING',
-                    'COMPLETED',
-                  ].includes(orderStatus)}
+                  active={['CONFIRMED', 'SHIPPING', 'COMPLETED'].includes(
+                    orderStatus
+                  )}
                   title="Đã xác nhận"
                   description="Shop đã xác nhận thông tin đơn hàng."
                 />

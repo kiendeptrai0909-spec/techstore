@@ -1,7 +1,8 @@
 import { Link } from 'react-router'
+import { Star } from 'lucide-react'
 import { formatCurrency } from '../../utils/formatCurrency'
 
-function OrderItemList({ items = [], orderStatus }) {
+function OrderItemList({ items = [], orderStatus, onOpenReview }) {
   if (items.length === 0) {
     return (
       <div className="rounded border border-dashed p-6 text-center text-gray-500">
@@ -14,34 +15,41 @@ function OrderItemList({ items = [], orderStatus }) {
     <div className="space-y-3">
       {items.map((item) => {
         const id = item.id || item.orderItemId
-        const productId = item.productId
-        const productSlug = item.productSlug || item.slug
+        const productId = item.productId || item.product?.id
+        const productSlug = item.productSlug || item.slug || item.product?.slug
 
-        const productName = item.productName || item.name || 'Sản phẩm'
+        const productName =
+          item.productName || item.name || item.product?.name || 'Sản phẩm'
+
         const variantName =
-          item.variantName || item.productVariantName || item.sku
-        const productSku = item.productSku || item.sku
+          item.variantName ||
+          item.productVariantName ||
+          item.sku ||
+          item.productVariant?.sku
+
+        const productSku =
+          item.productSku || item.sku || item.productVariant?.sku
 
         const imageUrl =
           item.thumbnailUrl ||
           item.imageUrl ||
           item.productImage ||
+          item.productVariant?.thumbnailUrl ||
+          item.product?.thumbnailUrl ||
           'https://placehold.co/300x300?text=TechStore'
 
         const quantity = item.quantity || 1
         const unitPrice = item.unitPrice || item.price || item.salePrice || 0
         const totalPrice = item.totalPrice || unitPrice * quantity
 
-        const productUrl = productSlug
-          ? `/products/${productSlug}`
-          : productId
-            ? `/products`
-            : '/products'
+        const productUrl = productSlug ? `/products/${productSlug}` : '/products'
+
+        const canReview = orderStatus === 'COMPLETED' && productId
 
         return (
           <div
             key={id}
-            className="grid gap-4 rounded border bg-white p-4 md:grid-cols-[100px_minmax(0,1fr)_160px]"
+            className="grid gap-4 rounded border bg-white p-4 md:grid-cols-[100px_minmax(0,1fr)_170px]"
           >
             <Link
               to={productUrl}
@@ -82,8 +90,20 @@ function OrderItemList({ items = [], orderStatus }) {
               {orderStatus === 'COMPLETED' && (
                 <button
                   type="button"
-                  className="mt-3 rounded bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700"
+                  disabled={!canReview}
+                  onClick={() =>
+                    onOpenReview({
+                      ...item,
+                      productId,
+                      productName,
+                      productSlug,
+                      thumbnailUrl: imageUrl,
+                      variantName,
+                    })
+                  }
+                  className="mt-3 inline-flex items-center gap-2 rounded bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-300"
                 >
+                  <Star size={16} />
                   Đánh giá sản phẩm
                 </button>
               )}
