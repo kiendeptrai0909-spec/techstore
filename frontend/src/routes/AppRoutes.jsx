@@ -18,6 +18,8 @@ import AdminOrderPage from '../pages/admin/AdminOrderPage'
 import AdminOrderDetailPage from '../pages/admin/AdminOrderDetailPage'
 import AdminProductPage from '../pages/admin/AdminProductPage'
 import AdminProductFormPage from '../pages/admin/AdminProductFormPage'
+import AdminCouponPage from '../pages/admin/AdminCouponPage'
+import AdminCouponFormPage from '../pages/admin/AdminCouponFormPage'
 function PlaceholderPage({ title }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16">
@@ -61,6 +63,9 @@ function AppRoutes() {
           <Route path="products" element={<AdminProductPage />} />
           <Route path="products/create" element={<AdminProductFormPage />} />
           <Route path="products/:productId/edit" element={<AdminProductFormPage />} />
+          <Route path="coupons" element={<AdminCouponPage />} />
+          <Route path="coupons/create" element={<AdminCouponFormPage />} />
+          <Route path="coupons/:couponId/edit" element={<AdminCouponFormPage />} />
         </Route>
         <Route
           path="/account/orders"
