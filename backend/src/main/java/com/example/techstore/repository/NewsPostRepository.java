@@ -10,9 +10,19 @@ import java.util.Optional;
 
 public interface NewsPostRepository extends JpaRepository<NewsPost, Long> {
 
-    Optional<NewsPost> findBySlug(String slug);
+    Page<NewsPost> findByDeletedAtIsNull(Pageable pageable);
 
-    boolean existsBySlug(String slug);
+    Page<NewsPost> findByStatusAndDeletedAtIsNull(
+            NewsStatus status,
+            Pageable pageable
+    );
 
-    Page<NewsPost> findByStatus(NewsStatus status, Pageable pageable);
+    Optional<NewsPost> findBySlugIgnoreCase(String slug);
+
+    Optional<NewsPost> findBySlugIgnoreCaseAndStatusAndDeletedAtIsNull(
+            String slug,
+            NewsStatus status
+    );
+
+    boolean existsBySlugIgnoreCase(String slug);
 }
