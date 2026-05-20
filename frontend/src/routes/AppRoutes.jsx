@@ -7,6 +7,8 @@ import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
 import CartPage from '../pages/user/CartPage'
 import ProtectedRoute from '../components/common/ProtectedRoute'
+import CheckoutPage from '../pages/user/CheckoutPage'
+import OrderSuccessPage from '../pages/user/OrderSuccessPage'
 function PlaceholderPage({ title }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16">
@@ -39,6 +41,23 @@ function AppRoutes() {
         <Route
           path="/account/orders"
           element={<PlaceholderPage title="Đơn hàng của tôi" />}
+        />
+        <Route
+          path="/checkout"
+          element={
+            <ProtectedRoute>
+              <CheckoutPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/orders/success/:orderId"
+          element={
+            <ProtectedRoute>
+              <OrderSuccessPage />
+            </ProtectedRoute>
+          }
         />
       </Route>
     </Routes>
