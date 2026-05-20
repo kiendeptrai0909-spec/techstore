@@ -16,6 +16,8 @@ import AdminLayout from '../layouts/AdminLayout'
 import AdminDashboardPage from '../pages/admin/AdminDashboardPage'
 import AdminOrderPage from '../pages/admin/AdminOrderPage'
 import AdminOrderDetailPage from '../pages/admin/AdminOrderDetailPage'
+import AdminProductPage from '../pages/admin/AdminProductPage'
+import AdminProductFormPage from '../pages/admin/AdminProductFormPage'
 function PlaceholderPage({ title }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16">
@@ -56,6 +58,9 @@ function AppRoutes() {
           <Route index element={<AdminDashboardPage />} />
           <Route path="orders" element={<AdminOrderPage />} />
           <Route path="orders/:orderId" element={<AdminOrderDetailPage />} />
+          <Route path="products" element={<AdminProductPage />} />
+          <Route path="products/create" element={<AdminProductFormPage />} />
+          <Route path="products/:productId/edit" element={<AdminProductFormPage />} />
         </Route>
         <Route
           path="/account/orders"
