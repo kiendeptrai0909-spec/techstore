@@ -15,6 +15,10 @@ import {
   Newspaper,
   Truck,
   RefreshCcw,
+  UserCircle,
+  PackageSearch,
+  LayoutDashboard,
+  ChevronDown,
 } from 'lucide-react'
 
 function Header() {
@@ -22,6 +26,7 @@ function Header() {
   const { user, isAuthenticated, logout } = useAuth()
 
   const [keyword, setKeyword] = useState('')
+  const [accountMenuOpen, setAccountMenuOpen] = useState(false)
 
   const handleSearch = (event) => {
     event.preventDefault()
@@ -37,9 +42,13 @@ function Header() {
   }
 
   const handleLogout = () => {
+    setAccountMenuOpen(false)
     logout()
     navigate('/login')
   }
+
+  const isAdminOrStaff =
+    user?.role === 'ROLE_ADMIN' || user?.role === 'ROLE_STAFF'
 
   return (
     <header className="sticky top-0 z-50 shadow-sm">
@@ -139,23 +148,80 @@ function Header() {
           </Link>
 
           {isAuthenticated ? (
-            <div className="flex shrink-0 items-center gap-2">
-              <Link
-                to="/account/orders"
-                className="hidden max-w-[130px] truncate rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800 md:block"
-                title={user?.fullName || user?.email || 'Tài khoản'}
-              >
-                {user?.fullName || 'Tài khoản'}
-              </Link>
-
+            <div className="relative flex shrink-0 items-center gap-2">
               <button
                 type="button"
-                onClick={handleLogout}
-                className="flex items-center gap-2 rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800"
+                onClick={() => setAccountMenuOpen((prev) => !prev)}
+                className="flex max-w-[170px] items-center gap-2 rounded bg-red-700 px-3 py-2 text-sm font-bold hover:bg-red-800"
+                title={user?.fullName || user?.email || 'Tài khoản'}
               >
-                <LogOut size={22} />
-                <span className="hidden sm:inline">Thoát</span>
+                <UserCircle size={22} />
+
+                <span className="hidden max-w-[100px] truncate md:inline">
+                  {user?.fullName || 'Tài khoản'}
+                </span>
+
+                <ChevronDown
+                  size={16}
+                  className={
+                    accountMenuOpen
+                      ? 'rotate-180 transition'
+                      : 'transition'
+                  }
+                />
               </button>
+
+              {accountMenuOpen && (
+                <div className="absolute right-0 top-[calc(100%+8px)] w-64 overflow-hidden rounded-md bg-white text-gray-800 shadow-lg ring-1 ring-black/5">
+                  <div className="border-b px-4 py-3">
+                    <div className="line-clamp-1 font-black text-gray-900">
+                      {user?.fullName || 'Tài khoản'}
+                    </div>
+
+                    <div className="mt-1 line-clamp-1 text-xs text-gray-500">
+                      {user?.email}
+                    </div>
+                  </div>
+
+                  <Link
+                    to="/account/profile"
+                    onClick={() => setAccountMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 text-sm font-bold hover:bg-red-50 hover:text-red-600"
+                  >
+                    <UserCircle size={18} />
+                    Tài khoản của tôi
+                  </Link>
+
+                  <Link
+                    to="/account/orders"
+                    onClick={() => setAccountMenuOpen(false)}
+                    className="flex items-center gap-3 px-4 py-3 text-sm font-bold hover:bg-red-50 hover:text-red-600"
+                  >
+                    <PackageSearch size={18} />
+                    Đơn hàng của tôi
+                  </Link>
+
+                  {isAdminOrStaff && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setAccountMenuOpen(false)}
+                      className="flex items-center gap-3 px-4 py-3 text-sm font-bold hover:bg-red-50 hover:text-red-600"
+                    >
+                      <LayoutDashboard size={18} />
+                      Trang quản trị
+                    </Link>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={handleLogout}
+                    className="flex w-full items-center gap-3 border-t px-4 py-3 text-left text-sm font-bold text-red-600 hover:bg-red-50"
+                  >
+                    <LogOut size={18} />
+                    Đăng xuất
+                  </button>
+                </div>
+              )}
             </div>
           ) : (
             <Link

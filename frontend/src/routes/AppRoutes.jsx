@@ -32,6 +32,7 @@ import FaqPage from '../pages/public/FaqPage'
 import ContactPage from '../pages/public/ContactPage'
 import NewsListPage from '../pages/public/NewsListPage'
 import NewsDetailPage from '../pages/public/NewsDetailPage'
+import ProfilePage from '../pages/user/ProfilePage'
 function PlaceholderPage({ title }) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-16">
@@ -111,6 +112,14 @@ function AppRoutes() {
             </ProtectedRoute>
           }
         />
+        <Route
+  path="/account/profile"
+  element={
+    <ProtectedRoute>
+      <ProfilePage />
+    </ProtectedRoute>
+  }
+/>
         <Route
           path="/checkout"
           element={
