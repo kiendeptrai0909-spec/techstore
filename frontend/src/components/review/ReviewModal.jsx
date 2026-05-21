@@ -1,48 +1,77 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { X } from 'lucide-react'
+import { reviewApi } from '../../api/reviewApi'
 import StarRatingInput from './StarRatingInput'
 
-function ReviewModal({ open, product, onClose, onSubmit, submitting }) {
+function ReviewModal({ open, item, onClose, onSubmitted }) {
   const [rating, setRating] = useState(5)
-  const [comment, setComment] = useState('')
-  const [error, setError] = useState('')
+  const [content, setContent] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+  const [message, setMessage] = useState('')
 
-  useEffect(() => {
-    if (open) {
-      setRating(5)
-      setComment('')
-      setError('')
-    }
-  }, [open])
-
-  if (!open) {
+  if (!open || !item) {
     return null
   }
+
+  const productId = item.productId
+  const orderItemId = item.orderItemId || item.id
+
+  const productName = item.productName || 'Sản phẩm'
+  const variantName = item.variantName || item.productVariantName
+  const imageUrl =
+    item.thumbnailUrl ||
+    item.imageUrl ||
+    item.productImage ||
+    'https://placehold.co/300x300?text=TechStore'
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    if (!rating || rating < 1 || rating > 5) {
-      setError('Vui lòng chọn số sao từ 1 đến 5')
+    if (!productId) {
+      setMessage('Không tìm thấy mã sản phẩm')
       return
     }
 
-    if (!comment.trim()) {
-      setError('Vui lòng nhập nội dung đánh giá')
+    if (!orderItemId) {
+      setMessage('Không tìm thấy mã chi tiết đơn hàng')
       return
     }
 
-    setError('')
+    if (!rating) {
+      setMessage('Vui lòng chọn số sao đánh giá')
+      return
+    }
 
-    await onSubmit({
-      rating,
-      comment: comment.trim(),
-    })
+    if (!content.trim()) {
+      setMessage('Vui lòng nhập nội dung đánh giá')
+      return
+    }
+
+    setSubmitting(true)
+    setMessage('')
+
+    try {
+      await reviewApi.createReview(productId, {
+  orderItemId,
+  rating,
+  content: content.trim(),
+  comment: content.trim(),
+})
+
+      setContent('')
+      setRating(5)
+      onSubmitted?.()
+      onClose?.()
+    } catch (error) {
+      setMessage(error.message || 'Không thể gửi đánh giá')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 px-4">
-      <div className="w-full max-w-lg rounded-lg bg-white shadow-xl">
+    <div className="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 px-4">
+      <div className="w-full max-w-xl overflow-hidden rounded-lg bg-white shadow-xl">
         <div className="flex items-center justify-between border-b px-5 py-4">
           <h2 className="text-xl font-black text-gray-900">
             Đánh giá sản phẩm
@@ -51,52 +80,47 @@ function ReviewModal({ open, product, onClose, onSubmit, submitting }) {
           <button
             type="button"
             onClick={onClose}
-            disabled={submitting}
-            className="rounded p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-900"
+            className="text-gray-500 hover:text-red-600"
           >
-            <X size={22} />
+            <X size={24} />
           </button>
         </div>
 
         <form onSubmit={handleSubmit} className="p-5">
-          <div className="flex gap-3 rounded bg-gray-50 p-3">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded border bg-white">
+          <div className="flex gap-4 rounded bg-gray-50 p-3">
+            <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded border bg-white">
               <img
-                src={
-                  product?.thumbnailUrl ||
-                  product?.imageUrl ||
-                  product?.productImage ||
-                  'https://placehold.co/120x120?text=TechStore'
-                }
-                alt={product?.productName || product?.name || 'Sản phẩm'}
+                src={imageUrl}
+                alt={productName}
                 className="max-h-full max-w-full object-contain"
               />
             </div>
 
-            <div className="min-w-0">
-              <div className="line-clamp-2 font-bold text-gray-900">
-                {product?.productName || product?.name || 'Sản phẩm'}
-              </div>
+            <div>
+              <h3 className="line-clamp-2 font-black text-gray-900">
+                {productName}
+              </h3>
 
-              {(product?.variantName || product?.productVariantName || product?.sku) && (
-                <div className="mt-1 text-sm text-gray-500">
-                  Phiên bản:{' '}
-                  {product.variantName || product.productVariantName || product.sku}
-                </div>
+              {variantName && (
+                <p className="mt-1 text-sm text-gray-500">
+                  Phiên bản: {variantName}
+                </p>
               )}
             </div>
           </div>
 
+          {message && (
+            <div className="mt-4 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">
+              {message}
+            </div>
+          )}
+
           <div className="mt-5">
-            <label className="mb-3 block font-bold text-gray-900">
+            <label className="mb-2 block font-bold text-gray-900">
               Bạn đánh giá sản phẩm này thế nào?
             </label>
 
-            <StarRatingInput
-              value={rating}
-              onChange={setRating}
-              disabled={submitting}
-            />
+            <StarRatingInput value={rating} onChange={setRating} />
           </div>
 
           <div className="mt-5">
@@ -105,30 +129,20 @@ function ReviewModal({ open, product, onClose, onSubmit, submitting }) {
             </label>
 
             <textarea
-              value={comment}
-              onChange={(event) => {
-                setComment(event.target.value)
-                setError('')
-              }}
-              disabled={submitting}
-              rows="5"
+              value={content}
+              onChange={(event) => setContent(event.target.value)}
+              rows={5}
               placeholder="Chia sẻ cảm nhận của bạn về sản phẩm..."
-              className="w-full rounded border px-4 py-3 text-sm outline-none focus:border-red-500 disabled:cursor-not-allowed disabled:bg-gray-100"
+              className="w-full rounded border px-4 py-3 text-sm outline-none focus:border-red-500"
             />
           </div>
 
-          {error && (
-            <div className="mt-3 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">
-              {error}
-            </div>
-          )}
-
-          <div className="mt-6 grid grid-cols-2 gap-3">
+          <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <button
               type="button"
               onClick={onClose}
               disabled={submitting}
-              className="rounded border px-5 py-3 font-bold text-gray-700 hover:border-red-500 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-60"
+              className="rounded border px-5 py-3 font-black text-gray-700 hover:border-red-500 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-60"
             >
               Hủy
             </button>

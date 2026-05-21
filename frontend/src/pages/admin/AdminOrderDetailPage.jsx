@@ -73,9 +73,7 @@ function AdminOrderDetailPage() {
     setSuccessMessage('')
 
     try {
-      const updatedOrder = await adminOrderApi.updateOrderStatus(orderId, {
-        status,
-      })
+      const updatedOrder = await adminOrderApi.updateOrderStatus(orderId, status)
 
       setOrder(updatedOrder)
       setSuccessMessage('Cập nhật trạng thái đơn hàng thành công')

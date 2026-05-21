@@ -13,8 +13,8 @@ function OrderItemList({ items = [], orderStatus, onOpenReview }) {
 
   return (
     <div className="space-y-3">
-      {items.map((item) => {
-        const id = item.id || item.orderItemId
+      {items.map((item, index) => {
+        const orderItemId = item.orderItemId || item.id
         const productId = item.productId || item.product?.id
         const productSlug = item.productSlug || item.slug || item.product?.slug
 
@@ -44,11 +44,31 @@ function OrderItemList({ items = [], orderStatus, onOpenReview }) {
 
         const productUrl = productSlug ? `/products/${productSlug}` : '/products'
 
-        const canReview = orderStatus === 'COMPLETED' && productId
+        const canReview =
+          orderStatus === 'COMPLETED' && Boolean(productId) && Boolean(orderItemId)
+
+        const handleOpenReview = () => {
+          if (!canReview) {
+            return
+          }
+
+          onOpenReview?.({
+            ...item,
+            id: orderItemId,
+            orderItemId,
+            productId,
+            productName,
+            productSlug,
+            thumbnailUrl: imageUrl,
+            imageUrl,
+            variantName,
+            productSku,
+          })
+        }
 
         return (
           <div
-            key={id}
+            key={orderItemId || `${productId}-${index}`}
             className="grid gap-4 rounded border bg-white p-4 md:grid-cols-[100px_minmax(0,1fr)_170px]"
           >
             <Link
@@ -91,16 +111,7 @@ function OrderItemList({ items = [], orderStatus, onOpenReview }) {
                 <button
                   type="button"
                   disabled={!canReview}
-                  onClick={() =>
-                    onOpenReview({
-                      ...item,
-                      productId,
-                      productName,
-                      productSlug,
-                      thumbnailUrl: imageUrl,
-                      variantName,
-                    })
-                  }
+                  onClick={handleOpenReview}
                   className="mt-3 inline-flex items-center gap-2 rounded bg-red-600 px-4 py-2 text-sm font-bold text-white hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-gray-300"
                 >
                   <Star size={16} />

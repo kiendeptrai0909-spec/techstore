@@ -3,10 +3,13 @@ import { Link } from 'react-router'
 import { ShoppingCart } from 'lucide-react'
 
 import { cartApi } from '../../api/cartApi'
+import { useCart } from '../../contexts/CartContext'
 import CartItem from '../../components/cart/CartItem'
 import CartSummary from '../../components/cart/CartSummary'
 
 function CartPage() {
+  const { refreshCart } = useCart()
+
   const [cart, setCart] = useState(null)
   const [loading, setLoading] = useState(true)
   const [updatingId, setUpdatingId] = useState(null)
@@ -29,8 +32,11 @@ function CartPage() {
     return []
   }, [cart])
 
-  const fetchCart = async () => {
-    setLoading(true)
+  const fetchCart = async (showLoading = true) => {
+    if (showLoading) {
+      setLoading(true)
+    }
+
     setMessage('')
 
     try {
@@ -39,13 +45,20 @@ function CartPage() {
     } catch (error) {
       setMessage(error.message || 'Không thể tải giỏ hàng')
     } finally {
-      setLoading(false)
+      if (showLoading) {
+        setLoading(false)
+      }
     }
   }
 
   useEffect(() => {
     fetchCart()
   }, [])
+
+  const syncCart = async () => {
+    await fetchCart(false)
+    await refreshCart()
+  }
 
   const handleUpdateQuantity = async (cartItemId, quantity) => {
     if (!cartItemId || quantity < 1) {
@@ -60,7 +73,7 @@ function CartPage() {
         quantity,
       })
 
-      await fetchCart()
+      await syncCart()
     } catch (error) {
       setMessage(error.message || 'Không thể cập nhật số lượng')
     } finally {
@@ -80,7 +93,8 @@ function CartPage() {
 
     try {
       await cartApi.removeCartItem(cartItemId)
-      await fetchCart()
+
+      await syncCart()
     } catch (error) {
       setMessage(error.message || 'Không thể xóa sản phẩm')
     } finally {
@@ -100,7 +114,8 @@ function CartPage() {
 
     try {
       await cartApi.clearCart()
-      await fetchCart()
+
+      await syncCart()
     } catch (error) {
       setMessage(error.message || 'Không thể xóa giỏ hàng')
     } finally {

@@ -3,8 +3,8 @@ import { Link, useNavigate, useParams } from 'react-router'
 import { ChevronRight } from 'lucide-react'
 
 import { productApi } from '../../api/productApi'
-import { cartApi } from '../../api/cartApi'
 import { reviewApi } from '../../api/reviewApi'
+import { useCart } from '../../contexts/CartContext'
 
 import ProductImageGallery from '../../components/product/ProductImageGallery'
 import ProductInfoBox from '../../components/product/ProductInfoBox'
@@ -14,6 +14,7 @@ import ProductReviewList from '../../components/product/ProductReviewList'
 function ProductDetailPage() {
   const { slug } = useParams()
   const navigate = useNavigate()
+  const { addToCart } = useCart()
 
   const [product, setProduct] = useState(null)
   const [selectedVariant, setSelectedVariant] = useState(null)
@@ -101,8 +102,8 @@ function ProductDetailPage() {
     setAddingToCart(true)
 
     try {
-      await cartApi.addToCart({
-        productVariantId,
+      await addToCart({
+        variantId: productVariantId,
         quantity,
       })
 

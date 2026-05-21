@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../contexts/AuthContext'
+import { useCart } from '../../contexts/CartContext'
 import {
   Menu,
   Search,
@@ -24,6 +25,7 @@ import {
 function Header() {
   const navigate = useNavigate()
   const { user, isAuthenticated, logout } = useAuth()
+  const { cartCount = 0, clearCartState } = useCart()
 
   const [keyword, setKeyword] = useState('')
   const [accountMenuOpen, setAccountMenuOpen] = useState(false)
@@ -43,6 +45,7 @@ function Header() {
 
   const handleLogout = () => {
     setAccountMenuOpen(false)
+    clearCartState?.()
     logout()
     navigate('/login')
   }
@@ -142,8 +145,8 @@ function Header() {
               hàng
             </span>
 
-            <span className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-yellow-300 text-xs font-black text-red-600">
-              0
+            <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-yellow-300 px-1 text-xs font-black text-red-600">
+              {cartCount}
             </span>
           </Link>
 

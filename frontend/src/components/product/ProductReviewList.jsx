@@ -3,7 +3,7 @@ import { Star } from 'lucide-react'
 function ProductReviewList({ reviews = [], loading, onWriteReview }) {
   const averageRating =
     reviews.length > 0
-      ? reviews.reduce((sum, review) => sum + (review.rating || 0), 0) /
+      ? reviews.reduce((sum, review) => sum + Number(review.rating || 0), 0) /
         reviews.length
       : 0
 
@@ -25,10 +25,9 @@ function ProductReviewList({ reviews = [], loading, onWriteReview }) {
                 <Star
                   key={index}
                   size={18}
-                  fill={index < Math.round(averageRating) ? 'orange' : 'none'}
                   className={
                     index < Math.round(averageRating)
-                      ? 'text-orange-500'
+                      ? 'fill-orange-400 text-orange-400'
                       : 'text-gray-300'
                   }
                 />
@@ -67,45 +66,74 @@ function ProductReviewList({ reviews = [], loading, onWriteReview }) {
         </div>
       ) : (
         <div className="space-y-4">
-          {reviews.map((review) => (
-            <div key={review.id} className="rounded border p-4">
-              <div className="flex items-center justify-between gap-3">
-                <div>
-                  <div className="font-bold text-gray-900">
-                    {review.user?.fullName ||
-                      review.userFullName ||
-                      review.fullName ||
-                      'Khách hàng'}
+          {reviews.map((review, reviewIndex) => {
+            const reviewerName =
+              review.user?.fullName ||
+              review.userFullName ||
+              review.fullName ||
+              review.customerName ||
+              review.createdBy ||
+              'Khách hàng'
+
+            const rating = Number(review.rating || 0)
+
+            const reviewContent =
+              review.content ||
+              review.comment ||
+              review.reviewContent ||
+              review.description ||
+              review.message ||
+              ''
+
+            const createdAt = review.createdAt
+              ? new Date(review.createdAt).toLocaleDateString('vi-VN')
+              : ''
+
+            return (
+              <div
+                key={review.id || reviewIndex}
+                className="rounded border p-4"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <div className="font-bold text-gray-900">
+                      {reviewerName}
+                    </div>
+
+                    <div className="mt-1 flex items-center gap-1">
+                      {Array.from({ length: 5 }).map((_, index) => (
+                        <Star
+                          key={index}
+                          size={16}
+                          className={
+                            index < rating
+                              ? 'fill-orange-400 text-orange-400'
+                              : 'text-gray-300'
+                          }
+                        />
+                      ))}
+                    </div>
                   </div>
 
-                  <div className="mt-1 flex items-center gap-1">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <Star
-                        key={index}
-                        size={16}
-                        fill={index < review.rating ? 'orange' : 'none'}
-                        className={
-                          index < review.rating
-                            ? 'text-orange-500'
-                            : 'text-gray-300'
-                        }
-                      />
-                    ))}
-                  </div>
+                  {createdAt && (
+                    <div className="text-sm text-gray-500">
+                      {createdAt}
+                    </div>
+                  )}
                 </div>
 
-                <div className="text-sm text-gray-500">
-                  {review.createdAt
-                    ? new Date(review.createdAt).toLocaleDateString('vi-VN')
-                    : ''}
-                </div>
+                {reviewContent ? (
+                  <p className="mt-3 whitespace-pre-line leading-6 text-gray-700">
+                    {reviewContent}
+                  </p>
+                ) : (
+                  <p className="mt-3 italic leading-6 text-gray-400">
+                    Người dùng chưa nhập nội dung đánh giá.
+                  </p>
+                )}
               </div>
-
-              <p className="mt-3 leading-6 text-gray-700">
-                {review.comment || review.content}
-              </p>
-            </div>
-          ))}
+            )
+          })}
         </div>
       )}
     </div>

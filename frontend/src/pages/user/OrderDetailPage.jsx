@@ -67,30 +67,56 @@ function OrderDetailPage() {
 
     setReviewProduct(null)
   }
+  const handleReviewSubmitted = async () => {
+  setReviewProduct(null)
+  setReviewMessage('Đánh giá sản phẩm thành công')
+  await fetchOrder()
+}
 
-  const handleSubmitReview = async ({ rating, comment }) => {
-    if (!reviewProduct?.productId) {
-      setReviewMessage('Không xác định được sản phẩm cần đánh giá')
-      return
-    }
+  const handleSubmitReview = async ({ rating, comment, content }) => {
+  const productId = reviewProduct?.productId
+  const orderItemId = reviewProduct?.orderItemId || reviewProduct?.id
+  const reviewContent = content || comment || ''
 
-    setReviewSubmitting(true)
-    setReviewMessage('')
-
-    try {
-      await reviewApi.createReview(reviewProduct.productId, {
-        rating,
-        comment,
-      })
-
-      setReviewProduct(null)
-      setReviewMessage('Đánh giá sản phẩm thành công')
-    } catch (error) {
-      setReviewMessage(error.message || 'Không thể gửi đánh giá')
-    } finally {
-      setReviewSubmitting(false)
-    }
+  if (!productId) {
+    setReviewMessage('Không xác định được sản phẩm cần đánh giá')
+    return
   }
+
+  if (!orderItemId) {
+    setReviewMessage('Không xác định được chi tiết đơn hàng cần đánh giá')
+    return
+  }
+
+  if (!rating) {
+    setReviewMessage('Vui lòng chọn số sao đánh giá')
+    return
+  }
+
+  if (!reviewContent.trim()) {
+    setReviewMessage('Vui lòng nhập nội dung đánh giá')
+    return
+  }
+
+  setReviewSubmitting(true)
+  setReviewMessage('')
+
+  try {
+    await reviewApi.createReview(productId, {
+      orderItemId,
+      rating,
+      content: reviewContent.trim(),
+    })
+
+    setReviewProduct(null)
+    setReviewMessage('Đánh giá sản phẩm thành công')
+    await fetchOrder()
+  } catch (error) {
+    setReviewMessage(error.message || 'Không thể gửi đánh giá')
+  } finally {
+    setReviewSubmitting(false)
+  }
+}
 
   if (loading) {
     return (
@@ -150,12 +176,11 @@ function OrderDetailPage() {
   return (
     <div className="bg-[#e9e9e9]">
       <ReviewModal
-        open={Boolean(reviewProduct)}
-        product={reviewProduct}
-        onClose={handleCloseReview}
-        onSubmit={handleSubmitReview}
-        submitting={reviewSubmitting}
-      />
+  open={Boolean(reviewProduct)}
+  item={reviewProduct}
+  onClose={handleCloseReview}
+  onSubmitted={handleReviewSubmitted}
+/>
 
       <div className="mx-auto max-w-7xl px-4 py-6">
         <div className="mb-4 rounded-md bg-white p-4 shadow-sm">

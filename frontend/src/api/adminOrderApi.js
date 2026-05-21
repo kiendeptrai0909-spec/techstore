@@ -9,7 +9,9 @@ export const adminOrderApi = {
     return axiosClient.get(`/admin/orders/${orderId}`)
   },
 
-  updateOrderStatus: (orderId, data) => {
-    return axiosClient.put(`/admin/orders/${orderId}/status`, data)
+  updateOrderStatus: (orderId, orderStatus) => {
+    return axiosClient.put(`/admin/orders/${orderId}/status`, {
+      orderStatus,
+    })
   },
 }

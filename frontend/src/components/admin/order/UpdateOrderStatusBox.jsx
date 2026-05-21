@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function UpdateOrderStatusBox({
   currentStatus,
@@ -6,6 +6,10 @@ function UpdateOrderStatusBox({
   updating,
 }) {
   const [status, setStatus] = useState(currentStatus || 'PENDING')
+
+  useEffect(() => {
+    setStatus(currentStatus || 'PENDING')
+  }, [currentStatus])
 
   const statuses = [
     {
@@ -33,7 +37,7 @@ function UpdateOrderStatusBox({
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    if (!status) {
+    if (!status || status === currentStatus) {
       return
     }
 
@@ -55,6 +59,7 @@ function UpdateOrderStatusBox({
           <select
             value={status}
             onChange={(event) => setStatus(event.target.value)}
+            disabled={updating}
             className="h-11 w-full rounded border px-4 text-sm outline-none focus:border-red-500"
           >
             {statuses.map((item) => (
