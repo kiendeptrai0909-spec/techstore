@@ -1,5 +1,6 @@
 package com.example.techstore.controller;
 
+import com.example.techstore.dto.response.ProductDetailResponse;
 import com.example.techstore.dto.response.ProductResponse;
 import com.example.techstore.service.ProductService;
 import lombok.RequiredArgsConstructor;
@@ -35,18 +36,18 @@ public class ProductController {
         );
     }
 
-    @GetMapping("/{id}")
-    public ProductResponse getProductById(@PathVariable Long id) {
-        return productService.getProductById(id);
-    }
-
-    @GetMapping("/slug/{slug}")
-    public ProductResponse getProductBySlug(@PathVariable String slug) {
-        return productService.getProductBySlug(slug);
-    }
-
     @GetMapping("/featured")
     public Page<ProductResponse> getFeaturedProducts(Pageable pageable) {
         return productService.getFeaturedProducts(pageable);
+    }
+
+    @GetMapping("/slug/{slug}")
+    public ProductDetailResponse getProductBySlug(@PathVariable String slug) {
+        return productService.getProductBySlug(slug);
+    }
+
+    @GetMapping("/{id}")
+    public ProductResponse getProductById(@PathVariable Long id) {
+        return productService.getProductById(id);
     }
 }

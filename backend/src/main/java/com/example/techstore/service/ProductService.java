@@ -2,22 +2,31 @@ package com.example.techstore.service;
 
 import com.example.techstore.dto.response.BrandResponse;
 import com.example.techstore.dto.response.CategoryResponse;
+import com.example.techstore.dto.response.ProductDetailResponse;
 import com.example.techstore.dto.response.ProductResponse;
+import com.example.techstore.dto.response.ProductReviewResponse;
+import com.example.techstore.dto.response.ProductSpecificationResponse;
 import com.example.techstore.dto.response.ProductVariantResponse;
 import com.example.techstore.entity.Brand;
 import com.example.techstore.entity.Category;
 import com.example.techstore.entity.Product;
+import com.example.techstore.entity.ProductImage;
+import com.example.techstore.entity.ProductSpecification;
 import com.example.techstore.entity.ProductVariant;
 import com.example.techstore.enums.ProductStatus;
 import com.example.techstore.exception.ResourceNotFoundException;
+import com.example.techstore.repository.ProductImageRepository;
 import com.example.techstore.repository.ProductRepository;
+import com.example.techstore.repository.ProductSpecificationRepository;
 import com.example.techstore.repository.ProductVariantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -26,7 +35,10 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductVariantRepository productVariantRepository;
+    private final ProductImageRepository productImageRepository;
+    private final ProductSpecificationRepository productSpecificationRepository;
 
+    @Transactional(readOnly = true)
     public Page<ProductResponse> getProducts(
             String keyword,
             Long categoryId,
@@ -53,28 +65,31 @@ public class ProductService {
                 .map(this::toResponse);
     }
 
+    @Transactional(readOnly = true)
     public ProductResponse getProductById(Long id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy sản phẩm"));
 
-        if (product.getStatus() != ProductStatus.ACTIVE) {
+        if (product.getStatus() != ProductStatus.ACTIVE || product.getDeletedAt() != null) {
             throw new ResourceNotFoundException("Không tìm thấy sản phẩm");
         }
 
         return toResponse(product);
     }
 
-    public ProductResponse getProductBySlug(String slug) {
+    @Transactional(readOnly = true)
+    public ProductDetailResponse getProductBySlug(String slug) {
         Product product = productRepository.findBySlug(slug)
                 .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy sản phẩm"));
 
-        if (product.getStatus() != ProductStatus.ACTIVE) {
+        if (product.getStatus() != ProductStatus.ACTIVE || product.getDeletedAt() != null) {
             throw new ResourceNotFoundException("Không tìm thấy sản phẩm");
         }
 
-        return toResponse(product);
+        return toDetailResponse(product);
     }
 
+    @Transactional(readOnly = true)
     public Page<ProductResponse> getFeaturedProducts(Pageable pageable) {
         return productRepository.findByFeaturedTrueAndStatus(ProductStatus.ACTIVE, pageable)
                 .map(this::toResponse);
@@ -84,6 +99,7 @@ public class ProductService {
         List<ProductVariantResponse> variants = productVariantRepository
                 .findByProductIdAndStatus(product.getId(), ProductStatus.ACTIVE)
                 .stream()
+                .filter(variant -> variant.getDeletedAt() == null)
                 .map(this::toVariantResponse)
                 .toList();
 
@@ -96,6 +112,51 @@ public class ProductService {
                 .category(toCategoryResponse(product.getCategory()))
                 .brand(toBrandResponse(product.getBrand()))
                 .variants(variants)
+                .build();
+    }
+
+    private ProductDetailResponse toDetailResponse(Product product) {
+        List<ProductVariantResponse> variants = productVariantRepository
+                .findByProductIdAndStatus(product.getId(), ProductStatus.ACTIVE)
+                .stream()
+                .filter(variant -> variant.getDeletedAt() == null)
+                .map(this::toVariantResponse)
+                .toList();
+
+        List<ProductDetailResponse.ImageResponse> images = productImageRepository
+                .findByProductIdOrderBySortOrderAsc(product.getId())
+                .stream()
+                .filter(image -> image.getDeletedAt() == null)
+                .map(ProductDetailResponse.ImageResponse::from)
+                .toList();
+
+        List<ProductSpecificationResponse> specifications = productSpecificationRepository
+                .findByProductId(product.getId())
+                .stream()
+                .filter(specification -> specification.getDeletedAt() == null)
+                .filter(specification -> specification.getSpecificationKey() != null)
+                .filter(specification -> specification.getSpecificationKey().getDeletedAt() == null)
+                .sorted(Comparator.comparing(
+                        specification -> specification.getSpecificationKey().getSortOrder()
+                ))
+                .map(ProductSpecificationResponse::from)
+                .toList();
+
+        List<ProductReviewResponse> reviews = List.of();
+
+        return ProductDetailResponse.builder()
+                .id(product.getId())
+                .name(product.getName())
+                .slug(product.getSlug())
+                .description(product.getDescription())
+                .featured(product.getFeatured())
+                .status(product.getStatus().name())
+                .category(toCategoryResponse(product.getCategory()))
+                .brand(toBrandResponse(product.getBrand()))
+                .variants(variants)
+                .images(images)
+                .specifications(specifications)
+                .reviews(reviews)
                 .build();
     }
 

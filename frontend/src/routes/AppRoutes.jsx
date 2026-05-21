@@ -113,13 +113,13 @@ function AppRoutes() {
           }
         />
         <Route
-  path="/account/profile"
-  element={
-    <ProtectedRoute>
-      <ProfilePage />
-    </ProtectedRoute>
-  }
-/>
+          path="/account/profile"
+          element={
+            <ProtectedRoute>
+              <ProfilePage />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/checkout"
           element={

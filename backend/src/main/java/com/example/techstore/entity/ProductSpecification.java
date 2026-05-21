@@ -6,7 +6,15 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "product_specifications")
+@Table(
+        name = "product_specifications",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        name = "uk_product_specification_key",
+                        columnNames = {"product_id", "specification_key_id"}
+                )
+        }
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,12 +31,13 @@ public class ProductSpecification {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    // Tên thông số, ví dụ RAM, CPU, SSD
+    // Tên thông số, ví dụ: RAM, CPU, SSD, Độ phân giải
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "specification_key_id", nullable = false)
     private SpecificationKey specificationKey;
 
-    @Column(nullable = false, length = 255)
+    // Giá trị thông số, ví dụ: 16GB DDR5, Intel Core i5, 4K/UHD
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String value;
 
     @Column(name = "created_at", insertable = false, updatable = false)
