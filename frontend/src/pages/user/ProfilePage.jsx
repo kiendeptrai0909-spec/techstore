@@ -5,6 +5,7 @@ import { PackageSearch, UserCircle } from 'lucide-react'
 import { userApi } from '../../api/userApi'
 import ProfileForm from '../../components/user/ProfileForm'
 import AvatarUpload from '../../components/user/AvatarUpload'
+import ChangePasswordForm from '../../components/user/ChangePasswordForm'
 
 function ProfilePage() {
   const [profile, setProfile] = useState(null)
@@ -45,9 +46,10 @@ function ProfilePage() {
       <div className="bg-[#e9e9e9]">
         <div className="mx-auto max-w-7xl px-4 py-6">
           <div className="mb-5 h-24 animate-pulse rounded bg-gray-200" />
+
           <div className="grid gap-5 lg:grid-cols-[330px_minmax(0,1fr)]">
             <div className="h-96 animate-pulse rounded bg-gray-200" />
-            <div className="h-[520px] animate-pulse rounded bg-gray-200" />
+            <div className="h-[720px] animate-pulse rounded bg-gray-200" />
           </div>
         </div>
       </div>
@@ -92,10 +94,14 @@ function ProfilePage() {
         )}
 
         <div className="grid gap-5 lg:grid-cols-[330px_minmax(0,1fr)]">
-          <AvatarUpload
-            user={profile}
-            onUploaded={handleAvatarUploaded}
-          />
+          <div className="space-y-5">
+            <AvatarUpload
+              user={profile}
+              onUploaded={handleAvatarUploaded}
+            />
+
+            <ChangePasswordForm />
+          </div>
 
           <ProfileForm
             user={profile}

@@ -19,4 +19,8 @@ export const userApi = {
       },
     })
   },
+
+  changePassword: (data) => {
+    return axiosClient.patch('/users/me/password', data)
+  },
 }

@@ -1,5 +1,6 @@
 package com.example.techstore.controller;
 
+import com.example.techstore.dto.request.ChangePasswordRequest;
 import com.example.techstore.dto.request.UserProfileRequest;
 import com.example.techstore.dto.response.UserProfileResponse;
 import com.example.techstore.entity.User;
@@ -10,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,6 +24,7 @@ public class UserProfileController {
 
     private final UserRepository userRepository;
     private final CloudinaryService cloudinaryService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping
     public ResponseEntity<UserProfileResponse> getMyProfile(
@@ -65,6 +68,33 @@ public class UserProfileController {
         return ResponseEntity.ok(Map.of(
                 "message", "Cập nhật avatar thành công",
                 "avatar", avatarUrl
+        ));
+    }
+
+    @PatchMapping("/password")
+    public ResponseEntity<?> changePassword(
+            @Valid @RequestBody ChangePasswordRequest request,
+            Authentication authentication
+    ) {
+        User user = getCurrentUser(authentication);
+
+        if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPasswordHash())) {
+            throw new BadRequestException("Mật khẩu hiện tại không chính xác");
+        }
+
+        if (!request.getNewPassword().equals(request.getConfirmPassword())) {
+            throw new BadRequestException("Xác nhận mật khẩu không khớp");
+        }
+
+        if (passwordEncoder.matches(request.getNewPassword(), user.getPasswordHash())) {
+            throw new BadRequestException("Mật khẩu mới không được trùng mật khẩu hiện tại");
+        }
+
+        user.setPasswordHash(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
+
+        return ResponseEntity.ok(Map.of(
+                "message", "Đổi mật khẩu thành công"
         ));
     }
 
