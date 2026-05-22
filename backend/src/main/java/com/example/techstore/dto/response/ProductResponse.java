@@ -1,5 +1,6 @@
 package com.example.techstore.dto.response;
 
+import com.example.techstore.enums.ProductStatus;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -18,6 +19,8 @@ public class ProductResponse {
     private String description;
 
     private Boolean featured;
+
+    private ProductStatus status;
 
     private CategoryResponse category;
 

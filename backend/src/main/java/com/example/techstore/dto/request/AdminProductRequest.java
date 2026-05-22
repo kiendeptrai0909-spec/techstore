@@ -11,26 +11,26 @@ import java.util.List;
 
 @Getter
 @Setter
-public class ProductRequest {
-
-    @NotNull(message = "Danh mục không được để trống")
-    private Long categoryId;
-
-    @NotNull(message = "Thương hiệu không được để trống")
-    private Long brandId;
+public class AdminProductRequest {
 
     @NotBlank(message = "Tên sản phẩm không được để trống")
     private String name;
 
-    @NotBlank(message = "Slug sản phẩm không được để trống")
+    @NotBlank(message = "Slug không được để trống")
     private String slug;
 
     private String description;
 
+    @NotNull(message = "Danh mục không được để trống")
+    private Long categoryId;
+
+    private Long brandId;
+
     private Boolean featured;
 
-    @NotNull(message = "Trạng thái sản phẩm không được để trống")
     private ProductStatus status;
+
+    private String thumbnailUrl;
 
     @Valid
     private List<ProductVariantRequest> variants;

@@ -20,6 +20,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findByStatus(ProductStatus status, Pageable pageable);
 
+    Page<Product> findByDeletedAtIsNull(Pageable pageable);
+
+    Page<Product> findByStatusAndDeletedAtIsNull(ProductStatus status, Pageable pageable);
+
     Page<Product> findByFeaturedTrueAndStatus(ProductStatus status, Pageable pageable);
 
     Page<Product> findByCategoryIdAndStatus(Long categoryId, ProductStatus status, Pageable pageable);
@@ -33,6 +37,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             left join p.brand b
             left join ProductVariant v on v.product = p
             where p.status = :status
+              and p.deletedAt is null
               and (:keyword = '' or lower(p.name) like concat('%', :keyword, '%'))
               and (:categoryId is null or c.id = :categoryId)
               and (:brandId is null or b.id = :brandId)

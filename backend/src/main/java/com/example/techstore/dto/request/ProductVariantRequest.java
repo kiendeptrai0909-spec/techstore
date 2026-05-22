@@ -14,6 +14,8 @@ import java.math.BigDecimal;
 @Setter
 public class ProductVariantRequest {
 
+    private Long id;
+
     @NotBlank(message = "Tên biến thể không được để trống")
     private String name;
 
@@ -33,6 +35,5 @@ public class ProductVariantRequest {
 
     private String thumbnailUrl;
 
-    @NotNull(message = "Trạng thái biến thể không được để trống")
     private ProductStatus status;
 }

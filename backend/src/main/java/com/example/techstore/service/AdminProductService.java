@@ -39,14 +39,13 @@ public class AdminProductService {
     @Transactional(readOnly = true)
     public Page<ProductResponse> getProducts(ProductStatus status, Pageable pageable) {
         if (status != null) {
-            return productRepository.findByStatus(status, pageable)
+            return productRepository.findByStatusAndDeletedAtIsNull(status, pageable)
                     .map(this::toProductResponse);
         }
 
-        return productRepository.findAll(pageable)
+        return productRepository.findByDeletedAtIsNull(pageable)
                 .map(this::toProductResponse);
     }
-
     @Transactional(readOnly = true)
     public ProductResponse getProductById(Long productId) {
         Product product = productRepository.findById(productId)
@@ -80,6 +79,8 @@ public class AdminProductService {
                 .build();
 
         Product savedProduct = productRepository.save(product);
+
+        overwriteVariants(savedProduct, request.getVariants());
 
         return toProductResponse(savedProduct);
     }
@@ -117,6 +118,8 @@ public class AdminProductService {
         }
 
         Product savedProduct = productRepository.save(product);
+
+        overwriteVariants(savedProduct, request.getVariants());
 
         return toProductResponse(savedProduct);
     }
@@ -161,7 +164,7 @@ public class AdminProductService {
                 .salePrice(request.getSalePrice())
                 .stock(request.getStock())
                 .thumbnailUrl(request.getThumbnailUrl())
-                .status(request.getStatus())
+                .status(request.getStatus() != null ? request.getStatus() : ProductStatus.ACTIVE)
                 .build();
 
         productVariantRepository.save(variant);
@@ -185,15 +188,19 @@ public class AdminProductService {
                     }
                 });
 
+        ProductStatus status = request.getStatus() != null
+                ? request.getStatus()
+                : ProductStatus.ACTIVE;
+
         variant.setName(request.getName().trim());
         variant.setSku(sku);
         variant.setPrice(request.getPrice());
         variant.setSalePrice(request.getSalePrice());
         variant.setStock(request.getStock());
         variant.setThumbnailUrl(request.getThumbnailUrl());
-        variant.setStatus(request.getStatus());
+        variant.setStatus(status);
 
-        if (request.getStatus() == ProductStatus.ACTIVE) {
+        if (status == ProductStatus.ACTIVE) {
             variant.setDeletedAt(null);
         }
 
@@ -213,6 +220,38 @@ public class AdminProductService {
         ProductVariant savedVariant = productVariantRepository.save(variant);
 
         return toProductResponse(savedVariant.getProduct());
+    }
+
+    private void overwriteVariants(Product product, List<ProductVariantRequest> variantRequests) {
+        List<ProductVariant> oldVariants = productVariantRepository.findByProductId(product.getId());
+
+        if (!oldVariants.isEmpty()) {
+            productVariantRepository.deleteAll(oldVariants);
+            productVariantRepository.flush();
+        }
+
+        if (variantRequests == null || variantRequests.isEmpty()) {
+            return;
+        }
+
+        for (ProductVariantRequest request : variantRequests) {
+            validateVariantRequest(request);
+
+            String sku = normalizeSku(request.getSku());
+
+            ProductVariant variant = ProductVariant.builder()
+                    .product(product)
+                    .name(request.getName().trim())
+                    .sku(sku)
+                    .price(request.getPrice())
+                    .salePrice(request.getSalePrice())
+                    .stock(request.getStock())
+                    .thumbnailUrl(request.getThumbnailUrl())
+                    .status(request.getStatus() != null ? request.getStatus() : ProductStatus.ACTIVE)
+                    .build();
+
+            productVariantRepository.save(variant);
+        }
     }
 
     private void validateVariantRequest(ProductVariantRequest request) {
@@ -244,6 +283,7 @@ public class AdminProductService {
                 .slug(product.getSlug())
                 .description(product.getDescription())
                 .featured(product.getFeatured())
+                .status(product.getStatus())
                 .category(toCategoryResponse(product.getCategory()))
                 .brand(toBrandResponse(product.getBrand()))
                 .variants(variants)

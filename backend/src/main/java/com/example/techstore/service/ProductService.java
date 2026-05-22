@@ -109,6 +109,7 @@ public class ProductService {
                 .slug(product.getSlug())
                 .description(product.getDescription())
                 .featured(product.getFeatured())
+                .status(product.getStatus())
                 .category(toCategoryResponse(product.getCategory()))
                 .brand(toBrandResponse(product.getBrand()))
                 .variants(variants)
