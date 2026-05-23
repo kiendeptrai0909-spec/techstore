@@ -23,7 +23,8 @@ import ProfilePage from '../pages/user/ProfilePage'
 
 import ProtectedRoute from '../components/common/ProtectedRoute'
 import AdminProtectedRoute from '../components/common/AdminProtectedRoute'
-
+import ForgotPasswordPage from '../pages/auth/ForgotPasswordPage'
+import ResetPasswordPage from '../pages/auth/ResetPasswordPage'
 import AdminDashboardPage from '../pages/admin/AdminDashboardPage'
 import AdminOrderPage from '../pages/admin/AdminOrderPage'
 import AdminOrderDetailPage from '../pages/admin/AdminOrderDetailPage'
@@ -58,7 +59,8 @@ function AppRoutes() {
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-
+<Route path="/forgot-password" element={<ForgotPasswordPage />} />
+<Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route
           path="/cart"
           element={

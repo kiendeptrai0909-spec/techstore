@@ -9,6 +9,7 @@ function ProductInfoBox({
   quantity,
   setQuantity,
   onAddToCart,
+  onBuyNow,
   addingToCart,
 }) {
   const price = selectedVariant?.price || product?.price || 0
@@ -28,6 +29,7 @@ function ProductInfoBox({
   }
 
   const stock = selectedVariant?.stock ?? product?.stock ?? 0
+  const disabledAction = addingToCart || stock <= 0
 
   return (
     <div className="rounded-md bg-white p-5 shadow-sm">
@@ -104,7 +106,8 @@ function ProductInfoBox({
           <button
             type="button"
             onClick={decreaseQuantity}
-            className="flex h-10 w-10 items-center justify-center hover:bg-gray-100"
+            disabled={quantity <= 1}
+            className="flex h-10 w-10 items-center justify-center hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
           >
             <Minus size={18} />
           </button>
@@ -134,7 +137,7 @@ function ProductInfoBox({
         <button
           type="button"
           onClick={onAddToCart}
-          disabled={addingToCart || stock <= 0}
+          disabled={disabledAction}
           className="flex items-center justify-center gap-2 rounded-md bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
         >
           <ShoppingCart size={20} />
@@ -143,10 +146,11 @@ function ProductInfoBox({
 
         <button
           type="button"
-          disabled={stock <= 0}
+          onClick={onBuyNow}
+          disabled={disabledAction}
           className="rounded-md bg-blue-600 px-5 py-3 font-black text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          Mua ngay
+          {addingToCart ? 'Đang xử lý...' : 'Mua ngay'}
         </button>
       </div>
 

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { useAuth } from '../../contexts/AuthContext'
 import AuthCard from '../../components/auth/AuthCard'
 import FormInput from '../../components/auth/FormInput'
@@ -103,16 +103,27 @@ function LoginPage() {
           autoComplete="email"
         />
 
-        <FormInput
-          label="Mật khẩu"
-          name="password"
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          placeholder="Nhập mật khẩu"
-          error={errors.password}
-          autoComplete="current-password"
-        />
+        <div>
+          <FormInput
+            label="Mật khẩu"
+            name="password"
+            type="password"
+            value={formData.password}
+            onChange={handleChange}
+            placeholder="Nhập mật khẩu"
+            error={errors.password}
+            autoComplete="current-password"
+          />
+
+          <div className="mt-2 text-right">
+            <Link
+              to="/forgot-password"
+              className="text-sm font-bold text-red-600 hover:underline"
+            >
+              Quên mật khẩu?
+            </Link>
+          </div>
+        </div>
 
         <button
           type="submit"

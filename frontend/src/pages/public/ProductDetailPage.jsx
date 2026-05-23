@@ -79,23 +79,42 @@ function ProductDetailPage() {
     setQuantity(1)
   }
 
-  const handleAddToCart = async () => {
-    const token = localStorage.getItem('accessToken')
-
-    if (!token) {
-      navigate('/login')
-      return
-    }
-
+  const getSelectedProductVariantId = () => {
     if (variants.length > 0 && !selectedVariant) {
       alert('Vui lòng chọn phiên bản sản phẩm')
-      return
+      return null
     }
 
     const productVariantId = selectedVariant?.id
 
     if (!productVariantId) {
       alert('Sản phẩm chưa có phiên bản để thêm vào giỏ hàng')
+      return null
+    }
+
+    if (Number(selectedVariant?.stock || 0) <= 0) {
+      alert('Sản phẩm đã hết hàng')
+      return null
+    }
+
+    return productVariantId
+  }
+
+  const handleAddToCart = async () => {
+    const token = localStorage.getItem('accessToken')
+
+    if (!token) {
+      navigate('/login', {
+        state: {
+          from: `/products/${slug}`,
+        },
+      })
+      return
+    }
+
+    const productVariantId = getSelectedProductVariantId()
+
+    if (!productVariantId) {
       return
     }
 
@@ -110,6 +129,40 @@ function ProductDetailPage() {
       alert('Đã thêm sản phẩm vào giỏ hàng')
     } catch (err) {
       alert(err.message || 'Không thể thêm vào giỏ hàng')
+    } finally {
+      setAddingToCart(false)
+    }
+  }
+
+  const handleBuyNow = async () => {
+    const token = localStorage.getItem('accessToken')
+
+    if (!token) {
+      navigate('/login', {
+        state: {
+          from: `/products/${slug}`,
+        },
+      })
+      return
+    }
+
+    const productVariantId = getSelectedProductVariantId()
+
+    if (!productVariantId) {
+      return
+    }
+
+    setAddingToCart(true)
+
+    try {
+      await addToCart({
+        variantId: productVariantId,
+        quantity,
+      })
+
+      navigate('/checkout')
+    } catch (err) {
+      alert(err.message || 'Không thể mua ngay sản phẩm này')
     } finally {
       setAddingToCart(false)
     }
@@ -187,6 +240,7 @@ function ProductDetailPage() {
             quantity={quantity}
             setQuantity={setQuantity}
             onAddToCart={handleAddToCart}
+            onBuyNow={handleBuyNow}
             addingToCart={addingToCart}
           />
         </div>

@@ -89,7 +89,7 @@ public class SecurityConfig {
                         ).permitAll()
 
                         .requestMatchers("/api/v1/admin/**").hasAuthority("ROLE_ADMIN")
-
+                        .requestMatchers("/api/v1/password-reset/**").permitAll()
                         .anyRequest().authenticated()
                 )
 
