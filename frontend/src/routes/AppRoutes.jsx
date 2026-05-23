@@ -45,6 +45,7 @@ import AdminContactMessagePage from '../pages/admin/AdminContactMessagePage'
 import AdminContactMessageDetailPage from '../pages/admin/AdminContactMessageDetailPage'
 import AdminCategoryPage from '../pages/admin/AdminCategoryPage'
 import AdminCategoryFormPage from '../pages/admin/AdminCategoryFormPage'
+import AdminChatPage from '../pages/admin/AdminChatPage'
 function AppRoutes() {
   return (
     <Routes>
@@ -145,7 +146,7 @@ function AppRoutes() {
         <Route path="coupons/:couponId/edit" element={<AdminCouponFormPage />} />
         <Route path="customers" element={<AdminCustomerPage />} />
         <Route path="customers/:customerId" element={<AdminCustomerDetailPage />} />
-
+        <Route path="chat" element={<AdminChatPage />} />
         <Route path="employees" element={<AdminEmployeePage />} />
         <Route path="employees/create" element={<AdminEmployeeFormPage />} />
         <Route path="employees/:employeeId/edit" element={<AdminEmployeeFormPage />} />

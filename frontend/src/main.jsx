@@ -6,6 +6,7 @@ import App from './App.jsx'
 import ScrollToTop from './components/common/ScrollToTop'
 import { AuthProvider } from './contexts/AuthContext.jsx'
 import { CartProvider } from './contexts/CartContext.jsx'
+import ChatWidget from './components/chat/ChatWidget'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')).render(
       <AuthProvider>
         <CartProvider>
           <App />
+          <ChatWidget />
         </CartProvider>
       </AuthProvider>
     </BrowserRouter>

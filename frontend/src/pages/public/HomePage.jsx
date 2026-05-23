@@ -11,7 +11,7 @@ import ProductSection from '../../components/home/ProductSection'
 import CategoryIconGrid from '../../components/home/CategoryIconGrid'
 import PromotionSection from '../../components/home/PromotionSection'
 import NewsSection from '../../components/home/NewsSection'
-import FloatingSupport from '../../components/home/FloatingSupport'
+
 
 function HomePage() {
   const [banners, setBanners] = useState([])
@@ -80,7 +80,7 @@ function HomePage() {
 
   return (
     <div className="bg-[#e9e9e9]">
-      <FloatingSupport />
+
 
       <div className="mx-auto grid max-w-[1580px] grid-cols-1 gap-4 px-4 py-4 xl:grid-cols-[150px_minmax(0,1fr)_150px]">
         <SideBanner banner={leftBanner} side="left" />

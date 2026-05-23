@@ -78,6 +78,11 @@ function AdminLayout() {
       icon: HelpCircle,
     },
     {
+      label: 'Chat',
+      path: '/admin/chat',
+      icon: MessageSquare,
+    },
+    {
       label: 'Liên hệ',
       path: '/admin/contact-messages',
       icon: MessageSquare,

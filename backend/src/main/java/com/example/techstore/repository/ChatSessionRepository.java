@@ -6,6 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface ChatSessionRepository extends JpaRepository<ChatSession, Long> {
 
     Page<ChatSession> findByCustomerId(Long customerId, Pageable pageable);
@@ -15,4 +17,12 @@ public interface ChatSessionRepository extends JpaRepository<ChatSession, Long> 
     Page<ChatSession> findByStatus(ChatStatus status, Pageable pageable);
 
     long countByStatus(ChatStatus status);
+
+    Page<ChatSession> findAllByOrderByIdDesc(Pageable pageable);
+
+    Page<ChatSession> findByCustomerIdOrderByIdDesc(Long customerId, Pageable pageable);
+
+    Page<ChatSession> findByStatusOrderByIdDesc(ChatStatus status, Pageable pageable);
+
+    Optional<ChatSession> findByIdAndCustomerId(Long id, Long customerId);
 }
