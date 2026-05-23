@@ -63,7 +63,23 @@ function AdminCouponPage() {
   const coupons = Array.isArray(pageData)
     ? pageData
     : pageData?.content || []
+  const filteredCoupons = coupons.filter((coupon) => {
+    const keyword = filters.keyword.trim().toLowerCase()
 
+    const matchKeyword =
+      !keyword ||
+      coupon.code?.toLowerCase().includes(keyword) ||
+      coupon.name?.toLowerCase().includes(keyword) ||
+      coupon.description?.toLowerCase().includes(keyword)
+
+    const matchDiscountType =
+      !filters.discountType || coupon.discountType === filters.discountType
+
+    const matchStatus =
+      !filters.status || coupon.status === filters.status
+
+    return matchKeyword && matchDiscountType && matchStatus
+  })
   const handleSubmitFilter = (event) => {
     event.preventDefault()
 
@@ -187,7 +203,7 @@ function AdminCouponPage() {
         )}
 
         <AdminCouponTable
-          coupons={coupons}
+          coupons={filteredCoupons}
           loading={loading}
           onDelete={handleDeleteCoupon}
         />

@@ -35,7 +35,7 @@ function AdminCouponTable({ coupons = [], loading, onDelete }) {
     const type = coupon.discountType || coupon.type
     const value = coupon.discountValue || coupon.value || 0
 
-    if (type === 'PERCENT') {
+    if (type === 'PERCENTAGE') {
       return `${value}%`
     }
 
@@ -87,7 +87,7 @@ function AdminCouponTable({ coupons = [], loading, onDelete }) {
 
                   <td className="px-4 py-4">
                     <span className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700">
-                      {discountType === 'PERCENT'
+                      {discountType === 'PERCENTAGE'
                         ? 'Phần trăm'
                         : 'Cố định'}
                     </span>

@@ -1,5 +1,6 @@
 package com.example.techstore.dto.response;
 
+import com.example.techstore.enums.ProductStatus;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -18,4 +19,6 @@ public class CategoryResponse {
     private String imageUrl;
 
     private Integer sortOrder;
+
+    private ProductStatus status;
 }

@@ -20,7 +20,10 @@ import OrderSuccessPage from '../pages/user/OrderSuccessPage'
 import MyOrdersPage from '../pages/user/MyOrdersPage'
 import OrderDetailPage from '../pages/user/OrderDetailPage'
 import ProfilePage from '../pages/user/ProfilePage'
-
+import AdminCustomerPage from '../pages/admin/AdminCustomerPage'
+import AdminCustomerDetailPage from '../pages/admin/AdminCustomerDetailPage'
+import AdminEmployeePage from '../pages/admin/AdminEmployeePage'
+import AdminEmployeeFormPage from '../pages/admin/AdminEmployeeFormPage'
 import ProtectedRoute from '../components/common/ProtectedRoute'
 import AdminProtectedRoute from '../components/common/AdminProtectedRoute'
 import ForgotPasswordPage from '../pages/auth/ForgotPasswordPage'
@@ -40,7 +43,8 @@ import AdminFaqPage from '../pages/admin/AdminFaqPage'
 import AdminFaqFormPage from '../pages/admin/AdminFaqFormPage'
 import AdminContactMessagePage from '../pages/admin/AdminContactMessagePage'
 import AdminContactMessageDetailPage from '../pages/admin/AdminContactMessageDetailPage'
-
+import AdminCategoryPage from '../pages/admin/AdminCategoryPage'
+import AdminCategoryFormPage from '../pages/admin/AdminCategoryFormPage'
 function AppRoutes() {
   return (
     <Routes>
@@ -59,8 +63,8 @@ function AppRoutes() {
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-<Route path="/forgot-password" element={<ForgotPasswordPage />} />
-<Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route
           path="/cart"
           element={
@@ -133,11 +137,18 @@ function AppRoutes() {
         <Route path="products" element={<AdminProductPage />} />
         <Route path="products/create" element={<AdminProductFormPage />} />
         <Route path="products/:productId/edit" element={<AdminProductFormPage />} />
-
+        <Route path="categories" element={<AdminCategoryPage />} />
+        <Route path="categories/create" element={<AdminCategoryFormPage />} />
+        <Route path="categories/:categoryId/edit" element={<AdminCategoryFormPage />} />
         <Route path="coupons" element={<AdminCouponPage />} />
         <Route path="coupons/create" element={<AdminCouponFormPage />} />
         <Route path="coupons/:couponId/edit" element={<AdminCouponFormPage />} />
+        <Route path="customers" element={<AdminCustomerPage />} />
+        <Route path="customers/:customerId" element={<AdminCustomerDetailPage />} />
 
+        <Route path="employees" element={<AdminEmployeePage />} />
+        <Route path="employees/create" element={<AdminEmployeeFormPage />} />
+        <Route path="employees/:employeeId/edit" element={<AdminEmployeeFormPage />} />
         <Route path="banners" element={<AdminBannerPage />} />
         <Route path="banners/create" element={<AdminBannerFormPage />} />
         <Route path="banners/:bannerId/edit" element={<AdminBannerFormPage />} />

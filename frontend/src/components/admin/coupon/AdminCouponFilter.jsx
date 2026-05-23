@@ -38,7 +38,7 @@ function AdminCouponFilter({ filters, setFilters, onSubmit, onReset }) {
             className="h-11 w-full rounded border px-4 text-sm outline-none focus:border-red-500"
           >
             <option value="">Tất cả</option>
-            <option value="PERCENT">Phần trăm</option>
+            <option value="PERCENTAGE">Phần trăm</option>
             <option value="FIXED">Số tiền cố định</option>
           </select>
         </div>

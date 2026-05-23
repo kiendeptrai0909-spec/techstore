@@ -63,7 +63,23 @@ function AdminBannerPage() {
   const banners = Array.isArray(pageData)
     ? pageData
     : pageData?.content || []
+  const filteredBanners = banners.filter((banner) => {
+    const keyword = filters.keyword.trim().toLowerCase()
 
+    const matchKeyword =
+      !keyword ||
+      banner.title?.toLowerCase().includes(keyword) ||
+      banner.linkUrl?.toLowerCase().includes(keyword) ||
+      banner.imageUrl?.toLowerCase().includes(keyword)
+
+    const matchPosition =
+      !filters.position || banner.position === filters.position
+
+    const matchStatus =
+      !filters.status || banner.status === filters.status
+
+    return matchKeyword && matchPosition && matchStatus
+  })
   const handleSubmitFilter = (event) => {
     event.preventDefault()
 
@@ -187,7 +203,7 @@ function AdminBannerPage() {
         )}
 
         <AdminBannerTable
-          banners={banners}
+          banners={filteredBanners}
           loading={loading}
           onDelete={handleDeleteBanner}
         />

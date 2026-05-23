@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -45,12 +46,35 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
               and (:maxPrice is null or v.price <= :maxPrice)
             """)
     Page<Product> searchProducts(
-            String keyword,
-            Long categoryId,
-            Long brandId,
-            BigDecimal minPrice,
-            BigDecimal maxPrice,
-            ProductStatus status,
+            @Param("keyword") String keyword,
+            @Param("categoryId") Long categoryId,
+            @Param("brandId") Long brandId,
+            @Param("minPrice") BigDecimal minPrice,
+            @Param("maxPrice") BigDecimal maxPrice,
+            @Param("status") ProductStatus status,
+            Pageable pageable
+    );
+
+    @Query("""
+            select distinct p
+            from Product p
+            left join p.category c
+            left join p.brand b
+            left join ProductVariant v on v.product = p
+            where p.deletedAt is null
+              and (:keyword = ''
+                   or lower(p.name) like concat('%', :keyword, '%')
+                   or lower(p.slug) like concat('%', :keyword, '%')
+                   or lower(v.sku) like concat('%', :keyword, '%'))
+              and (:categoryId is null or c.id = :categoryId)
+              and (:brandId is null or b.id = :brandId)
+              and (:status is null or p.status = :status)
+            """)
+    Page<Product> searchAdminProducts(
+            @Param("keyword") String keyword,
+            @Param("categoryId") Long categoryId,
+            @Param("brandId") Long brandId,
+            @Param("status") ProductStatus status,
             Pageable pageable
     );
 }

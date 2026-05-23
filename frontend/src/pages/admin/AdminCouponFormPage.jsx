@@ -12,8 +12,9 @@ function AdminCouponFormPage() {
 
   const [formData, setFormData] = useState({
     code: '',
+    name: '',
     description: '',
-    discountType: 'PERCENT',
+    discountType: 'PERCENTAGE',
     discountValue: '',
     maxDiscountAmount: '',
     minOrderAmount: '',
@@ -47,8 +48,9 @@ function AdminCouponFormPage() {
 
         setFormData({
           code: coupon.code || '',
+          name: coupon.name || '',
           description: coupon.description || '',
-          discountType: coupon.discountType || coupon.type || 'PERCENT',
+          discountType: coupon.discountType || coupon.type || 'PERCENTAGE',
           discountValue:
             coupon.discountValue ?? coupon.value ?? '',
           maxDiscountAmount: coupon.maxDiscountAmount ?? '',
@@ -91,7 +93,9 @@ function AdminCouponFormPage() {
     if (!formData.code.trim()) {
       nextErrors.code = 'Mã coupon không được để trống'
     }
-
+    if (!formData.name.trim()) {
+      nextErrors.name = 'Tên coupon không được để trống'
+    }
     if (!formData.discountValue) {
       nextErrors.discountValue = 'Giá trị giảm không được để trống'
     }
@@ -101,7 +105,7 @@ function AdminCouponFormPage() {
     }
 
     if (
-      formData.discountType === 'PERCENT' &&
+      formData.discountType === 'PERCENTAGE' &&
       Number(formData.discountValue) > 100
     ) {
       nextErrors.discountValue = 'Giảm theo phần trăm không được vượt quá 100'
@@ -110,7 +114,9 @@ function AdminCouponFormPage() {
     if (!formData.startAt) {
       nextErrors.startAt = 'Vui lòng chọn thời gian bắt đầu'
     }
-
+    if (formData.startAt && new Date(formData.startAt) < new Date()) {
+      nextErrors.startAt = 'Thời gian bắt đầu không được ở quá khứ'
+    }
     if (!formData.endAt) {
       nextErrors.endAt = 'Vui lòng chọn thời gian kết thúc'
     }
@@ -131,6 +137,7 @@ function AdminCouponFormPage() {
   const buildPayload = () => {
     return {
       code: formData.code.trim().toUpperCase(),
+      name: formData.name.trim(),
       description: formData.description.trim(),
       discountType: formData.discountType,
       discountValue: Number(formData.discountValue || 0),
@@ -237,7 +244,13 @@ function AdminCouponFormPage() {
             error={errors.code}
             placeholder="VD: SALE10"
           />
-
+<FormField
+  label="Tên coupon"
+  value={formData.name}
+  onChange={(value) => handleChange('name', value)}
+  error={errors.name}
+  placeholder="VD: Giảm 10% toàn cửa hàng"
+/>
           <div>
             <label className="mb-2 block text-sm font-bold text-gray-700">
               Trạng thái
@@ -265,14 +278,14 @@ function AdminCouponFormPage() {
               }
               className="h-11 w-full rounded border px-4 text-sm outline-none focus:border-red-500"
             >
-              <option value="PERCENT">Giảm theo phần trăm</option>
+              <option value="PERCENTAGE">Giảm theo phần trăm</option>
               <option value="FIXED">Giảm số tiền cố định</option>
             </select>
           </div>
 
           <FormField
             label={
-              formData.discountType === 'PERCENT'
+              formData.discountType === 'PERCENTAGE'
                 ? 'Giá trị giảm (%)'
                 : 'Giá trị giảm (VNĐ)'
             }
@@ -281,7 +294,7 @@ function AdminCouponFormPage() {
             onChange={(value) => handleChange('discountValue', value)}
             error={errors.discountValue}
             placeholder={
-              formData.discountType === 'PERCENT' ? 'VD: 10' : 'VD: 100000'
+              formData.discountType === 'PERCENTAGE' ? 'VD: 10' : 'VD: 100000'
             }
           />
 
@@ -315,6 +328,7 @@ function AdminCouponFormPage() {
             value={formData.startAt}
             onChange={(value) => handleChange('startAt', value)}
             error={errors.startAt}
+            min={getCurrentDateTimeLocal()}
           />
 
           <FormField
@@ -353,6 +367,7 @@ function FormField({
   placeholder,
   error,
   type = 'text',
+  min,
 }) {
   return (
     <div>
@@ -365,6 +380,7 @@ function FormField({
         value={value ?? ''}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
+        min={min}
         className={
           error
             ? 'h-11 w-full rounded border border-red-500 px-4 text-sm outline-none'
@@ -386,5 +402,13 @@ function toDateTimeLocal(value) {
 
   return localDate.toISOString().slice(0, 16)
 }
+function getCurrentDateTimeLocal() {
+  const now = new Date()
+  now.setSeconds(0, 0)
 
+  const offset = now.getTimezoneOffset()
+  const localDate = new Date(now.getTime() - offset * 60 * 1000)
+
+  return localDate.toISOString().slice(0, 16)
+}
 export default AdminCouponFormPage

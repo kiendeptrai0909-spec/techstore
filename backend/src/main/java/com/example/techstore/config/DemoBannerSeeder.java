@@ -31,7 +31,9 @@ public class DemoBannerSeeder implements CommandLineRunner {
 
     private void seedBanners() {
         LocalDateTime now = LocalDateTime.now();
-        LocalDateTime startAt = now.minusDays(1);
+
+        // Không dùng quá khứ nữa vì BannerService đã chặn startAt ở quá khứ
+        LocalDateTime startAt = now.plusMinutes(5);
         LocalDateTime endAt = now.plusMonths(6);
 
         upsertBanner(
@@ -104,7 +106,7 @@ public class DemoBannerSeeder implements CommandLineRunner {
                 "Deal sốc cuối tuần TechStore",
                 DEMO_BANNER_IMAGE,
                 "/products",
-                BannerPosition.SIDEBAR,
+                BannerPosition.SIDEBAR_LEFT,
                 1,
                 startAt,
                 endAt,
@@ -115,8 +117,8 @@ public class DemoBannerSeeder implements CommandLineRunner {
                 "Hỗ trợ kỹ thuật tận nhà",
                 DEMO_BANNER_IMAGE,
                 "/contact",
-                BannerPosition.SIDEBAR,
-                2,
+                BannerPosition.SIDEBAR_RIGHT,
+                1,
                 startAt,
                 endAt,
                 ProductStatus.ACTIVE
@@ -133,7 +135,7 @@ public class DemoBannerSeeder implements CommandLineRunner {
             LocalDateTime endAt,
             ProductStatus status
     ) {
-        Banner banner = findExistingBanner(title, position);
+        Banner banner = findExistingBanner(title);
 
         if (banner == null) {
             banner = new Banner();
@@ -152,13 +154,12 @@ public class DemoBannerSeeder implements CommandLineRunner {
         bannerRepository.save(banner);
     }
 
-    private Banner findExistingBanner(String title, BannerPosition position) {
+    private Banner findExistingBanner(String title) {
         List<Banner> banners = bannerRepository.findAll();
 
         return banners.stream()
                 .filter(banner -> banner.getTitle() != null)
                 .filter(banner -> banner.getTitle().equalsIgnoreCase(title))
-                .filter(banner -> banner.getPosition() == position)
                 .findFirst()
                 .orElse(null);
     }

@@ -94,6 +94,18 @@ function AdminBannerFormPage() {
       nextErrors.sortOrder = 'Thứ tự hiển thị không hợp lệ'
     }
 
+    if (!formData.startAt) {
+      nextErrors.startAt = 'Vui lòng chọn thời gian bắt đầu'
+    }
+
+    if (formData.startAt && new Date(formData.startAt) < new Date()) {
+      nextErrors.startAt = 'Thời gian bắt đầu không được ở quá khứ'
+    }
+
+    if (!formData.endAt) {
+      nextErrors.endAt = 'Vui lòng chọn thời gian kết thúc'
+    }
+
     if (
       formData.startAt &&
       formData.endAt &&
@@ -108,17 +120,17 @@ function AdminBannerFormPage() {
   }
 
   const buildPayload = () => {
-    return {
-      title: formData.title.trim(),
-      imageUrl: formData.imageUrl.trim(),
-      linkUrl: formData.linkUrl.trim() || null,
-      position: formData.position,
-      sortOrder: Number(formData.sortOrder || 0),
-      startAt: formData.startAt || null,
-      endAt: formData.endAt || null,
-      status: formData.status,
-    }
+  return {
+    title: formData.title.trim(),
+    imageUrl: formData.imageUrl.trim(),
+    linkUrl: formData.linkUrl.trim() || null,
+    position: formData.position,
+    sortOrder: Number(formData.sortOrder || 0),
+    startAt: toBackendDateTime(formData.startAt),
+    endAt: toBackendDateTime(formData.endAt),
+    status: formData.status,
   }
+}
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -257,6 +269,8 @@ function AdminBannerFormPage() {
               type="datetime-local"
               value={formData.startAt}
               onChange={(value) => handleChange('startAt', value)}
+              error={errors.startAt}
+              min={getCurrentDateTimeLocal()}
             />
 
             <FormField
@@ -342,6 +356,7 @@ function FormField({
   placeholder,
   error,
   type = 'text',
+  min,
 }) {
   return (
     <div>
@@ -354,6 +369,7 @@ function FormField({
         value={value ?? ''}
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
+        min={min}
         className={
           error
             ? 'h-11 w-full rounded border border-red-500 px-4 text-sm outline-none'
@@ -375,5 +391,18 @@ function toDateTimeLocal(value) {
 
   return localDate.toISOString().slice(0, 16)
 }
+function getCurrentDateTimeLocal() {
+  const now = new Date()
+  now.setSeconds(0, 0)
 
+  const offset = now.getTimezoneOffset()
+  const localDate = new Date(now.getTime() - offset * 60 * 1000)
+
+  return localDate.toISOString().slice(0, 16)
+}
+function toBackendDateTime(value) {
+  if (!value) return null
+
+  return value.length === 16 ? `${value}:00` : value
+}
 export default AdminBannerFormPage

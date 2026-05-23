@@ -157,12 +157,12 @@ function NewsStatusBadge({ status }) {
   }
 
   return (
-    <span
-      className={`rounded-full border px-3 py-1 text-xs font-bold ${current.className}`}
-    >
-      {current.label}
-    </span>
-  )
+  <span
+    className={`inline-flex min-w-[92px] items-center justify-center whitespace-nowrap rounded-full border px-3 py-1 text-xs font-bold ${current.className}`}
+  >
+    {current.label}
+  </span>
+)
 }
 
 export default AdminNewsTable

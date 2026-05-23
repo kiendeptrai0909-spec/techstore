@@ -2,7 +2,10 @@ import { NavLink, Outlet, useNavigate } from 'react-router'
 import {
   LayoutDashboard,
   Package,
+  Tags,
   ShoppingBag,
+  Users,
+  UserCog,
   Ticket,
   Image,
   Newspaper,
@@ -35,9 +38,24 @@ function AdminLayout() {
       icon: Package,
     },
     {
+      label: 'Danh mục',
+      path: '/admin/categories',
+      icon: Tags,
+    },
+    {
       label: 'Đơn hàng',
       path: '/admin/orders',
       icon: ShoppingBag,
+    },
+    {
+      label: 'Khách hàng',
+      path: '/admin/customers',
+      icon: Users,
+    },
+    {
+      label: 'Nhân viên',
+      path: '/admin/employees',
+      icon: UserCog,
     },
     {
       label: 'Coupon',

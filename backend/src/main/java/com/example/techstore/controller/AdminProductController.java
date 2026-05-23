@@ -27,10 +27,19 @@ public class AdminProductController {
      */
     @GetMapping
     public Page<ProductResponse> getProducts(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) Long brandId,
             @RequestParam(required = false) ProductStatus status,
             Pageable pageable
     ) {
-        return adminProductService.getProducts(status, pageable);
+        return adminProductService.getProducts(
+                keyword,
+                categoryId,
+                brandId,
+                status,
+                pageable
+        );
     }
 
     /*

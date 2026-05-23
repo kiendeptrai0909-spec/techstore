@@ -59,7 +59,22 @@ function AdminNewsPage() {
   const news = Array.isArray(pageData)
     ? pageData
     : pageData?.content || []
+  const filteredNews = news.filter((item) => {
+    const keyword = filters.keyword.trim().toLowerCase()
 
+    const matchKeyword =
+      !keyword ||
+      item.title?.toLowerCase().includes(keyword) ||
+      item.slug?.toLowerCase().includes(keyword) ||
+      item.summary?.toLowerCase().includes(keyword) ||
+      item.content?.toLowerCase().includes(keyword) ||
+      item.author?.toLowerCase().includes(keyword)
+
+    const matchStatus =
+      !filters.status || item.status === filters.status
+
+    return matchKeyword && matchStatus
+  })
   const handleSubmitFilter = (event) => {
     event.preventDefault()
 
@@ -176,7 +191,7 @@ function AdminNewsPage() {
         )}
 
         <AdminNewsTable
-          news={news}
+          news={filteredNews}
           loading={loading}
           onDelete={handleDeleteNews}
         />

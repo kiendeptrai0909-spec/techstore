@@ -27,9 +27,9 @@ public class NewsPostController {
     /*
      * Public API: xem chi tiết bài viết theo slug.
      *
-     * GET /api/v1/news/nen-mua-laptop-nao-cho-sinh-vien-cntt
+     * GET /api/v1/news/slug/nen-mua-laptop-nao-cho-sinh-vien-cntt
      */
-    @GetMapping("/{slug}")
+    @GetMapping("/slug/{slug}")
     public NewsPostResponse getActiveNewsPostBySlug(@PathVariable String slug) {
         return newsPostService.getActiveNewsPostBySlug(slug);
     }

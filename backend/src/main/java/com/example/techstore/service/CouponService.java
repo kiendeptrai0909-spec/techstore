@@ -231,11 +231,22 @@ public class CouponService {
             throw new BadRequestException("Số lượt sử dụng phải lớn hơn 0");
         }
 
-        if (request.getStartAt() != null
-                && request.getEndAt() != null
-                && request.getEndAt().isBefore(request.getStartAt())) {
+        if (request.getStartAt() == null) {
+            throw new BadRequestException("Thời gian bắt đầu không được để trống");
+        }
+
+        if (request.getStartAt().isBefore(LocalDateTime.now())) {
+            throw new BadRequestException("Thời gian bắt đầu không được ở quá khứ");
+        }
+
+        if (request.getEndAt() == null) {
+            throw new BadRequestException("Thời gian kết thúc không được để trống");
+        }
+
+        if (!request.getEndAt().isAfter(request.getStartAt())) {
             throw new BadRequestException("Thời gian kết thúc phải sau thời gian bắt đầu");
         }
+
     }
 
     private void validateCouponCanUse(Coupon coupon, BigDecimal subtotalAmount) {

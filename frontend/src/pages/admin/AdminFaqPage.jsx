@@ -59,7 +59,19 @@ function AdminFaqPage() {
   const faqs = Array.isArray(pageData)
     ? pageData
     : pageData?.content || []
+  const filteredFaqs = faqs.filter((faq) => {
+    const keyword = filters.keyword.trim().toLowerCase()
 
+    const matchKeyword =
+      !keyword ||
+      faq.question?.toLowerCase().includes(keyword) ||
+      faq.answer?.toLowerCase().includes(keyword)
+
+    const matchStatus =
+      !filters.status || faq.status === filters.status
+
+    return matchKeyword && matchStatus
+  })
   const handleSubmitFilter = (event) => {
     event.preventDefault()
 
@@ -176,7 +188,7 @@ function AdminFaqPage() {
         )}
 
         <AdminFaqTable
-          faqs={faqs}
+          faqs={filteredFaqs}
           loading={loading}
           onDelete={handleDeleteFaq}
         />

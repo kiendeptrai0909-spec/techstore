@@ -2,6 +2,7 @@ import { Link, NavLink, Outlet, useNavigate } from 'react-router'
 import {
   LayoutDashboard,
   Package,
+  Tags,
   ShoppingBag,
   TicketPercent,
   Image,
@@ -24,6 +25,11 @@ const menuItems = [
     label: 'Sản phẩm',
     to: '/admin/products',
     icon: Package,
+  },
+  {
+    label: 'Danh mục',
+    to: '/admin/categories',
+    icon: Tags,
   },
   {
     label: 'Đơn hàng',
@@ -52,7 +58,7 @@ const menuItems = [
   },
   {
     label: 'Liên hệ',
-    to: '/admin/contacts',
+    to: '/admin/contact-messages',
     icon: MessageSquare,
   },
 ]

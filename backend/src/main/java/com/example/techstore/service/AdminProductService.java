@@ -37,14 +37,24 @@ public class AdminProductService {
     private final BrandRepository brandRepository;
 
     @Transactional(readOnly = true)
-    public Page<ProductResponse> getProducts(ProductStatus status, Pageable pageable) {
-        if (status != null) {
-            return productRepository.findByStatusAndDeletedAtIsNull(status, pageable)
-                    .map(this::toProductResponse);
-        }
+    public Page<ProductResponse> getProducts(
+            String keyword,
+            Long categoryId,
+            Long brandId,
+            ProductStatus status,
+            Pageable pageable
+    ) {
+        String normalizedKeyword = keyword == null
+                ? ""
+                : keyword.trim().toLowerCase();
 
-        return productRepository.findByDeletedAtIsNull(pageable)
-                .map(this::toProductResponse);
+        return productRepository.searchAdminProducts(
+                normalizedKeyword,
+                categoryId,
+                brandId,
+                status,
+                pageable
+        ).map(this::toProductResponse);
     }
     @Transactional(readOnly = true)
     public ProductResponse getProductById(Long productId) {
