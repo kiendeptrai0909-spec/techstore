@@ -90,7 +90,7 @@ public class AdminProductService {
 
         Product savedProduct = productRepository.save(product);
 
-        overwriteVariants(savedProduct, request.getVariants());
+        saveOrUpdateVariants(savedProduct, request.getVariants());
 
         return toProductResponse(savedProduct);
     }
@@ -129,7 +129,7 @@ public class AdminProductService {
 
         Product savedProduct = productRepository.save(product);
 
-        overwriteVariants(savedProduct, request.getVariants());
+        saveOrUpdateVariants(savedProduct, request.getVariants());
 
         return toProductResponse(savedProduct);
     }
@@ -232,36 +232,105 @@ public class AdminProductService {
         return toProductResponse(savedVariant.getProduct());
     }
 
-    private void overwriteVariants(Product product, List<ProductVariantRequest> variantRequests) {
-        List<ProductVariant> oldVariants = productVariantRepository.findByProductId(product.getId());
-
-        if (!oldVariants.isEmpty()) {
-            productVariantRepository.deleteAll(oldVariants);
-            productVariantRepository.flush();
-        }
+    private void saveOrUpdateVariants(Product product, List<ProductVariantRequest> variantRequests) {
+        List<ProductVariant> existingVariants =
+                productVariantRepository.findByProductId(product.getId());
 
         if (variantRequests == null || variantRequests.isEmpty()) {
+            for (ProductVariant variant : existingVariants) {
+                variant.setStatus(ProductStatus.INACTIVE);
+                variant.setDeletedAt(LocalDateTime.now());
+                productVariantRepository.save(variant);
+            }
+
             return;
         }
+
+        List<Long> requestVariantIds = variantRequests.stream()
+                .map(ProductVariantRequest::getId)
+                .filter(id -> id != null)
+                .toList();
 
         for (ProductVariantRequest request : variantRequests) {
             validateVariantRequest(request);
 
             String sku = normalizeSku(request.getSku());
 
-            ProductVariant variant = ProductVariant.builder()
-                    .product(product)
-                    .name(request.getName().trim())
-                    .sku(sku)
-                    .price(request.getPrice())
-                    .salePrice(request.getSalePrice())
-                    .stock(request.getStock())
-                    .thumbnailUrl(request.getThumbnailUrl())
-                    .status(request.getStatus() != null ? request.getStatus() : ProductStatus.ACTIVE)
-                    .build();
-
-            productVariantRepository.save(variant);
+            if (request.getId() == null) {
+                createNewVariant(product, request, sku);
+            } else {
+                updateExistingVariant(product, request, sku);
+            }
         }
+
+        for (ProductVariant existingVariant : existingVariants) {
+            if (!requestVariantIds.contains(existingVariant.getId())) {
+                existingVariant.setStatus(ProductStatus.INACTIVE);
+                existingVariant.setDeletedAt(LocalDateTime.now());
+                productVariantRepository.save(existingVariant);
+            }
+        }
+    }
+
+    private void createNewVariant(
+            Product product,
+            ProductVariantRequest request,
+            String sku
+    ) {
+        if (productVariantRepository.existsBySku(sku)) {
+            throw new BadRequestException("SKU đã tồn tại: " + sku);
+        }
+
+        ProductVariant variant = ProductVariant.builder()
+                .product(product)
+                .name(request.getName().trim())
+                .sku(sku)
+                .price(request.getPrice())
+                .salePrice(request.getSalePrice())
+                .stock(request.getStock())
+                .thumbnailUrl(request.getThumbnailUrl())
+                .status(request.getStatus() != null ? request.getStatus() : ProductStatus.ACTIVE)
+                .build();
+
+        productVariantRepository.save(variant);
+    }
+
+    private void updateExistingVariant(
+            Product product,
+            ProductVariantRequest request,
+            String sku
+    ) {
+        ProductVariant variant = productVariantRepository.findById(request.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy biến thể sản phẩm"));
+
+        if (!variant.getProduct().getId().equals(product.getId())) {
+            throw new BadRequestException("Biến thể không thuộc sản phẩm này");
+        }
+
+        productVariantRepository.findBySku(sku)
+                .ifPresent(existingVariant -> {
+                    if (!existingVariant.getId().equals(variant.getId())) {
+                        throw new BadRequestException("SKU đã tồn tại: " + sku);
+                    }
+                });
+
+        ProductStatus status = request.getStatus() != null
+                ? request.getStatus()
+                : ProductStatus.ACTIVE;
+
+        variant.setName(request.getName().trim());
+        variant.setSku(sku);
+        variant.setPrice(request.getPrice());
+        variant.setSalePrice(request.getSalePrice());
+        variant.setStock(request.getStock());
+        variant.setThumbnailUrl(request.getThumbnailUrl());
+        variant.setStatus(status);
+
+        if (status == ProductStatus.ACTIVE) {
+            variant.setDeletedAt(null);
+        }
+
+        productVariantRepository.save(variant);
     }
 
     private void validateVariantRequest(ProductVariantRequest request) {

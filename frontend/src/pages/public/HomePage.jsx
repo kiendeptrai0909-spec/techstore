@@ -9,15 +9,16 @@ import CategorySidebar from '../../components/home/CategorySidebar'
 import SideBanner from '../../components/home/SideBanner'
 import ProductSection from '../../components/home/ProductSection'
 import CategoryIconGrid from '../../components/home/CategoryIconGrid'
-
 import NewsSection from '../../components/home/NewsSection'
-
 
 function HomePage() {
   const [banners, setBanners] = useState([])
   const [categories, setCategories] = useState([])
   const [featuredProducts, setFeaturedProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
+  const [laptopGamingProducts, setLaptopGamingProducts] = useState([])
+  const [officeProducts, setOfficeProducts] = useState([])
+  const [pcProducts, setPcProducts] = useState([])
   const [mouseProducts, setMouseProducts] = useState([])
   const [news, setNews] = useState([])
   const [loading, setLoading] = useState(true)
@@ -50,7 +51,50 @@ function HomePage() {
         setFeaturedProducts(normalizedFeaturedProducts)
         setAllProducts(normalizedProducts)
         setNews(normalizedNews)
+        const laptopCategory = findCategoryByKeywords(normalizedCategories, [
+          'laptop',
+          'may tinh xach tay',
+        ])
 
+        const pcCategory = findCategoryByKeywords(normalizedCategories, [
+          'pc',
+          'may tinh bo',
+          'build pc',
+        ])
+
+        const [
+          laptopGamingData,
+          officeProductData,
+          pcProductData,
+        ] = await Promise.all([
+          productApi.getProducts({
+            page: 0,
+            size: 5,
+            status: 'ACTIVE',
+            keyword: 'gaming',
+            ...(laptopCategory?.id ? { categoryId: laptopCategory.id } : {}),
+          }),
+
+          productApi.getProducts({
+            page: 0,
+            size: 5,
+            status: 'ACTIVE',
+            ...(laptopCategory?.id
+              ? { categoryId: laptopCategory.id }
+              : { keyword: 'laptop' }),
+          }),
+
+          productApi.getProducts({
+            page: 0,
+            size: 5,
+            status: 'ACTIVE',
+            ...(pcCategory?.id ? { categoryId: pcCategory.id } : { keyword: 'pc' }),
+          }),
+        ])
+
+        setLaptopGamingProducts(normalizeList(laptopGamingData))
+        setOfficeProducts(normalizeList(officeProductData))
+        setPcProducts(normalizeList(pcProductData))
         const mouseCategory = normalizedCategories.find((category) => {
           const slug = category.slug || ''
           const name = category.name || ''
@@ -92,32 +136,70 @@ function HomePage() {
     fetchHomeData()
   }, [])
 
-  const leftBanner = banners[0]
-  const rightBanner = banners[1]
+  const sortedBanners = sortBanners(banners)
 
-  const heroMainBanner = banners[2]
-  const heroRightBanners = banners.slice(3, 6)
-  const heroBottomBanners = banners.slice(6, 10)
+  const leftBanner = findFirstBannerByPosition(sortedBanners, [
+    'Banner trái',
+    'HOME_LEFT',
+    'SIDEBAR_LEFT',
+    'LEFT',
+  ])
 
-  const promotionBanners = banners.slice(10, 14)
+  const rightBanner = findFirstBannerByPosition(sortedBanners, [
+    'Banner phải',
+    'HOME_RIGHT',
+    'SIDEBAR_RIGHT',
+    'RIGHT',
+  ])
 
-  const pcProducts =
-    featuredProducts.length > 0 ? featuredProducts : allProducts.slice(0, 5)
+  const topBanners = findBannersByPosition(sortedBanners, [
+    'Trang chủ - đầu trang',
+    'HOME_TOP',
+    'TOP',
+  ])
 
-  const laptopGamingProducts =
-    allProducts.length > 5 ? allProducts.slice(5, 10) : allProducts.slice(0, 5)
+  const middleBanners = findBannersByPosition(sortedBanners, [
+    'Trang chủ - giữa trang',
+    'HOME_MIDDLE',
+    'MIDDLE',
+  ])
 
-  const officeProducts =
-    allProducts.length > 10
-      ? allProducts.slice(10, 15)
-      : allProducts.slice(0, 5)
+  const bottomBanners = findBannersByPosition(sortedBanners, [
+    'Trang chủ - cuối trang',
+    'HOME_BOTTOM',
+    'BOTTOM',
+  ])
 
+  /*
+   * Quy ước:
+   * Trang chủ - đầu trang:
+   * - thứ tự 1      -> banner lớn trung tâm
+   * - thứ tự 2-4    -> 3 banner nhỏ bên phải
+   * - thứ tự 5-6    -> 2 banner dưới banner lớn
+   *
+   * Trang chủ - giữa trang:
+   * - thứ tự 1      -> ô Deal hời tuần
+   * - thứ tự 2      -> ô Monitor
+   * - thứ tự 3      -> ô Gaming Mouse
+   * - thứ tự 4      -> ô PC RX 6500XT
+   */
+  const heroMainBanner = topBanners[0]
+  const heroRightBanners = topBanners.slice(1, 4)
+  const heroBottomBanners = topBanners.slice(4, 6)
 
+  const middleFallbackTitles = [
+    'Deal hời tuần',
+    'Monitor',
+    'Gaming Mouse',
+    'PC RX 6500XT',
+  ]
+
+  const middleSlotBanners = middleBanners.slice(0, 4)
+
+  
 
   return (
     <div className="bg-[#e9e9e9]">
-
-
       <div className="mx-auto grid max-w-[1580px] grid-cols-1 gap-4 px-4 py-4 xl:grid-cols-[150px_minmax(0,1fr)_150px]">
         <SideBanner banner={leftBanner} side="left" />
 
@@ -129,36 +211,42 @@ function HomePage() {
               </div>
 
               <div className="space-y-3">
-                <Link
-                  to={heroMainBanner?.linkUrl || '/products'}
-                  className="block overflow-hidden rounded-md bg-white shadow-sm"
-                >
-                  {heroMainBanner?.imageUrl ? (
-                    <img
-                      src={heroMainBanner.imageUrl}
-                      alt={heroMainBanner.title}
-                      className="h-[310px] w-full object-cover"
-                    />
-                  ) : (
+                {heroMainBanner ? (
+                  <BannerLink
+                    banner={heroMainBanner}
+                    imageClassName="h-[310px] w-full object-cover"
+                    className="block overflow-hidden rounded-md bg-white shadow-sm"
+                  />
+                ) : (
+                  <div className="overflow-hidden rounded-md bg-white shadow-sm">
                     <HeroFallback />
-                  )}
-                </Link>
+                  </div>
+                )}
 
                 <div className="grid gap-3 md:grid-cols-2">
-                  {heroBottomBanners.slice(0, 2).length > 0 ? (
-                    heroBottomBanners.slice(0, 2).map((banner) => (
-                      <Link
-                        key={banner.id}
-                        to={banner.linkUrl || '/products'}
-                        className="overflow-hidden rounded-md bg-white shadow-sm"
-                      >
-                        <img
-                          src={banner.imageUrl}
-                          alt={banner.title}
-                          className="h-[160px] w-full object-cover"
-                        />
-                      </Link>
-                    ))
+                  {heroBottomBanners.length > 0 ? (
+                    <>
+                      {[0, 1].map((index) => {
+                        const banner = heroBottomBanners[index]
+                        const fallbackTitle =
+                          index === 0 ? 'Laptop Gaming' : 'Laptop Office'
+
+                        if (banner) {
+                          return (
+                            <BannerLink
+                              key={banner.id}
+                              banner={banner}
+                              imageClassName="h-[160px] w-full object-cover"
+                              className="overflow-hidden rounded-md bg-white shadow-sm"
+                            />
+                          )
+                        }
+
+                        return (
+                          <BigPromo key={fallbackTitle} title={fallbackTitle} />
+                        )
+                      })}
+                    </>
                   ) : (
                     <>
                       <BigPromo title="Laptop Gaming" />
@@ -170,19 +258,30 @@ function HomePage() {
 
               <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
                 {heroRightBanners.length > 0 ? (
-                  heroRightBanners.map((banner) => (
-                    <Link
-                      key={banner.id}
-                      to={banner.linkUrl || '/products'}
-                      className="overflow-hidden rounded-md bg-white shadow-sm"
-                    >
-                      <img
-                        src={banner.imageUrl}
-                        alt={banner.title}
-                        className="h-[150px] w-full object-cover lg:h-[153px]"
-                      />
-                    </Link>
-                  ))
+                  <>
+                    {[0, 1, 2].map((index) => {
+                      const banner = heroRightBanners[index]
+                      const fallbackTitles = ['Build PC', 'Phím cơ', 'PC i5/5060']
+
+                      if (banner) {
+                        return (
+                          <BannerLink
+                            key={banner.id}
+                            banner={banner}
+                            imageClassName="h-[150px] w-full object-cover lg:h-[153px]"
+                            className="overflow-hidden rounded-md bg-white shadow-sm"
+                          />
+                        )
+                      }
+
+                      return (
+                        <SmallPromo
+                          key={fallbackTitles[index]}
+                          title={fallbackTitles[index]}
+                        />
+                      )
+                    })}
+                  </>
                 ) : (
                   <>
                     <SmallPromo title="Build PC" />
@@ -194,28 +293,22 @@ function HomePage() {
             </div>
 
             <div className="mt-3 grid gap-3 md:grid-cols-4">
-              {heroBottomBanners.slice(2, 6).length > 0 ? (
-                heroBottomBanners.slice(2, 6).map((banner) => (
-                  <Link
-                    key={banner.id}
-                    to={banner.linkUrl || '/products'}
-                    className="overflow-hidden rounded-md bg-white shadow-sm"
-                  >
-                    <img
-                      src={banner.imageUrl}
-                      alt={banner.title}
-                      className="h-[140px] w-full object-cover"
+              {middleFallbackTitles.map((title, index) => {
+                const banner = middleSlotBanners[index]
+
+                if (banner) {
+                  return (
+                    <BannerLink
+                      key={banner.id}
+                      banner={banner}
+                      imageClassName="h-[150px] w-full object-cover"
+                      className="overflow-hidden rounded-md bg-white shadow-sm"
                     />
-                  </Link>
-                ))
-              ) : (
-                <>
-                  <SmallPromo title="Deal hời tuần" />
-                  <SmallPromo title="Monitor" />
-                  <SmallPromo title="Gaming Mouse" />
-                  <SmallPromo title="PC RX 6500XT" />
-                </>
-              )}
+                  )
+                }
+
+                return <SmallPromo key={title} title={title} />
+              })}
             </div>
           </section>
 
@@ -225,8 +318,6 @@ function HomePage() {
             </div>
           ) : (
             <>
-              
-
               <ProductSection
                 title="Laptop gaming bán chạy"
                 products={laptopGamingProducts}
@@ -267,7 +358,18 @@ function HomePage() {
 
               <CategoryIconGrid categories={categories} />
 
-              
+              {bottomBanners.length > 0 && (
+                <section className="grid gap-3 md:grid-cols-2">
+                  {bottomBanners.map((banner) => (
+                    <BannerLink
+                      key={banner.id}
+                      banner={banner}
+                      imageClassName="h-[180px] w-full object-cover"
+                      className="overflow-hidden rounded-md bg-white shadow-sm"
+                    />
+                  ))}
+                </section>
+              )}
 
               <NewsSection news={news} />
             </>
@@ -277,6 +379,18 @@ function HomePage() {
         <SideBanner banner={rightBanner} side="right" />
       </div>
     </div>
+  )
+}
+
+function BannerLink({ banner, className, imageClassName }) {
+  return (
+    <Link to={banner.linkUrl || '/products'} className={className}>
+      <img
+        src={banner.imageUrl}
+        alt={banner.title || 'Banner TechStore'}
+        className={imageClassName}
+      />
+    </Link>
   )
 }
 
@@ -318,11 +432,70 @@ function BigPromo({ title }) {
     </Link>
   )
 }
+
 function normalizeList(data) {
   if (Array.isArray(data)) return data
   if (Array.isArray(data?.content)) return data.content
   if (Array.isArray(data?.data)) return data.data
   if (Array.isArray(data?.items)) return data.items
   return []
+}
+
+function sortBanners(banners) {
+  return [...banners].sort((a, b) => {
+    const orderA = Number(a.displayOrder ?? a.sortOrder ?? a.order ?? 999)
+    const orderB = Number(b.displayOrder ?? b.sortOrder ?? b.order ?? 999)
+
+    if (orderA !== orderB) {
+      return orderA - orderB
+    }
+
+    return Number(b.id || 0) - Number(a.id || 0)
+  })
+}
+
+function findFirstBannerByPosition(banners, positions) {
+  return findBannersByPosition(banners, positions)[0]
+}
+
+function findBannersByPosition(banners, positions) {
+  const normalizedPositions = positions.map(normalizeText)
+
+  return banners.filter((banner) => {
+    const position = normalizeText(
+      banner.position ||
+      banner.positionCode ||
+      banner.positionName ||
+      banner.positionLabel ||
+      banner.bannerPosition ||
+      banner.location ||
+      ''
+    )
+
+    return normalizedPositions.some((item) => position.includes(item))
+  })
+}
+
+function normalizeText(value) {
+  return String(value || '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .replace(/Đ/g, 'D')
+    .replace(/[^a-zA-Z0-9]+/g, ' ')
+    .trim()
+    .toUpperCase()
+}
+function findCategoryByKeywords(categories, keywords) {
+  const normalizedKeywords = keywords.map(normalizeText)
+
+  return categories.find((category) => {
+    const name = normalizeText(category.name)
+    const slug = normalizeText(category.slug)
+
+    return normalizedKeywords.some(
+      (keyword) => name.includes(keyword) || slug.includes(keyword)
+    )
+  })
 }
 export default HomePage
