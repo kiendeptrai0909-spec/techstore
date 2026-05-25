@@ -18,6 +18,7 @@ function HomePage() {
   const [categories, setCategories] = useState([])
   const [featuredProducts, setFeaturedProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
+  const [mouseProducts, setMouseProducts] = useState([])
   const [news, setNews] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -38,11 +39,49 @@ function HomePage() {
           newsApi.getNews({ page: 0, size: 4 }),
         ])
 
-        setBanners(bannerData || [])
-        setCategories(categoryData || [])
-        setFeaturedProducts(featuredProductData?.content || [])
-        setAllProducts(productData?.content || [])
-        setNews(newsData?.content || [])
+        const normalizedBanners = normalizeList(bannerData)
+        const normalizedCategories = normalizeList(categoryData)
+        const normalizedFeaturedProducts = normalizeList(featuredProductData)
+        const normalizedProducts = normalizeList(productData)
+        const normalizedNews = normalizeList(newsData)
+
+        setBanners(normalizedBanners)
+        setCategories(normalizedCategories)
+        setFeaturedProducts(normalizedFeaturedProducts)
+        setAllProducts(normalizedProducts)
+        setNews(normalizedNews)
+
+        const mouseCategory = normalizedCategories.find((category) => {
+          const slug = category.slug || ''
+          const name = category.name || ''
+
+          return (
+            slug === 'chuot' ||
+            slug === 'chuot-may-tinh' ||
+            name.toLowerCase() === 'chuột' ||
+            name.toLowerCase() === 'chuột máy tính'
+          )
+        })
+
+        if (mouseCategory?.id) {
+          const mouseProductData = await productApi.getProducts({
+            page: 0,
+            size: 5,
+            categoryId: mouseCategory.id,
+            status: 'ACTIVE',
+          })
+
+          setMouseProducts(normalizeList(mouseProductData))
+        } else {
+          const mouseProductData = await productApi.getProducts({
+            page: 0,
+            size: 5,
+            keyword: 'chuot',
+            status: 'ACTIVE',
+          })
+
+          setMouseProducts(normalizeList(mouseProductData))
+        }
       } catch (error) {
         console.error(error.message)
       } finally {
@@ -73,10 +112,7 @@ function HomePage() {
       ? allProducts.slice(10, 15)
       : allProducts.slice(0, 5)
 
-  const mouseProducts =
-    allProducts.length > 15
-      ? allProducts.slice(15, 20)
-      : allProducts.slice(0, 5)
+
 
   return (
     <div className="bg-[#e9e9e9]">
@@ -237,7 +273,7 @@ function HomePage() {
                   { label: 'Asus', url: '/products?keyword=asus' },
                   { label: 'Rapoo', url: '/products?keyword=rapoo' },
                 ]}
-                viewAllUrl="/products?keyword=chuot"
+                viewAllUrl="/products?category=chuot"
               />
 
               <CategoryIconGrid categories={categories} />
@@ -293,5 +329,11 @@ function BigPromo({ title }) {
     </Link>
   )
 }
-
+function normalizeList(data) {
+  if (Array.isArray(data)) return data
+  if (Array.isArray(data?.content)) return data.content
+  if (Array.isArray(data?.data)) return data.data
+  if (Array.isArray(data?.items)) return data.items
+  return []
+}
 export default HomePage

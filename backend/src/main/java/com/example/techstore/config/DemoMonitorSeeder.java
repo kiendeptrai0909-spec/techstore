@@ -29,7 +29,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
 import java.util.List;
-
+import java.util.Map;
 @Component
 @RequiredArgsConstructor
 @Order(31)
@@ -37,7 +37,163 @@ public class DemoMonitorSeeder implements CommandLineRunner {
 
     private static final String DEMO_IMAGE_URL =
             "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png";
-
+    private static final Map<String, List<String>> MONITOR_IMAGES = Map.ofEntries(
+            Map.entry("MAN-LG-27G850A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640077/lg-27g850a-b_cfdlhs.jpg"
+            )),
+            Map.entry("MAN-LG-24U411A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640225/man-lg-24u411a-b_01_g56amh.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640226/man-lg-24u411a-b_04_fc9fct.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640227/man-lg-24u411a-b_06_gbn9cb.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640227/man-lg-24u411a-b_07_zsjz9i.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640228/man-lg-24u411a-b_08_myqsuk.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640228/man-lg-24u411a-b_09_bgdngj.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640229/man-lg-24u411a-b_10_ktcfts.png"
+            )),
+            Map.entry("MAN-LG-32U889SA-W", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640594/man-lg-32u889sa-w_01_s1afrv.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640594/man-lg-32u889sa-w_04_hq0fp5.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640595/man-lg-32u889sa-w_06_odsncv.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640596/man-lg-32u889sa-w_07_c5wpvd.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640594/man-lg-32u889sa-w_05_ng1fyu.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640597/man-lg-32u889sa-w_08_ycrzsr.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640598/man-lg-32u889sa-w_09_hmckon.jpg"
+            )),
+            Map.entry("MAN-LG-27G610A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640764/man-lg-27g610a-b_01_zhn4tx.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640764/man-lg-27g610a-b_05_btjsxw.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640766/man-lg-27g610a-b_06_pah0aw.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640777/man-lg-27g610a-b_07_yiqb7t.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640778/man-lg-27g610a-b_08_mp8msx.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640779/man-lg-27g610a-b_09_b0tlhg.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640780/man-lg-27g610a-b_10_zzacbz.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640781/man-lg-27g610a-b_11_aeyst7.png"
+            )),
+            Map.entry("MAN-LG-40U990A-W", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640929/man-lg-40u990a-w_01_a1my6d.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640930/man-lg-40u990a-w_04_n103bd.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640931/man-lg-40u990a-w_05_sxob4b.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640932/man-lg-40u990a-w_06_bsqyou.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640934/man-lg-40u990a-w_07_pb7boh.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640935/man-lg-40u990a-w_08_k0cjvf.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640936/man-lg-40u990a-w_09_jn5jxj.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640937/man-lg-40u990a-w_10_lrnyvk.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640938/man-lg-40u990a-w_11_pxbplg.png"
+            )),
+            Map.entry("MAN-LG-24G411A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641093/man-lg-24g411a-b_01_chylb2.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641094/man-lg-24g411a-b_04_dh6gti.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641095/man-lg-24g411a-b_05_yczgdn.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641096/man-lg-24g411a-b_06_ljqpad.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641097/man-lg-24g411a-b_07_wpi5us.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641098/man-lg-24g411a-b_08_pohqg3.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641099/man-lg-24g411a-b_09_oibtqx.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641100/man-lg-24g411a-b_10_eaan8o.png"
+            )),
+            Map.entry("MAN-LG-39GX90SA-W", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641294/man-lg-39gx90sa-w_01_qkpfg6.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641295/man-lg-39gx90sa-w_04_l02en0.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641296/man-lg-39gx90sa-w_05_okxrzp.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641297/man-lg-39gx90sa-w_06_xoqkxu.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641298/man-lg-39gx90sa-w_07_evpwu2.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641299/man-lg-39gx90sa-w_08_ia4mag.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641300/man-lg-39gx90sa-w_09_z4kfwl.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641301/man-lg-39gx90sa-w_10_f8hcid.png"
+            )),
+            Map.entry("MAN-LG-27GX704A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645853/man-lg-27gx704a-b_01_cd7wqq.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645854/man-lg-27gx704a-b_04_h13iac.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645854/man-lg-27gx704a-b_05_gaapqp.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645856/man-lg-27gx704a-b_06_zbaufa.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645857/man-lg-27gx704a-b_07_st7u14.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645858/man-lg-27gx704a-b_08_wgn2by.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645859/man-lg-27gx704a-b_09_epjfzt.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645860/man-lg-27gx704a-b_10_bwad2o.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645861/man-lg-27gx704a-b_11_gbwhkj.png"
+            )),
+            Map.entry("MAN-LG-45GX950A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646130/man-lg-45gx950a-b_01_ioqaye.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646131/man-lg-45gx950a-b_04_vnup03.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646132/man-lg-45gx950a-b_05_jehdvv.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646134/man-lg-45gx950a-b_06_ja30f3.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646135/man-lg-45gx950a-b_07_yt8kgg.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646136/man-lg-45gx950a-b_08_thqo8a.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646137/man-lg-45gx950a-b_09_yiqjxu.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646138/man-lg-45gx950a-b_10_g1eiy5.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646140/man-lg-45gx950a-b_11_y1mpuc.png"
+            )),
+            Map.entry("MAN-LG-32GX870A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646293/man-lg-32gx870a-b_01_pxckck.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646295/man-lg-32gx870a-b_04_dle4rs.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646296/man-lg-32gx870a-b_05_cozj4k.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646297/man-lg-32gx870a-b_06_ctawep.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646298/man-lg-32gx870a-b_07_duwyhh.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646300/man-lg-32gx870a-b_08_urewz8.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646301/man-lg-32gx870a-b_09_zwwf6d.png"
+            )),
+            Map.entry("MAN-LG-29U531A-W", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646457/man-lg-29u531a-w_01_wsvjid.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646459/man-lg-29u531a-w_04_kkkvwg.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646460/man-lg-29u531a-w_05_l3uk8w.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646461/man-lg-29u531a-w_06_wwhz8s.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646463/man-lg-29u531a-w_07_oplkmg.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646464/man-lg-29u531a-w_08_wpitfu.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646465/man-lg-29u531a-w_09_hrtd1r.png"
+            )),
+            Map.entry("MAN-LG-27U411A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646607/man-lg-27u411a-b_01_cakr00.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646608/man-lg-27u411a-b_04_bgwevf.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646610/man-lg-27u411a-b_05_ahc81i.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646611/man-lg-27u411a-b_06_w0sfpl.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646612/man-lg-27u411a-b_07_kii6jh.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646614/man-lg-27u411a-b_08_qucmpg.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646615/man-lg-27u411a-b_09_wifhnc.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646616/man-lg-27u411a-b_10_h68a8u.png"
+            )),
+            Map.entry("MAN-LG-22U401A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646769/man-lg-22u401a-b_01_wkxzre.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646771/man-lg-22u401a-b_04_lfvteq.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646772/man-lg-22u401a-b_05_f4sgbs.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646774/man-lg-22u401a-b_06_zbzfcx.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646775/man-lg-22u401a-b_07_tpf0od.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646777/man-lg-22u401a-b_08_fipqeg.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646778/man-lg-22u401a-b_09_ksrt5j.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646780/man-lg-22u401a-b_10_vurxxx.png"
+            )),
+            Map.entry("MAN-LG-24U631A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646912/man-lg-24u631a-b_01_spcoy2.jpg",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646913/man-lg-24u631a-b_04_lyrgvs.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646915/man-lg-24u631a-b_05_eahw3b.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646916/man-lg-24u631a-b_06_y0q9nb.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646918/man-lg-24u631a-b_07_ftj9o3.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646919/man-lg-24u631a-b_08_x4orvy.png",
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646921/man-lg-24u631a-b_09_chjx7w.png"
+            )),
+            Map.entry("MAN-LG-34GX90SA-W", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647124/man-lg-34gx90sa-w_01_bribqd.jpg"
+            )),
+            Map.entry("MAN-LG-27UP850K-W", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647215/man-lg-27up850k-w_01_o5xvdl.jpg"
+            )),
+            Map.entry("MAN-LG-27U631A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647347/man-lg-27u631a-b_01_v1xpmg.jpg"
+            )),
+            Map.entry("MAN-LG-27UP600K-W", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647462/man-lg-27up600k-w_01_drhvma.jpg"
+            )),
+            Map.entry("MAN-LG-27GX790A-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647574/man-lg-27gx790a-b_01_nwbpsi.jpg"
+            )),
+            Map.entry("MAN-LG-32GS95UV-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647682/man-lg-32gs95uv-b_01_z2fhnr.jpg"
+            )),
+            Map.entry("MAN-LG-38WR85QC-W", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647797/man-lg-38wr85qc-w_01_xuslhe.png"
+            )),
+            Map.entry("MAN-LG-27GR93U-B", List.of(
+                    "https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647900/man-lg-27gr93u-b_01_gd6c9u.jpg"
+            ))
+    );
     private static final String CATEGORY_SLUG = "man-hinh";
     private static final String BRAND_SLUG = "lg";
     private static final String BRAND_NAME = "LG";
@@ -586,7 +742,7 @@ public class DemoMonitorSeeder implements CommandLineRunner {
 
         BigDecimal priceValue = new BigDecimal(price);
         BigDecimal salePriceValue = makeSalePrice(priceValue);
-
+        List<String> imageUrls = getMonitorImages(sku);
         variant.setProduct(savedProduct);
         variant.setName(variantName);
         variant.setSku(sku);
@@ -595,16 +751,18 @@ public class DemoMonitorSeeder implements CommandLineRunner {
         variant.setSaleStartAt(LocalDateTime.now().minusDays(7));
         variant.setSaleEndAt(LocalDateTime.now().plusDays(120));
         variant.setStock(stock);
-        variant.setThumbnailUrl(DEMO_IMAGE_URL);
+        variant.setThumbnailUrl(imageUrls.get(0));
         variant.setStatus(ProductStatus.ACTIVE);
 
         productVariantRepository.save(variant);
 
-        overwriteProductImages(savedProduct);
+        overwriteProductImages(savedProduct, imageUrls);
         overwriteSpecifications(savedProduct, category, specs);
     }
-
-    private void overwriteProductImages(Product product) {
+    private List<String> getMonitorImages(String sku) {
+        return MONITOR_IMAGES.getOrDefault(sku, List.of(DEMO_IMAGE_URL));
+    }
+    private void overwriteProductImages(Product product, List<String> imageUrls) {
         List<ProductImage> oldImages =
                 productImageRepository.findByProductIdOrderBySortOrderAsc(product.getId());
 
@@ -612,12 +770,17 @@ public class DemoMonitorSeeder implements CommandLineRunner {
             productImageRepository.deleteAll(oldImages);
         }
 
-        for (int i = 1; i <= 3; i++) {
+        List<String> safeImageUrls =
+                imageUrls == null || imageUrls.isEmpty()
+                        ? List.of(DEMO_IMAGE_URL)
+                        : imageUrls;
+
+        for (int i = 0; i < safeImageUrls.size(); i++) {
             ProductImage image = ProductImage.builder()
                     .product(product)
                     .variant(null)
-                    .imageUrl(DEMO_IMAGE_URL)
-                    .sortOrder(i)
+                    .imageUrl(safeImageUrls.get(i))
+                    .sortOrder(i + 1)
                     .build();
 
             productImageRepository.save(image);
