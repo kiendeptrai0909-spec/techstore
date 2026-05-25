@@ -1,5 +1,6 @@
 package com.example.techstore.controller;
 
+import com.example.techstore.dto.request.GoogleLoginRequest;
 import com.example.techstore.dto.request.LoginRequest;
 import com.example.techstore.dto.request.RegisterRequest;
 import com.example.techstore.dto.response.AuthResponse;
@@ -29,5 +30,12 @@ public class AuthController {
     @GetMapping("/me")
     public UserResponse getCurrentUser() {
         return authService.getCurrentUser();
+    }
+
+    @PostMapping("/google")
+    public AuthResponse loginWithGoogle(
+            @Valid @RequestBody GoogleLoginRequest request
+    ) {
+        return authService.loginWithGoogle(request);
     }
 }

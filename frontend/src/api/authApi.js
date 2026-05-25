@@ -12,4 +12,7 @@ export const authApi = {
   getMe: () => {
     return axiosClient.get('/auth/me')
   },
+  googleLogin: (credential) => {
+  return axiosClient.post('/auth/google', { credential })
+},
 }

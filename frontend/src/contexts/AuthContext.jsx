@@ -24,6 +24,8 @@ export function AuthProvider({ children }) {
   const token = localStorage.getItem('accessToken')
   const isAuthenticated = Boolean(token && user)
   const isAdmin = user?.role === 'ROLE_ADMIN'
+  const isStaff = user?.role === 'ROLE_STAFF'
+  const isAdminOrStaff = isAdmin || isStaff
 
   useEffect(() => {
     const loadCurrentUser = async () => {
@@ -51,9 +53,7 @@ export function AuthProvider({ children }) {
     loadCurrentUser()
   }, [])
 
-  const login = async (data) => {
-    const response = await authApi.login(data)
-
+  const saveAuthData = (response) => {
     localStorage.setItem('accessToken', response.accessToken)
 
     const userData = {
@@ -70,23 +70,19 @@ export function AuthProvider({ children }) {
     return response
   }
 
+  const login = async (data) => {
+    const response = await authApi.login(data)
+    return saveAuthData(response)
+  }
+
+  const loginWithGoogle = async (credential) => {
+    const response = await authApi.googleLogin(credential)
+    return saveAuthData(response)
+  }
+
   const register = async (data) => {
     const response = await authApi.register(data)
-
-    localStorage.setItem('accessToken', response.accessToken)
-
-    const userData = {
-      id: response.userId,
-      fullName: response.fullName,
-      email: response.email,
-      role: response.role,
-      status: response.status,
-    }
-
-    setUser(userData)
-    localStorage.setItem('user', JSON.stringify(userData))
-
-    return response
+    return saveAuthData(response)
   }
 
   const logout = () => {
@@ -101,11 +97,14 @@ export function AuthProvider({ children }) {
       loading,
       isAuthenticated,
       isAdmin,
+      isStaff,
+      isAdminOrStaff,
       login,
+      loginWithGoogle,
       register,
       logout,
     }),
-    [user, loading, isAuthenticated, isAdmin]
+    [user, loading, isAuthenticated, isAdmin, isStaff, isAdminOrStaff]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router'
 import { useAuth } from '../../contexts/AuthContext'
 import { useCart } from '../../contexts/CartContext'
+import { productApi } from '../../api/productApi'
 import {
   Menu,
   Search,
@@ -11,11 +12,9 @@ import {
   ShoppingCart,
   User,
   LogOut,
-  ShieldCheck,
-  Wrench,
   Newspaper,
-  Truck,
-  RefreshCcw,
+  CircleHelp,
+  MessageSquare,
   UserCircle,
   PackageSearch,
   LayoutDashboard,
@@ -29,11 +28,15 @@ function Header() {
 
   const [keyword, setKeyword] = useState('')
   const [accountMenuOpen, setAccountMenuOpen] = useState(false)
-
+  const [searchResults, setSearchResults] = useState([])
+  const [searchLoading, setSearchLoading] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const searchBoxRef = useRef(null)
   const handleSearch = (event) => {
     event.preventDefault()
 
     const trimmedKeyword = keyword.trim()
+    setSearchOpen(false)
 
     if (!trimmedKeyword) {
       navigate('/products')
@@ -42,7 +45,17 @@ function Header() {
 
     navigate(`/products?keyword=${encodeURIComponent(trimmedKeyword)}`)
   }
+  const handleSelectProduct = (product) => {
+    setKeyword('')
+    setSearchOpen(false)
 
+    if (product.slug) {
+      navigate(`/products/${product.slug}`)
+      return
+    }
+
+    navigate(`/products/${product.id}`)
+  }
   const handleLogout = () => {
     setAccountMenuOpen(false)
     clearCartState?.()
@@ -52,7 +65,56 @@ function Header() {
 
   const isAdminOrStaff =
     user?.role === 'ROLE_ADMIN' || user?.role === 'ROLE_STAFF'
+  useEffect(() => {
+    const trimmedKeyword = keyword.trim()
 
+    if (!trimmedKeyword) {
+      setSearchResults([])
+      setSearchOpen(false)
+      return
+    }
+
+    const timeoutId = setTimeout(async () => {
+      try {
+        setSearchLoading(true)
+
+        const data = await productApi.getProducts({
+          keyword: trimmedKeyword,
+          page: 0,
+          size: 6,
+          status: 'ACTIVE',
+        })
+
+        setSearchResults(normalizeList(data))
+        setSearchOpen(true)
+      } catch (error) {
+        console.error('Search products failed:', error)
+        setSearchResults([])
+        setSearchOpen(true)
+      } finally {
+        setSearchLoading(false)
+      }
+    }, 300)
+
+    return () => clearTimeout(timeoutId)
+  }, [keyword])
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchBoxRef.current &&
+        !searchBoxRef.current.contains(event.target)
+      ) {
+        setSearchOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
   return (
     <header className="sticky top-0 z-50 shadow-sm">
       <div className="bg-blue-600 py-2 text-center text-sm font-black text-white md:text-xl">
@@ -84,25 +146,84 @@ function Header() {
             Danh mục
           </Link>
 
-          <form
-            onSubmit={handleSearch}
-            className="flex h-11 flex-1 items-center overflow-hidden rounded bg-white"
-          >
-            <input
-              value={keyword}
-              onChange={(event) => setKeyword(event.target.value)}
-              type="text"
-              placeholder="Bạn cần tìm gì?"
-              className="h-full flex-1 px-4 text-sm text-gray-800 outline-none"
-            />
-
-            <button
-              type="submit"
-              className="flex h-full w-12 shrink-0 items-center justify-center text-gray-700 hover:bg-gray-100"
+          <div ref={searchBoxRef} className="relative flex-1">
+            <form
+              onSubmit={handleSearch}
+              className="flex h-11 items-center overflow-hidden rounded bg-white"
             >
-              <Search size={21} />
-            </button>
-          </form>
+              <input
+                value={keyword}
+                onChange={(event) => setKeyword(event.target.value)}
+                onFocus={() => {
+                  if (keyword.trim()) {
+                    setSearchOpen(true)
+                  }
+                }}
+                type="text"
+                placeholder="Bạn cần tìm gì?"
+                className="h-full flex-1 px-4 text-sm text-gray-800 outline-none"
+              />
+
+              <button
+                type="submit"
+                className="flex h-full w-12 shrink-0 items-center justify-center text-gray-700 hover:bg-gray-100"
+              >
+                <Search size={21} />
+              </button>
+            </form>
+
+            {searchOpen && keyword.trim() && (
+              <div className="absolute left-0 top-[calc(100%+4px)] z-[100] w-full overflow-hidden rounded-b bg-white text-gray-900 shadow-xl ring-1 ring-black/10">
+                {searchLoading ? (
+                  <div className="px-4 py-4 text-sm text-gray-500">
+                    Đang tìm kiếm...
+                  </div>
+                ) : searchResults.length === 0 ? (
+                  <div className="px-4 py-4 text-sm text-gray-500">
+                    Không tìm thấy sản phẩm phù hợp.
+                  </div>
+                ) : (
+                  <div className="max-h-[420px] overflow-y-auto">
+                    {searchResults.map((product) => (
+                      <button
+                        key={product.id}
+                        type="button"
+                        onMouseDown={(event) => {
+                          event.preventDefault()
+                          handleSelectProduct(product)
+                        }}
+                        className="flex w-full items-center gap-3 border-b px-4 py-3 text-left hover:bg-gray-50"
+                      >
+                        <div className="min-w-0 flex-1">
+                          <div className="line-clamp-2 text-sm font-semibold text-gray-900">
+                            {product.name}
+                          </div>
+
+                          <div className="mt-1 flex items-center gap-2">
+                            <span className="text-sm font-black text-red-600">
+                              {formatCurrency(getSalePrice(product))}
+                            </span>
+
+                            {getOriginalPrice(product) > getSalePrice(product) && (
+                              <span className="text-xs text-gray-400 line-through">
+                                {formatCurrency(getOriginalPrice(product))}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <img
+                          src={getProductImage(product)}
+                          alt={product.name}
+                          className="h-12 w-12 shrink-0 rounded border object-contain"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
 
           <div className="hidden shrink-0 items-center gap-2 text-sm font-bold lg:flex">
             <Phone size={22} />
@@ -242,51 +363,85 @@ function Header() {
         </div>
       </div>
 
-      <div className="border-b bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between overflow-x-auto px-4 py-2 text-sm font-semibold text-gray-800">
-          <Link
-            to="/products"
-            className="flex min-w-max items-center gap-2 px-3 hover:text-red-600"
-          >
-            <Wrench size={17} />
-            BUILD PC tặng màn hình 240Hz
-          </Link>
+     <div className="border-b bg-white">
+  <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-2 text-sm font-semibold text-gray-800">
+    <Link to="/news" className="flex items-center gap-2 hover:text-red-600">
+      <Newspaper size={17} />
+      Tin tức
+    </Link>
 
-          <Link
-            to="/products?keyword=thanh-ly"
-            className="flex min-w-max items-center gap-2 px-3 hover:text-red-600"
-          >
-            <RefreshCcw size={17} />
-            Xả Kho Thanh Lý
-          </Link>
+    <span className="mx-60 text-gray-300">|</span>
 
-          <Link
-            to="/news"
-            className="flex min-w-max items-center gap-2 px-3 hover:text-red-600"
-          >
-            <Newspaper size={17} />
-            Tin tức
-          </Link>
+    <Link to="/faqs" className="flex items-center gap-2 hover:text-red-600">
+      <CircleHelp size={17} />
+      FAQ
+    </Link>
 
-          <Link
-            to="/contact"
-            className="flex min-w-max items-center gap-2 px-3 hover:text-red-600"
-          >
-            <Truck size={17} />
-            Dịch vụ kỹ thuật tại nhà
-          </Link>
+    <span className="mx-60 text-gray-300">|</span>
 
-          <Link
-            to="/faqs"
-            className="flex min-w-max items-center gap-2 px-3 hover:text-red-600"
-          >
-            <ShieldCheck size={17} />
-            Tra cứu bảo hành
-          </Link>
-        </div>
-      </div>
+    <Link to="/contact" className="flex items-center gap-2 hover:text-red-600">
+      <MessageSquare size={17} />
+      Liên hệ
+    </Link>
+  </div>
+</div>
     </header>
   )
 }
+function normalizeList(data) {
+  if (Array.isArray(data)) return data
+  if (Array.isArray(data?.content)) return data.content
+  if (Array.isArray(data?.data)) return data.data
+  if (Array.isArray(data?.items)) return data.items
+  return []
+}
 
+function getFirstVariant(product) {
+  if (Array.isArray(product?.variants) && product.variants.length > 0) {
+    return product.variants[0]
+  }
+
+  return null
+}
+
+function getProductImage(product) {
+  const firstVariant = getFirstVariant(product)
+
+  return (
+    product?.thumbnailUrl ||
+    product?.imageUrl ||
+    firstVariant?.thumbnailUrl ||
+    product?.images?.[0]?.imageUrl ||
+    'https://placehold.co/80x80?text=TechStore'
+  )
+}
+
+function getOriginalPrice(product) {
+  const firstVariant = getFirstVariant(product)
+
+  return Number(
+    firstVariant?.price ||
+    product?.price ||
+    product?.minPrice ||
+    0
+  )
+}
+
+function getSalePrice(product) {
+  const firstVariant = getFirstVariant(product)
+
+  return Number(
+    firstVariant?.salePrice ||
+    product?.salePrice ||
+    product?.minSalePrice ||
+    firstVariant?.price ||
+    product?.price ||
+    product?.minPrice ||
+    0
+  )
+}
+
+function formatCurrency(value) {
+  return Number(value || 0).toLocaleString('vi-VN') + 'đ'
+}
 export default Header

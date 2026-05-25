@@ -9,7 +9,7 @@ import CategorySidebar from '../../components/home/CategorySidebar'
 import SideBanner from '../../components/home/SideBanner'
 import ProductSection from '../../components/home/ProductSection'
 import CategoryIconGrid from '../../components/home/CategoryIconGrid'
-import PromotionSection from '../../components/home/PromotionSection'
+
 import NewsSection from '../../components/home/NewsSection'
 
 
@@ -225,18 +225,7 @@ function HomePage() {
             </div>
           ) : (
             <>
-              <ProductSection
-                title="PC bán chạy"
-                products={pcProducts}
-                tabs={[
-                  { label: 'PC i3', url: '/products?keyword=pc+i3' },
-                  { label: 'PC i5', url: '/products?keyword=pc+i5' },
-                  { label: 'PC i7', url: '/products?keyword=pc+i7' },
-                  { label: 'PC i9', url: '/products?keyword=pc+i9' },
-                  { label: 'PC R5', url: '/products?keyword=pc+r5' },
-                ]}
-                viewAllUrl="/products?keyword=pc"
-              />
+              
 
               <ProductSection
                 title="Laptop gaming bán chạy"
@@ -278,7 +267,7 @@ function HomePage() {
 
               <CategoryIconGrid categories={categories} />
 
-              <PromotionSection banners={promotionBanners} />
+              
 
               <NewsSection news={news} />
             </>
