@@ -37,12 +37,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Random;
-
+import com.example.techstore.enums.PaymentMethod;
 @Service
 @RequiredArgsConstructor
 public class OrderService {
 
-    private static final BigDecimal DEFAULT_SHIPPING_FEE = new BigDecimal("30000");
+    private static final BigDecimal DEFAULT_SHIPPING_FEE = BigDecimal.ZERO;
 
     private final UserRepository userRepository;
     private final CartRepository cartRepository;
@@ -56,7 +56,7 @@ public class OrderService {
     @Transactional
     public OrderResponse createOrder(CreateOrderRequest request) {
         User user = getCurrentUser();
-
+        validatePendingBankTransferLimit(user, request);
         Cart cart = cartRepository.findByUserId(user.getId())
                 .orElseThrow(() -> new BadRequestException("Giỏ hàng đang trống"));
 
@@ -287,5 +287,26 @@ public class OrderService {
                 .transactionCode(payment.getTransactionCode())
                 .paidAt(payment.getPaidAt())
                 .build();
+    }
+    private void validatePendingBankTransferLimit(
+            User user,
+            CreateOrderRequest request
+    ) {
+        if (request.getPaymentMethod() != PaymentMethod.BANK_TRANSFER) {
+            return;
+        }
+
+        long pendingCount = paymentRepository.countPendingBankTransferOrdersByUser(
+                user.getId(),
+                OrderStatus.PENDING,
+                PaymentMethod.BANK_TRANSFER,
+                PaymentStatus.PENDING
+        );
+
+        if (pendingCount >= 3) {
+            throw new BadRequestException(
+                    "Bạn đang có quá nhiều đơn chuyển khoản chưa thanh toán. Vui lòng thanh toán hoặc chờ hệ thống hủy đơn quá hạn trước khi đặt tiếp."
+            );
+        }
     }
 }

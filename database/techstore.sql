@@ -2,12 +2,12 @@
 -- PostgreSQL database dump
 --
 
-\restrict V704YmN2pzdoc4bfG4X5H3ApTdab3fX2IFOdDJFBFfQjmdRJIiNTLcYStvj4jgg
+\restrict s5wAi7iZudDpoSxBy4a6MEaerdIniOvSYFDVl6JgPtTt9CF76eCV62bn9XL94jU
 
 -- Dumped from database version 18.4
 -- Dumped by pg_dump version 18.4
 
--- Started on 2026-05-24 05:02:00
+-- Started on 2026-05-25 13:55:21
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -61,7 +61,7 @@ CREATE TABLE public.banners (
     updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     deleted_at timestamp without time zone,
     CONSTRAINT chk_banners_date_range CHECK (((start_at IS NULL) OR (end_at IS NULL) OR (end_at >= start_at))),
-    CONSTRAINT chk_banners_position CHECK ((("position")::text = ANY ((ARRAY['HOME_TOP'::character varying, 'HOME_MIDDLE'::character varying, 'HOME_BOTTOM'::character varying, 'SIDEBAR_LEFT'::character varying, 'SIDEBAR_RIGHT'::character varying])::text[]))),
+    CONSTRAINT chk_banners_position CHECK ((("position")::text = ANY (ARRAY[('HOME_TOP'::character varying)::text, ('HOME_MIDDLE'::character varying)::text, ('HOME_BOTTOM'::character varying)::text, ('SIDEBAR_LEFT'::character varying)::text, ('SIDEBAR_RIGHT'::character varying)::text]))),
     CONSTRAINT chk_banners_sort_order CHECK ((sort_order >= 0)),
     CONSTRAINT chk_banners_status CHECK (((status)::text = ANY (ARRAY[('ACTIVE'::character varying)::text, ('INACTIVE'::character varying)::text])))
 );
@@ -70,7 +70,7 @@ CREATE TABLE public.banners (
 ALTER TABLE public.banners OWNER TO postgres;
 
 --
--- TOC entry 5368 (class 0 OID 0)
+-- TOC entry 5369 (class 0 OID 0)
 -- Dependencies: 219
 -- Name: TABLE banners; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -115,7 +115,7 @@ CREATE TABLE public.brands (
 ALTER TABLE public.brands OWNER TO postgres;
 
 --
--- TOC entry 5369 (class 0 OID 0)
+-- TOC entry 5370 (class 0 OID 0)
 -- Dependencies: 221
 -- Name: TABLE brands; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -157,7 +157,7 @@ CREATE TABLE public.cart_items (
 ALTER TABLE public.cart_items OWNER TO postgres;
 
 --
--- TOC entry 5370 (class 0 OID 0)
+-- TOC entry 5371 (class 0 OID 0)
 -- Dependencies: 223
 -- Name: TABLE cart_items; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -196,7 +196,7 @@ CREATE TABLE public.carts (
 ALTER TABLE public.carts OWNER TO postgres;
 
 --
--- TOC entry 5371 (class 0 OID 0)
+-- TOC entry 5372 (class 0 OID 0)
 -- Dependencies: 225
 -- Name: TABLE carts; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -244,7 +244,7 @@ CREATE TABLE public.categories (
 ALTER TABLE public.categories OWNER TO postgres;
 
 --
--- TOC entry 5372 (class 0 OID 0)
+-- TOC entry 5373 (class 0 OID 0)
 -- Dependencies: 227
 -- Name: TABLE categories; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -284,7 +284,7 @@ CREATE TABLE public.chat_messages (
 ALTER TABLE public.chat_messages OWNER TO postgres;
 
 --
--- TOC entry 5373 (class 0 OID 0)
+-- TOC entry 5374 (class 0 OID 0)
 -- Dependencies: 229
 -- Name: TABLE chat_messages; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -327,7 +327,7 @@ CREATE TABLE public.chat_sessions (
 ALTER TABLE public.chat_sessions OWNER TO postgres;
 
 --
--- TOC entry 5374 (class 0 OID 0)
+-- TOC entry 5375 (class 0 OID 0)
 -- Dependencies: 231
 -- Name: TABLE chat_sessions; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -373,7 +373,7 @@ CREATE TABLE public.contact_messages (
 ALTER TABLE public.contact_messages OWNER TO postgres;
 
 --
--- TOC entry 5375 (class 0 OID 0)
+-- TOC entry 5376 (class 0 OID 0)
 -- Dependencies: 233
 -- Name: TABLE contact_messages; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -413,7 +413,7 @@ CREATE TABLE public.coupon_usages (
 ALTER TABLE public.coupon_usages OWNER TO postgres;
 
 --
--- TOC entry 5376 (class 0 OID 0)
+-- TOC entry 5377 (class 0 OID 0)
 -- Dependencies: 235
 -- Name: TABLE coupon_usages; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -473,7 +473,7 @@ CREATE TABLE public.coupons (
 ALTER TABLE public.coupons OWNER TO postgres;
 
 --
--- TOC entry 5377 (class 0 OID 0)
+-- TOC entry 5378 (class 0 OID 0)
 -- Dependencies: 237
 -- Name: TABLE coupons; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -482,7 +482,7 @@ COMMENT ON TABLE public.coupons IS 'Luu thong tin ma giam gia';
 
 
 --
--- TOC entry 5378 (class 0 OID 0)
+-- TOC entry 5379 (class 0 OID 0)
 -- Dependencies: 237
 -- Name: COLUMN coupons.discount_type; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -527,7 +527,7 @@ CREATE TABLE public.faqs (
 ALTER TABLE public.faqs OWNER TO postgres;
 
 --
--- TOC entry 5379 (class 0 OID 0)
+-- TOC entry 5380 (class 0 OID 0)
 -- Dependencies: 239
 -- Name: TABLE faqs; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -574,7 +574,7 @@ CREATE TABLE public.news_posts (
 ALTER TABLE public.news_posts OWNER TO postgres;
 
 --
--- TOC entry 5380 (class 0 OID 0)
+-- TOC entry 5381 (class 0 OID 0)
 -- Dependencies: 241
 -- Name: TABLE news_posts; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -623,7 +623,7 @@ CREATE TABLE public.order_items (
 ALTER TABLE public.order_items OWNER TO postgres;
 
 --
--- TOC entry 5381 (class 0 OID 0)
+-- TOC entry 5382 (class 0 OID 0)
 -- Dependencies: 243
 -- Name: TABLE order_items; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -680,7 +680,7 @@ CREATE TABLE public.orders (
 ALTER TABLE public.orders OWNER TO postgres;
 
 --
--- TOC entry 5382 (class 0 OID 0)
+-- TOC entry 5383 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: TABLE orders; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -689,7 +689,7 @@ COMMENT ON TABLE public.orders IS 'Luu thong tin don hang';
 
 
 --
--- TOC entry 5383 (class 0 OID 0)
+-- TOC entry 5384 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: COLUMN orders.subtotal_amount; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -698,7 +698,7 @@ COMMENT ON COLUMN public.orders.subtotal_amount IS 'Tong tien hang truoc giam gi
 
 
 --
--- TOC entry 5384 (class 0 OID 0)
+-- TOC entry 5385 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: COLUMN orders.final_amount; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -707,7 +707,7 @@ COMMENT ON COLUMN public.orders.final_amount IS 'So tien khach can thanh toan sa
 
 
 --
--- TOC entry 5385 (class 0 OID 0)
+-- TOC entry 5386 (class 0 OID 0)
 -- Dependencies: 245
 -- Name: COLUMN orders.order_status; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -748,7 +748,7 @@ CREATE TABLE public.password_reset_tokens (
 ALTER TABLE public.password_reset_tokens OWNER TO postgres;
 
 --
--- TOC entry 5386 (class 0 OID 0)
+-- TOC entry 5387 (class 0 OID 0)
 -- Dependencies: 247
 -- Name: TABLE password_reset_tokens; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -787,15 +787,15 @@ CREATE TABLE public.payments (
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     CONSTRAINT chk_payments_amount CHECK ((amount >= (0)::numeric)),
-    CONSTRAINT chk_payments_method CHECK (((method)::text = ANY (ARRAY[('COD'::character varying)::text, ('MOCK_BANKING'::character varying)::text]))),
-    CONSTRAINT chk_payments_status CHECK (((status)::text = ANY (ARRAY[('PENDING'::character varying)::text, ('PAID'::character varying)::text, ('FAILED'::character varying)::text])))
+    CONSTRAINT chk_payments_method CHECK (((method)::text = ANY ((ARRAY['COD'::character varying, 'BANK_TRANSFER'::character varying])::text[]))),
+    CONSTRAINT chk_payments_status CHECK (((status)::text = ANY ((ARRAY['PENDING'::character varying, 'PAID'::character varying, 'FAILED'::character varying])::text[])))
 );
 
 
 ALTER TABLE public.payments OWNER TO postgres;
 
 --
--- TOC entry 5387 (class 0 OID 0)
+-- TOC entry 5388 (class 0 OID 0)
 -- Dependencies: 249
 -- Name: TABLE payments; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -804,7 +804,7 @@ COMMENT ON TABLE public.payments IS 'Luu thong tin thanh toan cua don hang';
 
 
 --
--- TOC entry 5388 (class 0 OID 0)
+-- TOC entry 5389 (class 0 OID 0)
 -- Dependencies: 249
 -- Name: COLUMN payments.method; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -813,7 +813,7 @@ COMMENT ON COLUMN public.payments.method IS 'COD, MOCK_BANKING';
 
 
 --
--- TOC entry 5389 (class 0 OID 0)
+-- TOC entry 5390 (class 0 OID 0)
 -- Dependencies: 249
 -- Name: COLUMN payments.status; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -856,7 +856,7 @@ CREATE TABLE public.product_images (
 ALTER TABLE public.product_images OWNER TO postgres;
 
 --
--- TOC entry 5390 (class 0 OID 0)
+-- TOC entry 5391 (class 0 OID 0)
 -- Dependencies: 251
 -- Name: TABLE product_images; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -903,7 +903,7 @@ CREATE TABLE public.product_reviews (
 ALTER TABLE public.product_reviews OWNER TO postgres;
 
 --
--- TOC entry 5391 (class 0 OID 0)
+-- TOC entry 5392 (class 0 OID 0)
 -- Dependencies: 253
 -- Name: TABLE product_reviews; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -912,7 +912,7 @@ COMMENT ON TABLE public.product_reviews IS 'Luu danh gia va binh luan san pham';
 
 
 --
--- TOC entry 5392 (class 0 OID 0)
+-- TOC entry 5393 (class 0 OID 0)
 -- Dependencies: 253
 -- Name: COLUMN product_reviews.rating; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -921,7 +921,7 @@ COMMENT ON COLUMN public.product_reviews.rating IS 'Gia tri tu 1 den 5';
 
 
 --
--- TOC entry 5393 (class 0 OID 0)
+-- TOC entry 5394 (class 0 OID 0)
 -- Dependencies: 253
 -- Name: COLUMN product_reviews.status; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -963,7 +963,7 @@ CREATE TABLE public.product_specifications (
 ALTER TABLE public.product_specifications OWNER TO postgres;
 
 --
--- TOC entry 5394 (class 0 OID 0)
+-- TOC entry 5395 (class 0 OID 0)
 -- Dependencies: 255
 -- Name: TABLE product_specifications; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1018,7 +1018,7 @@ CREATE TABLE public.product_variants (
 ALTER TABLE public.product_variants OWNER TO postgres;
 
 --
--- TOC entry 5395 (class 0 OID 0)
+-- TOC entry 5396 (class 0 OID 0)
 -- Dependencies: 257
 -- Name: TABLE product_variants; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1027,7 +1027,7 @@ COMMENT ON TABLE public.product_variants IS 'Luu cac phien ban cu the cua san ph
 
 
 --
--- TOC entry 5396 (class 0 OID 0)
+-- TOC entry 5397 (class 0 OID 0)
 -- Dependencies: 257
 -- Name: COLUMN product_variants.sale_price; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1074,7 +1074,7 @@ CREATE TABLE public.products (
 ALTER TABLE public.products OWNER TO postgres;
 
 --
--- TOC entry 5397 (class 0 OID 0)
+-- TOC entry 5398 (class 0 OID 0)
 -- Dependencies: 259
 -- Name: TABLE products; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1083,7 +1083,7 @@ COMMENT ON TABLE public.products IS 'Luu thong tin chung cua san pham';
 
 
 --
--- TOC entry 5398 (class 0 OID 0)
+-- TOC entry 5399 (class 0 OID 0)
 -- Dependencies: 259
 -- Name: COLUMN products.featured; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1127,7 +1127,7 @@ CREATE TABLE public.specification_keys (
 ALTER TABLE public.specification_keys OWNER TO postgres;
 
 --
--- TOC entry 5399 (class 0 OID 0)
+-- TOC entry 5400 (class 0 OID 0)
 -- Dependencies: 261
 -- Name: TABLE specification_keys; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1179,7 +1179,7 @@ CREATE TABLE public.users (
 ALTER TABLE public.users OWNER TO postgres;
 
 --
--- TOC entry 5400 (class 0 OID 0)
+-- TOC entry 5401 (class 0 OID 0)
 -- Dependencies: 263
 -- Name: TABLE users; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1188,7 +1188,7 @@ COMMENT ON TABLE public.users IS 'Luu tai khoan khach hang, nhan vien va quan tr
 
 
 --
--- TOC entry 5401 (class 0 OID 0)
+-- TOC entry 5402 (class 0 OID 0)
 -- Dependencies: 263
 -- Name: COLUMN users.role; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1197,7 +1197,7 @@ COMMENT ON COLUMN public.users.role IS 'ROLE_CUSTOMER, ROLE_STAFF, ROLE_ADMIN';
 
 
 --
--- TOC entry 5402 (class 0 OID 0)
+-- TOC entry 5403 (class 0 OID 0)
 -- Dependencies: 263
 -- Name: COLUMN users.status; Type: COMMENT; Schema: public; Owner: postgres
 --
@@ -1221,49 +1221,66 @@ ALTER TABLE public.users ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
 
 
 --
--- TOC entry 5317 (class 0 OID 16390)
+-- TOC entry 5318 (class 0 OID 16390)
 -- Dependencies: 219
 -- Data for Name: banners; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.banners (id, title, image_url, link_url, "position", sort_order, start_at, end_at, status, created_at, updated_at, deleted_at) FROM stdin;
-8	Mua PC tặng màn OLED 240Hz	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products?keyword=pc	HOME_TOP	1	2026-05-24 04:56:47.350199	2026-11-24 04:51:47.350199	ACTIVE	2026-05-23 00:21:44.422782	2026-05-24 04:51:47.352256	\N
 16	test1	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	http://localhost:5173/products/man-hinh-lg-27g850a-b-27-inch-nano-ips-black-4k-240hz-fhd-480hz	SIDEBAR_RIGHT	1	2026-05-25 02:24:00	2026-05-26 02:24:00	ACTIVE	2026-05-24 02:24:36.240158	2026-05-24 02:24:36.240158	\N
-9	Laptop gaming giảm giá cực sốc	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products?keyword=laptop	HOME_TOP	2	2026-05-24 04:56:47.350199	2026-11-24 04:51:47.350199	ACTIVE	2026-05-23 00:21:44.422782	2026-05-24 04:51:47.352256	\N
-10	Màn hình LG 4K OLED 240Hz	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products?keyword=lg	HOME_TOP	3	2026-05-24 04:56:47.350199	2026-11-24 04:51:47.350199	ACTIVE	2026-05-23 00:21:44.422782	2026-05-24 04:51:47.352256	\N
-11	Build PC theo nhu cầu học tập và gaming	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products?keyword=pc	HOME_MIDDLE	1	2026-05-24 04:56:47.350199	2026-11-24 04:51:47.350199	ACTIVE	2026-05-23 00:21:44.422782	2026-05-24 04:51:47.352256	\N
-12	Phụ kiện gaming sale cuối tuần	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products?keyword=gaming	HOME_MIDDLE	2	2026-05-24 04:56:47.350199	2026-11-24 04:51:47.350199	ACTIVE	2026-05-23 00:21:44.422782	2026-05-24 04:51:47.352256	\N
-13	Giao hàng toàn quốc - Bảo hành chính hãng	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/faqs	HOME_BOTTOM	1	2026-05-24 04:56:47.350199	2026-11-24 04:51:47.350199	ACTIVE	2026-05-23 00:21:44.422782	2026-05-24 04:51:47.352256	\N
-14	Deal sốc cuối tuần TechStore	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products	SIDEBAR_LEFT	1	2026-05-24 04:56:47.350199	2026-11-24 04:51:47.350199	ACTIVE	2026-05-23 00:21:44.422782	2026-05-24 04:51:47.352256	\N
-15	Hỗ trợ kỹ thuật tận nhà	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/contact	SIDEBAR_RIGHT	1	2026-05-24 04:56:47.350199	2026-11-24 04:51:47.350199	ACTIVE	2026-05-23 00:21:44.422782	2026-05-24 04:51:47.352256	\N
+8	Mua PC tặng màn OLED 240Hz	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products?keyword=pc	HOME_TOP	1	2026-05-25 13:48:20.747955	2026-11-25 13:43:20.747955	ACTIVE	2026-05-23 00:21:44.422782	2026-05-25 13:43:20.750863	\N
+9	Laptop gaming giảm giá cực sốc	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products?keyword=laptop	HOME_TOP	2	2026-05-25 13:48:20.747955	2026-11-25 13:43:20.747955	ACTIVE	2026-05-23 00:21:44.422782	2026-05-25 13:43:20.750863	\N
+10	Màn hình LG 4K OLED 240Hz	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products?keyword=lg	HOME_TOP	3	2026-05-25 13:48:20.747955	2026-11-25 13:43:20.747955	ACTIVE	2026-05-23 00:21:44.422782	2026-05-25 13:43:20.750863	\N
+11	Build PC theo nhu cầu học tập và gaming	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products?keyword=pc	HOME_MIDDLE	1	2026-05-25 13:48:20.747955	2026-11-25 13:43:20.747955	ACTIVE	2026-05-23 00:21:44.422782	2026-05-25 13:43:20.750863	\N
+12	Phụ kiện gaming sale cuối tuần	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products?keyword=gaming	HOME_MIDDLE	2	2026-05-25 13:48:20.747955	2026-11-25 13:43:20.747955	ACTIVE	2026-05-23 00:21:44.422782	2026-05-25 13:43:20.750863	\N
+13	Giao hàng toàn quốc - Bảo hành chính hãng	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/faqs	HOME_BOTTOM	1	2026-05-25 13:48:20.747955	2026-11-25 13:43:20.747955	ACTIVE	2026-05-23 00:21:44.422782	2026-05-25 13:43:20.750863	\N
+14	Deal sốc cuối tuần TechStore	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/products	SIDEBAR_LEFT	1	2026-05-25 13:48:20.747955	2026-11-25 13:43:20.747955	ACTIVE	2026-05-23 00:21:44.422782	2026-05-25 13:43:20.750863	\N
+15	Hỗ trợ kỹ thuật tận nhà	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779470207/Yellow_Blue_and_Pink_Modern_New_Game_Banner_Landscape_pqdfqk.png	/contact	SIDEBAR_RIGHT	1	2026-05-25 13:48:20.747955	2026-11-25 13:43:20.747955	ACTIVE	2026-05-23 00:21:44.422782	2026-05-25 13:43:20.750863	\N
 \.
 
 
 --
--- TOC entry 5319 (class 0 OID 16411)
+-- TOC entry 5320 (class 0 OID 16411)
 -- Dependencies: 221
 -- Data for Name: brands; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.brands (id, name, slug, logo_url, description, status, created_at, updated_at, deleted_at) FROM stdin;
 1	LG	lg	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	LG là thương hiệu công nghệ nổi tiếng với các dòng màn hình văn phòng, gaming, OLED và màn hình chuyên đồ họa.	ACTIVE	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
+2	AULA	aula	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	AULA là thương hiệu thiết bị ngoại vi và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+3	ASUS	asus	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ASUS là thương hiệu thiết bị ngoại vi và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+4	AKKO	akko	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	AKKO là thương hiệu thiết bị ngoại vi và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+5	Logitech	logitech	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	Logitech là thương hiệu thiết bị ngoại vi và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+6	E-Dra	e-dra	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	E-Dra là thương hiệu thiết bị ngoại vi và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+7	Veekos	veekos	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	Veekos là thương hiệu thiết bị ngoại vi và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+8	Rapoo	rapoo	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	Rapoo là thương hiệu thiết bị ngoại vi và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+9	Razer	razer	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	Razer là thương hiệu thiết bị ngoại vi và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+10	ACER	acer	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACER là thương hiệu thiết bị ngoại vi và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+11	DareU	dareu	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	DareU là thương hiệu thiết bị ngoại vi và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+12	HyperX	hyperx	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	HyperX là thương hiệu thiết bị âm thanh và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+13	Corsair	corsair	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	Corsair là thương hiệu thiết bị âm thanh và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+14	MSI	msi	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	MSI là thương hiệu thiết bị âm thanh và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+15	Soundpeats	soundpeats	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	Soundpeats là thương hiệu thiết bị âm thanh và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+16	Steelseries	steelseries	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	Steelseries là thương hiệu thiết bị âm thanh và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+17	ONIKUMA	onikuma	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ONIKUMA là thương hiệu thiết bị âm thanh và phụ kiện máy tính.	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+18	Warrior	warrior	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	Warrior là thương hiệu ghế gaming, ghế công thái học và phụ kiện setup.	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+19	Sihoo	sihoo	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	Sihoo là thương hiệu ghế gaming, ghế công thái học và phụ kiện setup.	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
 \.
 
 
 --
--- TOC entry 5321 (class 0 OID 16427)
+-- TOC entry 5322 (class 0 OID 16427)
 -- Dependencies: 223
 -- Data for Name: cart_items; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.cart_items (id, cart_id, product_variant_id, quantity, created_at, updated_at) FROM stdin;
 1	1	16	1	2026-05-23 00:54:52.401257	2026-05-23 00:54:52.401257
-2	2	1	1	2026-05-24 00:29:32.68009	2026-05-24 00:39:25.790332
 \.
 
 
 --
--- TOC entry 5323 (class 0 OID 16441)
+-- TOC entry 5324 (class 0 OID 16441)
 -- Dependencies: 225
 -- Data for Name: carts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1275,7 +1292,7 @@ COPY public.carts (id, user_id, created_at, updated_at) FROM stdin;
 
 
 --
--- TOC entry 5325 (class 0 OID 16451)
+-- TOC entry 5326 (class 0 OID 16451)
 -- Dependencies: 227
 -- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1283,36 +1300,36 @@ COPY public.carts (id, user_id, created_at, updated_at) FROM stdin;
 COPY public.categories (id, name, slug, parent_id, description, image_url, sort_order, status, created_at, updated_at, deleted_at) FROM stdin;
 1	Màn hình	man-hinh	\N	Màn hình máy tính, màn hình gaming, màn hình đồ họa và màn hình văn phòng.	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	ACTIVE	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
 2	test	test	\N	a	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	INACTIVE	2026-05-24 03:26:11.150269	2026-05-24 03:26:31.777792	2026-05-24 03:26:31.777521
+3	Bàn phím	ban-phim	\N	Bàn phím cơ, bàn phím gaming, bàn phím văn phòng và phụ kiện bàn phím.	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	4	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+4	Chuột	chuot	\N	Chuột máy tính, chuột gaming, chuột không dây và chuột văn phòng.	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	5	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+5	Tai nghe	tai-nghe	\N	Tai nghe gaming, tai nghe không dây, tai nghe in-ear và phụ kiện âm thanh.	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	6	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+6	Ghế	ghe	\N	Ghế gaming, ghế công thái học và ghế làm việc dành cho game thủ, văn phòng.	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	7	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+7	Laptop	laptop	\N	Laptop học tập, làm việc, văn phòng, đồ họa và giải trí.	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
 \.
 
 
 --
--- TOC entry 5327 (class 0 OID 16470)
+-- TOC entry 5328 (class 0 OID 16470)
 -- Dependencies: 229
 -- Data for Name: chat_messages; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.chat_messages (id, session_id, sender_id, message, created_at) FROM stdin;
-1	1	4	hello	2026-05-24 04:59:43.06206
-2	2	4	hello	2026-05-24 05:00:31.287351
-3	2	1	hi em yêu	2026-05-24 05:00:59.592494
 \.
 
 
 --
--- TOC entry 5329 (class 0 OID 16482)
+-- TOC entry 5330 (class 0 OID 16482)
 -- Dependencies: 231
 -- Data for Name: chat_sessions; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.chat_sessions (id, customer_id, staff_id, status, created_at, updated_at, closed_at) FROM stdin;
-1	4	1	CLOSED	2026-05-24 04:59:40.241614	2026-05-24 05:00:07.906049	2026-05-24 05:00:07.906001
-2	4	1	OPEN	2026-05-24 05:00:27.336438	2026-05-24 05:00:59.592494	\N
 \.
 
 
 --
--- TOC entry 5331 (class 0 OID 16495)
+-- TOC entry 5332 (class 0 OID 16495)
 -- Dependencies: 233
 -- Data for Name: contact_messages; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1332,7 +1349,7 @@ COPY public.contact_messages (id, full_name, email, phone, subject, message, sta
 
 
 --
--- TOC entry 5333 (class 0 OID 16512)
+-- TOC entry 5334 (class 0 OID 16512)
 -- Dependencies: 235
 -- Data for Name: coupon_usages; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1342,7 +1359,7 @@ COPY public.coupon_usages (id, coupon_id, user_id, order_id, used_at) FROM stdin
 
 
 --
--- TOC entry 5335 (class 0 OID 16522)
+-- TOC entry 5336 (class 0 OID 16522)
 -- Dependencies: 237
 -- Data for Name: coupons; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1350,19 +1367,19 @@ COPY public.coupon_usages (id, coupon_id, user_id, order_id, used_at) FROM stdin
 COPY public.coupons (id, code, name, description, discount_type, discount_value, min_order_amount, max_discount_amount, usage_limit, used_count, start_at, end_at, status, created_at, updated_at, deleted_at) FROM stdin;
 9	SALE1	sale1	q	PERCENTAGE	10.00	100000.00	50000.00	5	0	2026-05-25 01:31:00	2026-05-26 01:31:00	INACTIVE	2026-05-24 01:31:09.647181	2026-05-24 01:54:31.133375	2026-05-24 01:54:31.133817
 10	SALE11	sale11	aaa	PERCENTAGE	10.00	100000.00	50000.00	5	0	2026-05-25 01:54:00	2026-05-26 01:54:00	ACTIVE	2026-05-24 01:55:11.444483	2026-05-24 01:55:11.444483	\N
-1	WELCOME100K	Ưu đãi khách hàng mới	Giảm 100.000đ cho đơn hàng từ 2.000.000đ. Phù hợp cho khách hàng mới mua lần đầu tại TechStore.	FIXED	100000.00	2000000.00	\N	500	0	2026-05-23 04:51:47.361199	2026-11-24 04:51:47.361199	ACTIVE	2026-05-23 01:32:42.251069	2026-05-24 04:51:47.362499	\N
-2	TECHSTORE10	Giảm 10% toàn cửa hàng	Giảm 10% giá trị đơn hàng, tối đa 500.000đ cho đơn từ 5.000.000đ.	PERCENTAGE	10.00	5000000.00	500000.00	300	0	2026-05-23 04:51:47.361199	2026-11-24 04:51:47.361199	ACTIVE	2026-05-23 01:32:42.251069	2026-05-24 04:51:47.362499	\N
-3	LAPTOP500	Ưu đãi laptop	Giảm 500.000đ cho đơn hàng laptop từ 15.000.000đ.	FIXED	500000.00	15000000.00	\N	200	0	2026-05-23 04:51:47.361199	2026-11-24 04:51:47.361199	ACTIVE	2026-05-23 01:32:42.251069	2026-05-24 04:51:47.362499	\N
-4	GAMING5	Ưu đãi phụ kiện gaming	Giảm 5% tối đa 300.000đ cho các đơn hàng gaming gear từ 3.000.000đ.	PERCENTAGE	5.00	3000000.00	300000.00	300	0	2026-05-23 04:51:47.361199	2026-11-24 04:51:47.361199	ACTIVE	2026-05-23 01:32:42.251069	2026-05-24 04:51:47.362499	\N
-5	MONITOR300	Ưu đãi màn hình	Giảm 300.000đ cho đơn hàng màn hình từ 8.000.000đ.	FIXED	300000.00	8000000.00	\N	200	0	2026-05-23 04:51:47.361199	2026-11-24 04:51:47.361199	ACTIVE	2026-05-23 01:32:42.251069	2026-05-24 04:51:47.362499	\N
-6	FREESHIP30	Hỗ trợ phí vận chuyển	Giảm 30.000đ cho đơn hàng từ 1.000.000đ. Có thể dùng để hỗ trợ phí vận chuyển.	FIXED	30000.00	1000000.00	\N	1000	0	2026-05-23 04:51:47.361199	2026-11-24 04:51:47.361199	ACTIVE	2026-05-23 01:32:42.251069	2026-05-24 04:51:47.362499	\N
-7	VIP1000	Ưu đãi đơn hàng giá trị cao	Giảm 1.000.000đ cho đơn hàng từ 30.000.000đ.	FIXED	1000000.00	30000000.00	\N	100	0	2026-05-23 04:51:47.361199	2026-11-24 04:51:47.361199	ACTIVE	2026-05-23 01:32:42.251069	2026-05-24 04:51:47.362499	\N
-8	BUILDPC15	Ưu đãi build PC	Giảm 15% tối đa 1.500.000đ cho đơn build PC từ 20.000.000đ.	PERCENTAGE	15.00	20000000.00	1500000.00	150	0	2026-05-23 04:51:47.361199	2026-11-24 04:51:47.361199	ACTIVE	2026-05-23 01:32:42.251069	2026-05-24 04:51:47.362499	\N
+1	WELCOME100K	Ưu đãi khách hàng mới	Giảm 100.000đ cho đơn hàng từ 2.000.000đ. Phù hợp cho khách hàng mới mua lần đầu tại TechStore.	FIXED	100000.00	2000000.00	\N	500	0	2026-05-24 13:43:21.804318	2026-11-25 13:43:21.804318	ACTIVE	2026-05-23 01:32:42.251069	2026-05-25 13:43:21.805616	\N
+2	TECHSTORE10	Giảm 10% toàn cửa hàng	Giảm 10% giá trị đơn hàng, tối đa 500.000đ cho đơn từ 5.000.000đ.	PERCENTAGE	10.00	5000000.00	500000.00	300	0	2026-05-24 13:43:21.804318	2026-11-25 13:43:21.804318	ACTIVE	2026-05-23 01:32:42.251069	2026-05-25 13:43:21.805616	\N
+3	LAPTOP500	Ưu đãi laptop	Giảm 500.000đ cho đơn hàng laptop từ 15.000.000đ.	FIXED	500000.00	15000000.00	\N	200	0	2026-05-24 13:43:21.804318	2026-11-25 13:43:21.804318	ACTIVE	2026-05-23 01:32:42.251069	2026-05-25 13:43:21.805616	\N
+4	GAMING5	Ưu đãi phụ kiện gaming	Giảm 5% tối đa 300.000đ cho các đơn hàng gaming gear từ 3.000.000đ.	PERCENTAGE	5.00	3000000.00	300000.00	300	0	2026-05-24 13:43:21.804318	2026-11-25 13:43:21.804318	ACTIVE	2026-05-23 01:32:42.251069	2026-05-25 13:43:21.805616	\N
+5	MONITOR300	Ưu đãi màn hình	Giảm 300.000đ cho đơn hàng màn hình từ 8.000.000đ.	FIXED	300000.00	8000000.00	\N	200	0	2026-05-24 13:43:21.804318	2026-11-25 13:43:21.804318	ACTIVE	2026-05-23 01:32:42.251069	2026-05-25 13:43:21.805616	\N
+6	FREESHIP30	Hỗ trợ phí vận chuyển	Giảm 30.000đ cho đơn hàng từ 1.000.000đ. Có thể dùng để hỗ trợ phí vận chuyển.	FIXED	30000.00	1000000.00	\N	1000	0	2026-05-24 13:43:21.804318	2026-11-25 13:43:21.804318	ACTIVE	2026-05-23 01:32:42.251069	2026-05-25 13:43:21.805616	\N
+7	VIP1000	Ưu đãi đơn hàng giá trị cao	Giảm 1.000.000đ cho đơn hàng từ 30.000.000đ.	FIXED	1000000.00	30000000.00	\N	100	0	2026-05-24 13:43:21.804318	2026-11-25 13:43:21.804318	ACTIVE	2026-05-23 01:32:42.251069	2026-05-25 13:43:21.805616	\N
+8	BUILDPC15	Ưu đãi build PC	Giảm 15% tối đa 1.500.000đ cho đơn build PC từ 20.000.000đ.	PERCENTAGE	15.00	20000000.00	1500000.00	150	0	2026-05-24 13:43:21.804318	2026-11-25 13:43:21.804318	ACTIVE	2026-05-23 01:32:42.251069	2026-05-25 13:43:21.805616	\N
 \.
 
 
 --
--- TOC entry 5337 (class 0 OID 16552)
+-- TOC entry 5338 (class 0 OID 16552)
 -- Dependencies: 239
 -- Data for Name: faqs; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1385,7 +1402,7 @@ COPY public.faqs (id, question, answer, sort_order, status, created_at, updated_
 
 
 --
--- TOC entry 5339 (class 0 OID 16571)
+-- TOC entry 5340 (class 0 OID 16571)
 -- Dependencies: 241
 -- Data for Name: news_posts; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1405,27 +1422,37 @@ COPY public.news_posts (id, title, slug, summary, content, thumbnail_url, author
 
 
 --
--- TOC entry 5341 (class 0 OID 16587)
+-- TOC entry 5342 (class 0 OID 16587)
 -- Dependencies: 243
 -- Data for Name: order_items; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.order_items (id, order_id, product_id, product_variant_id, product_name, variant_name, product_sku, price, quantity, total_price, created_at) FROM stdin;
+1	1	196	196	test13	test13	TEST13	2000.00	1	2000.00	2026-05-25 13:04:58.808438
+2	2	196	196	test13	test13	TEST13	2000.00	1	2000.00	2026-05-25 13:05:26.163491
+3	3	196	196	test13	test13	TEST13	2000.00	1	2000.00	2026-05-25 13:18:34.143789
+4	4	1	1	Màn hình LG 27G850A-B 27 inch Nano IPS Black 4K 240Hz-FHD 480Hz chuyên game	27 inch / Nano IPS Black / 4K / 240Hz	MAN-LG-27G850A-B	18040500.00	1	18040500.00	2026-05-25 13:22:52.309499
+5	5	196	196	test13	test13	TEST13	2000.00	1	2000.00	2026-05-25 13:44:16.032567
 \.
 
 
 --
--- TOC entry 5343 (class 0 OID 16605)
+-- TOC entry 5344 (class 0 OID 16605)
 -- Dependencies: 245
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.orders (id, user_id, coupon_id, coupon_code, order_code, subtotal_amount, shipping_fee, discount_amount, final_amount, order_status, receiver_name, receiver_phone, shipping_address, note, created_at, updated_at, deleted_at) FROM stdin;
+1	4	\N	\N	ORD202605251304589856	2000.00	30000.00	0.00	32000.00	CANCELLED	lê trung kiên	0123456	1123		2026-05-25 13:04:58.808438	2026-05-25 13:43:17.448658	\N
+2	4	\N	\N	ORD202605251305269391	2000.00	30000.00	0.00	32000.00	CANCELLED	lê trung kiên	0123456	1123		2026-05-25 13:05:26.163491	2026-05-25 13:43:17.448658	\N
+3	4	\N	\N	ORD202605251318348713	2000.00	0.00	0.00	2000.00	CANCELLED	lê trung kiên	0123456	123		2026-05-25 13:18:34.143789	2026-05-25 13:43:17.448658	\N
+4	4	\N	\N	ORD202605251322528617	18040500.00	0.00	0.00	18040500.00	CANCELLED	lê trung kiên	0123456	123		2026-05-25 13:22:52.309499	2026-05-25 13:43:17.448658	\N
+5	4	\N	\N	ORD202605251344167167	2000.00	0.00	0.00	2000.00	CONFIRMED	lê trung kiên	0123456	123		2026-05-25 13:44:16.032567	2026-05-25 13:49:50.87154	\N
 \.
 
 
 --
--- TOC entry 5345 (class 0 OID 16636)
+-- TOC entry 5346 (class 0 OID 16636)
 -- Dependencies: 247
 -- Data for Name: password_reset_tokens; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1436,93 +1463,674 @@ COPY public.password_reset_tokens (id, user_id, token, expired_at, used, created
 
 
 --
--- TOC entry 5347 (class 0 OID 16648)
+-- TOC entry 5348 (class 0 OID 16648)
 -- Dependencies: 249
 -- Data for Name: payments; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.payments (id, order_id, method, status, amount, transaction_code, paid_at, created_at, updated_at) FROM stdin;
+1	1	BANK_TRANSFER	FAILED	32000.00	\N	\N	2026-05-25 13:04:58.808438	2026-05-25 13:43:17.448658
+2	2	BANK_TRANSFER	FAILED	32000.00	\N	\N	2026-05-25 13:05:26.163491	2026-05-25 13:43:17.448658
+3	3	BANK_TRANSFER	FAILED	2000.00	\N	\N	2026-05-25 13:18:34.143789	2026-05-25 13:43:17.448658
+4	4	BANK_TRANSFER	FAILED	18040500.00	\N	\N	2026-05-25 13:22:52.309499	2026-05-25 13:43:17.448658
+5	5	BANK_TRANSFER	PAID	2000.00	FT26145003839852	2026-05-25 13:49:50.873811	2026-05-25 13:44:16.032567	2026-05-25 13:49:50.87154
 \.
 
 
 --
--- TOC entry 5349 (class 0 OID 16667)
+-- TOC entry 5350 (class 0 OID 16667)
 -- Dependencies: 251
 -- Data for Name: product_images; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.product_images (id, product_id, variant_id, image_url, sort_order, created_at, deleted_at) FROM stdin;
-1651	1	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1652	1	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1653	1	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1654	2	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1655	2	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1656	2	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1657	3	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1658	3	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1659	3	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1660	4	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1661	4	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1662	4	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1663	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1664	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1665	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1666	6	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1667	6	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1668	6	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1669	7	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1670	7	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1671	7	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1672	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1673	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1674	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1675	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1676	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1677	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1678	10	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1679	10	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1680	10	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1681	11	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1682	11	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1683	11	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1684	12	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1685	12	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1686	12	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1687	13	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1688	13	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1689	13	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1690	14	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1691	14	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1692	14	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1693	15	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1694	15	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1695	15	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1696	16	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1697	16	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1698	16	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1699	17	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1700	17	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1701	17	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1702	18	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1703	18	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1704	18	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1705	19	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1706	19	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1707	19	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1708	20	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1709	20	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1710	20	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1711	21	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1712	21	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1713	21	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
-1714	22	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-24 04:51:46.498105	\N
-1715	22	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	2	2026-05-24 04:51:46.498105	\N
-1716	22	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	3	2026-05-24 04:51:46.498105	\N
+7317	1	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640077/lg-27g850a-b_cfdlhs.jpg	1	2026-05-25 13:43:17.46312	\N
+7318	2	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640225/man-lg-24u411a-b_01_g56amh.jpg	1	2026-05-25 13:43:17.46312	\N
+7319	2	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640226/man-lg-24u411a-b_04_fc9fct.png	2	2026-05-25 13:43:17.46312	\N
+7320	2	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640227/man-lg-24u411a-b_06_gbn9cb.png	3	2026-05-25 13:43:17.46312	\N
+7321	2	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640227/man-lg-24u411a-b_07_zsjz9i.png	4	2026-05-25 13:43:17.46312	\N
+7322	2	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640228/man-lg-24u411a-b_08_myqsuk.png	5	2026-05-25 13:43:17.46312	\N
+7323	2	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640228/man-lg-24u411a-b_09_bgdngj.png	6	2026-05-25 13:43:17.46312	\N
+7324	2	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640229/man-lg-24u411a-b_10_ktcfts.png	7	2026-05-25 13:43:17.46312	\N
+7325	3	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640594/man-lg-32u889sa-w_01_s1afrv.jpg	1	2026-05-25 13:43:17.46312	\N
+7326	3	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640594/man-lg-32u889sa-w_04_hq0fp5.jpg	2	2026-05-25 13:43:17.46312	\N
+7327	3	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640595/man-lg-32u889sa-w_06_odsncv.jpg	3	2026-05-25 13:43:17.46312	\N
+7328	3	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640596/man-lg-32u889sa-w_07_c5wpvd.jpg	4	2026-05-25 13:43:17.46312	\N
+7329	3	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640594/man-lg-32u889sa-w_05_ng1fyu.jpg	5	2026-05-25 13:43:17.46312	\N
+7330	3	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640597/man-lg-32u889sa-w_08_ycrzsr.jpg	6	2026-05-25 13:43:17.46312	\N
+7331	3	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640598/man-lg-32u889sa-w_09_hmckon.jpg	7	2026-05-25 13:43:17.46312	\N
+7332	4	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640764/man-lg-27g610a-b_01_zhn4tx.jpg	1	2026-05-25 13:43:17.46312	\N
+7333	4	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640764/man-lg-27g610a-b_05_btjsxw.png	2	2026-05-25 13:43:17.46312	\N
+7334	4	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640766/man-lg-27g610a-b_06_pah0aw.png	3	2026-05-25 13:43:17.46312	\N
+7335	4	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640777/man-lg-27g610a-b_07_yiqb7t.png	4	2026-05-25 13:43:17.46312	\N
+7336	4	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640778/man-lg-27g610a-b_08_mp8msx.png	5	2026-05-25 13:43:17.46312	\N
+7337	4	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640779/man-lg-27g610a-b_09_b0tlhg.png	6	2026-05-25 13:43:17.46312	\N
+7338	4	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640780/man-lg-27g610a-b_10_zzacbz.png	7	2026-05-25 13:43:17.46312	\N
+7339	4	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640781/man-lg-27g610a-b_11_aeyst7.png	8	2026-05-25 13:43:17.46312	\N
+7340	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640929/man-lg-40u990a-w_01_a1my6d.jpg	1	2026-05-25 13:43:17.46312	\N
+7341	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640930/man-lg-40u990a-w_04_n103bd.png	2	2026-05-25 13:43:17.46312	\N
+7342	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640931/man-lg-40u990a-w_05_sxob4b.png	3	2026-05-25 13:43:17.46312	\N
+7343	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640932/man-lg-40u990a-w_06_bsqyou.png	4	2026-05-25 13:43:17.46312	\N
+7344	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640934/man-lg-40u990a-w_07_pb7boh.png	5	2026-05-25 13:43:17.46312	\N
+7345	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640935/man-lg-40u990a-w_08_k0cjvf.png	6	2026-05-25 13:43:17.46312	\N
+7346	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640936/man-lg-40u990a-w_09_jn5jxj.png	7	2026-05-25 13:43:17.46312	\N
+7347	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640937/man-lg-40u990a-w_10_lrnyvk.png	8	2026-05-25 13:43:17.46312	\N
+7348	5	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640938/man-lg-40u990a-w_11_pxbplg.png	9	2026-05-25 13:43:17.46312	\N
+7349	6	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641093/man-lg-24g411a-b_01_chylb2.jpg	1	2026-05-25 13:43:17.46312	\N
+7350	6	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641094/man-lg-24g411a-b_04_dh6gti.png	2	2026-05-25 13:43:17.46312	\N
+7351	6	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641095/man-lg-24g411a-b_05_yczgdn.png	3	2026-05-25 13:43:17.46312	\N
+7352	6	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641096/man-lg-24g411a-b_06_ljqpad.png	4	2026-05-25 13:43:17.46312	\N
+7353	6	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641097/man-lg-24g411a-b_07_wpi5us.png	5	2026-05-25 13:43:17.46312	\N
+7354	6	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641098/man-lg-24g411a-b_08_pohqg3.png	6	2026-05-25 13:43:17.46312	\N
+7355	6	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641099/man-lg-24g411a-b_09_oibtqx.png	7	2026-05-25 13:43:17.46312	\N
+7356	6	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641100/man-lg-24g411a-b_10_eaan8o.png	8	2026-05-25 13:43:17.46312	\N
+7357	7	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641294/man-lg-39gx90sa-w_01_qkpfg6.jpg	1	2026-05-25 13:43:17.46312	\N
+7358	7	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641295/man-lg-39gx90sa-w_04_l02en0.png	2	2026-05-25 13:43:17.46312	\N
+7359	7	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641296/man-lg-39gx90sa-w_05_okxrzp.png	3	2026-05-25 13:43:17.46312	\N
+7360	7	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641297/man-lg-39gx90sa-w_06_xoqkxu.png	4	2026-05-25 13:43:17.46312	\N
+7361	7	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641298/man-lg-39gx90sa-w_07_evpwu2.png	5	2026-05-25 13:43:17.46312	\N
+7362	7	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641299/man-lg-39gx90sa-w_08_ia4mag.png	6	2026-05-25 13:43:17.46312	\N
+7363	7	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641300/man-lg-39gx90sa-w_09_z4kfwl.png	7	2026-05-25 13:43:17.46312	\N
+7364	7	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641301/man-lg-39gx90sa-w_10_f8hcid.png	8	2026-05-25 13:43:17.46312	\N
+7365	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645853/man-lg-27gx704a-b_01_cd7wqq.jpg	1	2026-05-25 13:43:17.46312	\N
+7366	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645854/man-lg-27gx704a-b_04_h13iac.png	2	2026-05-25 13:43:17.46312	\N
+7367	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645854/man-lg-27gx704a-b_05_gaapqp.png	3	2026-05-25 13:43:17.46312	\N
+7368	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645856/man-lg-27gx704a-b_06_zbaufa.png	4	2026-05-25 13:43:17.46312	\N
+7369	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645857/man-lg-27gx704a-b_07_st7u14.png	5	2026-05-25 13:43:17.46312	\N
+7370	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645858/man-lg-27gx704a-b_08_wgn2by.png	6	2026-05-25 13:43:17.46312	\N
+7371	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645859/man-lg-27gx704a-b_09_epjfzt.png	7	2026-05-25 13:43:17.46312	\N
+7372	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645860/man-lg-27gx704a-b_10_bwad2o.png	8	2026-05-25 13:43:17.46312	\N
+7373	8	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645861/man-lg-27gx704a-b_11_gbwhkj.png	9	2026-05-25 13:43:17.46312	\N
+7374	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646130/man-lg-45gx950a-b_01_ioqaye.jpg	1	2026-05-25 13:43:17.46312	\N
+7375	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646131/man-lg-45gx950a-b_04_vnup03.png	2	2026-05-25 13:43:17.46312	\N
+7376	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646132/man-lg-45gx950a-b_05_jehdvv.png	3	2026-05-25 13:43:17.46312	\N
+7377	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646134/man-lg-45gx950a-b_06_ja30f3.png	4	2026-05-25 13:43:17.46312	\N
+7378	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646135/man-lg-45gx950a-b_07_yt8kgg.png	5	2026-05-25 13:43:17.46312	\N
+7379	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646136/man-lg-45gx950a-b_08_thqo8a.png	6	2026-05-25 13:43:17.46312	\N
+7380	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646137/man-lg-45gx950a-b_09_yiqjxu.png	7	2026-05-25 13:43:17.46312	\N
+7381	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646138/man-lg-45gx950a-b_10_g1eiy5.png	8	2026-05-25 13:43:17.46312	\N
+7382	9	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646140/man-lg-45gx950a-b_11_y1mpuc.png	9	2026-05-25 13:43:17.46312	\N
+7383	10	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646293/man-lg-32gx870a-b_01_pxckck.jpg	1	2026-05-25 13:43:17.46312	\N
+7384	10	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646295/man-lg-32gx870a-b_04_dle4rs.png	2	2026-05-25 13:43:17.46312	\N
+7385	10	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646296/man-lg-32gx870a-b_05_cozj4k.png	3	2026-05-25 13:43:17.46312	\N
+7386	10	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646297/man-lg-32gx870a-b_06_ctawep.png	4	2026-05-25 13:43:17.46312	\N
+7387	10	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646298/man-lg-32gx870a-b_07_duwyhh.png	5	2026-05-25 13:43:17.46312	\N
+7388	10	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646300/man-lg-32gx870a-b_08_urewz8.png	6	2026-05-25 13:43:17.46312	\N
+7389	10	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646301/man-lg-32gx870a-b_09_zwwf6d.png	7	2026-05-25 13:43:17.46312	\N
+7390	11	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646457/man-lg-29u531a-w_01_wsvjid.jpg	1	2026-05-25 13:43:17.46312	\N
+7391	11	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646459/man-lg-29u531a-w_04_kkkvwg.png	2	2026-05-25 13:43:17.46312	\N
+7392	11	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646460/man-lg-29u531a-w_05_l3uk8w.png	3	2026-05-25 13:43:17.46312	\N
+7393	11	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646461/man-lg-29u531a-w_06_wwhz8s.png	4	2026-05-25 13:43:17.46312	\N
+7394	11	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646463/man-lg-29u531a-w_07_oplkmg.png	5	2026-05-25 13:43:17.46312	\N
+7395	11	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646464/man-lg-29u531a-w_08_wpitfu.png	6	2026-05-25 13:43:17.46312	\N
+7396	11	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646465/man-lg-29u531a-w_09_hrtd1r.png	7	2026-05-25 13:43:17.46312	\N
+7397	12	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646607/man-lg-27u411a-b_01_cakr00.jpg	1	2026-05-25 13:43:17.46312	\N
+7398	12	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646608/man-lg-27u411a-b_04_bgwevf.png	2	2026-05-25 13:43:17.46312	\N
+7399	12	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646610/man-lg-27u411a-b_05_ahc81i.png	3	2026-05-25 13:43:17.46312	\N
+7400	12	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646611/man-lg-27u411a-b_06_w0sfpl.png	4	2026-05-25 13:43:17.46312	\N
+7401	12	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646612/man-lg-27u411a-b_07_kii6jh.png	5	2026-05-25 13:43:17.46312	\N
+7402	12	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646614/man-lg-27u411a-b_08_qucmpg.png	6	2026-05-25 13:43:17.46312	\N
+7403	12	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646615/man-lg-27u411a-b_09_wifhnc.png	7	2026-05-25 13:43:17.46312	\N
+7404	12	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646616/man-lg-27u411a-b_10_h68a8u.png	8	2026-05-25 13:43:17.46312	\N
+7405	13	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646769/man-lg-22u401a-b_01_wkxzre.jpg	1	2026-05-25 13:43:17.46312	\N
+7406	13	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646771/man-lg-22u401a-b_04_lfvteq.png	2	2026-05-25 13:43:17.46312	\N
+7407	13	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646772/man-lg-22u401a-b_05_f4sgbs.png	3	2026-05-25 13:43:17.46312	\N
+7408	13	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646774/man-lg-22u401a-b_06_zbzfcx.png	4	2026-05-25 13:43:17.46312	\N
+7409	13	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646775/man-lg-22u401a-b_07_tpf0od.png	5	2026-05-25 13:43:17.46312	\N
+7410	13	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646777/man-lg-22u401a-b_08_fipqeg.png	6	2026-05-25 13:43:17.46312	\N
+7411	13	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646778/man-lg-22u401a-b_09_ksrt5j.png	7	2026-05-25 13:43:17.46312	\N
+7412	13	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646780/man-lg-22u401a-b_10_vurxxx.png	8	2026-05-25 13:43:17.46312	\N
+7413	14	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646912/man-lg-24u631a-b_01_spcoy2.jpg	1	2026-05-25 13:43:17.46312	\N
+7414	14	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646913/man-lg-24u631a-b_04_lyrgvs.png	2	2026-05-25 13:43:17.46312	\N
+7415	14	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646915/man-lg-24u631a-b_05_eahw3b.png	3	2026-05-25 13:43:17.46312	\N
+7416	14	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646916/man-lg-24u631a-b_06_y0q9nb.png	4	2026-05-25 13:43:17.46312	\N
+7417	14	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646918/man-lg-24u631a-b_07_ftj9o3.png	5	2026-05-25 13:43:17.46312	\N
+7418	14	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646919/man-lg-24u631a-b_08_x4orvy.png	6	2026-05-25 13:43:17.46312	\N
+7419	14	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646921/man-lg-24u631a-b_09_chjx7w.png	7	2026-05-25 13:43:17.46312	\N
+7420	15	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647124/man-lg-34gx90sa-w_01_bribqd.jpg	1	2026-05-25 13:43:17.46312	\N
+7421	16	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647215/man-lg-27up850k-w_01_o5xvdl.jpg	1	2026-05-25 13:43:17.46312	\N
+7422	17	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647347/man-lg-27u631a-b_01_v1xpmg.jpg	1	2026-05-25 13:43:17.46312	\N
+7423	18	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647462/man-lg-27up600k-w_01_drhvma.jpg	1	2026-05-25 13:43:17.46312	\N
+7424	19	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647574/man-lg-27gx790a-b_01_nwbpsi.jpg	1	2026-05-25 13:43:17.46312	\N
+7425	20	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647682/man-lg-32gs95uv-b_01_z2fhnr.jpg	1	2026-05-25 13:43:17.46312	\N
+7426	21	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647797/man-lg-38wr85qc-w_01_xuslhe.png	1	2026-05-25 13:43:17.46312	\N
+7427	22	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647900/man-lg-27gr93u-b_01_gd6c9u.jpg	1	2026-05-25 13:43:17.46312	\N
+7428	29	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779650632/kb-aula-f75-blk-blue-orange-f7504_01_fmryyh.png	1	2026-05-25 13:43:18.238185	\N
+7429	29	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779650633/kb-aula-f75-blk-blue-orange-f7504_04_bsrqhv.png	2	2026-05-25 13:43:18.238185	\N
+7430	29	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779650635/kb-aula-f75-blk-blue-orange-f7504_05_r1j69d.png	3	2026-05-25 13:43:18.238185	\N
+7431	29	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779650637/kb-aula-f75-blk-blue-orange-f7504_06_fezcwr.png	4	2026-05-25 13:43:18.238185	\N
+7432	30	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779650753/kb-asus-xa14-rog-strix-scope-ii-snow_03_tqpb8u.png	1	2026-05-25 13:43:18.238185	\N
+7433	30	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779650755/kb-asus-xa14-rog-strix-scope-ii-snow_04_zmnc3g.png	2	2026-05-25 13:43:18.238185	\N
+7434	31	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779650879/kb-akko-3108rf-blk-gold_01_sviran.jpg	1	2026-05-25 13:43:18.238185	\N
+7435	32	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651029/kb-akko-3108rf-prunus_01_r61nxj.jpg	1	2026-05-25 13:43:18.238185	\N
+7436	33	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651103/kb-akko-3108rf-glacier_01_va1q1m.jpg	1	2026-05-25 13:43:18.238185	\N
+7437	34	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651192/kb-logitech-g915-x-ls-tkl-tactile-blk_01_yxxmbu.jpg	1	2026-05-25 13:43:18.238185	\N
+7438	34	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651194/kb-logitech-g915-x-ls-tkl-tactile-blk_04_xkv65n.png	2	2026-05-25 13:43:18.238185	\N
+7439	34	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651237/kb-logitech-g915-x-ls-tkl-tactile-blk_05_qodntn.png	3	2026-05-25 13:43:18.238185	\N
+7440	34	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651239/kb-logitech-g915-x-ls-tkl-tactile-blk_06_hcoxgt.png	4	2026-05-25 13:43:18.238185	\N
+7441	35	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651503/kb-akko-5087v3-lord_01_rrznum.jpg	1	2026-05-25 13:43:18.238185	\N
+7442	35	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651505/kb-akko-5087v3-lord_05_cifsmw.jpg	2	2026-05-25 13:43:18.238185	\N
+7443	35	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651508/kb-akko-5087v3-lord_06_tbhbd9.jpg	3	2026-05-25 13:43:18.238185	\N
+7444	35	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651523/kb-akko-5087v3-lord_07_nd9kzs.jpg	4	2026-05-25 13:43:18.238185	\N
+7445	35	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651526/kb-akko-5087v3-lord_08_vy5y7q.jpg	5	2026-05-25 13:43:18.238185	\N
+7446	36	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651677/kb-edra-ek398s-red-sw_01_pvgbbt.jpg	1	2026-05-25 13:43:18.238185	\N
+7447	36	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651680/kb-edra-ek398s-red-sw_04_zec0bs.jpg	2	2026-05-25 13:43:18.238185	\N
+7448	36	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651683/kb-edra-ek398s-red-sw_05_f2kwmx.jpg	3	2026-05-25 13:43:18.238185	\N
+7449	36	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651686/kb-edra-ek398s-red-sw_06_jl7m6c.jpg	4	2026-05-25 13:43:18.238185	\N
+7450	36	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651689/kb-edra-ek398s-red-sw_07_mqzsc6.jpg	5	2026-05-25 13:43:18.238185	\N
+7451	37	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651817/kb-edra-ek375s-red-sw_01_omvhea.jpg	1	2026-05-25 13:43:18.238185	\N
+7452	37	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651820/kb-edra-ek375s-red-sw_04_tdbeqs.jpg	2	2026-05-25 13:43:18.238185	\N
+7453	37	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651823/kb-edra-ek375s-red-sw_05_zwzpnt.jpg	3	2026-05-25 13:43:18.238185	\N
+7454	38	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651942/kb-aula-s98-pro-tm-blue-whi-dark-pur-star-sw-s9812_01_sbbhe0.jpg	1	2026-05-25 13:43:18.238185	\N
+7455	38	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651945/kb-aula-s98-pro-tm-blue-whi-dark-pur-star-sw-s9812_05_dkkwd5.jpg	2	2026-05-25 13:43:18.238185	\N
+7456	38	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651948/kb-aula-s98-pro-tm-blue-whi-dark-pur-star-sw-s9812_06_ywohh9.jpg	3	2026-05-25 13:43:18.238185	\N
+7457	38	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651951/kb-aula-s98-pro-tm-blue-whi-dark-pur-star-sw-s9812_07_wpxqod.jpg	4	2026-05-25 13:43:18.238185	\N
+7458	39	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652124/kb-aula-s100-pro-tm-blk-s100pro03_01_tx7jja.jpg	1	2026-05-25 13:43:18.238185	\N
+7459	40	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652211/kb-veekos-k75-red_01_m2rrg8.jpg	1	2026-05-25 13:43:18.238185	\N
+7460	40	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652215/kb-veekos-k75-red_04_wcg0lk.jpg	2	2026-05-25 13:43:18.238185	\N
+7461	40	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652218/kb-veekos-k75-red_05_p49or6.jpg	3	2026-05-25 13:43:18.238185	\N
+7462	41	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652305/kb-aula-agg60-pro-grey-ag6001_01_rbmaus.jpg	1	2026-05-25 13:43:18.238185	\N
+7463	41	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652308/kb-aula-agg60-pro-grey-ag6001_04_zdq9kt.jpg	2	2026-05-25 13:43:18.238185	\N
+7464	41	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652312/kb-aula-agg60-pro-grey-ag6001_05_l0fzme.jpg	3	2026-05-25 13:43:18.238185	\N
+7465	41	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652315/kb-aula-agg60-pro-grey-ag6001_06_b8jfez.jpg	4	2026-05-25 13:43:18.238185	\N
+7466	42	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652417/kb-asus-tuf-k3-gen-ii-miku_01_biad20.png	1	2026-05-25 13:43:18.238185	\N
+7467	42	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652421/kb-asus-tuf-k3-gen-ii-miku_04_q3uspd.png	2	2026-05-25 13:43:18.238185	\N
+7468	42	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652424/kb-asus-tuf-k3-gen-ii-miku_05_rzrbru.png	3	2026-05-25 13:43:18.238185	\N
+7469	43	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652602/kb-akko-acr-pro-alice-plus-spray-white_01_feefyw.jpg	1	2026-05-25 13:43:18.238185	\N
+7470	43	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652606/kb-akko-acr-pro-alice-plus-spray-white_04_n7d9nh.jpg	2	2026-05-25 13:43:18.238185	\N
+7471	43	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652609/kb-akko-acr-pro-alice-plus-spray-white_05_grwfxs.jpg	3	2026-05-25 13:43:18.238185	\N
+7472	43	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652613/kb-akko-acr-pro-alice-plus-spray-white_06_vwyg2z.jpg	4	2026-05-25 13:43:18.238185	\N
+7473	43	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652616/kb-akko-acr-pro-alice-plus-spray-white_07_yzb6ex.jpg	5	2026-05-25 13:43:18.238185	\N
+7474	43	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652620/kb-akko-acr-pro-alice-plus-spray-white_08_zirqbo.jpg	6	2026-05-25 13:43:18.238185	\N
+7475	43	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652623/kb-akko-acr-pro-alice-plus-spray-white_09_kx6wjq.jpg	7	2026-05-25 13:43:18.238185	\N
+7476	44	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654044/chu-rapoo-v260-pro_01_osmmfs.jpg	1	2026-05-25 13:43:18.496089	\N
+7477	44	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654047/chu-rapoo-v260-pro_04_ngwfk5.jpg	2	2026-05-25 13:43:18.496089	\N
+7478	44	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654051/chu-rapoo-v260-pro_05_pxervx.jpg	3	2026-05-25 13:43:18.496089	\N
+7479	44	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654054/chu-rapoo-v260-pro_06_bwyv2s.jpg	4	2026-05-25 13:43:18.496089	\N
+7480	45	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654229/chu-asus-tuf-m3-genii_01_jmzwlb.jpg	1	2026-05-25 13:43:18.496089	\N
+7481	45	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654232/chu-asus-tuf-m3-genii_04_qjkxe8.jpg	2	2026-05-25 13:43:18.496089	\N
+7482	45	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654236/chu-asus-tuf-m3-genii_05_zbscqz.jpg	3	2026-05-25 13:43:18.496089	\N
+7483	45	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654240/chu-asus-tuf-m3-genii_06_aonnmt.jpg	4	2026-05-25 13:43:18.496089	\N
+7484	45	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654244/chu-asus-tuf-m3-genii_07_bvab68.jpg	5	2026-05-25 13:43:18.496089	\N
+7485	45	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654247/chu-asus-tuf-m3-genii_08_x3g0o3.jpg	6	2026-05-25 13:43:18.496089	\N
+7486	46	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654417/chu-asus-rog-impact-iii-wl-white_04_doaj5u.png	1	2026-05-25 13:43:18.496089	\N
+7487	46	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654421/chu-asus-rog-impact-iii-wl-white_05_ayvs5l.png	2	2026-05-25 13:43:18.496089	\N
+7488	46	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654425/chu-asus-rog-impact-iii-wl-white_06_qneg6b.png	3	2026-05-25 13:43:18.496089	\N
+7489	46	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654429/chu-asus-rog-impact-iii-wl-white_07_luan8v.png	4	2026-05-25 13:43:18.496089	\N
+7490	46	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654432/chu-asus-rog-impact-iii-wl-white_08_khdlnq.png	5	2026-05-25 13:43:18.496089	\N
+7491	46	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654436/chu-asus-rog-impact-iii-wl-white_09_xrhj1n.png	6	2026-05-25 13:43:18.496089	\N
+7492	47	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654591/chu-asus-rog-impact-iii-wl_01_jrixoi.jpg	1	2026-05-25 13:43:18.496089	\N
+7493	47	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654595/chu-asus-rog-impact-iii-wl_05_cixchp.png	2	2026-05-25 13:43:18.496089	\N
+7494	47	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654599/chu-asus-rog-impact-iii-wl_06_rlxrfk.png	3	2026-05-25 13:43:18.496089	\N
+7495	47	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654604/chu-asus-rog-impact-iii-wl_07_eecw3j.png	4	2026-05-25 13:43:18.496089	\N
+7496	47	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654608/chu-asus-rog-impact-iii-wl_08_dwmsrf.png	5	2026-05-25 13:43:18.496089	\N
+7497	47	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654612/chu-asus-rog-impact-iii-wl_09_cztrcc.png	6	2026-05-25 13:43:18.496089	\N
+7498	48	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654736/chu-log-g502-hero_01_xp096n.png	1	2026-05-25 13:43:18.496089	\N
+7499	48	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654740/chu-log-g502-hero_04_xtpiop.png	2	2026-05-25 13:43:18.496089	\N
+7500	48	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654744/chu-log-g502-hero_05_aiaavo.png	3	2026-05-25 13:43:18.496089	\N
+7501	48	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654748/chu-log-g502-hero_06_jhwxmg.png	4	2026-05-25 13:43:18.496089	\N
+7502	48	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654753/chu-log-g502-hero_07_tkjth3.png	5	2026-05-25 13:43:18.496089	\N
+7503	49	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654956/chu-logitech-g-pro-x-superlight-2-black_01_mbzarf.jpg	1	2026-05-25 13:43:18.496089	\N
+7504	49	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654960/chu-logitech-g-pro-x-superlight-2-black_04_jaltbq.jpg	2	2026-05-25 13:43:18.496089	\N
+7505	49	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654964/chu-logitech-g-pro-x-superlight-2-black_05_fxpigx.jpg	3	2026-05-25 13:43:18.496089	\N
+7506	49	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654968/chu-logitech-g-pro-x-superlight-2-black_06_xrjom7.jpg	4	2026-05-25 13:43:18.496089	\N
+7507	49	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654972/chu-logitech-g-pro-x-superlight-2-black_07_a2inro.jpg	5	2026-05-25 13:43:18.496089	\N
+7508	49	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654976/chu-logitech-g-pro-x-superlight-2-black_08_vetfj8.jpg	6	2026-05-25 13:43:18.496089	\N
+7509	49	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654980/chu-logitech-g-pro-x-superlight-2-black_09_cc67fh.jpg	7	2026-05-25 13:43:18.496089	\N
+7510	49	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654984/chu-logitech-g-pro-x-superlight-2-black_10_pip271.jpg	8	2026-05-25 13:43:18.496089	\N
+7511	49	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654988/chu-logitech-g-pro-x-superlight-2-black_11_t6qb6g.jpg	9	2026-05-25 13:43:18.496089	\N
+7512	50	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655215/chu-logitech-g-pro-x-superlight-2-dex-wl-white_01_owqeec.png	1	2026-05-25 13:43:18.496089	\N
+7513	50	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655219/chu-logitech-g-pro-x-superlight-2-dex-wl-white_04_eqokyx.png	2	2026-05-25 13:43:18.496089	\N
+7514	50	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655223/chu-logitech-g-pro-x-superlight-2-dex-wl-white_05_bumul8.png	3	2026-05-25 13:43:18.496089	\N
+7515	50	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655228/chu-logitech-g-pro-x-superlight-2-dex-wl-white_06_asnwab.png	4	2026-05-25 13:43:18.496089	\N
+7516	50	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655232/chu-logitech-g-pro-x-superlight-2-dex-wl-white_07_gzg4ym.png	5	2026-05-25 13:43:18.496089	\N
+7517	50	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655236/chu-logitech-g-pro-x-superlight-2-dex-wl-white_08_atzixi.png	6	2026-05-25 13:43:18.496089	\N
+7518	51	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655368/chu-logitech-g-pro-x-superlight-2-white_01_froumk.jpg	1	2026-05-25 13:43:18.496089	\N
+7519	51	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655372/chu-logitech-g-pro-x-superlight-2-white_04_b5qeln.jpg	2	2026-05-25 13:43:18.496089	\N
+7520	51	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655376/chu-logitech-g-pro-x-superlight-2-white_05_yezic1.jpg	3	2026-05-25 13:43:18.496089	\N
+7521	51	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655381/chu-logitech-g-pro-x-superlight-2-white_06_jmqe8f.jpg	4	2026-05-25 13:43:18.496089	\N
+7522	51	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655385/chu-logitech-g-pro-x-superlight-2-white_07_tapgnp.jpg	5	2026-05-25 13:43:18.496089	\N
+7523	51	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655389/chu-logitech-g-pro-x-superlight-2-white_08_un0fme.jpg	6	2026-05-25 13:43:18.496089	\N
+7524	51	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655394/chu-logitech-g-pro-x-superlight-2-white_09_woy0oi.jpg	7	2026-05-25 13:43:18.496089	\N
+7525	52	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655521/chu-razer-viper-v3-pro-white_01_eox8vt.png	1	2026-05-25 13:43:18.496089	\N
+7526	52	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655525/chu-razer-viper-v3-pro-white_04_vheiwh.png	2	2026-05-25 13:43:18.496089	\N
+7527	52	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655532/chu-razer-viper-v3-pro-white_05_g9zpx2.png	3	2026-05-25 13:43:18.496089	\N
+7528	52	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655536/chu-razer-viper-v3-pro-white_06_vzkzim.png	4	2026-05-25 13:43:18.496089	\N
+7529	52	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655542/chu-razer-viper-v3-pro-white_07_dpfqwa.png	5	2026-05-25 13:43:18.496089	\N
+7530	53	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655707/chu-razer-viper-v3-pro-blk_01_rzbacb.jpg	1	2026-05-25 13:43:18.496089	\N
+7531	53	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655712/chu-razer-viper-v3-pro-blk_04_bap50m.jpg	2	2026-05-25 13:43:18.496089	\N
+7532	53	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655716/chu-razer-viper-v3-pro-blk_05_ekxdxk.jpg	3	2026-05-25 13:43:18.496089	\N
+7533	53	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655721/chu-razer-viper-v3-pro-blk_06_snjc1n.jpg	4	2026-05-25 13:43:18.496089	\N
+7534	54	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7535	55	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7536	56	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655865/chu-acer-predator-cestus-353_01_a80xfx.png	1	2026-05-25 13:43:18.496089	\N
+7537	56	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655870/chu-acer-predator-cestus-353_04_j0kmqb.png	2	2026-05-25 13:43:18.496089	\N
+7538	56	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655875/chu-acer-predator-cestus-353_05_b8om8o.png	3	2026-05-25 13:43:18.496089	\N
+7539	57	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7540	58	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7541	59	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7542	60	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7543	61	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7544	62	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7545	63	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7546	64	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656169/chu-dareu-em911t-blk_01_h8m1cg.jpg	1	2026-05-25 13:43:18.496089	\N
+7547	64	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656173/chu-dareu-em911t-blk_04_eoa5z1.jpg	2	2026-05-25 13:43:18.496089	\N
+7548	64	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656178/chu-dareu-em911t-blk_05_tugzr9.jpg	3	2026-05-25 13:43:18.496089	\N
+7549	64	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656183/chu-dareu-em911t-blk_06_a1krpi.jpg	4	2026-05-25 13:43:18.496089	\N
+7550	65	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656288/chu-logitech-x2-superstrike-lp_01_ifk125.jpg	1	2026-05-25 13:43:18.496089	\N
+7551	65	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656293/chu-logitech-x2-superstrike-lp_04_x1fljj.jpg	2	2026-05-25 13:43:18.496089	\N
+7552	65	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656298/chu-logitech-x2-superstrike-lp_05_uplg6t.jpg	3	2026-05-25 13:43:18.496089	\N
+7553	66	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7554	67	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656399/chu-asus-p722-keris-ii-origin-wl-blk_01_c1asbf.png	1	2026-05-25 13:43:18.496089	\N
+7555	67	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656404/chu-asus-p722-keris-ii-origin-wl-blk_05_ymvnlq.png	2	2026-05-25 13:43:18.496089	\N
+7556	67	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656408/chu-asus-p722-keris-ii-origin-wl-blk_06_a2nqvi.png	3	2026-05-25 13:43:18.496089	\N
+7557	67	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656413/chu-asus-p722-keris-ii-origin-wl-blk_07_dhgy3n.png	4	2026-05-25 13:43:18.496089	\N
+7558	67	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656451/chu-asus-p722-keris-ii-origin-wl-blk_08_xykq81.png	5	2026-05-25 13:43:18.496089	\N
+7559	67	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656456/chu-asus-p722-keris-ii-origin-wl-blk_09_qisaqk.png	6	2026-05-25 13:43:18.496089	\N
+7560	68	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656610/chu-log-g102-lightsync-black_01_pzurem.jpg	1	2026-05-25 13:43:18.496089	\N
+7561	68	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656615/chu-log-g102-lightsync-black_04_zeabfz.jpg	2	2026-05-25 13:43:18.496089	\N
+7562	69	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7563	70	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7564	71	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7565	72	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7566	73	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7567	74	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7568	75	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7569	76	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7570	77	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7571	78	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7572	79	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7573	80	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7574	81	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7575	82	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7576	83	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7577	84	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7578	85	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7579	86	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7580	87	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7581	88	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7582	89	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7583	90	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7584	91	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7585	92	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7586	93	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:18.496089	\N
+7587	94	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658574/tai-hp-hyperx-cloud-earbuds-ii-black_01_magz9r.gif	1	2026-05-25 13:43:19.670857	\N
+7588	94	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658586/tai-hp-hyperx-cloud-earbuds-ii-black_04_cwjyw7.gif	2	2026-05-25 13:43:19.670857	\N
+7589	94	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658592/tai-hp-hyperx-cloud-earbuds-ii-black_05_knxcya.gif	3	2026-05-25 13:43:19.670857	\N
+7590	94	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658597/tai-hp-hyperx-cloud-earbuds-ii-black_06_q45m3z.gif	4	2026-05-25 13:43:19.670857	\N
+7591	95	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7592	96	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658730/tai-acer-pre-galea-550-wl_01_ftholv.jpg	1	2026-05-25 13:43:19.670857	\N
+7593	96	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658735/tai-acer-pre-galea-550-wl_04_af9srz.jpg	2	2026-05-25 13:43:19.670857	\N
+7594	96	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658740/tai-acer-pre-galea-550-wl_05_imdcas.jpg	3	2026-05-25 13:43:19.670857	\N
+7595	96	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658745/tai-acer-pre-galea-550-wl_06_u505yw.jpg	4	2026-05-25 13:43:19.670857	\N
+7596	96	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658751/tai-acer-pre-galea-550-wl_07_eudjpr.jpg	5	2026-05-25 13:43:19.670857	\N
+7597	96	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658756/tai-acer-pre-galea-550-wl_08_slklfh.jpg	6	2026-05-25 13:43:19.670857	\N
+7598	97	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658872/tai-akko-verge-s9-ultra-whi_01_yyeh2m.jpg	1	2026-05-25 13:43:19.670857	\N
+7599	97	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658877/tai-akko-verge-s9-ultra-whi_04_xy0wgh.jpg	2	2026-05-25 13:43:19.670857	\N
+7600	97	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658882/tai-akko-verge-s9-ultra-whi_05_vbygvh.jpg	3	2026-05-25 13:43:19.670857	\N
+7601	97	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658887/tai-akko-verge-s9-ultra-whi_06_tgno5b.jpg	4	2026-05-25 13:43:19.670857	\N
+7602	97	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658893/tai-akko-verge-s9-ultra-whi_07_zlfkda.jpg	5	2026-05-25 13:43:19.670857	\N
+7603	97	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658898/tai-akko-verge-s9-ultra-whi_08_whmywe.jpg	6	2026-05-25 13:43:19.670857	\N
+7604	98	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659064/tai-akko-gh300-whi_01_n6jbeg.jpg	1	2026-05-25 13:43:19.670857	\N
+7605	98	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659069/tai-akko-gh300-whi_04_rr6l2e.jpg	2	2026-05-25 13:43:19.670857	\N
+7606	98	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659074/tai-akko-gh300-whi_05_b7timy.jpg	3	2026-05-25 13:43:19.670857	\N
+7607	98	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659080/tai-akko-gh300-whi_06_n9nxkv.jpg	4	2026-05-25 13:43:19.670857	\N
+7608	98	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659085/tai-akko-gh300-whi_07_krolym.jpg	5	2026-05-25 13:43:19.670857	\N
+7609	99	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659245/tai-logitech-g325-lightspeed-whi_01_qj6mrk.jpg	1	2026-05-25 13:43:19.670857	\N
+7610	99	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659251/tai-logitech-g325-lightspeed-whi_04_zsx9sv.jpg	2	2026-05-25 13:43:19.670857	\N
+7611	99	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659257/tai-logitech-g325-lightspeed-whi_05_xnqt5o.jpg	3	2026-05-25 13:43:19.670857	\N
+7612	99	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659263/tai-logitech-g325-lightspeed-whi_06_gqztyj.jpg	4	2026-05-25 13:43:19.670857	\N
+7613	99	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659268/tai-logitech-g325-lightspeed-whi_07_apn1ab.jpg	5	2026-05-25 13:43:19.670857	\N
+7614	100	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7615	101	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659413/tai-asus-rog-pelta-wl-blk_01_pakenm.jpg	1	2026-05-25 13:43:19.670857	\N
+7616	101	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659418/tai-asus-rog-pelta-wl-blk_04_jbgv4e.png	2	2026-05-25 13:43:19.670857	\N
+7617	101	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659424/tai-asus-rog-pelta-wl-blk_05_wkshzh.png	3	2026-05-25 13:43:19.670857	\N
+7618	101	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659430/tai-asus-rog-pelta-wl-blk_06_sljthj.png	4	2026-05-25 13:43:19.670857	\N
+7619	101	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659435/tai-asus-rog-pelta-wl-blk_07_e2niid.png	5	2026-05-25 13:43:19.670857	\N
+7620	101	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659441/tai-asus-rog-pelta-wl-blk_08_s2otef.png	6	2026-05-25 13:43:19.670857	\N
+7621	102	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659588/tai-asu-rog-cetra-ii-core_01_fdyttd.jpg	1	2026-05-25 13:43:19.670857	\N
+7622	102	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659593/tai-asu-rog-cetra-ii-core_04_bon7u3.jpg	2	2026-05-25 13:43:19.670857	\N
+7623	102	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659598/tai-asu-rog-cetra-ii-core_05_dad9ol.jpg	3	2026-05-25 13:43:19.670857	\N
+7624	102	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659604/tai-asu-rog-cetra-ii-core_06_lox8dw.jpg	4	2026-05-25 13:43:19.670857	\N
+7625	102	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659611/tai-asu-rog-cetra-ii-core_08_umk17f.jpg	5	2026-05-25 13:43:19.670857	\N
+7626	102	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659616/tai-asu-rog-cetra-ii-core_09_xtro4u.jpg	6	2026-05-25 13:43:19.670857	\N
+7627	102	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659622/tai-asu-rog-cetra-ii-core_10_uwzuzj.jpg	7	2026-05-25 13:43:19.670857	\N
+7628	103	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659758/tai-logitech-g321-lightspeed-blk_01_s2gy89.png	1	2026-05-25 13:43:19.670857	\N
+7629	103	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659764/tai-logitech-g321-lightspeed-blk_05_siyvjq.png	2	2026-05-25 13:43:19.670857	\N
+7630	103	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659769/tai-logitech-g321-lightspeed-blk_06_qjnpmv.png	3	2026-05-25 13:43:19.670857	\N
+7631	103	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659775/tai-logitech-g321-lightspeed-blk_07_pj2bxd.png	4	2026-05-25 13:43:19.670857	\N
+7632	104	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659873/tai-razer-blackshark-v3-pro-cs2_01_nguzob.png	1	2026-05-25 13:43:19.670857	\N
+7633	104	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659878/tai-razer-blackshark-v3-pro-cs2_04_veggh0.png	2	2026-05-25 13:43:19.670857	\N
+7634	104	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659884/tai-razer-blackshark-v3-pro-cs2_05_yjmae8.png	3	2026-05-25 13:43:19.670857	\N
+7635	104	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659889/tai-razer-blackshark-v3-pro-cs2_06_twinq7.png	4	2026-05-25 13:43:19.670857	\N
+7636	104	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659895/tai-razer-blackshark-v3-pro-cs2_07_d1jj1y.png	5	2026-05-25 13:43:19.670857	\N
+7637	105	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660034/tai-hyperx-cloud-flight-2-wl-b5vc4aa_01_hlmgd3.jpg	1	2026-05-25 13:43:19.670857	\N
+7638	105	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660039/tai-hyperx-cloud-flight-2-wl-b5vc4aa_04_phjxkr.jpg	2	2026-05-25 13:43:19.670857	\N
+7639	105	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660045/tai-hyperx-cloud-flight-2-wl-b5vc4aa_05_dj60vv.jpg	3	2026-05-25 13:43:19.670857	\N
+7640	105	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660051/tai-hyperx-cloud-flight-2-wl-b5vc4aa_06_tzroe9.jpg	4	2026-05-25 13:43:19.670857	\N
+7641	105	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660057/tai-hyperx-cloud-flight-2-wl-b5vc4aa_07_tscm2e.jpg	5	2026-05-25 13:43:19.670857	\N
+7642	105	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660062/tai-hyperx-cloud-flight-2-wl-b5vc4aa_08_hf5f58.jpg	6	2026-05-25 13:43:19.670857	\N
+7643	105	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660068/tai-hyperx-cloud-flight-2-wl-b5vc4aa_09_horknn.jpg	7	2026-05-25 13:43:19.670857	\N
+7644	106	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660262/tai-razer-barracuda-x-chroma-phantom-white_01_enmu7b.png	1	2026-05-25 13:43:19.670857	\N
+7645	106	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660267/tai-razer-barracuda-x-chroma-phantom-white_04_o1fpyw.png	2	2026-05-25 13:43:19.670857	\N
+7646	106	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660273/tai-razer-barracuda-x-chroma-phantom-white_05_rf3de6.png	3	2026-05-25 13:43:19.670857	\N
+7647	106	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660279/tai-razer-barracuda-x-chroma-phantom-white_06_eh7u0e.png	4	2026-05-25 13:43:19.670857	\N
+7648	107	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660391/tai-dar-eh416-rgb_01_n5wbum.jpg	1	2026-05-25 13:43:19.670857	\N
+7649	108	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660512/tai-log-g435-lw-black_01_nxuqjq.jpg	1	2026-05-25 13:43:19.670857	\N
+7650	108	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660518/tai-log-g435-lw-black_04_mtjla7.jpg	2	2026-05-25 13:43:19.670857	\N
+7651	108	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660524/tai-log-g435-lw-black_05_y1dhcd.jpg	3	2026-05-25 13:43:19.670857	\N
+7652	108	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660530/tai-log-g435-lw-black_06_wf8xuq.jpg	4	2026-05-25 13:43:19.670857	\N
+7653	108	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660535/tai-log-g435-lw-black_07_j8osnu.jpg	5	2026-05-25 13:43:19.670857	\N
+7654	109	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660656/tai-log-g733-ls-wl-bl_01_cgveo0.png	1	2026-05-25 13:43:19.670857	\N
+7655	110	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660746/tai-corsair-h35-v2-carbon_01_ztdjkj.jpg	1	2026-05-25 13:43:19.670857	\N
+7656	110	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660752/tai-corsair-h35-v2-carbon_04_mpt7kq.png	2	2026-05-25 13:43:19.670857	\N
+7657	110	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660758/tai-corsair-h35-v2-carbon_05_j7w0xv.png	3	2026-05-25 13:43:19.670857	\N
+7658	110	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660764/tai-corsair-h35-v2-carbon_06_govcxt.png	4	2026-05-25 13:43:19.670857	\N
+7659	111	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660908/tai-rapoo-vh160_01_plikmc.png	1	2026-05-25 13:43:19.670857	\N
+7660	111	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660914/tai-rapoo-vh160_04_qeu2tl.png	2	2026-05-25 13:43:19.670857	\N
+7661	111	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660920/tai-rapoo-vh160_05_euvnge.png	3	2026-05-25 13:43:19.670857	\N
+7662	111	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660927/tai-rapoo-vh160_06_vzujpd.png	4	2026-05-25 13:43:19.670857	\N
+7663	111	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660933/tai-rapoo-vh160_07_irpewr.png	5	2026-05-25 13:43:19.670857	\N
+7664	112	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661098/tai-razer-barracuda-x-2022_01_wr68tn.png	1	2026-05-25 13:43:19.670857	\N
+7665	112	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661104/tai-razer-barracuda-x-2022_07_hzrh9u.jpg	2	2026-05-25 13:43:19.670857	\N
+7666	112	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661110/tai-razer-barracuda-x-2022_08_bzzekw.jpg	3	2026-05-25 13:43:19.670857	\N
+7667	112	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661117/tai-razer-barracuda-x-2022_09_loa9l1.jpg	4	2026-05-25 13:43:19.670857	\N
+7668	112	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661123/tai-razer-barracuda-x-2022_10_ou0tfh.jpg	5	2026-05-25 13:43:19.670857	\N
+7669	112	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661129/tai-razer-barracuda-x-2022_11_hxhhk6.jpg	6	2026-05-25 13:43:19.670857	\N
+7670	112	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661135/tai-razer-barracuda-x-2022_12_g5gp5f.jpg	7	2026-05-25 13:43:19.670857	\N
+7671	112	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661141/tai-razer-barracuda-x-2022_13_ow3gzq.png	8	2026-05-25 13:43:19.670857	\N
+7672	113	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661327/tai-hp-hyperx-cloud-iii-red_01_cl4rnd.gif	1	2026-05-25 13:43:19.670857	\N
+7673	113	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661333/tai-hp-hyperx-cloud-iii-red_06_qetfal.gif	2	2026-05-25 13:43:19.670857	\N
+7674	113	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661339/tai-hp-hyperx-cloud-iii-red_07_t9kvah.gif	3	2026-05-25 13:43:19.670857	\N
+7675	114	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7676	115	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7677	116	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7678	117	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7679	118	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7680	119	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7681	120	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7682	121	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7683	122	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7684	123	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7685	124	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7686	125	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7687	126	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:19.670857	\N
+7688	127	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661592/tai-onikuma-inear-t209-live-blk_01_lmdvrq.jpg	1	2026-05-25 13:43:19.670857	\N
+7689	127	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661598/tai-onikuma-inear-t209-live-blk_04_qgmtbd.jpg	2	2026-05-25 13:43:19.670857	\N
+7690	128	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661710/tai-onikuma-inear-t18-enc-bt-blk_01_kjdipf.png	1	2026-05-25 13:43:19.670857	\N
+7691	128	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661717/tai-onikuma-inear-t18-enc-bt-blk_04_lygu2d.png	2	2026-05-25 13:43:19.670857	\N
+7692	129	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661821/tai-razer-kraken-kitty-v2-bt-quartz_01_bbr2o3.png	1	2026-05-25 13:43:19.670857	\N
+7693	129	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661828/tai-razer-kraken-kitty-v2-bt-quartz_04_u1o8ow.png	2	2026-05-25 13:43:19.670857	\N
+7694	129	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661834/tai-razer-kraken-kitty-v2-bt-quartz_05_eqqkev.png	3	2026-05-25 13:43:19.670857	\N
+7695	129	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661841/tai-razer-kraken-kitty-v2-bt-quartz_06_y16vuo.png	4	2026-05-25 13:43:19.670857	\N
+7696	130	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661933/tai-hp-hyperx-cloud-jet-black_01_ljo3bj.jpg	1	2026-05-25 13:43:19.670857	\N
+7697	130	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661939/tai-hp-hyperx-cloud-jet-black_04_aww1gx.jpg	2	2026-05-25 13:43:19.670857	\N
+7698	130	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661946/tai-hp-hyperx-cloud-jet-black_05_ph9ihh.jpg	3	2026-05-25 13:43:19.670857	\N
+7699	130	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661952/tai-hp-hyperx-cloud-jet-black_06_ytwivw.jpg	4	2026-05-25 13:43:19.670857	\N
+7700	130	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661959/tai-hp-hyperx-cloud-jet-black_07_t90mhq.jpg	5	2026-05-25 13:43:19.670857	\N
+7701	131	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779662055/tai-edra-eh414w-blk_01_s3lgb1.png	1	2026-05-25 13:43:19.670857	\N
+7702	132	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663201/ghe-warrior-pawn-wec105-black_01_chhq2t.jpg	1	2026-05-25 13:43:20.2977	\N
+7703	132	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663207/ghe-warrior-pawn-wec105-black_04_vpptib.jpg	2	2026-05-25 13:43:20.2977	\N
+7704	132	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663214/ghe-warrior-pawn-wec105-black_05_p33fzx.jpg	3	2026-05-25 13:43:20.2977	\N
+7705	132	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663220/ghe-warrior-pawn-wec105-black_06_nrnyqm.jpg	4	2026-05-25 13:43:20.2977	\N
+7706	132	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663227/ghe-warrior-pawn-wec105-black_07_sgvhq7.jpg	5	2026-05-25 13:43:20.2977	\N
+7707	132	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663234/ghe-warrior-pawn-wec105-black_08_kxem07.jpg	6	2026-05-25 13:43:20.2977	\N
+7708	132	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663240/ghe-warrior-pawn-wec105-black_09_kvqnrv.jpg	7	2026-05-25 13:43:20.2977	\N
+7709	133	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663375/ghe-war-hero-wec502-grey_01_hyush6.gif	1	2026-05-25 13:43:20.2977	\N
+7710	133	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663382/ghe-war-hero-wec502-grey_04_u2fyac.gif	2	2026-05-25 13:43:20.2977	\N
+7711	133	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663388/ghe-war-hero-wec502-grey_05_uixkfq.gif	3	2026-05-25 13:43:20.2977	\N
+7712	133	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663395/ghe-war-hero-wec502-grey_06_wsien7.gif	4	2026-05-25 13:43:20.2977	\N
+7713	133	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663402/ghe-war-hero-wec502-grey_07_jrtgwv.gif	5	2026-05-25 13:43:20.2977	\N
+7714	134	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663607/ghe-iskur-v2-newgen-blk-green-rz38-05310700-r3ca_01_czjrtj.jpg	1	2026-05-25 13:43:20.2977	\N
+7715	134	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663614/ghe-iskur-v2-newgen-blk-green-rz38-05310700-r3ca_04_ckgf4n.jpg	2	2026-05-25 13:43:20.2977	\N
+7716	134	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663621/ghe-iskur-v2-newgen-blk-green-rz38-05310700-r3ca_05_hu7cyy.jpg	3	2026-05-25 13:43:20.2977	\N
+7717	134	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663628/ghe-iskur-v2-newgen-blk-green-rz38-05310700-r3ca_06_ssbeni.jpg	4	2026-05-25 13:43:20.2977	\N
+7718	134	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663635/ghe-iskur-v2-newgen-blk-green-rz38-05310700-r3ca_07_z3yobx.jpg	5	2026-05-25 13:43:20.2977	\N
+7719	135	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663731/ghe-edra-eec228_01_tfhour.jpg	1	2026-05-25 13:43:20.2977	\N
+7720	135	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663738/ghe-edra-eec228_05_okhjyl.jpg	2	2026-05-25 13:43:20.2977	\N
+7721	135	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663745/ghe-edra-eec228_06_eryleq.jpg	3	2026-05-25 13:43:20.2977	\N
+7722	135	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663752/ghe-edra-eec228_07_tzrzyf.jpg	4	2026-05-25 13:43:20.2977	\N
+7723	135	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663759/ghe-edra-eec228_08_qqoonp.jpg	5	2026-05-25 13:43:20.2977	\N
+7724	136	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663880/ghe-razer-enki-full-blk-rz38-03720300-r3u1_01_p6phna.png	1	2026-05-25 13:43:20.2977	\N
+7725	136	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663891/ghe-razer-enki-full-blk-rz38-03720300-r3u1_04_dryrev.png	2	2026-05-25 13:43:20.2977	\N
+7726	136	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663901/ghe-razer-enki-full-blk-rz38-03720300-r3u1_05_hqri0k.png	3	2026-05-25 13:43:20.2977	\N
+7727	136	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663908/ghe-razer-enki-full-blk-rz38-03720300-r3u1_06_jdowqm.png	4	2026-05-25 13:43:20.2977	\N
+7728	136	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663916/ghe-razer-enki-full-blk-rz38-03720300-r3u1_07_haav64.png	5	2026-05-25 13:43:20.2977	\N
+7729	137	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:20.2977	\N
+7730	138	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664125/ghe-warrior-raider-wgc207-black_01_wa4lr2.jpg	1	2026-05-25 13:43:20.2977	\N
+7731	138	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664142/ghe-warrior-raider-wgc207-black_04_dyokms.jpg	2	2026-05-25 13:43:20.2977	\N
+7732	138	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664148/ghe-warrior-raider-wgc207-black_05_gcbzhz.jpg	3	2026-05-25 13:43:20.2977	\N
+7733	138	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664156/ghe-warrior-raider-wgc207-black_06_se9gvp.jpg	4	2026-05-25 13:43:20.2977	\N
+7734	138	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664164/ghe-warrior-raider-wgc207-black_07_kwy4jj.jpg	5	2026-05-25 13:43:20.2977	\N
+7735	138	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664171/ghe-warrior-raider-wgc207-black_08_eqxsu1.jpg	6	2026-05-25 13:43:20.2977	\N
+7736	139	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664321/ghe-edra-egc229-black-grey_01_ojkmrp.jpg	1	2026-05-25 13:43:20.2977	\N
+7737	139	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664328/ghe-edra-egc229-black-grey_04_m8gsgm.jpg	2	2026-05-25 13:43:20.2977	\N
+7738	139	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664336/ghe-edra-egc229-black-grey_05_vybv7d.jpg	3	2026-05-25 13:43:20.2977	\N
+7739	139	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664343/ghe-edra-egc229-black-grey_06_uileg8.jpg	4	2026-05-25 13:43:20.2977	\N
+7740	139	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664350/ghe-edra-egc229-black-grey_07_cyeaaw.jpg	5	2026-05-25 13:43:20.2977	\N
+7741	139	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664358/ghe-edra-egc229-black-grey_08_tohak4.jpg	6	2026-05-25 13:43:20.2977	\N
+7742	140	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:20.2977	\N
+7743	141	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664631/ghe-war-hero-wec509-bla-red_01_keafvk.jpg	1	2026-05-25 13:43:20.2977	\N
+7744	141	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664639/ghe-war-hero-wec509-bla-red_05_zfd3py.jpg	2	2026-05-25 13:43:20.2977	\N
+7745	141	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664647/ghe-war-hero-wec509-bla-red_06_xjn9q8.jpg	3	2026-05-25 13:43:20.2977	\N
+7746	141	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664654/ghe-war-hero-wec509-bla-red_07_fgautz.jpg	4	2026-05-25 13:43:20.2977	\N
+7747	141	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664662/ghe-war-hero-wec509-bla-red_08_akucqy.jpg	5	2026-05-25 13:43:20.2977	\N
+7748	141	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664669/ghe-war-hero-wec509-bla-red_09_jvl8wc.jpg	6	2026-05-25 13:43:20.2977	\N
+7749	142	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664811/ghe-edra-her-egc203-bla_01_aff1lr.jpg	1	2026-05-25 13:43:20.2977	\N
+7750	142	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664819/ghe-edra-her-egc203-bla_17_a5e0vx.jpg	2	2026-05-25 13:43:20.2977	\N
+7751	142	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664826/ghe-edra-her-egc203-bla_18_cgou1e.jpg	3	2026-05-25 13:43:20.2977	\N
+7752	142	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664834/ghe-edra-her-egc203-bla_19_b2x6nn.jpg	4	2026-05-25 13:43:20.2977	\N
+7753	143	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664941/ghe-warrior-immortal-series-wgc225-blk_01_ox2981.png	1	2026-05-25 13:43:20.2977	\N
+7754	143	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664950/ghe-warrior-immortal-series-wgc225-blk_05_zpq9hm.png	2	2026-05-25 13:43:20.2977	\N
+7755	143	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664957/ghe-warrior-immortal-series-wgc225-blk_06_fk5cjk.png	3	2026-05-25 13:43:20.2977	\N
+7756	143	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664965/ghe-warrior-immortal-series-wgc225-blk_07_iutbxq.png	4	2026-05-25 13:43:20.2977	\N
+7757	144	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665079/ghe-cor-t3-rush-char-2023_01_mf9xyy.png	1	2026-05-25 13:43:20.2977	\N
+7758	145	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665153/ghe-sihoo-m57_01_lbrmpa.png	1	2026-05-25 13:43:20.2977	\N
+7759	145	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665161/ghe-sihoo-m57_04_pu4smo.png	2	2026-05-25 13:43:20.2977	\N
+7760	145	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665168/ghe-sihoo-m57_05_cokrwo.jpg	3	2026-05-25 13:43:20.2977	\N
+7761	146	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665280/ghe-sihoo-m102c_01_sjjmto.png	1	2026-05-25 13:43:20.2977	\N
+7762	146	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665288/ghe-sihoo-m102c_04_v6lygn.png	2	2026-05-25 13:43:20.2977	\N
+7763	146	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665296/ghe-sihoo-m102c_05_giyhio.png	3	2026-05-25 13:43:20.2977	\N
+7764	146	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665304/ghe-sihoo-m102c_06_rk9fez.png	4	2026-05-25 13:43:20.2977	\N
+7765	147	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665374/ghe-cor-tc500-luxe-shadow_01_plozvt.png	1	2026-05-25 13:43:20.2977	\N
+7766	147	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665397/ghe-cor-tc500-luxe-shadow_05_krpw4s.png	2	2026-05-25 13:43:20.2977	\N
+7767	147	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665405/ghe-cor-tc500-luxe-shadow_06_xc8grq.png	3	2026-05-25 13:43:20.2977	\N
+7768	147	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665413/ghe-cor-tc500-luxe-shadow_07_lzq7qg.png	4	2026-05-25 13:43:20.2977	\N
+7769	148	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665520/ghe-edra-egc231-wd-black_01_qms2vl.jpg	1	2026-05-25 13:43:20.2977	\N
+7770	148	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665528/ghe-edra-egc231-wd-black_04_dlsatq.jpg	2	2026-05-25 13:43:20.2977	\N
+7771	148	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665536/ghe-edra-egc231-wd-black_05_e9birm.jpg	3	2026-05-25 13:43:20.2977	\N
+7772	148	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665544/ghe-edra-egc231-wd-black_06_rcr6zn.jpg	4	2026-05-25 13:43:20.2977	\N
+7773	149	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665704/ghe-corsair-tc100-lb-90010050-ww_01_ah2pi7.jpg	1	2026-05-25 13:43:20.2977	\N
+7774	149	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665712/ghe-corsair-tc100-lb-90010050-ww_06_vsxdvf.jpg	2	2026-05-25 13:43:20.2977	\N
+7775	149	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665720/ghe-corsair-tc100-lb-90010050-ww_07_ag7tqo.jpg	3	2026-05-25 13:43:20.2977	\N
+7776	149	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665728/ghe-corsair-tc100-lb-90010050-ww_08_etb56z.jpg	4	2026-05-25 13:43:20.2977	\N
+7777	149	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665736/ghe-corsair-tc100-lb-90010050-ww_09_lqzlkj.jpg	5	2026-05-25 13:43:20.2977	\N
+7778	149	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665744/ghe-corsair-tc100-lb-90010050-ww_10_sizife.jpg	6	2026-05-25 13:43:20.2977	\N
+7779	150	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665858/ghe-razer-iskur-v2-dark-grey-fabric_01_ytqwhc.png	1	2026-05-25 13:43:20.2977	\N
+7780	150	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665866/ghe-razer-iskur-v2-dark-grey-fabric_04_du6fs5.png	2	2026-05-25 13:43:20.2977	\N
+7781	150	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665875/ghe-razer-iskur-v2-dark-grey-fabric_05_yuexlg.png	3	2026-05-25 13:43:20.2977	\N
+7782	150	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665883/ghe-razer-iskur-v2-dark-grey-fabric_06_oax9ci.png	4	2026-05-25 13:43:20.2977	\N
+7783	150	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665891/ghe-razer-iskur-v2-dark-grey-fabric_07_i0xusm.png	5	2026-05-25 13:43:20.2977	\N
+7784	151	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666006/ghe-edra-egc234-black_01_rob8tg.jpg	1	2026-05-25 13:43:20.2977	\N
+7785	151	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666014/ghe-edra-egc234-black_04_wewlyw.jpg	2	2026-05-25 13:43:20.2977	\N
+7786	151	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666022/ghe-edra-egc234-black_05_cbc483.jpg	3	2026-05-25 13:43:20.2977	\N
+7787	151	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666030/ghe-edra-egc234-black_06_wxbzbm.jpg	4	2026-05-25 13:43:20.2977	\N
+7788	151	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666038/ghe-edra-egc234-black_07_torol0.jpg	5	2026-05-25 13:43:20.2977	\N
+7789	152	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666169/ghe-warr-raider-wgc206-whi-pink_01_rfw4cm.jpg	1	2026-05-25 13:43:20.2977	\N
+7790	152	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666177/ghe-warr-raider-wgc206-whi-pink_04_xhkeee.jpg	2	2026-05-25 13:43:20.2977	\N
+7791	152	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666185/ghe-warr-raider-wgc206-whi-pink_05_ozalbx.jpg	3	2026-05-25 13:43:20.2977	\N
+7792	152	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666193/ghe-warr-raider-wgc206-whi-pink_06_hn4srd.jpg	4	2026-05-25 13:43:20.2977	\N
+7793	152	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666201/ghe-warr-raider-wgc206-whi-pink_07_fq5wg2.jpg	5	2026-05-25 13:43:20.2977	\N
+7794	153	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666309/ghe-sihoo-m57b-kc_01_fflhwk.jpg	1	2026-05-25 13:43:20.2977	\N
+7795	153	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666317/ghe-sihoo-m57b-kc_04_lq1crw.jpg	2	2026-05-25 13:43:20.2977	\N
+7796	153	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666326/ghe-sihoo-m57b-kc_05_miwbk2.jpg	3	2026-05-25 13:43:20.2977	\N
+7797	153	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666334/ghe-sihoo-m57b-kc_06_oixqku.jpg	4	2026-05-25 13:43:20.2977	\N
+7798	154	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:20.2977	\N
+7799	155	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666457/ghe-sihoo-m77c-gray_01_xz4rt9.jpg	1	2026-05-25 13:43:20.2977	\N
+7800	155	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666466/ghe-sihoo-m77c-gray_04_v1ma2u.jpg	2	2026-05-25 13:43:20.2977	\N
+7801	155	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666482/ghe-sihoo-m77c-gray_06_ubfyjs.jpg	3	2026-05-25 13:43:20.2977	\N
+7802	155	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666491/ghe-sihoo-m77c-gray_07_dxi8hh.jpg	4	2026-05-25 13:43:20.2977	\N
+7803	155	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666499/ghe-sihoo-m77c-gray_08_wnsgdq.jpg	5	2026-05-25 13:43:20.2977	\N
+7804	156	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666587/ghe-edra-citizen-egc236-fabric_01_vmxm3c.jpg	1	2026-05-25 13:43:20.2977	\N
+7805	156	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666595/ghe-edra-citizen-egc236-fabric_04_oemyzv.jpg	2	2026-05-25 13:43:20.2977	\N
+7806	156	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666603/ghe-edra-citizen-egc236-fabric_05_kvgakx.jpg	3	2026-05-25 13:43:20.2977	\N
+7807	156	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666612/ghe-edra-citizen-egc236-fabric_06_g6g7et.jpg	4	2026-05-25 13:43:20.2977	\N
+7808	156	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666620/ghe-edra-citizen-egc236-fabric_07_lbjsbo.jpg	5	2026-05-25 13:43:20.2977	\N
+7809	157	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666753/ghe-warrior-wgc210-blk-gray_01_mu8nmg.jpg	1	2026-05-25 13:43:20.2977	\N
+7810	157	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666762/ghe-warrior-wgc210-blk-gray_10_raorj3.jpg	2	2026-05-25 13:43:20.2977	\N
+7811	157	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666771/ghe-warrior-wgc210-blk-gray_11_ia7gjd.jpg	3	2026-05-25 13:43:20.2977	\N
+7812	158	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666854/ghe-razer-enki-full-blk-rz38-03720300-r3u1_01_yubxa0.png	1	2026-05-25 13:43:20.2977	\N
+7813	158	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666864/ghe-razer-enki-full-blk-rz38-03720300-r3u1_04_qfnn65.png	2	2026-05-25 13:43:20.2977	\N
+7814	158	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666871/ghe-razer-enki-full-blk-rz38-03720300-r3u1_05_uj0shx.png	3	2026-05-25 13:43:20.2977	\N
+7815	158	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666879/ghe-razer-enki-full-blk-rz38-03720300-r3u1_06_elku1n.png	4	2026-05-25 13:43:20.2977	\N
+7816	159	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673492/lap-acer-swift-x14-sfx14-72g-79uw_01_azryft.png	1	2026-05-25 13:43:20.759093	\N
+7817	160	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673548/lap-acer-aspire-go-ag14-72p-563l_01_nu4lqt.jpg	1	2026-05-25 13:43:20.759093	\N
+7818	160	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673549/lap-acer-aspire-go-ag14-72p-563l_04_vqxarn.jpg	2	2026-05-25 13:43:20.759093	\N
+7819	160	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673549/lap-acer-aspire-go-ag14-72p-563l_05_qlisft.jpg	3	2026-05-25 13:43:20.759093	\N
+7820	160	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673553/lap-acer-aspire-go-ag14-72p-563l_06_ckjmfp.jpg	4	2026-05-25 13:43:20.759093	\N
+7821	160	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673553/lap-acer-aspire-go-ag14-72p-563l_07_jfxkfq.jpg	5	2026-05-25 13:43:20.759093	\N
+7822	160	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673554/lap-acer-aspire-go-ag14-72p-563l_08_ap0sex.jpg	6	2026-05-25 13:43:20.759093	\N
+7823	161	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673682/lap-acer-aspire-go-ag15-72p-54gy_01_yiegxk.jpg	1	2026-05-25 13:43:20.759093	\N
+7824	161	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673682/lap-acer-aspire-go-ag15-72p-54gy_04_wvkvlh.jpg	2	2026-05-25 13:43:20.759093	\N
+7825	161	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673683/lap-acer-aspire-go-ag15-72p-54gy_05_agtevu.jpg	3	2026-05-25 13:43:20.759093	\N
+7826	161	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673683/lap-acer-aspire-go-ag15-72p-54gy_06_qvuehq.jpg	4	2026-05-25 13:43:20.759093	\N
+7827	161	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673683/lap-acer-aspire-go-ag15-72p-54gy_07_khuefa.jpg	5	2026-05-25 13:43:20.759093	\N
+7828	162	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673778/lap-acer-aspire-lite-al15-48p-r5mn_01_yzu4mo.jpg	1	2026-05-25 13:43:20.759093	\N
+7829	162	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673778/lap-acer-aspire-lite-al15-48p-r5mn_04_k5x3hz.jpg	2	2026-05-25 13:43:20.759093	\N
+7830	162	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673781/lap-acer-aspire-lite-al15-48p-r5mn_05_vgjftu.jpg	3	2026-05-25 13:43:20.759093	\N
+7831	162	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673782/lap-acer-aspire-lite-al15-48p-r5mn_06_eeolwg.jpg	4	2026-05-25 13:43:20.759093	\N
+7832	162	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673782/lap-acer-aspire-lite-al15-48p-r5mn_07_lze13w.jpg	5	2026-05-25 13:43:20.759093	\N
+7833	162	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673782/lap-acer-aspire-lite-al15-48p-r5mn_08_u9rbk3.jpg	6	2026-05-25 13:43:20.759093	\N
+7834	163	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673874/lap-acer-aspire-lite-al14-52p-309t_01_ajsfst.jpg	1	2026-05-25 13:43:20.759093	\N
+7835	163	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673875/lap-acer-aspire-lite-al14-52p-309t_04_uczqss.jpg	2	2026-05-25 13:43:20.759093	\N
+7836	163	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673875/lap-acer-aspire-lite-al14-52p-309t_05_igqcmc.jpg	3	2026-05-25 13:43:20.759093	\N
+7837	163	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673875/lap-acer-aspire-lite-al14-52p-309t_06_xdedo5.jpg	4	2026-05-25 13:43:20.759093	\N
+7838	163	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673875/lap-acer-aspire-lite-al14-52p-309t_07_zenhrg.jpg	5	2026-05-25 13:43:20.759093	\N
+7839	163	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673877/lap-acer-aspire-lite-al14-52p-309t_08_fqku0r.jpg	6	2026-05-25 13:43:20.759093	\N
+7840	164	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673969/lap-acer-swift-go-14-ai-sfg14-75-5264_01_wwtbmb.png	1	2026-05-25 13:43:20.759093	\N
+7841	164	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673969/lap-acer-swift-go-14-ai-sfg14-75-5264_04_sx7xeo.png	2	2026-05-25 13:43:20.759093	\N
+7842	164	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673969/lap-acer-swift-go-14-ai-sfg14-75-5264_05_yw3zoc.png	3	2026-05-25 13:43:20.759093	\N
+7843	164	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673970/lap-acer-swift-go-14-ai-sfg14-75-5264_06_xahuey.png	4	2026-05-25 13:43:20.759093	\N
+7844	164	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673970/lap-acer-swift-go-14-ai-sfg14-75-5264_07_xhbpx6.png	5	2026-05-25 13:43:20.759093	\N
+7845	165	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674080/lap-acer-aspire-go-15-ag15-71p-58x1_01_ewecbp.png	1	2026-05-25 13:43:20.759093	\N
+7846	165	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674082/lap-acer-aspire-go-15-ag15-71p-58x1_04_sdhunm.png	2	2026-05-25 13:43:20.759093	\N
+7847	165	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674083/lap-acer-aspire-go-15-ag15-71p-58x1_05_uognmd.png	3	2026-05-25 13:43:20.759093	\N
+7848	165	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674084/lap-acer-aspire-go-15-ag15-71p-58x1_06_b0utzs.png	4	2026-05-25 13:43:20.759093	\N
+7849	165	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674084/lap-acer-aspire-go-15-ag15-71p-58x1_07_rt4f8s.png	5	2026-05-25 13:43:20.759093	\N
+7850	166	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674178/lap-acer-aspire-16-ai-a16-71m-71u7_01_bhogaz.png	1	2026-05-25 13:43:20.759093	\N
+7851	166	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674178/lap-acer-aspire-16-ai-a16-71m-71u7_04_gqndgf.png	2	2026-05-25 13:43:20.759093	\N
+7852	166	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674179/lap-acer-aspire-16-ai-a16-71m-71u7_05_hevzl3.png	3	2026-05-25 13:43:20.759093	\N
+7853	166	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674179/lap-acer-aspire-16-ai-a16-71m-71u7_06_hztmob.png	4	2026-05-25 13:43:20.759093	\N
+7854	166	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674180/lap-acer-aspire-16-ai-a16-71m-71u7_07_yxct1c.png	5	2026-05-25 13:43:20.759093	\N
+7855	166	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674181/lap-acer-aspire-16-ai-a16-71m-71u7_08_gryo6b.png	6	2026-05-25 13:43:20.759093	\N
+7856	167	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674296/lap-acer-aspire-14-ai-a14-61m-r9ra_01_d902ps.png	1	2026-05-25 13:43:20.759093	\N
+7857	167	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674296/lap-acer-aspire-14-ai-a14-61m-r9ra_04_xzwz1x.png	2	2026-05-25 13:43:20.759093	\N
+7858	167	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674297/lap-acer-aspire-14-ai-a14-61m-r9ra_05_oo9eyt.png	3	2026-05-25 13:43:20.759093	\N
+7859	167	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674298/lap-acer-aspire-14-ai-a14-61m-r9ra_06_c7pwec.png	4	2026-05-25 13:43:20.759093	\N
+7860	168	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674382/lap-acer-aspire-lite-14-al14-71p-55p9_01_mebt11.png	1	2026-05-25 13:43:20.759093	\N
+7861	168	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674382/lap-acer-aspire-lite-14-al14-71p-55p9_04_naubrv.png	2	2026-05-25 13:43:20.759093	\N
+7862	168	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674383/lap-acer-aspire-lite-14-al14-71p-55p9_05_lgotxz.png	3	2026-05-25 13:43:20.759093	\N
+7863	168	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674384/lap-acer-aspire-lite-14-al14-71p-55p9_06_qox1yh.png	4	2026-05-25 13:43:20.759093	\N
+7864	168	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674385/lap-acer-aspire-lite-14-al14-71p-55p9_07_sfztdf.png	5	2026-05-25 13:43:20.759093	\N
+7865	168	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674386/lap-acer-aspire-lite-14-al14-71p-55p9_08_sxshb1.png	6	2026-05-25 13:43:20.759093	\N
+7866	168	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674387/lap-acer-aspire-lite-14-al14-71p-55p9_09_nngorr.png	7	2026-05-25 13:43:20.759093	\N
+7867	169	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674474/lap-acer-aspire-lite-al15-72p-581v_01_gbl6ys.png	1	2026-05-25 13:43:20.759093	\N
+7868	169	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674475/lap-acer-aspire-lite-al15-72p-581v_04_vkfnl4.png	2	2026-05-25 13:43:20.759093	\N
+7869	169	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674475/lap-acer-aspire-lite-al15-72p-581v_05_yvgaxf.png	3	2026-05-25 13:43:20.759093	\N
+7870	169	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674476/lap-acer-aspire-lite-al15-72p-581v_06_dusraj.png	4	2026-05-25 13:43:20.759093	\N
+7871	170	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674547/lap-acer-aspire-go-ag14-71m-57wr_01_gsyeqv.png	1	2026-05-25 13:43:20.759093	\N
+7872	170	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674548/lap-acer-aspire-go-ag14-71m-57wr_04_e24rmh.png	2	2026-05-25 13:43:20.759093	\N
+7873	171	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674610/lap-acer-swift-go-sfg14-74t-55hd_01_utgnq6.png	1	2026-05-25 13:43:20.759093	\N
+7874	172	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674665/lap-acer-aspire-lite-16-al16-52p-76du_01_vxbvpb.png	1	2026-05-25 13:43:20.759093	\N
+7875	173	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674733/lap-acer-aspire-lite-15-al15-41p-r3u5_01_qaujyz.png	1	2026-05-25 13:43:20.759093	\N
+7876	174	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675320/lap-acer-aspire-5-a515-58p-9841_01_fjqiiw.png	1	2026-05-25 13:43:20.759093	\N
+7877	175	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675388/lap-acer-swift-lite-14-sfl14-51m-56hs_01_slptm2.jpg	1	2026-05-25 13:43:20.759093	\N
+7878	176	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675453/lap-acer-swift-14-sf14-51-53p9_01_sopd8a.png	1	2026-05-25 13:43:20.759093	\N
+7879	177	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675520/lap-acer-swift-go-14-sfg14-73-57fz_01_mwwd6x.png	1	2026-05-25 13:43:20.759093	\N
+7880	178	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675577/lap-acer-swift-x14-sfx14-71g-78sy_01_adyw0q.png	1	2026-05-25 13:43:20.759093	\N
+7881	179	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	1	2026-05-25 13:43:20.759093	\N
+7882	180	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675710/lap-acer-swift-go-sfg14-i71-70rp_01_hzpids.jpg	1	2026-05-25 13:43:20.759093	\N
+7883	180	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675712/lap-acer-swift-go-sfg14-i71-70rp_05_qnwyag.jpg	2	2026-05-25 13:43:20.759093	\N
+7884	180	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675721/lap-acer-swift-go-sfg14-i71-70rp_06_nmreul.jpg	3	2026-05-25 13:43:20.759093	\N
+7885	180	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675723/lap-acer-swift-go-sfg14-i71-70rp_07_wgkev9.jpg	4	2026-05-25 13:43:20.759093	\N
+7886	180	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675724/lap-acer-swift-go-sfg14-i71-70rp_08_yqyul7.jpg	5	2026-05-25 13:43:20.759093	\N
+7887	180	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675726/lap-acer-swift-go-sfg14-i71-70rp_09_h9p4rk.jpg	6	2026-05-25 13:43:20.759093	\N
+7888	181	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675907/lap-acer-aspire-lite-al16-71p-582q_01_j12lcr.jpg	1	2026-05-25 13:43:20.759093	\N
+7889	181	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675908/lap-acer-aspire-lite-al16-71p-582q_04_wt6cg8.jpg	2	2026-05-25 13:43:20.759093	\N
+7890	181	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675945/lap-acer-aspire-lite-al16-71p-582q_05_b4973l.jpg	3	2026-05-25 13:43:20.759093	\N
+7891	181	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675946/lap-acer-aspire-lite-al16-71p-582q_06_r1yofc.jpg	4	2026-05-25 13:43:20.759093	\N
+7892	181	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675948/lap-acer-aspire-lite-al16-71p-582q_07_ajxhlr.jpg	5	2026-05-25 13:43:20.759093	\N
+7893	181	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675949/lap-acer-aspire-lite-al16-71p-582q_08_opnr45.jpg	6	2026-05-25 13:43:20.759093	\N
+7894	182	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676081/lap-acer-aspire-go-ag15-52p-52wt_01_rd5ere.jpg	1	2026-05-25 13:43:20.759093	\N
+7895	182	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676082/lap-acer-aspire-go-ag15-52p-52wt_04_w8dami.jpg	2	2026-05-25 13:43:20.759093	\N
+7896	182	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676084/lap-acer-aspire-go-ag15-52p-52wt_05_ji23ju.jpg	3	2026-05-25 13:43:20.759093	\N
+7897	182	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676086/lap-acer-aspire-go-ag15-52p-52wt_06_taxwwf.jpg	4	2026-05-25 13:43:20.759093	\N
+7898	182	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676088/lap-acer-aspire-go-ag15-52p-52wt_07_mgplgq.jpg	5	2026-05-25 13:43:20.759093	\N
+7899	182	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676132/lap-acer-aspire-go-ag15-52p-52wt_08_rfsudn.jpg	6	2026-05-25 13:43:20.759093	\N
+7900	182	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676140/lap-acer-aspire-go-ag15-52p-52wt_09_psyqhk.jpg	7	2026-05-25 13:43:20.759093	\N
+7901	183	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676279/lap-acer-aspire-go-ag14-i71m-50al_01_vszu3a.jpg	1	2026-05-25 13:43:20.759093	\N
+7902	183	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676281/lap-acer-aspire-go-ag14-i71m-50al_04_sycajq.jpg	2	2026-05-25 13:43:20.759093	\N
+7903	183	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676284/lap-acer-aspire-go-ag14-i71m-50al_05_ygjzbn.jpg	3	2026-05-25 13:43:20.759093	\N
+7904	183	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676286/lap-acer-aspire-go-ag14-i71m-50al_06_mw7yd7.jpg	4	2026-05-25 13:43:20.759093	\N
+7905	183	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676303/lap-acer-aspire-go-ag14-i71m-50al_07_rox9ey.jpg	5	2026-05-25 13:43:20.759093	\N
+7906	183	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676304/lap-acer-aspire-go-ag14-i71m-50al_08_fackvw.jpg	6	2026-05-25 13:43:20.759093	\N
+7907	184	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676403/lap-acer-aspire-lite-al15-53p-56qh_01_bgvgcm.jpg	1	2026-05-25 13:43:20.759093	\N
+7908	184	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676420/lap-acer-aspire-lite-al15-53p-56qh_04_kdpwam.jpg	2	2026-05-25 13:43:20.759093	\N
+7909	184	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676422/lap-acer-aspire-lite-al15-53p-56qh_05_xahbwb.jpg	3	2026-05-25 13:43:20.759093	\N
+7910	184	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676425/lap-acer-aspire-lite-al15-53p-56qh_06_omxfqm.jpg	4	2026-05-25 13:43:20.759093	\N
+7911	184	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676426/lap-acer-aspire-lite-al15-53p-56qh_07_n0yjke.jpg	5	2026-05-25 13:43:20.759093	\N
+7912	184	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676428/lap-acer-aspire-lite-al15-53p-56qh_08_u9os9l.jpg	6	2026-05-25 13:43:20.759093	\N
+7913	185	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676518/lap-acer-aspire-lite-al15-44p-r4uh_01_klhjfk.jpg	1	2026-05-25 13:43:20.759093	\N
+7914	185	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676520/lap-acer-aspire-lite-al15-44p-r4uh_04_ktojvj.jpg	2	2026-05-25 13:43:20.759093	\N
+7915	185	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676522/lap-acer-aspire-lite-al15-44p-r4uh_05_cip02i.jpg	3	2026-05-25 13:43:20.759093	\N
+7916	185	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676545/lap-acer-aspire-lite-al15-44p-r4uh_06_wnjkcn.jpg	4	2026-05-25 13:43:20.759093	\N
+7917	185	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676547/lap-acer-aspire-lite-al15-44p-r4uh_07_xrthpm.jpg	5	2026-05-25 13:43:20.759093	\N
+7918	186	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676658/lap-acer-aspire-lite-al15-21p-r91w_01_cojgrd.jpg	1	2026-05-25 13:43:20.759093	\N
+7919	186	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676675/lap-acer-aspire-lite-al15-21p-r91w_04_fgmdt1.jpg	2	2026-05-25 13:43:20.759093	\N
+7920	186	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676702/lap-acer-aspire-lite-al15-21p-r91w_05_vcwnml.jpg	3	2026-05-25 13:43:20.759093	\N
+7921	186	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676773/lap-acer-aspire-lite-al15-21p-r91w_06_n56fu6.jpg	4	2026-05-25 13:43:20.759093	\N
+7922	187	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676867/lap-acer-aspire-lite-al14-44p-r0sp_01_jlcjif.jpg	1	2026-05-25 13:43:20.759093	\N
+7923	187	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676869/lap-acer-aspire-lite-al14-44p-r0sp_04_zpdgkl.jpg	2	2026-05-25 13:43:20.759093	\N
+7924	187	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676871/lap-acer-aspire-lite-al14-44p-r0sp_05_bdrraq.jpg	3	2026-05-25 13:43:20.759093	\N
+7925	187	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676873/lap-acer-aspire-lite-al14-44p-r0sp_06_n7kobq.jpg	4	2026-05-25 13:43:20.759093	\N
+7926	187	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676874/lap-acer-aspire-lite-al14-44p-r0sp_07_yv7zib.jpg	5	2026-05-25 13:43:20.759093	\N
+7927	187	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676876/lap-acer-aspire-lite-al14-44p-r0sp_08_pzutqu.jpg	6	2026-05-25 13:43:20.759093	\N
+7928	188	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677055/lap-acer-aspire-lite-al15-36p-30tn_01_cwkoeq.jpg	1	2026-05-25 13:43:20.759093	\N
+7929	188	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677057/lap-acer-aspire-lite-al15-36p-30tn_04_dbzigm.jpg	2	2026-05-25 13:43:20.759093	\N
+7930	188	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677071/lap-acer-aspire-lite-al15-36p-30tn_05_nujyth.jpg	3	2026-05-25 13:43:20.759093	\N
+7931	188	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677103/lap-acer-aspire-lite-al15-36p-30tn_06_iby1qq.jpg	4	2026-05-25 13:43:20.759093	\N
+7932	188	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677111/lap-acer-aspire-lite-al15-36p-30tn_07_feix0y.jpg	5	2026-05-25 13:43:20.759093	\N
+7933	188	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677113/lap-acer-aspire-lite-al15-36p-30tn_08_bv0wql.jpg	6	2026-05-25 13:43:20.759093	\N
+7934	189	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677233/lap-acer-aspire-lite-al14-45p-r7z3_01_dko84a.jpg	1	2026-05-25 13:43:20.759093	\N
+7935	189	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677235/lap-acer-aspire-lite-al14-45p-r7z3_04_syhmn4.jpg	2	2026-05-25 13:43:20.759093	\N
+7936	189	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677237/lap-acer-aspire-lite-al14-45p-r7z3_05_j6fowo.jpg	3	2026-05-25 13:43:20.759093	\N
+7937	189	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677240/lap-acer-aspire-lite-al14-45p-r7z3_06_ws7e54.jpg	4	2026-05-25 13:43:20.759093	\N
+7938	189	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677242/lap-acer-aspire-lite-al14-45p-r7z3_07_fmy4d1.jpg	5	2026-05-25 13:43:20.759093	\N
+7939	189	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677244/lap-acer-aspire-lite-al14-45p-r7z3_08_djdbfa.jpg	6	2026-05-25 13:43:20.759093	\N
+7940	190	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677396/lap-acer-aspire-lite-al15-46p-r73c_01_srqqqw.jpg	1	2026-05-25 13:43:20.759093	\N
+7941	190	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677419/lap-acer-aspire-lite-al15-46p-r73c_04_oqp4lr.jpg	2	2026-05-25 13:43:20.759093	\N
+7942	190	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677421/lap-acer-aspire-lite-al15-46p-r73c_05_xjfndv.jpg	3	2026-05-25 13:43:20.759093	\N
+7943	190	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677423/lap-acer-aspire-lite-al15-46p-r73c_06_kcsbg8.jpg	4	2026-05-25 13:43:20.759093	\N
+7944	190	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677425/lap-acer-aspire-lite-al15-46p-r73c_07_cz96mv.jpg	5	2026-05-25 13:43:20.759093	\N
+7945	190	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677429/lap-acer-aspire-lite-al15-46p-r73c_08_zunnz8.jpg	6	2026-05-25 13:43:20.759093	\N
+7946	190	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677432/lap-acer-aspire-lite-al15-46p-r73c_09_nwjeu2.jpg	7	2026-05-25 13:43:20.759093	\N
+7947	191	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677559/lap-acer-swift-edge-sfe14-51t-52kd_01_mosa0p.jpg	1	2026-05-25 13:43:20.759093	\N
+7948	191	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677565/lap-acer-swift-edge-sfe14-51t-52kd_04_oazko6.jpg	2	2026-05-25 13:43:20.759093	\N
+7949	191	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677567/lap-acer-swift-edge-sfe14-51t-52kd_05_qa6gvt.jpg	3	2026-05-25 13:43:20.759093	\N
+7950	191	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677570/lap-acer-swift-edge-sfe14-51t-52kd_06_jhdave.jpg	4	2026-05-25 13:43:20.759093	\N
+7951	191	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677582/lap-acer-swift-edge-sfe14-51t-52kd_07_txfur4.jpg	5	2026-05-25 13:43:20.759093	\N
+7952	192	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677674/lap-acer-aspire-lite-al15-42p-r8e6_01_jdbnxa.jpg	1	2026-05-25 13:43:20.759093	\N
+7953	192	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677677/lap-acer-aspire-lite-al15-42p-r8e6_04_hwhxxx.jpg	2	2026-05-25 13:43:20.759093	\N
+7954	192	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677680/lap-acer-aspire-lite-al15-42p-r8e6_05_qsphia.jpg	3	2026-05-25 13:43:20.759093	\N
+7955	192	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677686/lap-acer-aspire-lite-al15-42p-r8e6_06_v1sdel.jpg	4	2026-05-25 13:43:20.759093	\N
+7956	192	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677688/lap-acer-aspire-lite-al15-42p-r8e6_08_fqvuvd.jpg	5	2026-05-25 13:43:20.759093	\N
+7957	193	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677772/lap-acer-a5-a515-58m-79r7_01_gfxnzz.png	1	2026-05-25 13:43:20.759093	\N
+7958	194	\N	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677873/lap-acer-a5-a514-56p-562p_01_iukjtq.png	1	2026-05-25 13:43:20.759093	\N
 \.
 
 
 --
--- TOC entry 5351 (class 0 OID 16681)
+-- TOC entry 5352 (class 0 OID 16681)
 -- Dependencies: 253
 -- Data for Name: product_reviews; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1532,7 +2140,7 @@ COPY public.product_reviews (id, user_id, product_id, order_item_id, rating, com
 
 
 --
--- TOC entry 5353 (class 0 OID 16700)
+-- TOC entry 5354 (class 0 OID 16700)
 -- Dependencies: 255
 -- Data for Name: product_specifications; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1748,11 +2356,1546 @@ COPY public.product_specifications (id, product_id, specification_key_id, value,
 208	22	7	144Hz	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
 209	22	8	1ms GTG	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
 210	22	9	100 x 100 mm	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
+211	29	16	AULA	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+212	29	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+213	29	18	75%	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+214	29	19	Reaper Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+215	29	20	Có dây / không dây	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+216	29	21	RGB	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+217	29	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+218	29	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+219	30	16	ASUS	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+220	30	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+221	30	18	Fullsize	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+222	30	19	ROG NX Snow	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+223	30	20	USB Type-C	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+224	30	21	AURA Sync RGB	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+225	30	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+226	30	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+227	31	16	AKKO	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+228	31	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+229	31	18	Fullsize 108 phím	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+230	31	19	Akko Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+231	31	20	Wireless / USB Type-C	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+232	31	21	Không LED	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+233	31	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+234	31	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+235	32	16	AKKO	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+236	32	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+237	32	18	Fullsize 108 phím	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+238	32	19	Akko Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+239	32	20	Wireless / USB Type-C	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+240	32	21	Không LED	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+241	32	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+242	32	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+243	33	16	AKKO	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+244	33	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+245	33	18	Fullsize 108 phím	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+246	33	19	Akko Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+247	33	20	Wireless / USB Type-C	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+248	33	21	Không LED	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+249	33	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+250	33	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+251	34	16	Logitech	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+252	34	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+253	34	18	TKL	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+254	34	19	Tactile Low Profile	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+255	34	20	Lightspeed / Bluetooth / USB-C	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+256	34	21	RGB	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+257	34	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+258	34	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+259	35	16	AKKO	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+260	35	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+261	35	18	TKL	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+262	35	19	Akko V3 Piano Pro	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+263	35	20	Bluetooth / 2.4GHz / USB-C	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+264	35	21	RGB	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+265	35	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+266	35	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+267	36	16	E-Dra	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+268	36	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+269	36	18	Fullsize	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+270	36	19	Red Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+271	36	20	USB / 2.4GHz / Bluetooth	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+272	36	21	LED	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+273	36	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+274	36	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+275	37	16	E-Dra	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+276	37	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+277	37	18	75%	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+278	37	19	Red Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+279	37	20	USB / 2.4GHz / Bluetooth	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+280	37	21	LED	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+281	37	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+282	37	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+283	38	16	AULA	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+284	38	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+285	38	18	98 phím	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+286	38	19	Star Vector Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+287	38	20	Có dây / không dây	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+288	38	21	RGB	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+289	38	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+290	38	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+291	39	16	AULA	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+292	39	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+293	39	18	100 phím	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+294	39	19	Red Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+295	39	20	Có dây / không dây	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+296	39	21	Rainbow LED	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+297	39	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+298	39	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+299	40	16	Veekos	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+300	40	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+301	40	18	75%	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+302	40	19	Mechanical Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+303	40	20	USB Type-C	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+304	40	21	RGB	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+305	40	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+306	40	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+307	41	16	AULA	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+308	41	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+309	41	18	60%	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+310	41	19	Aether Magnetic Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+311	41	20	USB Type-C	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+312	41	21	RGB	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+313	41	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+314	41	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+315	42	16	ASUS	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+316	42	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+317	42	18	96%	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+318	42	19	Optical Mechanical Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+319	42	20	USB	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+320	42	21	Aura Sync RGB	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+321	42	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+322	42	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+323	43	16	AKKO	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+324	43	17	24 tháng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+325	43	18	Alice Layout	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+326	43	19	AKKO CS Switch	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+327	43	20	USB Type-C	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+328	43	21	RGB	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+329	43	22	Bàn phím cơ	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+330	43	23	Còn hàng	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+331	44	24	Rapoo	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+332	44	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+333	44	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+334	44	27	Có dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+335	44	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+336	44	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+337	44	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+338	44	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+339	45	24	ASUS	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+340	45	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+341	45	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+342	45	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+343	45	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+344	45	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+345	45	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+346	45	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+347	46	24	ASUS	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+348	46	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+349	46	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+350	46	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+351	46	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+352	46	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+353	46	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+354	46	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+355	47	24	ASUS	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+356	47	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+357	47	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+358	47	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+359	47	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+360	47	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+361	47	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+362	47	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+363	48	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+364	48	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+365	48	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+366	48	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+367	48	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+368	48	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+369	48	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+370	48	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+371	49	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+372	49	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+373	49	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+374	49	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+375	49	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+376	49	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+377	49	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+378	49	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+379	50	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+380	50	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+381	50	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+382	50	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+383	50	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+384	50	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+385	50	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+386	50	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+387	51	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+388	51	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+389	51	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+390	51	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+391	51	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+392	51	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+393	51	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+394	51	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+395	52	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+396	52	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+397	52	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+398	52	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+399	52	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+400	52	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+401	52	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+402	52	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+403	53	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+404	53	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+405	53	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+406	53	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+407	53	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+408	53	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+409	53	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+410	53	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+411	54	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+412	54	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+413	54	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+414	54	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+415	54	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+416	54	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+417	54	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+418	54	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+419	55	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+420	55	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+421	55	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+422	55	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+423	55	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+424	55	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+425	55	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+426	55	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+427	56	24	ACER	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+428	56	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+429	56	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+430	56	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+431	56	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+432	56	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+433	56	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+434	56	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+435	57	24	ACER	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+436	57	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+437	57	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+438	57	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+439	57	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+440	57	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+441	57	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+442	57	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+443	58	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+444	58	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+445	58	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+446	58	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+447	58	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+448	58	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+449	58	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+450	58	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+451	59	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+452	59	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+453	59	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+454	59	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+455	59	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+456	59	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+457	59	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+458	59	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+459	60	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+460	60	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+461	60	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+462	60	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+463	60	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+464	60	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+465	60	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+466	60	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+467	61	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+468	61	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+469	61	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+470	61	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+471	61	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+472	61	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+473	61	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+474	61	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+475	62	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+476	62	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+477	62	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+478	62	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+479	62	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+480	62	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+481	62	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+482	62	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+483	63	24	DareU	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+484	63	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+485	63	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+486	63	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+487	63	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+488	63	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+489	63	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+490	63	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+491	64	24	DareU	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+492	64	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+493	64	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+494	64	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+495	64	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+496	64	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+497	64	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+498	64	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+499	65	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+500	65	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+501	65	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+502	65	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+503	65	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+504	65	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+505	65	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+506	65	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+507	66	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+508	66	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+509	66	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+510	66	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+511	66	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+512	66	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+513	66	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+514	66	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+515	67	24	ASUS	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+516	67	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+517	67	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+518	67	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+519	67	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+520	67	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+521	67	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+522	67	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+523	68	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+524	68	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+525	68	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+526	68	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+527	68	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+528	68	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+529	68	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+530	68	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+531	69	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+532	69	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+533	69	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+534	69	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+535	69	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+536	69	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+537	69	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+538	69	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+539	70	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+540	70	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+541	70	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+542	70	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+543	70	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+544	70	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+545	70	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+546	70	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+547	71	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+548	71	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+549	71	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+550	71	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+551	71	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+552	71	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+553	71	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+554	71	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+555	72	24	ASUS	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+556	72	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+557	72	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+558	72	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+559	72	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+560	72	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+561	72	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+562	72	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+563	73	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+564	73	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+565	73	26	Chuột văn phòng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+566	73	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+567	73	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+568	73	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+569	73	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+570	73	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+571	74	24	ASUS	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+572	74	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+573	74	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+574	74	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+575	74	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+576	74	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+577	74	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+578	74	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+579	75	24	DareU	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+580	75	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+581	75	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+582	75	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+583	75	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+584	75	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+585	75	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+586	75	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+587	76	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+588	76	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+589	76	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+590	76	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+591	76	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+592	76	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+593	76	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+594	76	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+595	77	24	DareU	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+596	77	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+597	77	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+598	77	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+599	77	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+600	77	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+601	77	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+602	77	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+603	78	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+604	78	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+605	78	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+606	78	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+607	78	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+608	78	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+609	78	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+610	78	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+611	79	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+612	79	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+613	79	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+614	79	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+615	79	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+616	79	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+617	79	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+618	79	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+619	80	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+620	80	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+621	80	26	Chuột văn phòng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+622	80	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+623	80	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+624	80	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+625	80	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+626	80	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+627	81	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+628	81	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+629	81	26	Chuột văn phòng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+630	81	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+631	81	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+632	81	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+633	81	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+634	81	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+635	82	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+636	82	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+637	82	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+638	82	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+639	82	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+640	82	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+641	82	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+642	82	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+643	83	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+644	83	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+645	83	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+646	83	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+647	83	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+648	83	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+649	83	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+650	83	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+651	84	24	Razer	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+652	84	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+653	84	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+654	84	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+655	84	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+656	84	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+657	84	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+658	84	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+659	85	24	ASUS	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+660	85	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+661	85	26	Chuột gaming	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+662	85	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+663	85	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+664	85	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+665	85	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+666	85	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+667	86	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+668	86	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+669	86	26	Chuột văn phòng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+670	86	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+671	86	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+672	86	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+673	86	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+674	86	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+675	87	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+676	87	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+677	87	26	Chuột văn phòng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+678	87	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+679	87	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+680	87	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+681	87	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+682	87	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+683	88	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+684	88	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+685	88	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+686	88	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+687	88	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+688	88	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+689	88	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+690	88	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+691	89	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+692	89	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+693	89	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+694	89	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+695	89	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+696	89	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+697	89	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+698	89	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+699	90	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+700	90	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+701	90	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+702	90	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+703	90	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+704	90	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+705	90	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+706	90	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+707	91	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+708	91	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+709	91	26	Chuột văn phòng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+710	91	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+711	91	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+712	91	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+713	91	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+714	91	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+715	92	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+716	92	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+717	92	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+718	92	27	Không dây	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+719	92	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+720	92	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+721	92	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+722	92	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+723	93	24	Logitech	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+724	93	25	24 tháng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+725	93	26	Chuột máy tính	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+726	93	27	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+727	93	28	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+728	93	29	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+729	93	30	Đang cập nhật	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+730	93	31	Còn hàng	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+731	94	32	HyperX	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+732	94	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+733	94	34	Tai nghe in-ear	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+734	94	35	Có dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+735	94	36	Micro tích hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+736	94	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+737	94	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+738	94	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+739	95	32	Logitech	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+740	95	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+741	95	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+742	95	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+743	95	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+744	95	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+745	95	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+746	95	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+747	96	32	ACER	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+748	96	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+749	96	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+750	96	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+751	96	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+752	96	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+753	96	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+754	96	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+755	97	32	AKKO	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+756	97	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+757	97	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+758	97	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+759	97	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+760	97	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+761	97	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+762	97	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+763	98	32	AKKO	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+764	98	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+765	98	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+766	98	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+767	98	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+768	98	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+769	98	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+770	98	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+771	99	32	Logitech	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+772	99	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+773	99	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+774	99	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+775	99	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+776	99	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+777	99	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+778	99	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+779	100	32	Razer	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+780	100	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+781	100	34	Tai nghe in-ear	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+782	100	35	Có dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+783	100	36	Micro tích hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+784	100	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+785	100	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+786	100	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+787	101	32	ASUS	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+788	101	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+789	101	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+790	101	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+791	101	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+792	101	37	RGB	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+793	101	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+794	101	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+795	102	32	ASUS	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+796	102	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+797	102	34	Tai nghe in-ear	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+798	102	35	Có dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+799	102	36	Micro tích hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+800	102	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+801	102	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+802	102	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+803	103	32	Logitech	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+804	103	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+805	103	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+806	103	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+807	103	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+808	103	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+809	103	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+810	103	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+811	104	32	Razer	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+812	104	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+813	104	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+814	104	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+815	104	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+816	104	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+817	104	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+818	104	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+819	105	32	HyperX	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+820	105	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+821	105	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+822	105	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+823	105	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+824	105	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+825	105	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+826	105	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+827	106	32	Razer	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+828	106	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+829	106	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+830	106	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+831	106	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+832	106	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+833	106	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+834	106	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+835	107	32	DareU	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+836	107	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+837	107	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+838	107	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+839	107	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+840	107	37	RGB	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+841	107	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+842	107	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+843	108	32	Logitech	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+844	108	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+845	108	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+846	108	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+847	108	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+848	108	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+849	108	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+850	108	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+851	109	32	Logitech	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+852	109	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+853	109	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+854	109	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+855	109	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+856	109	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+857	109	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+858	109	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+859	110	32	Corsair	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+860	110	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+861	110	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+862	110	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+863	110	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+864	110	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+865	110	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+866	110	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+867	111	32	Rapoo	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+868	111	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+869	111	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+870	111	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+871	111	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+872	111	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+873	111	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+874	111	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+875	112	32	Razer	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+876	112	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+877	112	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+878	112	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+879	112	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+880	112	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+881	112	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+882	112	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+883	113	32	HyperX	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+884	113	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+885	113	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+886	113	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+887	113	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+888	113	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+889	113	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+890	113	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+891	114	32	MSI	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+892	114	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+893	114	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+894	114	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+895	114	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+896	114	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+897	114	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+898	114	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+899	115	32	Logitech	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+900	115	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+901	115	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+902	115	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+903	115	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+904	115	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+905	115	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+906	115	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+907	116	32	Logitech	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+908	116	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+909	116	34	Tai nghe in-ear	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+910	116	35	Có dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+911	116	36	Micro tích hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+912	116	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+913	116	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+914	116	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+915	117	32	Razer	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+916	117	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+917	117	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+918	117	35	USB	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+919	117	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+920	117	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+921	117	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+922	117	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+923	118	32	DareU	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+924	118	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+925	118	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+926	118	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+927	118	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+928	118	37	RGB	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1014	129	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+929	118	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+930	118	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+931	119	32	E-Dra	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+932	119	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+933	119	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+934	119	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+935	119	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+936	119	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+937	119	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+938	119	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+939	120	32	HyperX	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+940	120	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+941	120	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+942	120	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+943	120	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+944	120	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+945	120	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+946	120	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+947	121	32	Razer	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+948	121	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+949	121	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+950	121	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+951	121	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+952	121	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+953	121	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+954	121	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+955	122	32	Logitech	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+956	122	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+957	122	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+958	122	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+959	122	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+960	122	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+961	122	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+962	122	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+963	123	32	Soundpeats	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+964	123	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+965	123	34	Tai nghe in-ear	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+966	123	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+967	123	36	Micro tích hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+968	123	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+969	123	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+970	123	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+971	124	32	Corsair	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+972	124	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+973	124	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+974	124	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+975	124	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+976	124	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+977	124	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+978	124	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+979	125	32	Corsair	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+980	125	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+981	125	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+982	125	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+983	125	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+984	125	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+985	125	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+986	125	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+987	126	32	Steelseries	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+988	126	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+989	126	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+990	126	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+991	126	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+992	126	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+993	126	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+994	126	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+995	127	32	ONIKUMA	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+996	127	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+997	127	34	Tai nghe in-ear	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+998	127	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+999	127	36	Micro tích hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1000	127	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1001	127	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1002	127	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1003	128	32	ONIKUMA	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1004	128	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1005	128	34	Tai nghe in-ear	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1006	128	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1007	128	36	Micro tích hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1008	128	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1009	128	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1010	128	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1011	129	32	Razer	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1012	129	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1013	129	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1015	129	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1016	129	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1017	129	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1018	129	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1019	130	32	HyperX	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1020	130	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1021	130	34	Tai nghe gaming	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1022	130	35	Không dây	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1023	130	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1024	130	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1025	130	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1026	130	39	Hết hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1027	131	32	E-Dra	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1028	131	33	24 tháng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1029	131	34	Tai nghe máy tính	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1030	131	35	Có dây / Không dây tùy phiên bản	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1031	131	36	Có micro	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1032	131	37	Không	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1033	131	38	PC, laptop, điện thoại và thiết bị chơi game hỗ trợ kết nối phù hợp	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1034	131	39	Còn hàng	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+1035	132	40	Warrior	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1036	132	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1037	132	42	Ghế công thái học	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1038	132	43	Đen	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1039	132	44	Lưới thoáng khí	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1040	132	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1041	132	46	Tối đa khoảng 120kg - 150kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1042	132	47	Class 3 / Class 4	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1043	132	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1044	133	40	Warrior	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1045	133	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1046	133	42	Ghế công thái học	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1047	133	43	Xám	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1048	133	44	Lưới thoáng khí	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1049	133	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1050	133	46	Tối đa khoảng 120kg - 150kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1051	133	47	Class 3 / Class 4	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1052	133	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1053	134	40	Razer	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1054	134	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1055	134	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1056	134	43	Đen xanh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1057	134	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1058	134	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1059	134	46	Tối đa khoảng 136kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1060	134	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1061	134	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1062	135	40	E-Dra	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1063	135	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1064	135	42	Ghế công thái học	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1065	135	43	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1066	135	44	Lưới thoáng khí	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1067	135	45	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1068	135	46	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1069	135	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1070	135	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1071	136	40	Razer	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1072	136	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1073	136	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1074	136	43	Đen xanh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1075	136	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1076	136	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1077	136	46	Tối đa khoảng 136kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1078	136	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1079	136	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1080	137	40	Razer	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1081	137	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1082	137	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1083	137	43	Xám	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1084	137	44	Vải	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1085	137	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1086	137	46	Tối đa khoảng 136kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1087	137	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1088	137	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1089	138	40	Warrior	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1090	138	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1091	138	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1092	138	43	Đen	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1093	138	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1094	138	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1095	138	46	Tối đa khoảng 120kg - 150kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1096	138	47	Class 3 / Class 4	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1097	138	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1098	139	40	E-Dra	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1099	139	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1100	139	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1101	139	43	Đen đỏ	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1102	139	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1103	139	45	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1104	139	46	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1105	139	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1106	139	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1107	140	40	Warrior	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1108	140	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1109	140	42	Ghế công thái học	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1110	140	43	Đen	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1111	140	44	Lưới thoáng khí	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1112	140	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1113	140	46	Tối đa khoảng 120kg - 150kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1114	140	47	Class 3 / Class 4	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1115	140	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1116	141	40	Warrior	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1117	141	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1118	141	42	Ghế công thái học	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1119	141	43	Đen đỏ	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1120	141	44	Lưới thoáng khí	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1121	141	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1122	141	46	Tối đa khoảng 120kg - 150kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1123	141	47	Class 3 / Class 4	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1124	141	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1125	142	40	E-Dra	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1126	142	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1127	142	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1128	142	43	Đen	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1129	142	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1130	142	45	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1131	142	46	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1132	142	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1133	142	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1134	143	40	Warrior	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1135	143	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1136	143	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1137	143	43	Đen	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1138	143	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1139	143	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1140	143	46	Tối đa khoảng 120kg - 150kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1141	143	47	Class 3 / Class 4	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1142	143	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1143	144	40	Corsair	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1144	144	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1145	144	42	Ghế làm việc	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1146	144	43	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1147	144	44	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1148	144	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1149	144	46	Tối đa khoảng 136kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1150	144	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1151	144	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1152	145	40	Sihoo	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1153	145	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1154	145	42	Ghế công thái học	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1155	145	43	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1156	145	44	Lưới thoáng khí	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1157	145	45	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1158	145	46	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1159	145	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1160	145	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1161	146	40	Sihoo	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1162	146	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1163	146	42	Ghế công thái học	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1164	146	43	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1165	146	44	Lưới thoáng khí	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1166	146	45	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1167	146	46	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1168	146	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1169	146	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1170	147	40	Corsair	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1171	147	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1172	147	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1173	147	43	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1174	147	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1175	147	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1176	147	46	Tối đa khoảng 136kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1177	147	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1178	147	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1179	148	40	E-Dra	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1180	148	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1181	148	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1182	148	43	Đen	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1183	148	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1184	148	45	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1185	148	46	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1186	148	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1187	148	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1188	149	40	Corsair	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1189	149	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1190	149	42	Ghế làm việc	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1191	149	43	Đen	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1192	149	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1193	149	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1194	149	46	Tối đa khoảng 136kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1195	149	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1196	149	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1197	150	40	Razer	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1198	150	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1199	150	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1200	150	43	Xám	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1201	150	44	Vải	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1202	150	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1203	150	46	Tối đa khoảng 136kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1204	150	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1205	150	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1206	151	40	E-Dra	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1207	151	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1208	151	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1209	151	43	Đen	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1210	151	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1211	151	45	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1212	151	46	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1213	151	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1214	151	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1215	152	40	Warrior	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1216	152	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1217	152	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1218	152	43	Trắng hồng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1219	152	44	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1220	152	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1221	152	46	Tối đa khoảng 120kg - 150kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1222	152	47	Class 3 / Class 4	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1223	152	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1224	153	40	Sihoo	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1225	153	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1226	153	42	Ghế công thái học	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1227	153	43	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1228	153	44	Lưới thoáng khí	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1229	153	45	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1230	153	46	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1231	153	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1232	153	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1233	154	40	Sihoo	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1234	154	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1235	154	42	Ghế công thái học	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1236	154	43	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1237	154	44	Lưới thoáng khí	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1238	154	45	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1239	154	46	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1240	154	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1241	154	48	Còn hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1242	155	40	Sihoo	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1243	155	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1244	155	42	Ghế công thái học	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1245	155	43	Xám	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1246	155	44	Lưới thoáng khí	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1247	155	45	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1248	155	46	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1249	155	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1250	155	48	Hết hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1251	156	40	E-Dra	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1252	156	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1253	156	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1254	156	43	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1255	156	44	Vải	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1256	156	45	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1257	156	46	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1258	156	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1259	156	48	Hết hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1260	157	40	Warrior	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1261	157	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1262	157	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1263	157	43	Đen xám	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1264	157	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1265	157	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1266	157	46	Tối đa khoảng 120kg - 150kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1267	157	47	Class 3 / Class 4	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1268	157	48	Hết hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1269	158	40	Razer	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1270	158	41	12 tháng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1271	158	42	Ghế gaming	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1272	158	43	Đen	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1273	158	44	Da PU / Da tổng hợp	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1274	158	45	Tay vịn điều chỉnh	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1275	158	46	Tối đa khoảng 136kg	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1276	158	47	Đang cập nhật	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1277	158	48	Hết hàng	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+1278	159	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1279	159	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1280	159	51	Acer Swift X	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1281	159	52	Đồ họa, sáng tạo nội dung, học tập và làm việc	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1282	159	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1283	159	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1284	159	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1285	159	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1286	159	57	NVIDIA GeForce RTX / Intel Arc tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1287	159	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1288	159	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1289	159	60	Khoảng 1.2kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1290	159	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1291	160	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1292	160	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1293	160	51	Acer Aspire Go	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1294	160	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1295	160	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1296	160	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1297	160	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1298	160	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1299	160	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1300	160	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1301	160	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1302	160	60	Khoảng 1.4kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1303	160	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1304	161	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1305	161	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1306	161	51	Acer Aspire Go	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1307	161	52	Học tập, làm việc văn phòng và tác vụ AI cơ bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1308	161	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1309	161	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1310	161	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1311	161	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1312	161	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1313	161	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1314	161	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1315	161	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1316	161	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1317	162	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1318	162	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1319	162	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1320	162	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1321	162	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1322	162	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1323	162	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1324	162	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1325	162	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1326	162	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1327	162	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1328	162	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1329	162	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1330	163	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1331	163	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1332	163	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1333	163	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1334	163	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1335	163	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1336	163	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1337	163	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1338	163	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1339	163	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1340	163	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1341	163	60	Khoảng 1.4kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1342	163	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1343	164	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1344	164	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1345	164	51	Acer Swift Go	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1346	164	52	Học tập, làm việc văn phòng và tác vụ AI cơ bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1347	164	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1348	164	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1349	164	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1350	164	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1351	164	57	Intel Arc / Intel UHD / AMD Radeon tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1352	164	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1353	164	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1354	164	60	Khoảng 1.2kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1355	164	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1356	165	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1357	165	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1358	165	51	Acer Aspire Go	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1359	165	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1360	165	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1361	165	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1362	165	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1363	165	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1364	165	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1365	165	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1366	165	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1367	165	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1368	165	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1369	166	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1370	166	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1371	166	51	Acer Aspire 16 AI	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1372	166	52	Học tập, làm việc văn phòng và tác vụ AI cơ bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1373	166	53	Khoảng 16 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1374	166	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1375	166	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1376	166	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1377	166	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1378	166	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1379	166	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1380	166	60	Khoảng 1.6kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1381	166	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1382	167	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1383	167	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1384	167	51	Acer Aspire 14 AI	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1385	167	52	Học tập, làm việc văn phòng và tác vụ AI cơ bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1386	167	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1387	167	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1388	167	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1389	167	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1390	167	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1391	167	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1392	167	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1393	167	60	Khoảng 1.4kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1394	167	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1395	168	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1396	168	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1397	168	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1398	168	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1399	168	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1400	168	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1401	168	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1402	168	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1403	168	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1404	168	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1405	168	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1406	168	60	Khoảng 1.4kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1407	168	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1408	169	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1409	169	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1410	169	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1411	169	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1412	169	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1413	169	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1414	169	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1415	169	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1416	169	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1417	169	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1418	169	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1419	169	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1420	169	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1421	170	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1422	170	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1423	170	51	Acer Aspire Go	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1424	170	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1425	170	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1426	170	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1427	170	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1428	170	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1429	170	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1430	170	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1431	170	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1432	170	60	Khoảng 1.4kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1433	170	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1434	171	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1435	171	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1436	171	51	Acer Swift Go	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1437	171	52	Làm việc di động, văn phòng và giải trí	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1438	171	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1439	171	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1440	171	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1441	171	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1442	171	57	Intel Arc / Intel UHD / AMD Radeon tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1443	171	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1444	171	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1445	171	60	Khoảng 1.2kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1446	171	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1447	172	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1448	172	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1449	172	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1450	172	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1451	172	53	Khoảng 16 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1452	172	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1453	172	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1454	172	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1455	172	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1456	172	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1457	172	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1458	172	60	Khoảng 1.6kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1459	172	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1460	173	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1461	173	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1462	173	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1463	173	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1464	173	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1465	173	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1466	173	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1467	173	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1468	173	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1469	173	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1470	173	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1471	173	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1472	173	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1473	174	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1474	174	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1475	174	51	Acer Aspire 5	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1476	174	52	Học tập và làm việc	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1477	174	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1478	174	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1479	174	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1480	174	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1481	174	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1482	174	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1483	174	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1484	174	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1485	174	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1486	175	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1487	175	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1488	175	51	Acer Swift Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1489	175	52	Làm việc di động, văn phòng và giải trí	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1490	175	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1491	175	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1492	175	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1493	175	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1494	175	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1495	175	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1496	175	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1497	175	60	Khoảng 1.4kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1498	175	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1499	176	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1500	176	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1501	176	51	Acer Swift AI	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1502	176	52	Học tập, làm việc văn phòng và tác vụ AI cơ bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1503	176	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1504	176	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1505	176	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1506	176	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1507	176	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1508	176	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1509	176	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1510	176	60	Khoảng 1.2kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1511	176	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1512	177	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1513	177	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1514	177	51	Acer Swift Go	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1515	177	52	Làm việc di động, văn phòng và giải trí	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1516	177	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1517	177	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1518	177	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1519	177	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1520	177	57	Intel Arc / Intel UHD / AMD Radeon tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1521	177	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1522	177	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1523	177	60	Khoảng 1.2kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1524	177	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1525	178	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1526	178	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1527	178	51	Acer Swift X	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1528	178	52	Đồ họa, sáng tạo nội dung, học tập và làm việc	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1529	178	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1530	178	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1531	178	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1532	178	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1533	178	57	NVIDIA GeForce RTX / Intel Arc tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1534	178	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1535	178	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1536	178	60	Khoảng 1.2kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1537	178	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1538	179	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1539	179	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1540	179	51	Acer Swift 3	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1541	179	52	Làm việc di động, văn phòng và giải trí	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1542	179	53	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1543	179	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1544	179	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1545	179	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1546	179	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1547	179	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1548	179	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1549	179	60	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1550	179	61	Còn hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1551	180	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1552	180	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1553	180	51	Acer Swift Go	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1554	180	52	Học tập, làm việc văn phòng và tác vụ AI cơ bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1555	180	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1556	180	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1557	180	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1558	180	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1559	180	57	Intel Arc / Intel UHD / AMD Radeon tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1560	180	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1561	180	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1562	180	60	Khoảng 1.2kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1563	180	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1564	181	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1565	181	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1566	181	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1567	181	52	Học tập, làm việc văn phòng và tác vụ AI cơ bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1568	181	53	Khoảng 16 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1569	181	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1570	181	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1571	181	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1572	181	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1573	181	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1574	181	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1575	181	60	Khoảng 1.6kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1576	181	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1577	182	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1578	182	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1579	182	51	Acer Aspire Go	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1580	182	52	Học tập, làm việc văn phòng và tác vụ AI cơ bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1581	182	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1582	182	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1583	182	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1584	182	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1585	182	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1586	182	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1587	182	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1588	182	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1589	182	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1590	183	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1591	183	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1592	183	51	Acer Aspire Go	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1593	183	52	Học tập, làm việc văn phòng và tác vụ AI cơ bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1594	183	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1595	183	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1596	183	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1597	183	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1598	183	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1599	183	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1600	183	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1601	183	60	Khoảng 1.4kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1602	183	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1603	184	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1604	184	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1605	184	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1606	184	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1607	184	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1608	184	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1609	184	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1610	184	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1611	184	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1612	184	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1613	184	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1614	184	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1615	184	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1616	185	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1617	185	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1618	185	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1619	185	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1620	185	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1621	185	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1622	185	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1623	185	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1624	185	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1625	185	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1626	185	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1627	185	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1628	185	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1629	186	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1630	186	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1631	186	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1632	186	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1633	186	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1634	186	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1635	186	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1636	186	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1637	186	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1638	186	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1639	186	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1640	186	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1641	186	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1642	187	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1643	187	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1644	187	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1645	187	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1646	187	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1647	187	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1648	187	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1649	187	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1650	187	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1651	187	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1652	187	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1653	187	60	Khoảng 1.4kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1654	187	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1655	188	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1656	188	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1657	188	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1658	188	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1659	188	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1660	188	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1661	188	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1662	188	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1663	188	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1664	188	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1665	188	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1666	188	60	Khoảng 1.4kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1667	188	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1668	189	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1669	189	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1670	189	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1671	189	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1672	189	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1673	189	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1674	189	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1675	189	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1676	189	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1677	189	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1678	189	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1679	189	60	Khoảng 1.4kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1680	189	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1681	190	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1682	190	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1683	190	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1684	190	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1685	190	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1686	190	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1687	190	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1688	190	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1689	190	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1690	190	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1691	190	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1692	190	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1693	190	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1694	191	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1695	191	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1696	191	51	Acer Swift Edge	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1697	191	52	Học tập, làm việc văn phòng và tác vụ AI cơ bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1698	191	53	Khoảng 14 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1699	191	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1700	191	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1701	191	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1702	191	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1703	191	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1704	191	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1705	191	60	Khoảng 1.2kg - 1.5kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1706	191	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1707	192	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1708	192	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1709	192	51	Acer Aspire Lite	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1710	192	52	Học tập, văn phòng và làm việc hằng ngày	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1711	192	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1712	192	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1713	192	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1714	192	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1715	192	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1716	192	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1717	192	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1718	192	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1719	192	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1720	193	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1721	193	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1722	193	51	Acer Aspire 5	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1723	193	52	Học tập và làm việc	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1724	193	53	Khoảng 15.6 inch	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1725	193	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1726	193	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1727	193	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1728	193	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1729	193	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1730	193	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1731	193	60	Khoảng 1.7kg - 1.8kg	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1732	193	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1733	194	49	ACER	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1734	194	50	12 tháng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1735	194	51	Acer Aspire 5	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1736	194	52	Học tập và làm việc	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1737	194	53	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1738	194	54	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1739	194	55	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1740	194	56	SSD, dung lượng tùy phiên bản	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1741	194	57	Card đồ họa tích hợp	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1742	194	58	Windows 11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1743	194	59	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1744	194	60	Đang cập nhật	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+1745	194	61	Hết hàng	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
 \.
 
 
 --
--- TOC entry 5355 (class 0 OID 16712)
+-- TOC entry 5356 (class 0 OID 16712)
 -- Dependencies: 257
 -- Data for Name: product_variants; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1761,34 +3904,202 @@ COPY public.product_variants (id, product_id, name, sku, price, sale_price, sale
 25	26	tets011	TETS011	30000.00	20000.00	\N	\N	20		INACTIVE	2026-05-23 01:08:09.256704	2026-05-23 01:08:21.594754	2026-05-23 01:08:21.597488
 23	25	test011	TEST011	30000.00	20000.00	\N	\N	20		INACTIVE	2026-05-23 00:49:49.900409	2026-05-23 00:50:52.852639	2026-05-23 00:50:52.855065
 24	25	test012	TEST012	30000.00	20000.00	\N	\N	20		INACTIVE	2026-05-23 00:49:49.900409	2026-05-23 00:50:52.852639	2026-05-23 00:50:52.855065
-1	1	27 inch / Nano IPS Black / 4K / 240Hz	MAN-LG-27G850A-B	18990000.00	18040500.00	2026-05-17 04:51:46.526202	2026-09-21 04:51:46.526202	8	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-2	2	24 inch / IPS / Full HD / 120Hz / HDR10	MAN-LG-24U411A-B	2390000.00	2270500.00	2026-05-17 04:51:46.620198	2026-09-21 04:51:46.620198	20	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-3	3	32 inch / IPS / 4K UHD / USB-C / webOS	MAN-LG-32U889SA-W	27990000.00	26590500.00	2026-05-17 04:51:46.668198	2026-09-21 04:51:46.668198	5	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-4	4	27 inch / IPS / 2K QHD / 200Hz / G-Sync	MAN-LG-27G610A-B	5190000.00	4930500.00	2026-05-17 04:51:46.709198	2026-09-21 04:51:46.709198	14	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-5	5	40 inch / Nano IPS Black / 5K2K / 120Hz / USB-C	MAN-LG-40U990A-W	42990000.00	40840500.00	2026-05-17 04:51:46.751197	2026-09-21 04:51:46.751197	4	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-6	6	24 inch / IPS / Full HD / 144Hz / HDR10	MAN-LG-24G411A-B	2650000.00	2517500.00	2026-05-17 04:51:46.803197	2026-09-21 04:51:46.803197	22	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-7	7	39 inch / OLED / 2K / 240Hz / webOS	MAN-LG-39GX90SA-W	32490000.00	30865500.00	2026-05-17 04:51:46.844198	2026-09-21 04:51:46.844198	5	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-8	8	27 inch / OLED / QHD 2K / 240Hz / G-Sync	MAN-LG-27GX704A-B	15990000.00	15190500.00	2026-05-17 04:51:46.883198	2026-09-21 04:51:46.883198	7	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-10	10	32 inch / OLED / 4K / 240Hz / G-Sync	MAN-LG-32GX870A-B	29990000.00	28490500.00	2026-05-17 04:51:46.951198	2026-09-21 04:51:46.951198	6	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-11	11	29 inch / IPS / UWFHD 2560x1080 / 100Hz / USB-C	MAN-LG-29U531A-W	4990000.00	4740500.00	2026-05-17 04:51:46.983199	2026-09-21 04:51:46.983199	12	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-12	12	27 inch / IPS / Full HD / 120Hz / HDR10	MAN-LG-27U411A-B	2990000.00	2840500.00	2026-05-17 04:51:47.020199	2026-09-21 04:51:47.020199	18	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-13	13	22 inch / VA / Full HD / 100Hz / HDR10	MAN-LG-22U401A-B	2090000.00	1985500.00	2026-05-17 04:51:47.050198	2026-09-21 04:51:47.050198	25	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-14	14	24 inch / IPS / 2K / 100Hz / USB-C	MAN-LG-24U631A-B	3990000.00	3790500.00	2026-05-17 04:51:47.078197	2026-09-21 04:51:47.078197	15	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-15	15	34 inch / OLED cong / 2K / 240Hz	MAN-LG-34GX90SA-W	25190000.00	23930500.00	2026-05-17 04:51:47.119198	2026-09-21 04:51:47.119198	6	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-16	16	27 inch / IPS / 4K UHD / HDR / USB-C	MAN-LG-27UP850K-W	8590000.00	8160500.00	2026-05-17 04:51:47.148198	2026-09-21 04:51:47.148198	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-17	17	27 inch / IPS / 2K / 100Hz / HDR10	MAN-LG-27U631A-B	4390000.00	4170500.00	2026-05-17 04:51:47.180199	2026-09-21 04:51:47.180199	16	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-18	18	27 inch / IPS / 4K / HDR10	MAN-LG-27UP600K-W	5490000.00	5215500.00	2026-05-17 04:51:47.205198	2026-09-21 04:51:47.205198	11	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-19	19	27 inch / OLED / 2K / 480Hz / G-Sync	MAN-LG-27GX790A-B	20990000.00	19940500.00	2026-05-17 04:51:47.237198	2026-09-21 04:51:47.237198	5	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-20	20	32 inch / OLED / 4K / 240Hz / Dual Mode	MAN-LG-32GS95UV-B	27390000.00	26020500.00	2026-05-17 04:51:47.262199	2026-09-21 04:51:47.262199	7	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-21	21	38 inch / Nano IPS cong / WQHD 3840x1600 / 144Hz	MAN-LG-38WR85QC-W	24190000.00	22980500.00	2026-05-17 04:51:47.291199	2026-09-21 04:51:47.291199	5	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-27	22	27 inch / IPS / 4K / 144Hz / G-Sync	MAN-LG-27GR93U-B	9190000.00	8730500.00	2026-05-17 04:51:47.325198	2026-09-21 04:51:47.325198	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-23 01:21:51.816911	2026-05-24 04:51:46.498105	\N
-9	9	45 inch / OLED cong / 4K 165Hz / FHD 330Hz	MAN-LG-45GX950A-B	53990000.00	51290500.00	2026-05-17 04:51:46.921198	2026-09-21 04:51:46.921198	3	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
+195	195	test12	TEST12	2000.00	1000.00	\N	\N	100		ACTIVE	2026-05-25 13:01:52.512181	2026-05-25 13:01:52.512181	\N
+1	1	27 inch / Nano IPS Black / 4K / 240Hz	MAN-LG-27G850A-B	18990000.00	18040500.00	2026-05-18 13:43:17.485345	2026-09-22 13:43:17.485345	8	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640077/lg-27g850a-b_cfdlhs.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+52	52	Phiên bản tiêu chuẩn	CHU-RAZER-VIPER-V3-PRO-WHITE	3690000.00	3505500.00	2026-05-18 13:43:18.840849	2026-09-22 13:43:18.840849	23	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655521/chu-razer-viper-v3-pro-white_01_eox8vt.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+53	53	Phiên bản tiêu chuẩn	CHU-RAZER-VIPER-V3-PRO-BLK	3690000.00	3505500.00	2026-05-18 13:43:18.854849	2026-09-22 13:43:18.854849	24	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655707/chu-razer-viper-v3-pro-blk_01_rzbacb.jpg	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+54	54	Phiên bản tiêu chuẩn	CHU-LOGITECH-G-PRO-X-SUPERLIGHT-2-DEX-WL-BLACK	3250000.00	3087500.00	2026-05-18 13:43:18.867849	2026-09-22 13:43:18.867849	25	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+55	55	Phiên bản tiêu chuẩn	CHU-LOGITECH-G-PRO-X-SUPERLIGHT-2-DEX-WL-PINK	3250000.00	3087500.00	2026-05-18 13:43:18.881614	2026-09-22 13:43:18.881614	26	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+2	2	24 inch / IPS / Full HD / 120Hz / HDR10	MAN-LG-24U411A-B	2390000.00	2270500.00	2026-05-18 13:43:17.552902	2026-09-22 13:43:17.552902	20	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640225/man-lg-24u411a-b_01_g56amh.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+3	3	32 inch / IPS / 4K UHD / USB-C / webOS	MAN-LG-32U889SA-W	27990000.00	26590500.00	2026-05-18 13:43:17.596446	2026-09-22 13:43:17.596446	5	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640594/man-lg-32u889sa-w_01_s1afrv.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+4	4	27 inch / IPS / 2K QHD / 200Hz / G-Sync	MAN-LG-27G610A-B	5190000.00	4930500.00	2026-05-18 13:43:17.636787	2026-09-22 13:43:17.636787	14	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640764/man-lg-27g610a-b_01_zhn4tx.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
 28	28	test11	TEST11	200000.00	189000.00	\N	\N	20		INACTIVE	2026-05-24 01:48:15.899381	2026-05-24 01:48:25.763946	2026-05-24 01:48:25.767394
+5	5	40 inch / Nano IPS Black / 5K2K / 120Hz / USB-C	MAN-LG-40U990A-W	42990000.00	40840500.00	2026-05-18 13:43:17.67888	2026-09-22 13:43:17.67888	4	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779640929/man-lg-40u990a-w_01_a1my6d.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+6	6	24 inch / IPS / Full HD / 144Hz / HDR10	MAN-LG-24G411A-B	2650000.00	2517500.00	2026-05-18 13:43:17.721468	2026-09-22 13:43:17.721468	22	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641093/man-lg-24g411a-b_01_chylb2.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+7	7	39 inch / OLED / 2K / 240Hz / webOS	MAN-LG-39GX90SA-W	32490000.00	30865500.00	2026-05-18 13:43:17.762467	2026-09-22 13:43:17.762467	5	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779641294/man-lg-39gx90sa-w_01_qkpfg6.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+50	50	Phiên bản tiêu chuẩn	CHU-LOGITECH-G-PRO-X-SUPERLIGHT-2-DEX-WL-WHITE	3250000.00	3087500.00	2026-05-18 13:43:18.810289	2026-09-22 13:43:18.810289	21	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655215/chu-logitech-g-pro-x-superlight-2-dex-wl-white_01_owqeec.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+51	51	Phiên bản tiêu chuẩn	CHU-LOGITECH-G-PRO-X-SUPERLIGHT-2-WHITE	3250000.00	3087500.00	2026-05-18 13:43:18.826289	2026-09-22 13:43:18.826289	22	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655368/chu-logitech-g-pro-x-superlight-2-white_01_froumk.jpg	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+56	56	Phiên bản tiêu chuẩn	CHU-ACER-CESTUS-330	1200000.00	1140000.00	2026-05-18 13:43:18.895616	2026-09-22 13:43:18.895616	27	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779655865/chu-acer-predator-cestus-353_01_a80xfx.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+74	74	Phiên bản tiêu chuẩn	CHU-ASUS-ROG-IMPACT-III	990000.00	940500.00	2026-05-18 13:43:19.19848	2026-09-22 13:43:19.19848	29	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+196	196	test13	TEST13	3000.00	2000.00	\N	\N	99		ACTIVE	2026-05-25 13:04:13.27127	2026-05-25 13:44:16.032567	\N
+67	67	Phiên bản tiêu chuẩn	CHU-ASUS-P722-KERIS-II-ORIGIN-WL-BLK	3350000.00	3182500.00	2026-05-18 13:43:19.06636	2026-09-22 13:43:19.06636	22	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656399/chu-asus-p722-keris-ii-origin-wl-blk_01_c1asbf.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+68	68	Phiên bản tiêu chuẩn	CHU-LOG-G102-LIGHTSYNC-BLACK	400000.00	380000.00	2026-05-18 13:43:19.084901	2026-09-22 13:43:19.084901	23	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656610/chu-log-g102-lightsync-black_01_pzurem.jpg	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+69	69	Phiên bản tiêu chuẩn	CHU-RAZ-DA-ESSENTIAL	370000.00	351500.00	2026-05-18 13:43:19.102901	2026-09-22 13:43:19.102901	24	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+18	18	27 inch / IPS / 4K / HDR10	MAN-LG-27UP600K-W	5490000.00	5215500.00	2026-05-18 13:43:18.101491	2026-09-22 13:43:18.101491	11	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647462/man-lg-27up600k-w_01_drhvma.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+44	44	Phiên bản tiêu chuẩn	CHU-RAPOO-V260-PRO	329000.00	312550.00	2026-05-18 13:43:18.498182	2026-09-22 13:43:18.498182	15	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654044/chu-rapoo-v260-pro_01_osmmfs.jpg	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+57	57	Phiên bản tiêu chuẩn	CHU-ACER-PREDATOR-CESTUS-353	2500000.00	2375000.00	2026-05-18 13:43:18.909615	2026-09-22 13:43:18.909615	28	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+58	58	Phiên bản tiêu chuẩn	CHU-RAZER-DA-V4-PRO-BLK	3690000.00	3505500.00	2026-05-18 13:43:18.923183	2026-09-22 13:43:18.923183	29	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+59	59	Phiên bản tiêu chuẩn	CHU-RAZER-VIPER-V4-PRO-WHITE	4490000.00	4265500.00	2026-05-18 13:43:18.938181	2026-09-22 13:43:18.938181	30	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+60	60	Phiên bản tiêu chuẩn	CHU-RAZER-VIPER-V4-PRO-BLK	4490000.00	4265500.00	2026-05-18 13:43:18.952181	2026-09-22 13:43:18.952181	15	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+61	61	Phiên bản tiêu chuẩn	CHU-LOGITECH-G-PRO-X-SUPERLIGHT-2-SE-BLACK	2740000.00	2603000.00	2026-05-18 13:43:18.967207	2026-09-22 13:43:18.967207	16	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+62	62	Phiên bản tiêu chuẩn	CHU-RAZER-VIPER-V3-PRO-SE	2370000.00	2251500.00	2026-05-18 13:43:18.982792	2026-09-22 13:43:18.982792	17	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+63	63	Phiên bản tiêu chuẩn	CHU-DAREU-EM911T-BLK	400000.00	380000.00	2026-05-18 13:43:18.997792	2026-09-22 13:43:18.997792	18	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+64	64	Phiên bản tiêu chuẩn	CHU-DAREU-EM911T-WHI	400000.00	380000.00	2026-05-18 13:43:19.013792	2026-09-22 13:43:19.013792	19	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656169/chu-dareu-em911t-blk_01_h8m1cg.jpg	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+65	65	Phiên bản tiêu chuẩn	CHU-LOGITECH-X2-SUPERSTRIKE-LP	4690000.00	4455500.00	2026-05-18 13:43:19.030792	2026-09-22 13:43:19.031792	20	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779656288/chu-logitech-x2-superstrike-lp_01_ifk125.jpg	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+66	66	Phiên bản tiêu chuẩn	CHU-RAZER-VIPER-V3-PRO-CS2	4680000.00	4446000.00	2026-05-18 13:43:19.048359	2026-09-22 13:43:19.048359	21	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+84	84	Phiên bản tiêu chuẩn	CHU-RAZER-BASI-V3-X-HS	1490000.00	1415500.00	2026-05-18 13:43:19.420746	2026-09-22 13:43:19.420746	23	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+78	78	Phiên bản tiêu chuẩn	CHU-RAZ-BASI-V3	940000.00	893000.00	2026-05-18 13:43:19.287739	2026-09-22 13:43:19.287739	17	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+83	83	Phiên bản tiêu chuẩn	CHU-LOG-G-PRO-X-SUP-W-BLA	2530000.00	2403500.00	2026-05-18 13:43:19.397746	2026-09-22 13:43:19.397746	22	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+85	85	Phiên bản tiêu chuẩn	CHU-ASUS-TUF-M4-WL	990000.00	940500.00	2026-05-18 13:43:19.446837	2026-09-22 13:43:19.446837	24	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+86	86	Phiên bản tiêu chuẩn	CHU-LOGITECH-PEB-MOUSE-2-M350S-ROSE	490000.00	465500.00	2026-05-18 13:43:19.469836	2026-09-22 13:43:19.469836	25	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+87	87	Phiên bản tiêu chuẩn	CHU-LOGITECH-MX-MASTER-3S-GRA	2400000.00	2280000.00	2026-05-18 13:43:19.4944	2026-09-22 13:43:19.4944	26	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+88	88	Phiên bản tiêu chuẩn	CHU-LOGITECH-G502X-PLUS-LS-WHITE	3490000.00	3315500.00	2026-05-18 13:43:19.51845	2026-09-22 13:43:19.51845	27	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+89	89	Phiên bản tiêu chuẩn	CHU-LOG-G309-TRANG	1630000.00	1548500.00	2026-05-18 13:43:19.540955	2026-09-22 13:43:19.540955	28	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+101	101	Phiên bản tiêu chuẩn	TAI-ASUS-ROG-PELTA-WL-BLK	3190000.00	3030500.00	2026-05-18 13:43:19.749923	2026-09-22 13:43:19.749923	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659413/tai-asus-rog-pelta-wl-blk_01_pakenm.jpg	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+104	104	Phiên bản tiêu chuẩn	TAI-RAZER-BLACKSHARK-V3-PRO-CS2	7780000.00	7391000.00	2026-05-18 13:43:19.791202	2026-09-22 13:43:19.791202	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659873/tai-razer-blackshark-v3-pro-cs2_01_nguzob.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+105	105	Phiên bản tiêu chuẩn	TAI-HYPERX-CLOUD-FLIGHT-2-WL-B5VC4AA	3190000.00	3030500.00	2026-05-18 13:43:19.804202	2026-09-22 13:43:19.804202	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660034/tai-hyperx-cloud-flight-2-wl-b5vc4aa_01_hlmgd3.jpg	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+106	106	Phiên bản tiêu chuẩn	TAI-RAZER-BARRACUDA-X-CHROMA-PHANTOM-WHITE	3680000.00	3496000.00	2026-05-18 13:43:19.820201	2026-09-22 13:43:19.820201	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660262/tai-razer-barracuda-x-chroma-phantom-white_01_enmu7b.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+107	107	Phiên bản tiêu chuẩn	TAI-DAR-EH416-RGB	390000.00	370500.00	2026-05-18 13:43:19.834782	2026-09-22 13:43:19.834782	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660391/tai-dar-eh416-rgb_01_n5wbum.jpg	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+108	108	Phiên bản tiêu chuẩn	TAI-LOG-G435-LW-BLACK	1390000.00	1320500.00	2026-05-18 13:43:19.849783	2026-09-22 13:43:19.849783	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660512/tai-log-g435-lw-black_01_nxuqjq.jpg	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+109	109	Phiên bản tiêu chuẩn	TAI-LOG-G733-LS-WL-BL	2440000.00	2318000.00	2026-05-18 13:43:19.864783	2026-09-22 13:43:19.864783	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660656/tai-log-g733-ls-wl-bl_01_cgveo0.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+102	102	Phiên bản tiêu chuẩn	TAI-ASU-ROG-CETRA-II-CORE	990000.00	940500.00	2026-05-18 13:43:19.763924	2026-09-22 13:43:19.763924	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659588/tai-asu-rog-cetra-ii-core_01_fdyttd.jpg	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+103	103	Phiên bản tiêu chuẩn	TAI-LOGITECH-G321-LIGHTSPEED-BLK	1380000.00	1311000.00	2026-05-18 13:43:19.777205	2026-09-22 13:43:19.777205	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659758/tai-logitech-g321-lightspeed-blk_01_s2gy89.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+19	19	27 inch / OLED / 2K / 480Hz / G-Sync	MAN-LG-27GX790A-B	20990000.00	19940500.00	2026-05-18 13:43:18.131199	2026-09-22 13:43:18.131199	5	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647574/man-lg-27gx790a-b_01_nwbpsi.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+20	20	32 inch / OLED / 4K / 240Hz / Dual Mode	MAN-LG-32GS95UV-B	27390000.00	26020500.00	2026-05-18 13:43:18.153199	2026-09-22 13:43:18.153199	7	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647682/man-lg-32gs95uv-b_01_z2fhnr.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+21	21	38 inch / Nano IPS cong / WQHD 3840x1600 / 144Hz	MAN-LG-38WR85QC-W	24190000.00	22980500.00	2026-05-18 13:43:18.178148	2026-09-22 13:43:18.178148	5	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647797/man-lg-38wr85qc-w_01_xuslhe.png	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+27	22	27 inch / IPS / 4K / 144Hz / G-Sync	MAN-LG-27GR93U-B	9190000.00	8730500.00	2026-05-18 13:43:18.205148	2026-09-22 13:43:18.205148	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647900/man-lg-27gr93u-b_01_gd6c9u.jpg	ACTIVE	2026-05-23 01:21:51.816911	2026-05-25 13:43:17.46312	\N
+37	37	75% / Red Switch	KB-EDRA-EK375S-RED-SW	690000.00	655500.00	2026-05-18 13:43:18.373538	2026-09-22 13:43:18.373538	22	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651817/kb-edra-ek375s-red-sw_01_omvhea.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+94	94	Phiên bản tiêu chuẩn	TAI-HP-HYPERX-CLOUD-EARBUDS-II-BLACK	750000.00	712500.00	2026-05-18 13:43:19.671747	2026-09-22 13:43:19.671747	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658574/tai-hp-hyperx-cloud-earbuds-ii-black_01_magz9r.gif	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+114	114	Phiên bản tiêu chuẩn	TAI-MSI-H991	1400000.00	1330000.00	2026-05-18 13:43:19.951201	2026-09-22 13:43:19.951201	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+115	115	Phiên bản tiêu chuẩn	TAI-LOG-G-PRO-X	2420000.00	2299000.00	2026-05-18 13:43:19.967202	2026-09-22 13:43:19.967202	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+29	29	75% / Reaper Switch	KB-AULA-F75-BLK-BLUE-ORANGE-F7504	1189000.00	1129550.00	2026-05-18 13:43:18.242294	2026-09-22 13:43:18.242294	25	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779650632/kb-aula-f75-blk-blue-orange-f7504_01_fmryyh.png	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+30	30	Fullsize / ROG NX Snow	KB-ASUS-XA14-ROG-STRIX-SCOPE-II-SNOW	3390000.00	3220500.00	2026-05-18 13:43:18.256293	2026-09-22 13:43:18.257295	12	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779650753/kb-asus-xa14-rog-strix-scope-ii-snow_03_tqpb8u.png	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+31	31	Fullsize 108 phím / Akko Switch	KB-AKKO-3108RF-BLK-GOLD	850000.00	807500.00	2026-05-18 13:43:18.26848	2026-09-22 13:43:18.26848	30	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779650879/kb-akko-3108rf-blk-gold_01_sviran.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+32	32	Fullsize 108 phím / Akko Switch	KB-AKKO-3108RF-PRUNUS	850000.00	807500.00	2026-05-18 13:43:18.280986	2026-09-22 13:43:18.280986	28	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651029/kb-akko-3108rf-prunus_01_r61nxj.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+33	33	Fullsize 108 phím / Akko Switch	KB-AKKO-3108RF-GLACIER	850000.00	807500.00	2026-05-18 13:43:18.306986	2026-09-22 13:43:18.306986	28	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651103/kb-akko-3108rf-glacier_01_va1q1m.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+34	34	TKL / Tactile Low Profile	KB-LOGITECH-G915-X-LS-TKL-TACTILE-BLK	4440000.00	4218000.00	2026-05-18 13:43:18.320381	2026-09-22 13:43:18.320381	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651192/kb-logitech-g915-x-ls-tkl-tactile-blk_01_yxxmbu.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+35	35	TKL / Akko V3 Piano Pro	KB-AKKO-5087V3-LORD	1590000.00	1510500.00	2026-05-18 13:43:18.338033	2026-09-22 13:43:18.338033	18	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651503/kb-akko-5087v3-lord_01_rrznum.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+36	36	Fullsize / Red Switch	KB-EDRA-EK398S-RED-SW	790000.00	750500.00	2026-05-18 13:43:18.356032	2026-09-22 13:43:18.356032	22	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651677/kb-edra-ek398s-red-sw_01_pvgbbt.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+41	41	60% / Aether Magnetic Switch	KB-AULA-AGG60-PRO-GREY-AG6001	3690000.00	3505500.00	2026-05-18 13:43:18.44064	2026-09-22 13:43:18.44064	8	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652305/kb-aula-agg60-pro-grey-ag6001_01_rbmaus.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+70	70	Phiên bản tiêu chuẩn	CHU-LOG-G304	725000.00	688750.00	2026-05-18 13:43:19.121203	2026-09-22 13:43:19.121203	25	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+71	71	Phiên bản tiêu chuẩn	CHU-RAZ-DE-WHI	370000.00	351500.00	2026-05-18 13:43:19.13991	2026-09-22 13:43:19.13991	26	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+116	116	Phiên bản tiêu chuẩn	TAI-LOG-G333-BLA	910000.00	864500.00	2026-05-18 13:43:19.983771	2026-09-22 13:43:19.983771	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+38	38	98 phím / Star Vector Switch	KB-AULA-S98-PRO-TM-BLUE-WHI-DARK-PUR-STAR-SW-S9812	1590000.00	1510500.00	2026-05-18 13:43:18.39107	2026-09-22 13:43:18.39107	16	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779651942/kb-aula-s98-pro-tm-blue-whi-dark-pur-star-sw-s9812_01_sbbhe0.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+134	134	Phiên bản tiêu chuẩn	GHE-ISKUR-V2-NEWGEN-BLK-GREEN-RZ38-05310700-R3CA	8900000.00	8455000.00	2026-05-18 13:43:20.32194	2026-09-22 13:43:20.32194	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663607/ghe-iskur-v2-newgen-blk-green-rz38-05310700-r3ca_01_czjrtj.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+135	135	Phiên bản tiêu chuẩn	GHE-EDRA-EEC228	1390000.00	1320500.00	2026-05-18 13:43:20.33394	2026-09-22 13:43:20.33394	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663731/ghe-edra-eec228_01_tfhour.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+136	136	Phiên bản tiêu chuẩn	GHE-RAZER-ENKI-BLK-GREEN-RZ38-03720100-R3U1	12500000.00	11875000.00	2026-05-18 13:43:20.345941	2026-09-22 13:43:20.345941	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663880/ghe-razer-enki-full-blk-rz38-03720300-r3u1_01_p6phna.png	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+137	137	Phiên bản tiêu chuẩn	GHE-RAZER-ISKUR-V2-X-RZ38-05310200-R3UA	7290000.00	6925500.00	2026-05-18 13:43:20.35694	2026-09-22 13:43:20.35694	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+158	158	Phiên bản tiêu chuẩn	GHE-RAZER-ENKI-FULL-BLK-RZ38-03720300-R3U1	12500000.00	11875000.00	2026-05-18 13:43:20.727954	2026-09-22 13:43:20.727954	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666854/ghe-razer-enki-full-blk-rz38-03720300-r3u1_01_yubxa0.png	INACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+167	167	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-14-AI-A14-61M-R9RA	23890000.00	22695500.00	2026-05-18 13:43:20.896897	2026-09-22 13:43:20.896897	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674296/lap-acer-aspire-14-ai-a14-61m-r9ra_01_d902ps.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+168	168	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-14-AL14-71P-55P9	17490000.00	16615500.00	2026-05-18 13:43:20.918613	2026-09-22 13:43:20.918613	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674382/lap-acer-aspire-lite-14-al14-71p-55p9_01_mebt11.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+178	178	Phiên bản tiêu chuẩn	LAP-ACER-SWIFT-X14-SFX14-71G-78SY	33990000.00	32290500.00	2026-05-18 13:43:21.172602	2026-09-22 13:43:21.172602	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675577/lap-acer-swift-x14-sfx14-71g-78sy_01_adyw0q.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+39	39	100 phím / Red Switch	KB-AULA-S100-PRO-TM-BLK-S100PRO03	790000.00	750500.00	2026-05-18 13:43:18.40807	2026-09-22 13:43:18.40807	20	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652124/kb-aula-s100-pro-tm-blk-s100pro03_01_tx7jja.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+117	117	Phiên bản tiêu chuẩn	TAI-RAZ-KRA-V3X-USB	1250000.00	1187500.00	2026-05-18 13:43:19.999772	2026-09-22 13:43:19.999772	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+118	118	Phiên bản tiêu chuẩn	TAI-DAR-EH469-RGB-BLA	400000.00	380000.00	2026-05-18 13:43:20.016771	2026-09-22 13:43:20.016771	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+40	40	75% / Mechanical Switch	KB-VEEKOS-K75-RED	690000.00	655500.00	2026-05-18 13:43:18.424639	2026-09-22 13:43:18.424639	18	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652211/kb-veekos-k75-red_01_m2rrg8.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+119	119	Phiên bản tiêu chuẩn	TAI-EDRA-EH494W-BLACK	950000.00	902500.00	2026-05-18 13:43:20.03438	2026-09-22 13:43:20.03438	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+120	120	Phiên bản tiêu chuẩn	TAI-HYPERX-STINGER-CORE-II	790000.00	750500.00	2026-05-18 13:43:20.05238	2026-09-22 13:43:20.05238	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+132	132	Phiên bản tiêu chuẩn	GHE-WARRIOR-PAWN-WEC105-BLACK	1590000.00	1510500.00	2026-05-18 13:43:20.299352	2026-09-22 13:43:20.299352	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663201/ghe-warrior-pawn-wec105-black_01_chhq2t.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+133	133	Phiên bản tiêu chuẩn	GHE-WAR-HERO-WEC502-GREY	2590000.00	2460500.00	2026-05-18 13:43:20.310351	2026-09-22 13:43:20.310351	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779663375/ghe-war-hero-wec502-grey_01_hyush6.gif	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+8	8	27 inch / OLED / QHD 2K / 240Hz / G-Sync	MAN-LG-27GX704A-B	15990000.00	15190500.00	2026-05-18 13:43:17.797962	2026-09-22 13:43:17.797962	7	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779645853/man-lg-27gx704a-b_01_cd7wqq.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+9	9	45 inch / OLED cong / 4K 165Hz / FHD 330Hz	MAN-LG-45GX950A-B	53990000.00	51290500.00	2026-05-18 13:43:17.830466	2026-09-22 13:43:17.830466	3	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646130/man-lg-45gx950a-b_01_ioqaye.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+10	10	32 inch / OLED / 4K / 240Hz / G-Sync	MAN-LG-32GX870A-B	29990000.00	28490500.00	2026-05-18 13:43:17.861048	2026-09-22 13:43:17.861048	6	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646293/man-lg-32gx870a-b_01_pxckck.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+75	75	Phiên bản tiêu chuẩn	CHU-EM901X-RGB-SL-WL-PINK	700000.00	665000.00	2026-05-18 13:43:19.218481	2026-09-22 13:43:19.218481	30	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+76	76	Phiên bản tiêu chuẩn	CHU-LOG-G102-LIGHTSYNC-WHITE	400000.00	380000.00	2026-05-18 13:43:19.241044	2026-09-22 13:43:19.241044	15	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+77	77	Phiên bản tiêu chuẩn	CHU-EM901X-RGB-SL-WL-BLACK	700000.00	665000.00	2026-05-18 13:43:19.262044	2026-09-22 13:43:19.262044	16	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+169	169	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL15-72P-581V	15290000.00	14525500.00	2026-05-18 13:43:20.939189	2026-09-22 13:43:20.939189	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674474/lap-acer-aspire-lite-al15-72p-581v_01_gbl6ys.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+170	170	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-GO-AG14-71M-57WR	16790000.00	15950500.00	2026-05-18 13:43:20.960189	2026-09-22 13:43:20.960189	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674547/lap-acer-aspire-go-ag14-71m-57wr_01_gsyeqv.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+173	173	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-15-AL15-41P-R3U5	12790000.00	12150500.00	2026-05-18 13:43:21.022737	2026-09-22 13:43:21.022737	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674733/lap-acer-aspire-lite-15-al15-41p-r3u5_01_qaujyz.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+174	174	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-5-A515-58P-9841	21690000.00	20605500.00	2026-05-18 13:43:21.054798	2026-09-22 13:43:21.054798	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675320/lap-acer-aspire-5-a515-58p-9841_01_fjqiiw.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+175	175	Phiên bản tiêu chuẩn	LAP-ACER-SWIFT-LITE-14-SFL14-51M-56HS	16990000.00	16140500.00	2026-05-18 13:43:21.082387	2026-09-22 13:43:21.082387	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675388/lap-acer-swift-lite-14-sfl14-51m-56hs_01_slptm2.jpg	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+11	11	29 inch / IPS / UWFHD 2560x1080 / 100Hz / USB-C	MAN-LG-29U531A-W	4990000.00	4740500.00	2026-05-18 13:43:17.895587	2026-09-22 13:43:17.895587	12	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646457/man-lg-29u531a-w_01_wsvjid.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+12	12	27 inch / IPS / Full HD / 120Hz / HDR10	MAN-LG-27U411A-B	2990000.00	2840500.00	2026-05-18 13:43:17.932586	2026-09-22 13:43:17.932586	18	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646607/man-lg-27u411a-b_01_cakr00.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+13	13	22 inch / VA / Full HD / 100Hz / HDR10	MAN-LG-22U401A-B	2090000.00	1985500.00	2026-05-18 13:43:17.961586	2026-09-22 13:43:17.961586	25	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646769/man-lg-22u401a-b_01_wkxzre.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+14	14	24 inch / IPS / 2K / 100Hz / USB-C	MAN-LG-24U631A-B	3990000.00	3790500.00	2026-05-18 13:43:17.989144	2026-09-22 13:43:17.989144	15	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779646912/man-lg-24u631a-b_01_spcoy2.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+171	171	Phiên bản tiêu chuẩn	LAP-ACER-SWIFT-GO-SFG14-74T-55HD	31490000.00	29915500.00	2026-05-18 13:43:20.980737	2026-09-22 13:43:20.980737	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674610/lap-acer-swift-go-sfg14-74t-55hd_01_utgnq6.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+15	15	34 inch / OLED cong / 2K / 240Hz	MAN-LG-34GX90SA-W	25190000.00	23930500.00	2026-05-18 13:43:18.016145	2026-09-22 13:43:18.016145	6	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647124/man-lg-34gx90sa-w_01_bribqd.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+16	16	27 inch / IPS / 4K UHD / HDR / USB-C	MAN-LG-27UP850K-W	8590000.00	8160500.00	2026-05-18 13:43:18.042713	2026-09-22 13:43:18.042713	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647215/man-lg-27up850k-w_01_o5xvdl.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+172	172	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-16-AL16-52P-76DU	17690000.00	16805500.00	2026-05-18 13:43:21.001737	2026-09-22 13:43:21.001737	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674665/lap-acer-aspire-lite-16-al16-52p-76du_01_vxbvpb.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+176	176	Phiên bản tiêu chuẩn	LAP-ACER-SWIFT-14-SF14-51-53P9	28990000.00	27540500.00	2026-05-18 13:43:21.110387	2026-09-22 13:43:21.110387	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675453/lap-acer-swift-14-sf14-51-53p9_01_sopd8a.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+43	43	Alice Layout / AKKO CS Switch	KB-AKKO-ACR-PRO-ALICE-PLUS-SPRAY-WHITE	2990000.00	2840500.00	2026-05-18 13:43:18.475182	2026-09-22 13:43:18.475182	7	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652602/kb-akko-acr-pro-alice-plus-spray-white_01_feefyw.jpg	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+45	45	Phiên bản tiêu chuẩn	CHU-ASUS-TUF-M3-GENII	400000.00	380000.00	2026-05-18 13:43:18.513182	2026-09-22 13:43:18.513182	16	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654229/chu-asus-tuf-m3-genii_01_jmzwlb.jpg	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+79	79	Phiên bản tiêu chuẩn	CHU-LOG-G304-WL-WHITE	725000.00	688750.00	2026-05-18 13:43:19.309739	2026-09-22 13:43:19.309739	18	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+80	80	Phiên bản tiêu chuẩn	CHU-LOGITECH-PEB-MOUSE-2-M350S-GRA	470000.00	446500.00	2026-05-18 13:43:19.332304	2026-09-22 13:43:19.332304	19	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+110	110	Phiên bản tiêu chuẩn	TAI-HS55-WL-CORE-BLACK-CA-9011290-AP	1590000.00	1510500.00	2026-05-18 13:43:19.879319	2026-09-22 13:43:19.879319	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660746/tai-corsair-h35-v2-carbon_01_ztdjkj.jpg	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+111	111	Phiên bản tiêu chuẩn	TAI-RAPOO-VH160	690000.00	655500.00	2026-05-18 13:43:19.896316	2026-09-22 13:43:19.896316	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779660908/tai-rapoo-vh160_01_plikmc.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+112	112	Phiên bản tiêu chuẩn	TAI-RAZER-BARRACUDA-X-2022	2490000.00	2365500.00	2026-05-18 13:43:19.918315	2026-09-22 13:43:19.918315	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661098/tai-razer-barracuda-x-2022_01_wr68tn.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+42	42	96% / Optical Mechanical Switch	KB-ASUS-TUF-K3-GEN-II-MIKU	2790000.00	2650500.00	2026-05-18 13:43:18.458639	2026-09-22 13:43:18.458639	9	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779652417/kb-asus-tuf-k3-gen-ii-miku_01_biad20.png	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 13:43:18.238185	\N
+46	46	Phiên bản tiêu chuẩn	CHU-ASUS-ROG-IMPACT-III-WL-WHITE	1090000.00	1035500.00	2026-05-18 13:43:18.534182	2026-09-22 13:43:18.535181	17	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654417/chu-asus-rog-impact-iii-wl-white_04_doaj5u.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+47	47	Phiên bản tiêu chuẩn	CHU-ASUS-ROG-IMPACT-III-WL	1090000.00	1035500.00	2026-05-18 13:43:18.553182	2026-09-22 13:43:18.553182	18	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654591/chu-asus-rog-impact-iii-wl_01_jrixoi.jpg	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+48	48	Phiên bản tiêu chuẩn	CHU-LOG-G502-HERO	940000.00	893000.00	2026-05-18 13:43:18.735601	2026-09-22 13:43:18.735601	19	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654736/chu-log-g502-hero_01_xp096n.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+49	49	Phiên bản tiêu chuẩn	CHU-LOGITECH-G-PRO-X-SUPERLIGHT-2-BLACK	3250000.00	3087500.00	2026-05-18 13:43:18.773746	2026-09-22 13:43:18.773746	20	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779654956/chu-logitech-g-pro-x-superlight-2-black_01_mbzarf.jpg	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+72	72	Phiên bản tiêu chuẩn	CHU-ASUS-TUF-MINI-MIKU	2490000.00	2365500.00	2026-05-18 13:43:19.159909	2026-09-22 13:43:19.159909	27	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+73	73	Phiên bản tiêu chuẩn	CHU-LOG-M331-SIL-BLA	360000.00	342000.00	2026-05-18 13:43:19.179481	2026-09-22 13:43:19.179481	28	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+113	113	Phiên bản tiêu chuẩn	TAI-HP-HYPERX-CLOUD-III-RED	2290000.00	2175500.00	2026-05-18 13:43:19.935202	2026-09-22 13:43:19.935202	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661327/tai-hp-hyperx-cloud-iii-red_01_cl4rnd.gif	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+121	121	Phiên bản tiêu chuẩn	TAI-RAZ-BLACK-SHARK-V2-X	990000.00	940500.00	2026-05-18 13:43:20.069947	2026-09-22 13:43:20.069947	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+122	122	Phiên bản tiêu chuẩn	TAI-LOGITECH-G-PRO-X2-LS-BLACK	4970000.00	4721500.00	2026-05-18 13:43:20.087947	2026-09-22 13:43:20.087947	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+123	123	Phiên bản tiêu chuẩn	TAI-SPEAT-AIR-3-PRO	1590000.00	1510500.00	2026-05-18 13:43:20.105947	2026-09-22 13:43:20.105947	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+124	124	Phiên bản tiêu chuẩn	TAI-CORSAIR-H35-SUR-V2-CARBON	1290000.00	1225500.00	2026-05-18 13:43:20.123947	2026-09-22 13:43:20.123947	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+90	90	Phiên bản tiêu chuẩn	CHU-LOG-G309-DEN	1630000.00	1548500.00	2026-05-18 13:43:19.564955	2026-09-22 13:43:19.564955	29	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+91	91	Phiên bản tiêu chuẩn	CHU-LOGITECH-PEB-MOUSE-2-M350S-WHITE	490000.00	465500.00	2026-05-18 13:43:19.593024	2026-09-22 13:43:19.593024	30	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+92	92	Phiên bản tiêu chuẩn	CHU-LOG-G-PRO-X-SUP-W-WHI	2530000.00	2403500.00	2026-05-18 13:43:19.619203	2026-09-22 13:43:19.619203	15	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+93	93	Phiên bản tiêu chuẩn	CHU-LOGITECH-G-PRO-X-SUPERLIGHT-2-MAG	3250000.00	3087500.00	2026-05-18 13:43:19.645747	2026-09-22 13:43:19.645747	16	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+95	95	Phiên bản tiêu chuẩn	TAI-LOGITECH-AX20	3590000.00	3410500.00	2026-05-18 13:43:19.68534	2026-09-22 13:43:19.68534	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+96	96	Phiên bản tiêu chuẩn	TAI-ACER-PRE-GALEA-550-WL	3000000.00	2850000.00	2026-05-18 13:43:19.69334	2026-09-22 13:43:19.69334	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658730/tai-acer-pre-galea-550-wl_01_ftholv.jpg	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+97	97	Phiên bản tiêu chuẩn	TAI-AKKO-VERGE-S9-ULTRA-WHI	1390000.00	1320500.00	2026-05-18 13:43:19.70534	2026-09-22 13:43:19.70534	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779658872/tai-akko-verge-s9-ultra-whi_01_yyeh2m.jpg	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+98	98	Phiên bản tiêu chuẩn	TAI-AKKO-GH300-WHI	890000.00	845500.00	2026-05-18 13:43:19.71634	2026-09-22 13:43:19.71634	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659064/tai-akko-gh300-whi_01_n6jbeg.jpg	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+99	99	Phiên bản tiêu chuẩn	TAI-LOGITECH-G325-LIGHTSPEED-WHI	2390000.00	2270500.00	2026-05-18 13:43:19.727923	2026-09-22 13:43:19.727923	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779659245/tai-logitech-g325-lightspeed-whi_01_qj6mrk.jpg	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+100	100	Phiên bản tiêu chuẩn	TAI-RAZ-HAMER-V3-EARBUDS	1260000.00	1197000.00	2026-05-18 13:43:19.738923	2026-09-22 13:43:19.738923	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+17	17	27 inch / IPS / 2K / 100Hz / HDR10	MAN-LG-27U631A-B	4390000.00	4170500.00	2026-05-18 13:43:18.074492	2026-09-22 13:43:18.074492	16	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779647347/man-lg-27u631a-b_01_v1xpmg.jpg	ACTIVE	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+81	81	Phiên bản tiêu chuẩn	CHU-LOG-M331-SIL-BLU	360000.00	342000.00	2026-05-18 13:43:19.353304	2026-09-22 13:43:19.353304	20	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+82	82	Phiên bản tiêu chuẩn	CHU-RAZER-COBRA	660000.00	627000.00	2026-05-18 13:43:19.375204	2026-09-22 13:43:19.375204	21	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 13:43:18.496089	\N
+141	141	Phiên bản tiêu chuẩn	GHE-WAR-HERO-WEC509-BLA-RED	3390000.00	3220500.00	2026-05-18 13:43:20.409397	2026-09-22 13:43:20.409397	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664631/ghe-war-hero-wec509-bla-red_01_keafvk.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+142	142	Phiên bản tiêu chuẩn	GHE-EDRA-HER-EGC203-BLA	3490000.00	3315500.00	2026-05-18 13:43:20.425397	2026-09-22 13:43:20.425397	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664811/ghe-edra-her-egc203-bla_01_aff1lr.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+143	143	Phiên bản tiêu chuẩn	GHE-WARRIOR-IMMORTAL-SERIES-WGC225-BLK	3290000.00	3125500.00	2026-05-18 13:43:20.438961	2026-09-22 13:43:20.438961	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664941/ghe-warrior-immortal-series-wgc225-blk_01_ox2981.png	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+144	144	Phiên bản tiêu chuẩn	GHE-COR-T3-RUSH-CHAR-2023	7390000.00	7020500.00	2026-05-18 13:43:20.454961	2026-09-22 13:43:20.454961	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665079/ghe-cor-t3-rush-char-2023_01_mf9xyy.png	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+145	145	Phiên bản tiêu chuẩn	GHE-SIHOO-M57	4090000.00	3885500.00	2026-05-18 13:43:20.472203	2026-09-22 13:43:20.472203	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665153/ghe-sihoo-m57_01_lbrmpa.png	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+146	146	Phiên bản tiêu chuẩn	GHE-SIHOO-M102C	2800000.00	2660000.00	2026-05-18 13:43:20.488203	2026-09-22 13:43:20.488203	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665280/ghe-sihoo-m102c_01_sjjmto.png	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+147	147	Phiên bản tiêu chuẩn	GHE-COR-TC500-LUXE-SHADOW	11890000.00	11295500.00	2026-05-18 13:43:20.505204	2026-09-22 13:43:20.505204	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665374/ghe-cor-tc500-luxe-shadow_01_plozvt.png	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+125	125	Phiên bản tiêu chuẩn	TAI-CORSAIR-H35-V2-CARBON	890000.00	845500.00	2026-05-18 13:43:20.142507	2026-09-22 13:43:20.142507	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+126	126	Phiên bản tiêu chuẩn	TAI-STEEL-ARCTIS-NOVA-7-DE	3990000.00	3790500.00	2026-05-18 13:43:20.161506	2026-09-22 13:43:20.161506	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+127	127	Phiên bản tiêu chuẩn	TAI-ONIKUMA-INEAR-T209-LIVE-BLK	590000.00	560500.00	2026-05-18 13:43:20.182341	2026-09-22 13:43:20.182341	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661592/tai-onikuma-inear-t209-live-blk_01_lmdvrq.jpg	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+128	128	Phiên bản tiêu chuẩn	TAI-ONIKUMA-INEAR-T18-ENC-BT-BLK	590000.00	560500.00	2026-05-18 13:43:20.202341	2026-09-22 13:43:20.202341	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661710/tai-onikuma-inear-t18-enc-bt-blk_01_kjdipf.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+129	129	Phiên bản tiêu chuẩn	TAI-RAZER-KRAKEN-KITTY-V2-BT-QUARTZ	2680000.00	2546000.00	2026-05-18 13:43:20.224204	2026-09-22 13:43:20.224204	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661821/tai-razer-kraken-kitty-v2-bt-quartz_01_bbr2o3.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+130	130	Phiên bản tiêu chuẩn	TAI-HP-HYPERX-CLOUD-JET-BLACK	1690000.00	1605500.00	2026-05-18 13:43:20.250781	2026-09-22 13:43:20.250781	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779661933/tai-hp-hyperx-cloud-jet-black_01_ljo3bj.jpg	INACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+131	131	Phiên bản tiêu chuẩn	TAI-EDRA-EH414W-BLK	990000.00	940500.00	2026-05-18 13:43:20.276352	2026-09-22 13:43:20.276352	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779662055/tai-edra-eh414w-blk_01_s3lgb1.png	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 13:43:19.670857	\N
+138	138	Phiên bản tiêu chuẩn	GHE-WARRIOR-RAIDER-WGC207-BLACK	2690000.00	2555500.00	2026-05-18 13:43:20.367873	2026-09-22 13:43:20.367873	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664125/ghe-warrior-raider-wgc207-black_01_wa4lr2.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+139	139	Phiên bản tiêu chuẩn	GHE-EDRA-EGC-229	2750000.00	2612500.00	2026-05-18 13:43:20.3824	2026-09-22 13:43:20.3824	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779664321/ghe-edra-egc229-black-grey_01_ojkmrp.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+140	140	Phiên bản tiêu chuẩn	GHE-WAR-WEC-506-BLA-V2	3690000.00	3505500.00	2026-05-18 13:43:20.397398	2026-09-22 13:43:20.397398	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+148	148	Phiên bản tiêu chuẩn	GHE-EDRA-EGC231-WD-BLACK	3590000.00	3410500.00	2026-05-18 13:43:20.523203	2026-09-22 13:43:20.523203	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665520/ghe-edra-egc231-wd-black_01_qms2vl.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+159	159	Phiên bản tiêu chuẩn	LAP-ACER-SWIFT-X14-SFX14-72G-79UW	52990000.00	50340500.00	2026-05-18 13:43:20.760955	2026-09-22 13:43:20.760955	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673492/lap-acer-swift-x14-sfx14-72g-79uw_01_azryft.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+160	160	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-GO-AG14-72P-563L	19990000.00	18990500.00	2026-05-18 13:43:20.771955	2026-09-22 13:43:20.771955	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673548/lap-acer-aspire-go-ag14-72p-563l_01_nu4lqt.jpg	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+161	161	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-GO-AG15-72P-54GY	19490000.00	18515500.00	2026-05-18 13:43:20.787955	2026-09-22 13:43:20.787955	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673682/lap-acer-aspire-go-ag15-72p-54gy_01_yiegxk.jpg	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+162	162	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL15-48P-R5MN	15990000.00	15190500.00	2026-05-18 13:43:20.802954	2026-09-22 13:43:20.802954	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673778/lap-acer-aspire-lite-al15-48p-r5mn_01_yzu4mo.jpg	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+163	163	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL14-52P-309T	14490000.00	13765500.00	2026-05-18 13:43:20.820204	2026-09-22 13:43:20.820204	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673874/lap-acer-aspire-lite-al14-52p-309t_01_ajsfst.jpg	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+164	164	Phiên bản tiêu chuẩn	LAP-ACER-SWIFT-GO-14-AI-SFG14-75-5264	29990000.00	28490500.00	2026-05-18 13:43:20.837832	2026-09-22 13:43:20.837832	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779673969/lap-acer-swift-go-14-ai-sfg14-75-5264_01_wwtbmb.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+165	165	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-GO-15-AG15-71P-58X1	14490000.00	13765500.00	2026-05-18 13:43:20.855832	2026-09-22 13:43:20.855832	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674080/lap-acer-aspire-go-15-ag15-71p-58x1_01_ewecbp.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+166	166	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-16-AI-A16-71M-71U7	18890000.00	17945500.00	2026-05-18 13:43:20.875896	2026-09-22 13:43:20.875896	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779674178/lap-acer-aspire-16-ai-a16-71m-71u7_01_bhogaz.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+149	149	Phiên bản tiêu chuẩn	GHE-CORSAIR-TC100-LB-90010050-WW	5290000.00	5025500.00	2026-05-18 13:43:20.540926	2026-09-22 13:43:20.540926	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665704/ghe-corsair-tc100-lb-90010050-ww_01_ah2pi7.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+150	150	Phiên bản tiêu chuẩn	GHE-RAZER-ISKUR-V2-DARK-GREY-FABRIC	15420000.00	14649000.00	2026-05-18 13:43:20.558926	2026-09-22 13:43:20.558926	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779665858/ghe-razer-iskur-v2-dark-grey-fabric_01_ytqwhc.png	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+151	151	Phiên bản tiêu chuẩn	GHE-EDRA-EGC234-BLACK	1690000.00	1605500.00	2026-05-18 13:43:20.577488	2026-09-22 13:43:20.577488	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666006/ghe-edra-egc234-black_01_rob8tg.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+152	152	Phiên bản tiêu chuẩn	GHE-WARR-RAIDER-WGC206-WHI-PINK	2890000.00	2745500.00	2026-05-18 13:43:20.596487	2026-09-22 13:43:20.596487	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666169/ghe-warr-raider-wgc206-whi-pink_01_rfw4cm.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+153	153	Phiên bản tiêu chuẩn	GHE-SIHOO-M57B-KC	4590000.00	4360500.00	2026-05-18 13:43:20.618763	2026-09-22 13:43:20.618763	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666309/ghe-sihoo-m57b-kc_01_fflhwk.jpg	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+154	154	Phiên bản tiêu chuẩn	GHE-SIHOO-M18	3190000.00	3030500.00	2026-05-18 13:43:20.640763	2026-09-22 13:43:20.640763	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+155	155	Phiên bản tiêu chuẩn	GHE-SIHOO-M77C-GRAY	2490000.00	2365500.00	2026-05-18 13:43:20.660762	2026-09-22 13:43:20.660762	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666457/ghe-sihoo-m77c-gray_01_xz4rt9.jpg	INACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+156	156	Phiên bản tiêu chuẩn	GHE-EDRA-CITIZEN-EGC236-FABRIC	1990000.00	1890500.00	2026-05-18 13:43:20.681306	2026-09-22 13:43:20.681306	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666587/ghe-edra-citizen-egc236-fabric_01_vmxm3c.jpg	INACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+157	157	Phiên bản tiêu chuẩn	GHE-WARRIOR-WGC210-BLK-GRAY	1690000.00	1605500.00	2026-05-18 13:43:20.704304	2026-09-22 13:43:20.704304	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779666753/ghe-warrior-wgc210-blk-gray_01_mu8nmg.jpg	INACTIVE	2026-05-25 08:39:43.521156	2026-05-25 13:43:20.2977	\N
+177	177	Phiên bản tiêu chuẩn	LAP-ACER-SWIFT-GO-14-SFG14-73-57FZ	23790000.00	22600500.00	2026-05-18 13:43:21.13878	2026-09-22 13:43:21.13878	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675520/lap-acer-swift-go-14-sfg14-73-57fz_01_mwwd6x.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+179	179	Phiên bản tiêu chuẩn	LAP-ACER-SWIFT-3-SF314-511-55QE	12990000.00	12340500.00	2026-05-18 13:43:21.204603	2026-09-22 13:43:21.204603	10	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+180	180	Phiên bản tiêu chuẩn	LAP-ACER-SWIFT-GO-SFG14-I71-70RP	49990000.00	47490500.00	2026-05-18 13:43:21.236773	2026-09-22 13:43:21.236773	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675710/lap-acer-swift-go-sfg14-i71-70rp_01_hzpids.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+181	181	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL16-71P-582Q	24990000.00	23740500.00	2026-05-18 13:43:21.269769	2026-09-22 13:43:21.269769	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779675907/lap-acer-aspire-lite-al16-71p-582q_01_j12lcr.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+182	182	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-GO-AG15-52P-52WT	23490000.00	22315500.00	2026-05-18 13:43:21.320335	2026-09-22 13:43:21.320335	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676081/lap-acer-aspire-go-ag15-52p-52wt_01_rd5ere.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+183	183	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-GO-AG14-I71M-50AL	23990000.00	22790500.00	2026-05-18 13:43:21.359611	2026-09-22 13:43:21.359611	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676279/lap-acer-aspire-go-ag14-i71m-50al_01_vszu3a.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+184	184	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL15-53P-56QH	22990000.00	21840500.00	2026-05-18 13:43:21.397187	2026-09-22 13:43:21.397187	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676403/lap-acer-aspire-lite-al15-53p-56qh_01_bgvgcm.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+185	185	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL15-44P-R4UH	21990000.00	20890500.00	2026-05-18 13:43:21.430754	2026-09-22 13:43:21.430754	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676518/lap-acer-aspire-lite-al15-44p-r4uh_01_klhjfk.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+186	186	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL15-21P-R91W	20990000.00	19940500.00	2026-05-18 13:43:21.463754	2026-09-22 13:43:21.463754	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676658/lap-acer-aspire-lite-al15-21p-r91w_01_cojgrd.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+187	187	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL14-44P-R0SP	20990000.00	19940500.00	2026-05-18 13:43:21.498803	2026-09-22 13:43:21.498803	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779676867/lap-acer-aspire-lite-al14-44p-r0sp_01_jlcjif.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+188	188	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL15-36P-30TN	16990000.00	16140500.00	2026-05-18 13:43:21.532355	2026-09-22 13:43:21.532355	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677055/lap-acer-aspire-lite-al15-36p-30tn_01_cwkoeq.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+189	189	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL14-45P-R7Z3	15990000.00	15190500.00	2026-05-18 13:43:21.568893	2026-09-22 13:43:21.568893	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677233/lap-acer-aspire-lite-al14-45p-r7z3_01_dko84a.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+190	190	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL15-46P-R73C	14490000.00	13765500.00	2026-05-18 13:43:21.604461	2026-09-22 13:43:21.604461	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677396/lap-acer-aspire-lite-al15-46p-r73c_01_srqqqw.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+191	191	Phiên bản tiêu chuẩn	LAP-ACER-SWIFT-EDGE-SFE14-51T-52KD	40990000.00	38940500.00	2026-05-18 13:43:21.643314	2026-09-22 13:43:21.643314	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677559/lap-acer-swift-edge-sfe14-51t-52kd_01_mosa0p.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+192	192	Phiên bản tiêu chuẩn	LAP-ACER-ASPIRE-LITE-AL15-42P-R8E6	14990000.00	14240500.00	2026-05-18 13:43:21.686889	2026-09-22 13:43:21.686889	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677674/lap-acer-aspire-lite-al15-42p-r8e6_01_jdbnxa.jpg	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+193	193	Phiên bản tiêu chuẩn	LAP-ACER-A5-A515-58M-79R7	16990000.00	16140500.00	2026-05-18 13:43:21.726776	2026-09-22 13:43:21.726776	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677772/lap-acer-a5-a515-58m-79r7_01_gfxnzz.png	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
+194	194	Phiên bản tiêu chuẩn	LAP-ACER-A5-A514-56P-562P	12790000.00	12150500.00	2026-05-18 13:43:21.769776	2026-09-22 13:43:21.769776	0	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779677873/lap-acer-a5-a514-56p-562p_01_iukjtq.png	INACTIVE	2026-05-25 08:41:14.30386	2026-05-25 13:43:20.759093	\N
 \.
 
 
 --
--- TOC entry 5357 (class 0 OID 16738)
+-- TOC entry 5358 (class 0 OID 16738)
 -- Dependencies: 259
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1806,6 +4117,7 @@ COPY public.products (id, category_id, brand_id, name, slug, description, featur
 10	1	1	Màn hình LG 32GX870A-B UltraGear 32 inch OLED 4K 240Hz G-Sync chuyên game	man-hinh-lg-32gx870a-b-ultragear-32-inch-oled-4k-240hz-gsync	Màn hình OLED 32 inch 4K 240Hz, phù hợp gaming cao cấp, xem phim và sáng tạo nội dung.\n\nThông số nổi bật:\n- Hãng sản xuất: LG\n- Bảo hành: 24 tháng\n- Kích thước màn hình: 32 inch\n- Tấm nền: OLED\n- Độ phân giải: 4K\n- Tần số quét: 240Hz\n- Thời gian phản hồi: 0.03ms GtG\n- Cổng kết nối: 2 x HDMI; 1 x DisplayPort; 1 x USB-C DP Alt Mode PD 90W\n- VESA: 100x100	t	ACTIVE	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
 11	1	1	Màn hình LG 29U531A-W 29 inch IPS 100Hz USB-C HDR10 UWFHD	man-hinh-lg-29u531a-w-29-inch-ips-100hz-usbc-hdr10-uwfhd	Màn hình UltraWide 29 inch phù hợp làm việc đa nhiệm, dựng nội dung cơ bản và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: LG\n- Bảo hành: 24 tháng\n- Kích thước màn hình: 29 inch\n- Tấm nền: IPS\n- Độ phân giải: UWFHD (2560 x 1080)\n- Tỷ lệ: 21:9 UltraWide\n- Tần số quét: 100Hz\n- Thời gian phản hồi: 5ms\n- Cổng kết nối: 1 x HDMI; 1 x USB-C 15W\n- VESA: 100x100	f	ACTIVE	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
 12	1	1	Màn hình LG 27U411A-B 27 inch IPS 120Hz HDR10 siêu mỏng	man-hinh-lg-27u411a-b-27-inch-ips-120hz-hdr10	Màn hình 27 inch phổ thông, phù hợp học tập, làm việc văn phòng và giải trí tại nhà.\n\nThông số nổi bật:\n- Hãng sản xuất: LG\n- Bảo hành: 24 tháng\n- Kích thước màn hình: 27 inch\n- Tấm nền: IPS\n- Độ phân giải: Full HD\n- HDR: HDR10\n- Tần số quét: 120Hz\n- Thời gian phản hồi: 5ms GtG / 1ms MBR\n- Cổng kết nối: 1 x HDMI\n- VESA: 100 x 100 mm	f	ACTIVE	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
+78	4	9	Chuột Razer Basilisk V3	chuot-razer-basilisk-v3	Chuột Razer Basilisk V3 là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
 13	1	1	Màn hình LG 22U401A-B 22 inch 100Hz HDR10	man-hinh-lg-22u401a-b-22-inch-100hz-hdr10	Màn hình nhỏ gọn 22 inch cho học tập, văn phòng và giải trí nhẹ.\n\nThông số nổi bật:\n- Hãng sản xuất: LG\n- Bảo hành: 24 tháng\n- Kích thước màn hình: 22 inch\n- Tấm nền: VA\n- Độ phân giải: Full HD (1920 x 1080)\n- HDR: HDR10\n- Tần số quét: 100Hz\n- Thời gian phản hồi: 1ms MBR\n- Cổng kết nối: 1 x HDMI; 1 x D-Sub\n- VESA: 100x100	f	ACTIVE	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
 14	1	1	Màn hình LG 24U631A-B 24 inch IPS 2K 100Hz USB-C	man-hinh-lg-24u631a-b-24-inch-ips-2k-100hz-usbc	Màn hình 24 inch độ phân giải 2K, phù hợp làm việc văn phòng, học tập và giải trí sắc nét.\n\nThông số nổi bật:\n- Hãng sản xuất: LG\n- Bảo hành: 24 tháng\n- Kích thước màn hình: 24 inch\n- Tấm nền: IPS\n- Độ phân giải: 2K\n- HDR: HDR10\n- Tần số quét: 100Hz\n- Thời gian phản hồi: 5ms GtG\n- Cổng kết nối: 1 x HDMI; 1 x USB-C 15W\n- VESA: 100x100	f	ACTIVE	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
 15	1	1	Màn hình cong LG 34GX90SA-W OLED 2K 240Hz chuyên game	man-hinh-cong-lg-34gx90sa-w-oled-2k-240hz	Màn hình cong OLED 34 inch, phù hợp game thủ cần khung hình rộng, màu sắc sâu và tốc độ cao.\n\nThông số nổi bật:\n- Hãng sản xuất: LG\n- Bảo hành: 24 tháng\n- Kích thước màn hình: 34 inch\n- Tấm nền: OLED\n- Độ phân giải: 2K\n- Tần số quét: 240Hz\n- Thời gian phản hồi: 0.03ms\n- Cổng kết nối: HDMI 2.0; DisplayPort 1.4; USB-C\n- VESA: N/A	t	ACTIVE	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
@@ -1821,11 +4133,178 @@ COPY public.products (id, category_id, brand_id, name, slug, description, featur
 26	1	1	tets01	tets01		f	INACTIVE	2026-05-23 01:08:09.256704	2026-05-23 01:08:21.594754	2026-05-23 01:08:21.595488
 22	1	1	Màn hình LG 27GR93U-B UltraGear 27 inch IPS 4K 144Hz G-Sync chuyên game	man-hinh-lg-27gr93u-b-ultragear-27-inch-ips-4k-144hz-gsync	Màn hình UltraGear 27 inch 4K 144Hz, phù hợp game thủ cần độ nét cao và chuyển động mượt.\n\nThông số nổi bật:\n- Hãng sản xuất: LG\n- Bảo hành: 24 tháng\n- Kích thước màn hình: 27 inch\n- Tấm nền: IPS\n- Độ phân giải: 4K (3840 x 2160)\n- HDR: HDR10\n- Tần số quét: 144Hz\n- Thời gian phản hồi: 1ms GTG\n- VESA: 100 x 100 mm	t	ACTIVE	2026-05-22 23:51:49.289431	2026-05-23 01:21:51.816911	\N
 28	1	1	test1	test1	test1	f	INACTIVE	2026-05-24 01:48:15.899381	2026-05-24 01:48:25.763946	2026-05-24 01:48:25.764399
+29	3	2	Bàn phím AULA F75 Đen Xanh Đậm Cam Reaper Switch	ban-phim-aula-f75-den-xanh-dam-cam-reaper-switch	Bàn phím cơ gaming layout 75%, thiết kế nhỏ gọn, màu sắc nổi bật, phù hợp chơi game và làm việc.\n\nThông số nổi bật:\n- Hãng sản xuất: AULA\n- Layout: 75%\n- Switch: Reaper Switch\n- Kết nối: Có dây / không dây\n- LED: RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+30	3	3	Bàn phím gaming ASUS XA14 ROG STRIX SCOPE II X NX Snow	ban-phim-gaming-asus-xa14-rog-strix-scope-ii-x-nx-snow	Bàn phím gaming ASUS ROG cao cấp, switch NX Snow cho cảm giác gõ mượt và độ ổn định cao.\n\nThông số nổi bật:\n- Hãng sản xuất: ASUS\n- Layout: Fullsize\n- Switch: ROG NX Snow\n- Kết nối: USB Type-C\n- LED: AURA Sync RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+31	3	4	Bàn phím không dây AKKO 3108RF V3 Black Gold	ban-phim-khong-day-akko-3108rf-v3-black-gold	Bàn phím AKKO fullsize không dây, phong cách Black Gold, phù hợp làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: AKKO\n- Layout: Fullsize 108 phím\n- Switch: Akko Switch\n- Kết nối: Wireless / USB Type-C\n- LED: Không LED\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+32	3	4	Bàn phím không dây AKKO 3108RF V3 Prunus Lannesiana	ban-phim-khong-day-akko-3108rf-v3-prunus-lannesiana	Bàn phím AKKO 3108RF V3 phiên bản Prunus Lannesiana, thiết kế đẹp mắt, dùng pin tiện lợi.\n\nThông số nổi bật:\n- Hãng sản xuất: AKKO\n- Layout: Fullsize 108 phím\n- Switch: Akko Switch\n- Kết nối: Wireless / USB Type-C\n- LED: Không LED\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+33	3	4	Bàn phím không dây AKKO 3108RF V3 Glacier	ban-phim-khong-day-akko-3108rf-v3-glacier	Bàn phím AKKO 3108RF V3 Glacier với tông màu hiện đại, kết nối linh hoạt cho học tập và văn phòng.\n\nThông số nổi bật:\n- Hãng sản xuất: AKKO\n- Layout: Fullsize 108 phím\n- Switch: Akko Switch\n- Kết nối: Wireless / USB Type-C\n- LED: Không LED\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+34	3	5	Bàn phím Logitech G915 X Lightspeed TKL Tactile Wireless Black	ban-phim-logitech-g915-x-lightspeed-tkl-tactile-wireless-black	Bàn phím gaming không dây Logitech G915 X Lightspeed TKL, thiết kế mỏng, phản hồi nhanh.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Layout: TKL\n- Switch: Tactile Low Profile\n- Kết nối: Lightspeed / Bluetooth / USB-C\n- LED: RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+35	3	4	Bàn phím không dây AKKO 5087 V3 Lord of Mysteries	ban-phim-khong-day-akko-5087-v3-lord-of-mysteries	Bàn phím AKKO 5087 V3 Lord of Mysteries layout TKL, thiết kế độc đáo, hỗ trợ nhiều chế độ kết nối.\n\nThông số nổi bật:\n- Hãng sản xuất: AKKO\n- Layout: TKL\n- Switch: Akko V3 Piano Pro\n- Kết nối: Bluetooth / 2.4GHz / USB-C\n- LED: RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+36	3	6	Bàn phím cơ E-Dra không dây EK398S Red Switch	ban-phim-co-e-dra-khong-day-ek398s-red-switch	Bàn phím cơ E-Dra EK398S không dây, Red Switch dễ dùng, phù hợp làm việc và chơi game.\n\nThông số nổi bật:\n- Hãng sản xuất: E-Dra\n- Layout: Fullsize\n- Switch: Red Switch\n- Kết nối: USB / 2.4GHz / Bluetooth\n- LED: LED\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+37	3	6	Bàn phím cơ E-Dra không dây EK375S Red Switch	ban-phim-co-e-dra-khong-day-ek375s-red-switch	Bàn phím cơ E-Dra EK375S nhỏ gọn, hỗ trợ nhiều chế độ kết nối, phù hợp setup tối giản.\n\nThông số nổi bật:\n- Hãng sản xuất: E-Dra\n- Layout: 75%\n- Switch: Red Switch\n- Kết nối: USB / 2.4GHz / Bluetooth\n- LED: LED\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+38	3	2	Bàn phím AULA S98 PRO TM Xanh Dương Trắng Tím Đậm Star Vector Switch	ban-phim-aula-s98-pro-tm-xanh-duong-trang-tim-dam-star-vector-switch	Bàn phím AULA S98 PRO TM layout 98 phím, switch Star Vector, thiết kế màu sắc nổi bật.\n\nThông số nổi bật:\n- Hãng sản xuất: AULA\n- Layout: 98 phím\n- Switch: Star Vector Switch\n- Kết nối: Có dây / không dây\n- LED: RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+39	3	2	Bàn phím AULA S100 PRO TM Đen Xám Cam Red Switch	ban-phim-aula-s100-pro-tm-den-xam-cam-red-switch	Bàn phím AULA S100 PRO TM với Red Switch, kiểu dáng gọn nhẹ, phù hợp học tập và chơi game.\n\nThông số nổi bật:\n- Hãng sản xuất: AULA\n- Layout: 100 phím\n- Switch: Red Switch\n- Kết nối: Có dây / không dây\n- LED: Rainbow LED\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+40	3	7	Bàn phím có dây Veekos K75 Wined Red	ban-phim-co-day-veekos-k75-wined-red	Bàn phím cơ có dây Veekos K75 Wined Red, layout 75%, keycap PBT và hỗ trợ hotswap.\n\nThông số nổi bật:\n- Hãng sản xuất: Veekos\n- Layout: 75%\n- Switch: Mechanical Switch\n- Kết nối: USB Type-C\n- LED: RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+41	3	2	Bàn phím có dây AULA AG60 PRO Xám Aether Magnetic Switch Rapid Trigger	ban-phim-co-day-aula-ag60-pro-xam-aether-magnetic-switch-rapid-trigger	Bàn phím AULA AG60 PRO sử dụng magnetic switch, hỗ trợ rapid trigger, phù hợp game thủ FPS.\n\nThông số nổi bật:\n- Hãng sản xuất: AULA\n- Layout: 60%\n- Switch: Aether Magnetic Switch\n- Kết nối: USB Type-C\n- LED: RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+42	3	3	Bàn phím cơ có dây ASUS TUF Gaming K3 Gen II Hatsune Miku	ban-phim-co-co-day-asus-tuf-gaming-k3-gen-ii-hatsune-miku	Bàn phím ASUS TUF Gaming K3 Gen II phiên bản Hatsune Miku, thiết kế nổi bật, hỗ trợ Aura Sync.\n\nThông số nổi bật:\n- Hãng sản xuất: ASUS\n- Layout: 96%\n- Switch: Optical Mechanical Switch\n- Kết nối: USB\n- LED: Aura Sync RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+43	3	4	Bàn phím AKKO ACR Pro Alice Plus Spray Paint White AKKO CS Switch	ban-phim-akko-acr-pro-alice-plus-spray-paint-white-akko-cs-switch	Bàn phím AKKO ACR Pro Alice Plus kiểu dáng Alice công thái học, vỏ trong suốt và switch AKKO CS.\n\nThông số nổi bật:\n- Hãng sản xuất: AKKO\n- Layout: Alice Layout\n- Switch: AKKO CS Switch\n- Kết nối: USB Type-C\n- LED: RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+44	4	8	Chuột gaming có dây Rapoo V260 Pro	chuot-gaming-co-day-rapoo-v260-pro	Chuột gaming có dây Rapoo V260 Pro là sản phẩm chuột máy tính thuộc thương hiệu Rapoo, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Rapoo\n- Loại chuột: Chuột gaming\n- Kết nối: Có dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+45	4	3	Chuột Asus TUF Gaming M3 Gen II	chuot-asus-tuf-gaming-m3-gen-ii	Chuột Asus TUF Gaming M3 Gen II là sản phẩm chuột máy tính thuộc thương hiệu ASUS, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ASUS\n- Loại chuột: Chuột gaming\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+46	4	3	Chuột ASUS ROG Strix Impact III Wireless White	chuot-asus-rog-strix-impact-iii-wireless-white	Chuột ASUS ROG Strix Impact III Wireless White là sản phẩm chuột máy tính thuộc thương hiệu ASUS, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ASUS\n- Loại chuột: Chuột gaming\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+47	4	3	Chuột ASUS ROG Strix Impact III Wireless	chuot-asus-rog-strix-impact-iii-wireless	Chuột ASUS ROG Strix Impact III Wireless là sản phẩm chuột máy tính thuộc thương hiệu ASUS, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ASUS\n- Loại chuột: Chuột gaming\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+48	4	5	Chuột Logitech G502 Hero Gaming	chuot-logitech-g502-hero-gaming	Chuột Logitech G502 Hero Gaming là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột gaming\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+49	4	5	Chuột Logitech G Pro X Superlight 2 Black	chuot-logitech-g-pro-x-superlight-2-black	Chuột Logitech G Pro X Superlight 2 Black là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+50	4	5	Chuột Logitech G Pro X Superlight 2 Dex Wireless White	chuot-logitech-g-pro-x-superlight-2-dex-wireless-white	Chuột Logitech G Pro X Superlight 2 Dex Wireless White là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+51	4	5	Chuột Logitech G Pro X Superlight 2 White	chuot-logitech-g-pro-x-superlight-2-white	Chuột Logitech G Pro X Superlight 2 White là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+52	4	9	Chuột Razer Không dây Viper V3 Pro Trắng	chuot-razer-khong-day-viper-v3-pro-trang	Chuột Razer Không dây Viper V3 Pro Trắng là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+53	4	9	Chuột Razer Không dây Viper V3 Pro Đen	chuot-razer-khong-day-viper-v3-pro-den	Chuột Razer Không dây Viper V3 Pro Đen là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+54	4	5	Chuột Logitech G Pro X Superlight 2 Dex Wireless Black	chuot-logitech-g-pro-x-superlight-2-dex-wireless-black	Chuột Logitech G Pro X Superlight 2 Dex Wireless Black là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+55	4	5	Chuột Logitech G Pro X Superlight 2 Dex Wireless Pink	chuot-logitech-g-pro-x-superlight-2-dex-wireless-pink	Chuột Logitech G Pro X Superlight 2 Dex Wireless Pink là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+56	4	10	Chuột gaming Acer Predator Cestus 330	chuot-gaming-acer-predator-cestus-330	Chuột gaming Acer Predator Cestus 330 là sản phẩm chuột máy tính thuộc thương hiệu ACER, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ACER\n- Loại chuột: Chuột gaming\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+57	4	10	Chuột gaming không dây Predator Cestus 353	chuot-gaming-khong-day-predator-cestus-353	Chuột gaming không dây Predator Cestus 353 là sản phẩm chuột máy tính thuộc thương hiệu ACER, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ACER\n- Loại chuột: Chuột gaming\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+58	4	9	Chuột Razer DeathAdder V4 Pro Black	chuot-razer-deathadder-v4-pro-black	Chuột Razer DeathAdder V4 Pro Black là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+59	4	9	Chuột Razer Không dây Viper V4 Pro Trắng	chuot-razer-khong-day-viper-v4-pro-trang	Chuột Razer Không dây Viper V4 Pro Trắng là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+60	4	9	Chuột Razer Không dây Viper V4 Pro Đen	chuot-razer-khong-day-viper-v4-pro-den	Chuột Razer Không dây Viper V4 Pro Đen là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+61	4	5	Chuột Logitech G Pro X Superlight 2 SE Black	chuot-logitech-g-pro-x-superlight-2-se-black	Chuột Logitech G Pro X Superlight 2 SE Black là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+62	4	9	Chuột không dây Razer Viper V3 Pro SE	chuot-khong-day-razer-viper-v3-pro-se	Chuột không dây Razer Viper V3 Pro SE là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+63	4	11	Chuột DareU Không dây EM911T RGB Đen	chuot-dareu-khong-day-em911t-rgb-den	Chuột DareU Không dây EM911T RGB Đen là sản phẩm chuột máy tính thuộc thương hiệu DareU, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: DareU\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+64	4	11	Chuột DareU Không dây EM911T RGB Trắng	chuot-dareu-khong-day-em911t-rgb-trang	Chuột DareU Không dây EM911T RGB Trắng là sản phẩm chuột máy tính thuộc thương hiệu DareU, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: DareU\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+65	4	5	Chuột gaming không dây Logitech Pro X2 Superstrike Lightspeed	chuot-gaming-khong-day-logitech-pro-x2-superstrike-lightspeed	Chuột gaming không dây Logitech Pro X2 Superstrike Lightspeed là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột gaming\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+66	4	9	Chuột Razer Viper V3 Pro Counter-Strike 2 Edition	chuot-razer-viper-v3-pro-counter-strike-2-edition	Chuột Razer Viper V3 Pro Counter-Strike 2 Edition là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+67	4	3	Chuột ASUS P722 ROG KERIS II Origin WL Black	chuot-asus-p722-rog-keris-ii-origin-wl-black	Chuột ASUS P722 ROG KERIS II Origin WL Black là sản phẩm chuột máy tính thuộc thương hiệu ASUS, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ASUS\n- Loại chuột: Chuột gaming\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+68	4	5	Chuột Logitech G102 LightSync Black	chuot-logitech-g102-lightsync-black	Chuột Logitech G102 LightSync Black là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+69	4	9	Chuột Razer DeathAdder Essential (RZ01-03850100-R3M1)	chuot-razer-deathadder-essential-rz01-03850100-r3m1	Chuột Razer DeathAdder Essential (RZ01-03850100-R3M1) là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+70	4	5	Chuột Logitech G304 Wireless	chuot-logitech-g304-wireless	Chuột Logitech G304 Wireless là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+71	4	9	Chuột Razer Deathadder Essential White	chuot-razer-deathadder-essential-white	Chuột Razer Deathadder Essential White là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+72	4	3	Chuột không dây ASUS TUF Gaming Mini Hatsune Miku	chuot-khong-day-asus-tuf-gaming-mini-hatsune-miku	Chuột không dây ASUS TUF Gaming Mini Hatsune Miku là sản phẩm chuột máy tính thuộc thương hiệu ASUS, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ASUS\n- Loại chuột: Chuột gaming\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+73	4	5	Chuột không dây Logitech M331 Silent Black	chuot-khong-day-logitech-m331-silent-black	Chuột không dây Logitech M331 Silent Black là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột văn phòng\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+74	4	3	Chuột ASUS ROG Strix Impact III	chuot-asus-rog-strix-impact-iii	Chuột ASUS ROG Strix Impact III là sản phẩm chuột máy tính thuộc thương hiệu ASUS, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ASUS\n- Loại chuột: Chuột gaming\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+75	4	11	Chuột DareU EM901X RGB Superlight Wireless Pink	chuot-dareu-em901x-rgb-superlight-wireless-pink	Chuột DareU EM901X RGB Superlight Wireless Pink là sản phẩm chuột máy tính thuộc thương hiệu DareU, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: DareU\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+76	4	5	Chuột Logitech G102 LightSync White	chuot-logitech-g102-lightsync-white	Chuột Logitech G102 LightSync White là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+77	4	11	Chuột DareU EM901X RGB Superlight Wireless Black	chuot-dareu-em901x-rgb-superlight-wireless-black	Chuột DareU EM901X RGB Superlight Wireless Black là sản phẩm chuột máy tính thuộc thương hiệu DareU, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: DareU\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+79	4	5	Chuột Logitech G304 Wireless White	chuot-logitech-g304-wireless-white	Chuột Logitech G304 Wireless White là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+80	4	5	Chuột Logitech Pebble Mouse 2 M350S Graphite	chuot-logitech-pebble-mouse-2-m350s-graphite	Chuột Logitech Pebble Mouse 2 M350S Graphite là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột văn phòng\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+81	4	5	Chuột không dây Logitech M331 Silent Blue	chuot-khong-day-logitech-m331-silent-blue	Chuột không dây Logitech M331 Silent Blue là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột văn phòng\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+82	4	9	Chuột Razer Cobra	chuot-razer-cobra	Chuột Razer Cobra là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+83	4	5	Chuột Logitech G Pro X Superlight Wireless Black	chuot-logitech-g-pro-x-superlight-wireless-black	Chuột Logitech G Pro X Superlight Wireless Black là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+84	4	9	Chuột Razer Basilisk V3 X HyperSpeed	chuot-razer-basilisk-v3-x-hyperspeed	Chuột Razer Basilisk V3 X HyperSpeed là sản phẩm chuột máy tính thuộc thương hiệu Razer, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+85	4	3	Chuột Gaming Asus TUF M4 Wireless	chuot-gaming-asus-tuf-m4-wireless	Chuột Gaming Asus TUF M4 Wireless là sản phẩm chuột máy tính thuộc thương hiệu ASUS, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ASUS\n- Loại chuột: Chuột gaming\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+86	4	5	Chuột Logitech Pebble Mouse 2 M350S Rose	chuot-logitech-pebble-mouse-2-m350s-rose	Chuột Logitech Pebble Mouse 2 M350S Rose là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột văn phòng\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+87	4	5	Chuột Logitech MX Master 3S Graphite	chuot-logitech-mx-master-3s-graphite	Chuột Logitech MX Master 3S Graphite là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột văn phòng\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+88	4	5	Chuột Logitech G502 X Plus LightSpeed White	chuot-logitech-g502-x-plus-lightspeed-white	Chuột Logitech G502 X Plus LightSpeed White là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+89	4	5	Chuột Logitech G309 Lightspeed Wireless Bluetooth Trắng	chuot-logitech-g309-lightspeed-wireless-bluetooth-trang	Chuột Logitech G309 Lightspeed Wireless Bluetooth Trắng là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+90	4	5	Chuột Logitech G309 Lightspeed Wireless Bluetooth Đen	chuot-logitech-g309-lightspeed-wireless-bluetooth-den	Chuột Logitech G309 Lightspeed Wireless Bluetooth Đen là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+91	4	5	Chuột Logitech Pebble Mouse 2 M350S White	chuot-logitech-pebble-mouse-2-m350s-white	Chuột Logitech Pebble Mouse 2 M350S White là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột văn phòng\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+92	4	5	Chuột Logitech G Pro X Superlight Wireless White	chuot-logitech-g-pro-x-superlight-wireless-white	Chuột Logitech G Pro X Superlight Wireless White là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Không dây\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+93	4	5	Chuột Logitech G Pro X Superlight 2 Magneta	chuot-logitech-g-pro-x-superlight-2-magneta	Chuột Logitech G Pro X Superlight 2 Magneta là sản phẩm chuột máy tính thuộc thương hiệu Logitech, phù hợp cho nhu cầu làm việc, học tập và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại chuột: Chuột máy tính\n- Kết nối: Có dây / Không dây tùy phiên bản\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+94	5	12	Tai nghe HP HYPERX Cloud Earbuds II Black	tai-nghe-hp-hyperx-cloud-earbuds-ii-black	Tai nghe HP HYPERX Cloud Earbuds II Black là sản phẩm tai nghe thuộc thương hiệu HyperX, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: HyperX\n- Loại tai nghe: Tai nghe in-ear\n- Kiểu kết nối: Có dây\n- Microphone: Micro tích hợp\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+95	5	5	Tai nghe gaming không dây Logitech Astro A20 X	tai-nghe-gaming-khong-day-logitech-astro-a20-x	Tai nghe gaming không dây Logitech Astro A20 X là sản phẩm tai nghe thuộc thương hiệu Logitech, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+96	5	10	Tai nghe gaming Acer Predator Galea 550 Wireless	tai-nghe-gaming-acer-predator-galea-550-wireless	Tai nghe gaming Acer Predator Galea 550 Wireless là sản phẩm tai nghe thuộc thương hiệu ACER, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ACER\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+97	5	4	Tai nghe gaming không dây Akko Verge S9 Ultra White	tai-nghe-gaming-khong-day-akko-verge-s9-ultra-white	Tai nghe gaming không dây Akko Verge S9 Ultra White là sản phẩm tai nghe thuộc thương hiệu AKKO, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: AKKO\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+98	5	4	Tai nghe không dây AKKO GH300 White	tai-nghe-khong-day-akko-gh300-white	Tai nghe không dây AKKO GH300 White là sản phẩm tai nghe thuộc thương hiệu AKKO, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: AKKO\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+99	5	5	Tai nghe không dây Logitech G325 LIGHTSPEED White	tai-nghe-khong-day-logitech-g325-lightspeed-white	Tai nghe không dây Logitech G325 LIGHTSPEED White là sản phẩm tai nghe thuộc thương hiệu Logitech, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+100	5	9	Tai nghe Razer Hammerhead V3 Wired Earbuds	tai-nghe-razer-hammerhead-v3-wired-earbuds	Tai nghe Razer Hammerhead V3 Wired Earbuds là sản phẩm tai nghe thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại tai nghe: Tai nghe in-ear\n- Kiểu kết nối: Có dây\n- Microphone: Micro tích hợp\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+101	5	3	Tai nghe Asus ROG Pelta WL RGB Black	tai-nghe-asus-rog-pelta-wl-rgb-black	Tai nghe Asus ROG Pelta WL RGB Black là sản phẩm tai nghe thuộc thương hiệu ASUS, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ASUS\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+102	5	3	Tai nghe Asus ROG Cetra II Core	tai-nghe-asus-rog-cetra-ii-core	Tai nghe Asus ROG Cetra II Core là sản phẩm tai nghe thuộc thương hiệu ASUS, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ASUS\n- Loại tai nghe: Tai nghe in-ear\n- Kiểu kết nối: Có dây\n- Microphone: Micro tích hợp\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+103	5	5	Tai nghe không dây Logitech G321 LIGHTSPEED Black	tai-nghe-khong-day-logitech-g321-lightspeed-black	Tai nghe không dây Logitech G321 LIGHTSPEED Black là sản phẩm tai nghe thuộc thương hiệu Logitech, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+104	5	9	Tai nghe không dây Razer Blackshark V3 Pro Counter-Strike 2 Edition	tai-nghe-khong-day-razer-blackshark-v3-pro-counter-strike-2-edition	Tai nghe không dây Razer Blackshark V3 Pro Counter-Strike 2 Edition là sản phẩm tai nghe thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+105	5	12	Tai nghe không dây HyperX Cloud Flight 2 WL Black	tai-nghe-khong-day-hyperx-cloud-flight-2-wl-black	Tai nghe không dây HyperX Cloud Flight 2 WL Black là sản phẩm tai nghe thuộc thương hiệu HyperX, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: HyperX\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+106	5	9	Tai nghe Razer Barracuda X Chroma Phantom White Edition	tai-nghe-razer-barracuda-x-chroma-phantom-white-edition	Tai nghe Razer Barracuda X Chroma Phantom White Edition là sản phẩm tai nghe thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+107	5	11	Tai nghe DareU EH416 RGB	tai-nghe-dareu-eh416-rgb	Tai nghe DareU EH416 RGB là sản phẩm tai nghe thuộc thương hiệu DareU, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: DareU\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+108	5	5	Tai nghe Logitech G435 Lightspeed Wireless Black	tai-nghe-logitech-g435-lightspeed-wireless-black	Tai nghe Logitech G435 Lightspeed Wireless Black là sản phẩm tai nghe thuộc thương hiệu Logitech, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+109	5	5	Tai nghe Logitech G733 LIGHTSPEED Wireless Black	tai-nghe-logitech-g733-lightspeed-wireless-black	Tai nghe Logitech G733 LIGHTSPEED Wireless Black là sản phẩm tai nghe thuộc thương hiệu Logitech, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+110	5	13	Tai nghe Corsair HS55 Wireless Core Black	tai-nghe-corsair-hs55-wireless-core-black	Tai nghe Corsair HS55 Wireless Core Black là sản phẩm tai nghe thuộc thương hiệu Corsair, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Corsair\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+111	5	8	Tai nghe Gaming Rapoo VH160	tai-nghe-gaming-rapoo-vh160	Tai nghe Gaming Rapoo VH160 là sản phẩm tai nghe thuộc thương hiệu Rapoo, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Rapoo\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+112	5	9	Tai nghe Razer Barracuda X 2022	tai-nghe-razer-barracuda-x-2022	Tai nghe Razer Barracuda X 2022 là sản phẩm tai nghe thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+113	5	12	Tai nghe HP HyperX Cloud III Red	tai-nghe-hp-hyperx-cloud-iii-red	Tai nghe HP HyperX Cloud III Red là sản phẩm tai nghe thuộc thương hiệu HyperX, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: HyperX\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+114	5	14	Tai nghe MSI H991	tai-nghe-msi-h991	Tai nghe MSI H991 là sản phẩm tai nghe thuộc thương hiệu MSI, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: MSI\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+115	5	5	Tai nghe Logitech G Pro X Gaming Black	tai-nghe-logitech-g-pro-x-gaming-black	Tai nghe Logitech G Pro X Gaming Black là sản phẩm tai nghe thuộc thương hiệu Logitech, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+116	5	5	Tai nghe Logitech G333 Black	tai-nghe-logitech-g333-black	Tai nghe Logitech G333 Black là sản phẩm tai nghe thuộc thương hiệu Logitech, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại tai nghe: Tai nghe in-ear\n- Kiểu kết nối: Có dây\n- Microphone: Micro tích hợp\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+117	5	9	Tai nghe Razer Kraken V3 X USB	tai-nghe-razer-kraken-v3-x-usb	Tai nghe Razer Kraken V3 X USB là sản phẩm tai nghe thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: USB\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+118	5	11	Tai nghe DAREU EH469 7.1 RGB Black	tai-nghe-dareu-eh469-71-rgb-black	Tai nghe DAREU EH469 7.1 RGB Black là sản phẩm tai nghe thuộc thương hiệu DareU, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: DareU\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: RGB\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+119	5	6	Tai nghe E-Dra EH494W Black	tai-nghe-e-dra-eh494w-black	Tai nghe E-Dra EH494W Black là sản phẩm tai nghe thuộc thương hiệu E-Dra, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: E-Dra\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+120	5	12	Tai nghe HyperX Cloud Stinger Core II	tai-nghe-hyperx-cloud-stinger-core-ii	Tai nghe HyperX Cloud Stinger Core II là sản phẩm tai nghe thuộc thương hiệu HyperX, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: HyperX\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+121	5	9	Tai nghe Razer BlackShark V2 X	tai-nghe-razer-blackshark-v2-x	Tai nghe Razer BlackShark V2 X là sản phẩm tai nghe thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+122	5	5	Tai nghe Logitech G PRO X 2 LIGHTSPEED Black	tai-nghe-logitech-g-pro-x-2-lightspeed-black	Tai nghe Logitech G PRO X 2 LIGHTSPEED Black là sản phẩm tai nghe thuộc thương hiệu Logitech, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Logitech\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+123	5	15	Tai nghe Bluetooth SoundPeats Air 3 Pro	tai-nghe-bluetooth-soundpeats-air-3-pro	Tai nghe Bluetooth SoundPeats Air 3 Pro là sản phẩm tai nghe thuộc thương hiệu Soundpeats, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Soundpeats\n- Loại tai nghe: Tai nghe in-ear\n- Kiểu kết nối: Không dây\n- Microphone: Micro tích hợp\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+124	5	13	Tai nghe Corsair HS35 Surround v2 Carbon	tai-nghe-corsair-hs35-surround-v2-carbon	Tai nghe Corsair HS35 Surround v2 Carbon là sản phẩm tai nghe thuộc thương hiệu Corsair, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Corsair\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+125	5	13	Tai nghe Corsair HS35 V2 Carbon	tai-nghe-corsair-hs35-v2-carbon	Tai nghe Corsair HS35 V2 Carbon là sản phẩm tai nghe thuộc thương hiệu Corsair, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Corsair\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+126	5	16	Tai nghe Steelseries Arctis Nova 7 Dragon Edition	tai-nghe-steelseries-arctis-nova-7-dragon-edition	Tai nghe Steelseries Arctis Nova 7 Dragon Edition là sản phẩm tai nghe thuộc thương hiệu Steelseries, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Steelseries\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+127	5	17	Tai nghe Onikuma In-ear T209 Bluetooth Live Translation Đen	tai-nghe-onikuma-in-ear-t209-bluetooth-live-translation-den	Tai nghe Onikuma In-ear T209 Bluetooth Live Translation Đen là sản phẩm tai nghe thuộc thương hiệu ONIKUMA, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ONIKUMA\n- Loại tai nghe: Tai nghe in-ear\n- Kiểu kết nối: Không dây\n- Microphone: Micro tích hợp\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+128	5	17	Tai nghe Onikuma In-ear T18 ENC Bluetooth Đen	tai-nghe-onikuma-in-ear-t18-enc-bluetooth-den	Tai nghe Onikuma In-ear T18 ENC Bluetooth Đen là sản phẩm tai nghe thuộc thương hiệu ONIKUMA, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: ONIKUMA\n- Loại tai nghe: Tai nghe in-ear\n- Kiểu kết nối: Không dây\n- Microphone: Micro tích hợp\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+129	5	9	Tai nghe Razer Kraken Kitty V2 BT Quartz	tai-nghe-razer-kraken-kitty-v2-bt-quartz	Tai nghe Razer Kraken Kitty V2 BT Quartz là sản phẩm tai nghe thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+130	5	12	Tai nghe HP HyperX Cloud JET Black Wireless	tai-nghe-hp-hyperx-cloud-jet-black-wireless	Tai nghe HP HyperX Cloud JET Black Wireless là sản phẩm tai nghe thuộc thương hiệu HyperX, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: HyperX\n- Loại tai nghe: Tai nghe gaming\n- Kiểu kết nối: Không dây\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+131	5	6	Tai nghe E-Dra EH414W Black	tai-nghe-e-dra-eh414w-black	Tai nghe E-Dra EH414W Black là sản phẩm tai nghe thuộc thương hiệu E-Dra, phù hợp cho nhu cầu chơi game, học tập, làm việc và giải trí.\n\nThông số nổi bật:\n- Hãng sản xuất: E-Dra\n- Loại tai nghe: Tai nghe máy tính\n- Kiểu kết nối: Có dây / Không dây tùy phiên bản\n- Microphone: Có micro\n- LED: Không\n- Bảo hành: 24 tháng	t	ACTIVE	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+132	6	18	Ghế công thái học Ergonomic Warrior Pawn Series WEC105 Black	ghe-cong-thai-hoc-ergonomic-warrior-pawn-series-wec105-black	Ghế công thái học Ergonomic Warrior Pawn Series WEC105 Black là sản phẩm ghế thuộc thương hiệu Warrior, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Warrior\n- Loại ghế: Ghế công thái học\n- Màu sắc: Đen\n- Chất liệu: Lưới thoáng khí\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+133	6	18	Ghế Ergonomic Warrior Hero series WEC502 Grey	ghe-ergonomic-warrior-hero-series-wec502-grey	Ghế Ergonomic Warrior Hero series WEC502 Grey là sản phẩm ghế thuộc thương hiệu Warrior, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Warrior\n- Loại ghế: Ghế công thái học\n- Màu sắc: Xám\n- Chất liệu: Lưới thoáng khí\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+134	6	9	Ghế gaming Razer Iskur V2 X NewGen Black Green	ghe-gaming-razer-iskur-v2-x-newgen-black-green	Ghế gaming Razer Iskur V2 X NewGen Black Green là sản phẩm ghế thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại ghế: Ghế gaming\n- Màu sắc: Đen xanh\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+135	6	6	Ghế công thái học E-Dra EEC228	ghe-cong-thai-hoc-e-dra-eec228	Ghế công thái học E-Dra EEC228 là sản phẩm ghế thuộc thương hiệu E-Dra, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: E-Dra\n- Loại ghế: Ghế công thái học\n- Màu sắc: Đang cập nhật\n- Chất liệu: Lưới thoáng khí\n- Tay vịn: Đang cập nhật\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+136	6	9	Ghế Gaming Razer Enki Black Green	ghe-gaming-razer-enki-black-green	Ghế Gaming Razer Enki Black Green là sản phẩm ghế thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại ghế: Ghế gaming\n- Màu sắc: Đen xanh\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+137	6	9	Ghế gaming Razer Iskur V2 X Light Gray Fabric	ghe-gaming-razer-iskur-v2-x-light-gray-fabric	Ghế gaming Razer Iskur V2 X Light Gray Fabric là sản phẩm ghế thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại ghế: Ghế gaming\n- Màu sắc: Xám\n- Chất liệu: Vải\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+138	6	18	Ghế chơi game Warrior Raider Series WGC207 Black	ghe-choi-game-warrior-raider-series-wgc207-black	Ghế chơi game Warrior Raider Series WGC207 Black là sản phẩm ghế thuộc thương hiệu Warrior, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Warrior\n- Loại ghế: Ghế gaming\n- Màu sắc: Đen\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+139	6	6	Ghế game E-Dra Level E EGC229 Black Red	ghe-game-e-dra-level-e-egc229-black-red	Ghế game E-Dra Level E EGC229 Black Red là sản phẩm ghế thuộc thương hiệu E-Dra, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: E-Dra\n- Loại ghế: Ghế gaming\n- Màu sắc: Đen đỏ\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Đang cập nhật\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+140	6	18	Ghế Ergonomic Warrior Hero series WEC506 Black V2.0	ghe-ergonomic-warrior-hero-series-wec506-black-v20	Ghế Ergonomic Warrior Hero series WEC506 Black V2.0 là sản phẩm ghế thuộc thương hiệu Warrior, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Warrior\n- Loại ghế: Ghế công thái học\n- Màu sắc: Đen\n- Chất liệu: Lưới thoáng khí\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+141	6	18	Ghế Ergonomic Warrior Hero series WEC509 Black Red	ghe-ergonomic-warrior-hero-series-wec509-black-red	Ghế Ergonomic Warrior Hero series WEC509 Black Red là sản phẩm ghế thuộc thương hiệu Warrior, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Warrior\n- Loại ghế: Ghế công thái học\n- Màu sắc: Đen đỏ\n- Chất liệu: Lưới thoáng khí\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+142	6	6	Ghế chơi game E-Dra Hercules EGC203 V2 Black	ghe-choi-game-e-dra-hercules-egc203-v2-black	Ghế chơi game E-Dra Hercules EGC203 V2 Black là sản phẩm ghế thuộc thương hiệu E-Dra, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: E-Dra\n- Loại ghế: Ghế gaming\n- Màu sắc: Đen\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Đang cập nhật\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+143	6	18	Ghế chơi game Warrior Immortal Series WGC225 Black	ghe-choi-game-warrior-immortal-series-wgc225-black	Ghế chơi game Warrior Immortal Series WGC225 Black là sản phẩm ghế thuộc thương hiệu Warrior, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Warrior\n- Loại ghế: Ghế gaming\n- Màu sắc: Đen\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+144	6	13	Ghế Corsair T3 RUSH Charcoal 2023	ghe-corsair-t3-rush-charcoal-2023	Ghế Corsair T3 RUSH Charcoal 2023 là sản phẩm ghế thuộc thương hiệu Corsair, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Corsair\n- Loại ghế: Ghế làm việc\n- Màu sắc: Đang cập nhật\n- Chất liệu: Đang cập nhật\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+145	6	19	Ghế công thái học Sihoo M57	ghe-cong-thai-hoc-sihoo-m57	Ghế công thái học Sihoo M57 là sản phẩm ghế thuộc thương hiệu Sihoo, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Sihoo\n- Loại ghế: Ghế công thái học\n- Màu sắc: Đang cập nhật\n- Chất liệu: Lưới thoáng khí\n- Tay vịn: Đang cập nhật\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+146	6	19	Ghế công thái học Sihoo M102C	ghe-cong-thai-hoc-sihoo-m102c	Ghế công thái học Sihoo M102C là sản phẩm ghế thuộc thương hiệu Sihoo, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Sihoo\n- Loại ghế: Ghế công thái học\n- Màu sắc: Đang cập nhật\n- Chất liệu: Lưới thoáng khí\n- Tay vịn: Đang cập nhật\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+147	6	13	Ghế Gaming Corsair TC500 LUXE Shadow	ghe-gaming-corsair-tc500-luxe-shadow	Ghế Gaming Corsair TC500 LUXE Shadow là sản phẩm ghế thuộc thương hiệu Corsair, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Corsair\n- Loại ghế: Ghế gaming\n- Màu sắc: Đang cập nhật\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+148	6	6	Ghế game E-Dra EGC231 WISDOM Black	ghe-game-e-dra-egc231-wisdom-black	Ghế game E-Dra EGC231 WISDOM Black là sản phẩm ghế thuộc thương hiệu E-Dra, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: E-Dra\n- Loại ghế: Ghế gaming\n- Màu sắc: Đen\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Đang cập nhật\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+149	6	13	Ghế Corsair TC100 Leatherette Black	ghe-corsair-tc100-leatherette-black	Ghế Corsair TC100 Leatherette Black là sản phẩm ghế thuộc thương hiệu Corsair, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Corsair\n- Loại ghế: Ghế làm việc\n- Màu sắc: Đen\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+150	6	9	Ghế gaming Razer Iskur V2 Dark Grey Fabric	ghe-gaming-razer-iskur-v2-dark-grey-fabric	Ghế gaming Razer Iskur V2 Dark Grey Fabric là sản phẩm ghế thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại ghế: Ghế gaming\n- Màu sắc: Xám\n- Chất liệu: Vải\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+151	6	6	Ghế Gaming E-Dra Dignity EGC234 Black	ghe-gaming-e-dra-dignity-egc234-black	Ghế Gaming E-Dra Dignity EGC234 Black là sản phẩm ghế thuộc thương hiệu E-Dra, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: E-Dra\n- Loại ghế: Ghế gaming\n- Màu sắc: Đen\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Đang cập nhật\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+152	6	18	Ghế Warrior Raider Series WGC206 White Pink	ghe-warrior-raider-series-wgc206-white-pink	Ghế Warrior Raider Series WGC206 White Pink là sản phẩm ghế thuộc thương hiệu Warrior, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Warrior\n- Loại ghế: Ghế gaming\n- Màu sắc: Trắng hồng\n- Chất liệu: Đang cập nhật\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+153	6	19	Ghế công thái học Sihoo M57B có kê chân	ghe-cong-thai-hoc-sihoo-m57b-co-ke-chan	Ghế công thái học Sihoo M57B có kê chân là sản phẩm ghế thuộc thương hiệu Sihoo, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Sihoo\n- Loại ghế: Ghế công thái học\n- Màu sắc: Đang cập nhật\n- Chất liệu: Lưới thoáng khí\n- Tay vịn: Đang cập nhật\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+154	6	19	Ghế công thái học Sihoo M18	ghe-cong-thai-hoc-sihoo-m18	Ghế công thái học Sihoo M18 là sản phẩm ghế thuộc thương hiệu Sihoo, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Sihoo\n- Loại ghế: Ghế công thái học\n- Màu sắc: Đang cập nhật\n- Chất liệu: Lưới thoáng khí\n- Tay vịn: Đang cập nhật\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+155	6	19	Ghế công thái học Sihoo M77C Xám	ghe-cong-thai-hoc-sihoo-m77c-xam	Ghế công thái học Sihoo M77C Xám là sản phẩm ghế thuộc thương hiệu Sihoo, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Sihoo\n- Loại ghế: Ghế công thái học\n- Màu sắc: Xám\n- Chất liệu: Lưới thoáng khí\n- Tay vịn: Đang cập nhật\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+156	6	6	Ghế Gaming E-Dra EGC236 Fabric	ghe-gaming-e-dra-egc236-fabric	Ghế Gaming E-Dra EGC236 Fabric là sản phẩm ghế thuộc thương hiệu E-Dra, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: E-Dra\n- Loại ghế: Ghế gaming\n- Màu sắc: Đang cập nhật\n- Chất liệu: Vải\n- Tay vịn: Đang cập nhật\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+157	6	18	Ghế chơi game Warrior Raider Series WGC210 Black Gray	ghe-choi-game-warrior-raider-series-wgc210-black-gray	Ghế chơi game Warrior Raider Series WGC210 Black Gray là sản phẩm ghế thuộc thương hiệu Warrior, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Warrior\n- Loại ghế: Ghế gaming\n- Màu sắc: Đen xám\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+158	6	9	Ghế Gaming Razer Enki Full Black	ghe-gaming-razer-enki-full-black	Ghế Gaming Razer Enki Full Black là sản phẩm ghế thuộc thương hiệu Razer, phù hợp cho nhu cầu chơi game, học tập, làm việc và setup góc máy.\n\nThông số nổi bật:\n- Hãng sản xuất: Razer\n- Loại ghế: Ghế gaming\n- Màu sắc: Đen\n- Chất liệu: Da PU / Da tổng hợp\n- Tay vịn: Tay vịn điều chỉnh\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+159	7	10	Laptop Acer Swift X14 SFX14 72G 79UW	laptop-acer-swift-x14-sfx14-72g-79uw	Laptop Acer Swift X14 SFX14 72G 79UW là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Swift X\n- Nhu cầu sử dụng: Đồ họa, sáng tạo nội dung, học tập và làm việc\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+160	7	10	Laptop Acer Aspire Go 14 AG14-72P-563L	laptop-acer-aspire-go-14-ag14-72p-563l	Laptop Acer Aspire Go 14 AG14-72P-563L là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Go\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+161	7	10	Laptop Acer Aspire Go 15 AI AG15 72P 54GY	laptop-acer-aspire-go-15-ai-ag15-72p-54gy	Laptop Acer Aspire Go 15 AI AG15 72P 54GY là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Go\n- Nhu cầu sử dụng: Học tập, làm việc văn phòng và tác vụ AI cơ bản\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+162	7	10	Laptop Acer Aspire Lite 15 AL15-48P-R5MN	laptop-acer-aspire-lite-15-al15-48p-r5mn	Laptop Acer Aspire Lite 15 AL15-48P-R5MN là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+163	7	10	Laptop Acer Aspire Lite 14 AL14-52P-309T	laptop-acer-aspire-lite-14-al14-52p-309t	Laptop Acer Aspire Lite 14 AL14-52P-309T là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+164	7	10	Laptop Acer Swift Go 14 AI SFG14 75 5264	laptop-acer-swift-go-14-ai-sfg14-75-5264	Laptop Acer Swift Go 14 AI SFG14 75 5264 là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Swift Go\n- Nhu cầu sử dụng: Học tập, làm việc văn phòng và tác vụ AI cơ bản\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+165	7	10	Laptop Acer Aspire Go 15 AG15 71P 58X1	laptop-acer-aspire-go-15-ag15-71p-58x1	Laptop Acer Aspire Go 15 AG15 71P 58X1 là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Go\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+166	7	10	Laptop Acer Aspire 16 AI A16 71M 71U7	laptop-acer-aspire-16-ai-a16-71m-71u7	Laptop Acer Aspire 16 AI A16 71M 71U7 là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire 16 AI\n- Nhu cầu sử dụng: Học tập, làm việc văn phòng và tác vụ AI cơ bản\n- Kích thước màn hình: Khoảng 16 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+167	7	10	Laptop Acer Aspire 14 AI A14 61M R9RA	laptop-acer-aspire-14-ai-a14-61m-r9ra	Laptop Acer Aspire 14 AI A14 61M R9RA là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire 14 AI\n- Nhu cầu sử dụng: Học tập, làm việc văn phòng và tác vụ AI cơ bản\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+168	7	10	Laptop Acer Aspire Lite 14 AL14 71P 55P9	laptop-acer-aspire-lite-14-al14-71p-55p9	Laptop Acer Aspire Lite 14 AL14 71P 55P9 là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+169	7	10	Laptop Acer Aspire Lite AL15 72P 581V	laptop-acer-aspire-lite-al15-72p-581v	Laptop Acer Aspire Lite AL15 72P 581V là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+170	7	10	Laptop Acer Aspire Go AG14 71M 57WR	laptop-acer-aspire-go-ag14-71m-57wr	Laptop Acer Aspire Go AG14 71M 57WR là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Go\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+171	7	10	Laptop Acer Swift Go SFG14 74T 55HD	laptop-acer-swift-go-sfg14-74t-55hd	Laptop Acer Swift Go SFG14 74T 55HD là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Swift Go\n- Nhu cầu sử dụng: Làm việc di động, văn phòng và giải trí\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+172	7	10	Laptop Acer Aspire Lite 16 AL16 52P 76DU	laptop-acer-aspire-lite-16-al16-52p-76du	Laptop Acer Aspire Lite 16 AL16 52P 76DU là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 16 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+173	7	10	Laptop Acer Aspire Lite 15 AL15 41P R3U5	laptop-acer-aspire-lite-15-al15-41p-r3u5	Laptop Acer Aspire Lite 15 AL15 41P R3U5 là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+174	7	10	Laptop Acer Aspire 5 A515 58P 9841	laptop-acer-aspire-5-a515-58p-9841	Laptop Acer Aspire 5 A515 58P 9841 là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire 5\n- Nhu cầu sử dụng: Học tập và làm việc\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+175	7	10	Laptop ACER Swift Lite 14 SFL14 51M 56HS	laptop-acer-swift-lite-14-sfl14-51m-56hs	Laptop ACER Swift Lite 14 SFL14 51M 56HS là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Swift Lite\n- Nhu cầu sử dụng: Làm việc di động, văn phòng và giải trí\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+176	7	10	Laptop Acer Swift 14 AI SF14 51 53P9	laptop-acer-swift-14-ai-sf14-51-53p9	Laptop Acer Swift 14 AI SF14 51 53P9 là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Swift AI\n- Nhu cầu sử dụng: Học tập, làm việc văn phòng và tác vụ AI cơ bản\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+177	7	10	Laptop Acer Swift Go 14 SFG14 73 57FZ	laptop-acer-swift-go-14-sfg14-73-57fz	Laptop Acer Swift Go 14 SFG14 73 57FZ là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Swift Go\n- Nhu cầu sử dụng: Làm việc di động, văn phòng và giải trí\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+178	7	10	Laptop Acer Swift X14 SFX14 71G 78SY	laptop-acer-swift-x14-sfx14-71g-78sy	Laptop Acer Swift X14 SFX14 71G 78SY là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Swift X\n- Nhu cầu sử dụng: Đồ họa, sáng tạo nội dung, học tập và làm việc\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+179	7	10	Laptop Acer Swift 3 SF314 511 55QE	laptop-acer-swift-3-sf314-511-55qe	Laptop Acer Swift 3 SF314 511 55QE là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Swift 3\n- Nhu cầu sử dụng: Làm việc di động, văn phòng và giải trí\n- Kích thước màn hình: Đang cập nhật\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+180	7	10	Laptop Acer Swift Go 14 AI SFG14 I71 70RP	laptop-acer-swift-go-14-ai-sfg14-i71-70rp	Laptop Acer Swift Go 14 AI SFG14 I71 70RP là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Swift Go\n- Nhu cầu sử dụng: Học tập, làm việc văn phòng và tác vụ AI cơ bản\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+181	7	10	Laptop Acer Aspire Lite 16 AI AL16 71P 582Q	laptop-acer-aspire-lite-16-ai-al16-71p-582q	Laptop Acer Aspire Lite 16 AI AL16 71P 582Q là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, làm việc văn phòng và tác vụ AI cơ bản\n- Kích thước màn hình: Khoảng 16 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+182	7	10	Laptop Acer Aspire Go 15 AI AG15 52P 52WT	laptop-acer-aspire-go-15-ai-ag15-52p-52wt	Laptop Acer Aspire Go 15 AI AG15 52P 52WT là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Go\n- Nhu cầu sử dụng: Học tập, làm việc văn phòng và tác vụ AI cơ bản\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+183	7	10	Laptop Acer Aspire Go 14 AI AG14 I71M 50AL	laptop-acer-aspire-go-14-ai-ag14-i71m-50al	Laptop Acer Aspire Go 14 AI AG14 I71M 50AL là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Go\n- Nhu cầu sử dụng: Học tập, làm việc văn phòng và tác vụ AI cơ bản\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+184	7	10	Laptop Acer Aspire Lite 15 AL15 53P 56QH	laptop-acer-aspire-lite-15-al15-53p-56qh	Laptop Acer Aspire Lite 15 AL15 53P 56QH là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+185	7	10	Laptop Acer Aspire Lite 15 AL15 44P R4UH	laptop-acer-aspire-lite-15-al15-44p-r4uh	Laptop Acer Aspire Lite 15 AL15 44P R4UH là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+186	7	10	Laptop Acer Aspire Lite 15 AL15 21P R91W	laptop-acer-aspire-lite-15-al15-21p-r91w	Laptop Acer Aspire Lite 15 AL15 21P R91W là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+187	7	10	Laptop Acer Aspire Lite 14 AL14 44P R0SP	laptop-acer-aspire-lite-14-al14-44p-r0sp	Laptop Acer Aspire Lite 14 AL14 44P R0SP là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+188	7	10	Laptop Acer Aspire Lite 14 AL15 36P 30TN	laptop-acer-aspire-lite-14-al15-36p-30tn	Laptop Acer Aspire Lite 14 AL15 36P 30TN là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+189	7	10	Laptop Acer Aspire Lite 14 AL14 45P R7Z3	laptop-acer-aspire-lite-14-al14-45p-r7z3	Laptop Acer Aspire Lite 14 AL14 45P R7Z3 là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+190	7	10	Laptop Acer Aspire Lite 15 AL15 46P R73C	laptop-acer-aspire-lite-15-al15-46p-r73c	Laptop Acer Aspire Lite 15 AL15 46P R73C là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+191	7	10	Laptop Acer Swift Edge 14 AI SFE14-51T-52KD	laptop-acer-swift-edge-14-ai-sfe14-51t-52kd	Laptop Acer Swift Edge 14 AI SFE14-51T-52KD là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Swift Edge\n- Nhu cầu sử dụng: Học tập, làm việc văn phòng và tác vụ AI cơ bản\n- Kích thước màn hình: Khoảng 14 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+192	7	10	Laptop Acer Aspire Lite 15 AL15-42P-R8E6	laptop-acer-aspire-lite-15-al15-42p-r8e6	Laptop Acer Aspire Lite 15 AL15-42P-R8E6 là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire Lite\n- Nhu cầu sử dụng: Học tập, văn phòng và làm việc hằng ngày\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+193	7	10	Laptop Acer Aspire 5 A515 58M 79R7	laptop-acer-aspire-5-a515-58m-79r7	Laptop Acer Aspire 5 A515 58M 79R7 là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire 5\n- Nhu cầu sử dụng: Học tập và làm việc\n- Kích thước màn hình: Khoảng 15.6 inch\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+194	7	10	Laptop Acer Aspire 5 A514 56P 562P	laptop-acer-aspire-5-a514-56p-562p	Laptop Acer Aspire 5 A514 56P 562P là sản phẩm laptop thuộc thương hiệu ACER, phù hợp cho nhu cầu học tập, làm việc, giải trí và xử lý tác vụ hằng ngày.\n\nThông số nổi bật:\n- Thương hiệu: ACER\n- Dòng laptop: Acer Aspire 5\n- Nhu cầu sử dụng: Học tập và làm việc\n- Kích thước màn hình: Đang cập nhật\n- Hệ điều hành: Windows 11\n- Bảo hành: 12 tháng	t	ACTIVE	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+195	7	18	test12	test12		f	ACTIVE	2026-05-25 13:01:52.512181	2026-05-25 13:01:52.512181	\N
+196	7	14	test13	test13		f	ACTIVE	2026-05-25 13:04:13.27127	2026-05-25 13:04:13.27127	\N
 \.
 
 
 --
--- TOC entry 5359 (class 0 OID 16757)
+-- TOC entry 5360 (class 0 OID 16757)
 -- Dependencies: 261
 -- Data for Name: specification_keys; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1837,20 +4316,66 @@ COPY public.specification_keys (id, category_id, name, unit, sort_order, created
 4	1	Tấm nền	\N	4	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
 5	1	Độ phân giải	\N	5	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
 15	1	Trọng lượng	kg	9	2026-05-22 23:51:49.289431	2026-05-22 23:51:49.289431	\N
-12	1	Hệ điều hành	\N	7	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-14	1	Tỷ lệ	\N	6	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-10	1	HDR	\N	6	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-13	1	Độ sáng	\N	9	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-6	1	Dual mode	\N	7	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-8	1	Thời gian phản hồi	\N	8	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-7	1	Tần số quét	Hz	7	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-11	1	Cổng kết nối	\N	10	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
-9	1	VESA	\N	9	2026-05-22 23:51:49.289431	2026-05-24 04:51:46.498105	\N
+34	5	Loại tai nghe	\N	3	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+35	5	Kiểu kết nối	\N	4	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+12	1	Hệ điều hành	\N	7	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+14	1	Tỷ lệ	\N	6	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+10	1	HDR	\N	6	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+13	1	Độ sáng	\N	9	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+36	5	Microphone	\N	5	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+37	5	LED	\N	6	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+16	3	Hãng sản xuất	\N	1	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+17	3	Bảo hành	\N	2	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+18	3	Layout	\N	3	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+19	3	Switch	\N	4	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+20	3	Kết nối	\N	5	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+21	3	LED	\N	6	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+22	3	Loại bàn phím	\N	7	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+23	3	Tình trạng	\N	8	2026-05-25 08:39:40.550823	2026-05-25 08:39:40.550823	\N
+24	4	Hãng sản xuất	\N	1	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+25	4	Bảo hành	\N	2	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+26	4	Loại chuột	\N	3	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+27	4	Kết nối	\N	4	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+28	4	Độ nhạy DPI	\N	5	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+29	4	Cảm biến	\N	6	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+30	4	Số nút bấm	\N	7	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+31	4	Tình trạng	\N	8	2026-05-25 08:39:40.880456	2026-05-25 08:39:40.880456	\N
+32	5	Hãng sản xuất	\N	1	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+33	5	Bảo hành	\N	2	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+38	5	Tương thích	\N	7	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+39	5	Tình trạng	\N	8	2026-05-25 08:39:42.368437	2026-05-25 08:39:42.368437	\N
+40	6	Hãng sản xuất	\N	1	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+41	6	Bảo hành	\N	2	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+42	6	Loại ghế	\N	3	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+43	6	Màu sắc	\N	4	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+44	6	Chất liệu	\N	5	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+45	6	Tay vịn	\N	6	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+46	6	Tải trọng	\N	7	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+47	6	Trục thủy lực	\N	8	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+48	6	Tình trạng	\N	9	2026-05-25 08:39:43.521156	2026-05-25 08:39:43.521156	\N
+49	7	Hãng sản xuất	\N	1	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+50	7	Bảo hành	\N	2	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+51	7	Dòng laptop	\N	3	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+52	7	Nhu cầu sử dụng	\N	4	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+53	7	Kích thước màn hình	\N	5	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+54	7	CPU	\N	6	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+55	7	RAM	\N	7	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+56	7	Ổ cứng	\N	8	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+57	7	Card đồ họa	\N	9	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+58	7	Hệ điều hành	\N	10	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+59	7	Màu sắc	\N	11	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+60	7	Trọng lượng	\N	12	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+61	7	Tình trạng	\N	13	2026-05-25 08:41:14.30386	2026-05-25 08:41:14.30386	\N
+6	1	Dual mode	\N	7	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+8	1	Thời gian phản hồi	\N	8	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+7	1	Tần số quét	Hz	7	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+11	1	Cổng kết nối	\N	10	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
+9	1	VESA	\N	9	2026-05-22 23:51:49.289431	2026-05-25 13:43:17.46312	\N
 \.
 
 
 --
--- TOC entry 5361 (class 0 OID 16771)
+-- TOC entry 5362 (class 0 OID 16771)
 -- Dependencies: 263
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -1859,12 +4384,12 @@ COPY public.users (id, full_name, email, password_hash, role, phone, gender, dat
 1	Quản trị viên TechStore	admin@techstore.vn	$2a$10$bvdAHIi70g3T5avNzHhe/uoKLRnFH3vGh/usn1jOnDWSJWoSPsNv.	ROLE_ADMIN	0909000001	MALE	1995-01-15	Tòa nhà TechStore, 123 Nguyễn Trãi, Quận 1, TP.HCM	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.128212	2026-05-22 23:51:49.128212	\N
 2	Nhân viên hỗ trợ TechStore	staff@techstore.vn	$2a$10$RcFlcczvmMStxdJC7VqqBeTQ/zRkHN0z4mb9e4dxHaVRqsmqDTytS	ROLE_STAFF	0909000002	FEMALE	1998-08-12	Chi nhánh TechStore, 456 Lê Văn Việt, TP. Thủ Đức, TP.HCM	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.209746	2026-05-22 23:51:49.209746	\N
 3	Nguyễn Minh Quân	customer@techstore.vn	$2a$10$3rw/MJZcvrzKgO0KWm94hu3Vny1VHIrVY3rUeCRGmfpPrJSiX9kuq	ROLE_CUSTOMER	0909000003	MALE	2001-03-10	25 Lê Văn Việt, TP. Thủ Đức, TP.HCM	https://res.cloudinary.com/dlbgs5wps/image/upload/v1779383312/avatar_test_hejmvl.png	ACTIVE	2026-05-22 23:51:49.282646	2026-05-22 23:51:49.282646	\N
-4	lê trung kiên	kienkg700@gmail.com	$2a$10$.NyydydvByBuWAxXXGaHVu50yxktOlP5xfL.aNCQ.uO6wrk.XyCrW	ROLE_CUSTOMER	0123456	\N	\N	\N	\N	ACTIVE	2026-05-24 00:17:18.91896	2026-05-24 00:23:19.206431	\N
+4	lê trung kiên	kienkg700@gmail.com	$2a$10$.NyydydvByBuWAxXXGaHVu50yxktOlP5xfL.aNCQ.uO6wrk.XyCrW	ROLE_CUSTOMER	0123456	\N	\N	\N	https://lh3.googleusercontent.com/a/ACg8ocK1vzYQEudwT89c5wgjzTApP-ebr42n1w7VV_k-fFP_zZKrrQ=s96-c	ACTIVE	2026-05-24 00:17:18.91896	2026-05-25 10:53:14.477445	\N
 \.
 
 
 --
--- TOC entry 5403 (class 0 OID 0)
+-- TOC entry 5404 (class 0 OID 0)
 -- Dependencies: 220
 -- Name: banners_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1873,25 +4398,25 @@ SELECT pg_catalog.setval('public.banners_id_seq', 16, true);
 
 
 --
--- TOC entry 5404 (class 0 OID 0)
+-- TOC entry 5405 (class 0 OID 0)
 -- Dependencies: 222
 -- Name: brands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.brands_id_seq', 1, true);
-
-
---
--- TOC entry 5405 (class 0 OID 0)
--- Dependencies: 224
--- Name: cart_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.cart_items_id_seq', 3, true);
+SELECT pg_catalog.setval('public.brands_id_seq', 19, true);
 
 
 --
 -- TOC entry 5406 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: cart_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.cart_items_id_seq', 10, true);
+
+
+--
+-- TOC entry 5407 (class 0 OID 0)
 -- Dependencies: 226
 -- Name: carts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1900,16 +4425,16 @@ SELECT pg_catalog.setval('public.carts_id_seq', 2, true);
 
 
 --
--- TOC entry 5407 (class 0 OID 0)
+-- TOC entry 5408 (class 0 OID 0)
 -- Dependencies: 228
 -- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.categories_id_seq', 2, true);
+SELECT pg_catalog.setval('public.categories_id_seq', 7, true);
 
 
 --
--- TOC entry 5408 (class 0 OID 0)
+-- TOC entry 5409 (class 0 OID 0)
 -- Dependencies: 230
 -- Name: chat_messages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1918,7 +4443,7 @@ SELECT pg_catalog.setval('public.chat_messages_id_seq', 3, true);
 
 
 --
--- TOC entry 5409 (class 0 OID 0)
+-- TOC entry 5410 (class 0 OID 0)
 -- Dependencies: 232
 -- Name: chat_sessions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1927,7 +4452,7 @@ SELECT pg_catalog.setval('public.chat_sessions_id_seq', 2, true);
 
 
 --
--- TOC entry 5410 (class 0 OID 0)
+-- TOC entry 5411 (class 0 OID 0)
 -- Dependencies: 234
 -- Name: contact_messages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1936,7 +4461,7 @@ SELECT pg_catalog.setval('public.contact_messages_id_seq', 13, true);
 
 
 --
--- TOC entry 5411 (class 0 OID 0)
+-- TOC entry 5412 (class 0 OID 0)
 -- Dependencies: 236
 -- Name: coupon_usages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1945,7 +4470,7 @@ SELECT pg_catalog.setval('public.coupon_usages_id_seq', 1, false);
 
 
 --
--- TOC entry 5412 (class 0 OID 0)
+-- TOC entry 5413 (class 0 OID 0)
 -- Dependencies: 238
 -- Name: coupons_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1954,7 +4479,7 @@ SELECT pg_catalog.setval('public.coupons_id_seq', 10, true);
 
 
 --
--- TOC entry 5413 (class 0 OID 0)
+-- TOC entry 5414 (class 0 OID 0)
 -- Dependencies: 240
 -- Name: faqs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1963,7 +4488,7 @@ SELECT pg_catalog.setval('public.faqs_id_seq', 13, true);
 
 
 --
--- TOC entry 5414 (class 0 OID 0)
+-- TOC entry 5415 (class 0 OID 0)
 -- Dependencies: 242
 -- Name: news_posts_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1972,25 +4497,25 @@ SELECT pg_catalog.setval('public.news_posts_id_seq', 10, true);
 
 
 --
--- TOC entry 5415 (class 0 OID 0)
+-- TOC entry 5416 (class 0 OID 0)
 -- Dependencies: 244
 -- Name: order_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.order_items_id_seq', 1, false);
-
-
---
--- TOC entry 5416 (class 0 OID 0)
--- Dependencies: 246
--- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.orders_id_seq', 1, false);
+SELECT pg_catalog.setval('public.order_items_id_seq', 5, true);
 
 
 --
 -- TOC entry 5417 (class 0 OID 0)
+-- Dependencies: 246
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.orders_id_seq', 5, true);
+
+
+--
+-- TOC entry 5418 (class 0 OID 0)
 -- Dependencies: 248
 -- Name: password_reset_tokens_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -1999,25 +4524,25 @@ SELECT pg_catalog.setval('public.password_reset_tokens_id_seq', 3, true);
 
 
 --
--- TOC entry 5418 (class 0 OID 0)
+-- TOC entry 5419 (class 0 OID 0)
 -- Dependencies: 250
 -- Name: payments_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.payments_id_seq', 1, false);
-
-
---
--- TOC entry 5419 (class 0 OID 0)
--- Dependencies: 252
--- Name: product_images_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.product_images_id_seq', 1716, true);
+SELECT pg_catalog.setval('public.payments_id_seq', 5, true);
 
 
 --
 -- TOC entry 5420 (class 0 OID 0)
+-- Dependencies: 252
+-- Name: product_images_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.product_images_id_seq', 7958, true);
+
+
+--
+-- TOC entry 5421 (class 0 OID 0)
 -- Dependencies: 254
 -- Name: product_reviews_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -2026,43 +4551,43 @@ SELECT pg_catalog.setval('public.product_reviews_id_seq', 1, false);
 
 
 --
--- TOC entry 5421 (class 0 OID 0)
+-- TOC entry 5422 (class 0 OID 0)
 -- Dependencies: 256
 -- Name: product_specifications_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.product_specifications_id_seq', 210, true);
-
-
---
--- TOC entry 5422 (class 0 OID 0)
--- Dependencies: 258
--- Name: product_variants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.product_variants_id_seq', 28, true);
+SELECT pg_catalog.setval('public.product_specifications_id_seq', 1745, true);
 
 
 --
 -- TOC entry 5423 (class 0 OID 0)
--- Dependencies: 260
--- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Dependencies: 258
+-- Name: product_variants_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.products_id_seq', 28, true);
+SELECT pg_catalog.setval('public.product_variants_id_seq', 196, true);
 
 
 --
 -- TOC entry 5424 (class 0 OID 0)
--- Dependencies: 262
--- Name: specification_keys_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Dependencies: 260
+-- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.specification_keys_id_seq', 15, true);
+SELECT pg_catalog.setval('public.products_id_seq', 196, true);
 
 
 --
 -- TOC entry 5425 (class 0 OID 0)
+-- Dependencies: 262
+-- Name: specification_keys_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.specification_keys_id_seq', 61, true);
+
+
+--
+-- TOC entry 5426 (class 0 OID 0)
 -- Dependencies: 264
 -- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -2215,7 +4740,7 @@ ALTER TABLE ONLY public.payments
 
 
 --
--- TOC entry 5077 (class 2606 OID 16825)
+-- TOC entry 5078 (class 2606 OID 16825)
 -- Name: product_images product_images_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2224,7 +4749,7 @@ ALTER TABLE ONLY public.product_images
 
 
 --
--- TOC entry 5082 (class 2606 OID 16827)
+-- TOC entry 5083 (class 2606 OID 16827)
 -- Name: product_reviews product_reviews_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2233,7 +4758,7 @@ ALTER TABLE ONLY public.product_reviews
 
 
 --
--- TOC entry 5090 (class 2606 OID 16829)
+-- TOC entry 5091 (class 2606 OID 16829)
 -- Name: product_specifications product_specifications_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2242,7 +4767,7 @@ ALTER TABLE ONLY public.product_specifications
 
 
 --
--- TOC entry 5098 (class 2606 OID 16831)
+-- TOC entry 5099 (class 2606 OID 16831)
 -- Name: product_variants product_variants_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2251,7 +4776,7 @@ ALTER TABLE ONLY public.product_variants
 
 
 --
--- TOC entry 5108 (class 2606 OID 16833)
+-- TOC entry 5109 (class 2606 OID 16833)
 -- Name: products products_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2260,7 +4785,7 @@ ALTER TABLE ONLY public.products
 
 
 --
--- TOC entry 5114 (class 2606 OID 16835)
+-- TOC entry 5115 (class 2606 OID 16835)
 -- Name: specification_keys specification_keys_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2341,7 +4866,7 @@ ALTER TABLE ONLY public.payments
 
 
 --
--- TOC entry 5084 (class 2606 OID 16853)
+-- TOC entry 5085 (class 2606 OID 16853)
 -- Name: product_reviews uq_product_reviews_order_item; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2350,7 +4875,7 @@ ALTER TABLE ONLY public.product_reviews
 
 
 --
--- TOC entry 5086 (class 2606 OID 16855)
+-- TOC entry 5087 (class 2606 OID 16855)
 -- Name: product_reviews uq_product_reviews_user_product; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2359,7 +4884,7 @@ ALTER TABLE ONLY public.product_reviews
 
 
 --
--- TOC entry 5092 (class 2606 OID 16857)
+-- TOC entry 5093 (class 2606 OID 16857)
 -- Name: product_specifications uq_product_specifications_product_key; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2368,7 +4893,7 @@ ALTER TABLE ONLY public.product_specifications
 
 
 --
--- TOC entry 5100 (class 2606 OID 16859)
+-- TOC entry 5101 (class 2606 OID 16859)
 -- Name: product_variants uq_product_variants_sku; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2377,7 +4902,7 @@ ALTER TABLE ONLY public.product_variants
 
 
 --
--- TOC entry 5110 (class 2606 OID 16861)
+-- TOC entry 5111 (class 2606 OID 16861)
 -- Name: products uq_products_slug; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2386,7 +4911,7 @@ ALTER TABLE ONLY public.products
 
 
 --
--- TOC entry 5116 (class 2606 OID 16863)
+-- TOC entry 5117 (class 2606 OID 16863)
 -- Name: specification_keys uq_specification_keys_category_name; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2395,7 +4920,7 @@ ALTER TABLE ONLY public.specification_keys
 
 
 --
--- TOC entry 5121 (class 2606 OID 16865)
+-- TOC entry 5122 (class 2606 OID 16865)
 -- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2700,7 +5225,7 @@ CREATE INDEX idx_payments_status ON public.payments USING btree (status);
 
 
 --
--- TOC entry 5074 (class 1259 OID 16903)
+-- TOC entry 5075 (class 1259 OID 16903)
 -- Name: idx_product_images_product_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2708,7 +5233,7 @@ CREATE INDEX idx_product_images_product_id ON public.product_images USING btree 
 
 
 --
--- TOC entry 5075 (class 1259 OID 16904)
+-- TOC entry 5076 (class 1259 OID 16904)
 -- Name: idx_product_images_variant_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2716,7 +5241,7 @@ CREATE INDEX idx_product_images_variant_id ON public.product_images USING btree 
 
 
 --
--- TOC entry 5078 (class 1259 OID 16905)
+-- TOC entry 5079 (class 1259 OID 16905)
 -- Name: idx_product_reviews_product_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2724,7 +5249,7 @@ CREATE INDEX idx_product_reviews_product_id ON public.product_reviews USING btre
 
 
 --
--- TOC entry 5079 (class 1259 OID 16906)
+-- TOC entry 5080 (class 1259 OID 16906)
 -- Name: idx_product_reviews_status; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2732,7 +5257,7 @@ CREATE INDEX idx_product_reviews_status ON public.product_reviews USING btree (s
 
 
 --
--- TOC entry 5080 (class 1259 OID 16907)
+-- TOC entry 5081 (class 1259 OID 16907)
 -- Name: idx_product_reviews_user_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2740,7 +5265,7 @@ CREATE INDEX idx_product_reviews_user_id ON public.product_reviews USING btree (
 
 
 --
--- TOC entry 5087 (class 1259 OID 16908)
+-- TOC entry 5088 (class 1259 OID 16908)
 -- Name: idx_product_specifications_key_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2748,7 +5273,7 @@ CREATE INDEX idx_product_specifications_key_id ON public.product_specifications 
 
 
 --
--- TOC entry 5088 (class 1259 OID 16909)
+-- TOC entry 5089 (class 1259 OID 16909)
 -- Name: idx_product_specifications_product_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2756,7 +5281,7 @@ CREATE INDEX idx_product_specifications_product_id ON public.product_specificati
 
 
 --
--- TOC entry 5093 (class 1259 OID 16910)
+-- TOC entry 5094 (class 1259 OID 16910)
 -- Name: idx_product_variants_price; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2764,7 +5289,7 @@ CREATE INDEX idx_product_variants_price ON public.product_variants USING btree (
 
 
 --
--- TOC entry 5094 (class 1259 OID 16911)
+-- TOC entry 5095 (class 1259 OID 16911)
 -- Name: idx_product_variants_product_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2772,7 +5297,7 @@ CREATE INDEX idx_product_variants_product_id ON public.product_variants USING bt
 
 
 --
--- TOC entry 5095 (class 1259 OID 16912)
+-- TOC entry 5096 (class 1259 OID 16912)
 -- Name: idx_product_variants_sale_price; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2780,7 +5305,7 @@ CREATE INDEX idx_product_variants_sale_price ON public.product_variants USING bt
 
 
 --
--- TOC entry 5096 (class 1259 OID 16913)
+-- TOC entry 5097 (class 1259 OID 16913)
 -- Name: idx_product_variants_status; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2788,7 +5313,7 @@ CREATE INDEX idx_product_variants_status ON public.product_variants USING btree 
 
 
 --
--- TOC entry 5101 (class 1259 OID 16914)
+-- TOC entry 5102 (class 1259 OID 16914)
 -- Name: idx_products_brand_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2796,7 +5321,7 @@ CREATE INDEX idx_products_brand_id ON public.products USING btree (brand_id);
 
 
 --
--- TOC entry 5102 (class 1259 OID 16915)
+-- TOC entry 5103 (class 1259 OID 16915)
 -- Name: idx_products_category_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2804,7 +5329,7 @@ CREATE INDEX idx_products_category_id ON public.products USING btree (category_i
 
 
 --
--- TOC entry 5103 (class 1259 OID 16916)
+-- TOC entry 5104 (class 1259 OID 16916)
 -- Name: idx_products_featured; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2812,7 +5337,7 @@ CREATE INDEX idx_products_featured ON public.products USING btree (featured);
 
 
 --
--- TOC entry 5104 (class 1259 OID 16917)
+-- TOC entry 5105 (class 1259 OID 16917)
 -- Name: idx_products_filter; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2820,7 +5345,7 @@ CREATE INDEX idx_products_filter ON public.products USING btree (status, categor
 
 
 --
--- TOC entry 5105 (class 1259 OID 16918)
+-- TOC entry 5106 (class 1259 OID 16918)
 -- Name: idx_products_name_lower; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2828,7 +5353,7 @@ CREATE INDEX idx_products_name_lower ON public.products USING btree (lower((name
 
 
 --
--- TOC entry 5106 (class 1259 OID 16919)
+-- TOC entry 5107 (class 1259 OID 16919)
 -- Name: idx_products_status; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2836,7 +5361,7 @@ CREATE INDEX idx_products_status ON public.products USING btree (status);
 
 
 --
--- TOC entry 5111 (class 1259 OID 16920)
+-- TOC entry 5112 (class 1259 OID 16920)
 -- Name: idx_specification_keys_category_id; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2844,7 +5369,7 @@ CREATE INDEX idx_specification_keys_category_id ON public.specification_keys USI
 
 
 --
--- TOC entry 5112 (class 1259 OID 16921)
+-- TOC entry 5113 (class 1259 OID 16921)
 -- Name: idx_specification_keys_sort_order; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2852,7 +5377,7 @@ CREATE INDEX idx_specification_keys_sort_order ON public.specification_keys USIN
 
 
 --
--- TOC entry 5117 (class 1259 OID 16922)
+-- TOC entry 5118 (class 1259 OID 16922)
 -- Name: idx_users_role; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2860,7 +5385,7 @@ CREATE INDEX idx_users_role ON public.users USING btree (role);
 
 
 --
--- TOC entry 5118 (class 1259 OID 16923)
+-- TOC entry 5119 (class 1259 OID 16923)
 -- Name: idx_users_status; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2884,7 +5409,7 @@ CREATE UNIQUE INDEX uq_password_reset_tokens_token ON public.password_reset_toke
 
 
 --
--- TOC entry 5119 (class 1259 OID 16926)
+-- TOC entry 5120 (class 1259 OID 16926)
 -- Name: uq_users_email_lower; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2892,7 +5417,15 @@ CREATE UNIQUE INDEX uq_users_email_lower ON public.users USING btree (lower((ema
 
 
 --
--- TOC entry 5152 (class 2620 OID 16927)
+-- TOC entry 5074 (class 1259 OID 17119)
+-- Name: ux_payments_transaction_code; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX ux_payments_transaction_code ON public.payments USING btree (transaction_code) WHERE (transaction_code IS NOT NULL);
+
+
+--
+-- TOC entry 5153 (class 2620 OID 16927)
 -- Name: banners trg_banners_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2900,7 +5433,7 @@ CREATE TRIGGER trg_banners_updated_at BEFORE UPDATE ON public.banners FOR EACH R
 
 
 --
--- TOC entry 5153 (class 2620 OID 16928)
+-- TOC entry 5154 (class 2620 OID 16928)
 -- Name: brands trg_brands_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2908,7 +5441,7 @@ CREATE TRIGGER trg_brands_updated_at BEFORE UPDATE ON public.brands FOR EACH ROW
 
 
 --
--- TOC entry 5154 (class 2620 OID 16929)
+-- TOC entry 5155 (class 2620 OID 16929)
 -- Name: cart_items trg_cart_items_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2916,7 +5449,7 @@ CREATE TRIGGER trg_cart_items_updated_at BEFORE UPDATE ON public.cart_items FOR 
 
 
 --
--- TOC entry 5155 (class 2620 OID 16930)
+-- TOC entry 5156 (class 2620 OID 16930)
 -- Name: carts trg_carts_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2924,7 +5457,7 @@ CREATE TRIGGER trg_carts_updated_at BEFORE UPDATE ON public.carts FOR EACH ROW E
 
 
 --
--- TOC entry 5156 (class 2620 OID 16931)
+-- TOC entry 5157 (class 2620 OID 16931)
 -- Name: categories trg_categories_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2932,7 +5465,7 @@ CREATE TRIGGER trg_categories_updated_at BEFORE UPDATE ON public.categories FOR 
 
 
 --
--- TOC entry 5157 (class 2620 OID 16932)
+-- TOC entry 5158 (class 2620 OID 16932)
 -- Name: chat_sessions trg_chat_sessions_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2940,7 +5473,7 @@ CREATE TRIGGER trg_chat_sessions_updated_at BEFORE UPDATE ON public.chat_session
 
 
 --
--- TOC entry 5158 (class 2620 OID 16933)
+-- TOC entry 5159 (class 2620 OID 16933)
 -- Name: contact_messages trg_contact_messages_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2948,7 +5481,7 @@ CREATE TRIGGER trg_contact_messages_updated_at BEFORE UPDATE ON public.contact_m
 
 
 --
--- TOC entry 5159 (class 2620 OID 16934)
+-- TOC entry 5160 (class 2620 OID 16934)
 -- Name: coupons trg_coupons_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2956,7 +5489,7 @@ CREATE TRIGGER trg_coupons_updated_at BEFORE UPDATE ON public.coupons FOR EACH R
 
 
 --
--- TOC entry 5160 (class 2620 OID 16935)
+-- TOC entry 5161 (class 2620 OID 16935)
 -- Name: faqs trg_faqs_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2964,7 +5497,7 @@ CREATE TRIGGER trg_faqs_updated_at BEFORE UPDATE ON public.faqs FOR EACH ROW EXE
 
 
 --
--- TOC entry 5161 (class 2620 OID 16936)
+-- TOC entry 5162 (class 2620 OID 16936)
 -- Name: news_posts trg_news_posts_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2972,7 +5505,7 @@ CREATE TRIGGER trg_news_posts_updated_at BEFORE UPDATE ON public.news_posts FOR 
 
 
 --
--- TOC entry 5162 (class 2620 OID 16937)
+-- TOC entry 5163 (class 2620 OID 16937)
 -- Name: orders trg_orders_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2980,7 +5513,7 @@ CREATE TRIGGER trg_orders_updated_at BEFORE UPDATE ON public.orders FOR EACH ROW
 
 
 --
--- TOC entry 5163 (class 2620 OID 16938)
+-- TOC entry 5164 (class 2620 OID 16938)
 -- Name: payments trg_payments_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2988,7 +5521,7 @@ CREATE TRIGGER trg_payments_updated_at BEFORE UPDATE ON public.payments FOR EACH
 
 
 --
--- TOC entry 5164 (class 2620 OID 16939)
+-- TOC entry 5165 (class 2620 OID 16939)
 -- Name: product_reviews trg_product_reviews_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -2996,7 +5529,7 @@ CREATE TRIGGER trg_product_reviews_updated_at BEFORE UPDATE ON public.product_re
 
 
 --
--- TOC entry 5165 (class 2620 OID 16940)
+-- TOC entry 5166 (class 2620 OID 16940)
 -- Name: product_specifications trg_product_specifications_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3004,7 +5537,7 @@ CREATE TRIGGER trg_product_specifications_updated_at BEFORE UPDATE ON public.pro
 
 
 --
--- TOC entry 5166 (class 2620 OID 16941)
+-- TOC entry 5167 (class 2620 OID 16941)
 -- Name: product_variants trg_product_variants_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3012,7 +5545,7 @@ CREATE TRIGGER trg_product_variants_updated_at BEFORE UPDATE ON public.product_v
 
 
 --
--- TOC entry 5167 (class 2620 OID 16942)
+-- TOC entry 5168 (class 2620 OID 16942)
 -- Name: products trg_products_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3020,7 +5553,7 @@ CREATE TRIGGER trg_products_updated_at BEFORE UPDATE ON public.products FOR EACH
 
 
 --
--- TOC entry 5168 (class 2620 OID 16943)
+-- TOC entry 5169 (class 2620 OID 16943)
 -- Name: specification_keys trg_specification_keys_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3028,7 +5561,7 @@ CREATE TRIGGER trg_specification_keys_updated_at BEFORE UPDATE ON public.specifi
 
 
 --
--- TOC entry 5169 (class 2620 OID 16944)
+-- TOC entry 5170 (class 2620 OID 16944)
 -- Name: users trg_users_updated_at; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
@@ -3036,7 +5569,7 @@ CREATE TRIGGER trg_users_updated_at BEFORE UPDATE ON public.users FOR EACH ROW E
 
 
 --
--- TOC entry 5122 (class 2606 OID 16945)
+-- TOC entry 5123 (class 2606 OID 16945)
 -- Name: cart_items fk_cart_items_cart; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3045,7 +5578,7 @@ ALTER TABLE ONLY public.cart_items
 
 
 --
--- TOC entry 5123 (class 2606 OID 16950)
+-- TOC entry 5124 (class 2606 OID 16950)
 -- Name: cart_items fk_cart_items_product_variant; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3054,7 +5587,7 @@ ALTER TABLE ONLY public.cart_items
 
 
 --
--- TOC entry 5124 (class 2606 OID 16955)
+-- TOC entry 5125 (class 2606 OID 16955)
 -- Name: carts fk_carts_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3063,7 +5596,7 @@ ALTER TABLE ONLY public.carts
 
 
 --
--- TOC entry 5125 (class 2606 OID 16960)
+-- TOC entry 5126 (class 2606 OID 16960)
 -- Name: categories fk_categories_parent; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3072,7 +5605,7 @@ ALTER TABLE ONLY public.categories
 
 
 --
--- TOC entry 5126 (class 2606 OID 16965)
+-- TOC entry 5127 (class 2606 OID 16965)
 -- Name: chat_messages fk_chat_messages_sender; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3081,7 +5614,7 @@ ALTER TABLE ONLY public.chat_messages
 
 
 --
--- TOC entry 5127 (class 2606 OID 16970)
+-- TOC entry 5128 (class 2606 OID 16970)
 -- Name: chat_messages fk_chat_messages_session; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3090,7 +5623,7 @@ ALTER TABLE ONLY public.chat_messages
 
 
 --
--- TOC entry 5128 (class 2606 OID 16975)
+-- TOC entry 5129 (class 2606 OID 16975)
 -- Name: chat_sessions fk_chat_sessions_customer; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3099,7 +5632,7 @@ ALTER TABLE ONLY public.chat_sessions
 
 
 --
--- TOC entry 5129 (class 2606 OID 16980)
+-- TOC entry 5130 (class 2606 OID 16980)
 -- Name: chat_sessions fk_chat_sessions_staff; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3108,7 +5641,7 @@ ALTER TABLE ONLY public.chat_sessions
 
 
 --
--- TOC entry 5130 (class 2606 OID 16985)
+-- TOC entry 5131 (class 2606 OID 16985)
 -- Name: coupon_usages fk_coupon_usages_coupon; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3117,7 +5650,7 @@ ALTER TABLE ONLY public.coupon_usages
 
 
 --
--- TOC entry 5131 (class 2606 OID 16990)
+-- TOC entry 5132 (class 2606 OID 16990)
 -- Name: coupon_usages fk_coupon_usages_order; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3126,7 +5659,7 @@ ALTER TABLE ONLY public.coupon_usages
 
 
 --
--- TOC entry 5132 (class 2606 OID 16995)
+-- TOC entry 5133 (class 2606 OID 16995)
 -- Name: coupon_usages fk_coupon_usages_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3135,7 +5668,7 @@ ALTER TABLE ONLY public.coupon_usages
 
 
 --
--- TOC entry 5133 (class 2606 OID 17000)
+-- TOC entry 5134 (class 2606 OID 17000)
 -- Name: news_posts fk_news_posts_author; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3144,7 +5677,7 @@ ALTER TABLE ONLY public.news_posts
 
 
 --
--- TOC entry 5134 (class 2606 OID 17005)
+-- TOC entry 5135 (class 2606 OID 17005)
 -- Name: order_items fk_order_items_order; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3153,7 +5686,7 @@ ALTER TABLE ONLY public.order_items
 
 
 --
--- TOC entry 5135 (class 2606 OID 17010)
+-- TOC entry 5136 (class 2606 OID 17010)
 -- Name: order_items fk_order_items_product; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3162,7 +5695,7 @@ ALTER TABLE ONLY public.order_items
 
 
 --
--- TOC entry 5136 (class 2606 OID 17015)
+-- TOC entry 5137 (class 2606 OID 17015)
 -- Name: order_items fk_order_items_product_variant; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3171,7 +5704,7 @@ ALTER TABLE ONLY public.order_items
 
 
 --
--- TOC entry 5137 (class 2606 OID 17020)
+-- TOC entry 5138 (class 2606 OID 17020)
 -- Name: orders fk_orders_coupon; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3180,7 +5713,7 @@ ALTER TABLE ONLY public.orders
 
 
 --
--- TOC entry 5138 (class 2606 OID 17025)
+-- TOC entry 5139 (class 2606 OID 17025)
 -- Name: orders fk_orders_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3189,7 +5722,7 @@ ALTER TABLE ONLY public.orders
 
 
 --
--- TOC entry 5139 (class 2606 OID 17030)
+-- TOC entry 5140 (class 2606 OID 17030)
 -- Name: password_reset_tokens fk_password_reset_tokens_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3198,7 +5731,7 @@ ALTER TABLE ONLY public.password_reset_tokens
 
 
 --
--- TOC entry 5140 (class 2606 OID 17035)
+-- TOC entry 5141 (class 2606 OID 17035)
 -- Name: payments fk_payments_order; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3207,7 +5740,7 @@ ALTER TABLE ONLY public.payments
 
 
 --
--- TOC entry 5141 (class 2606 OID 17040)
+-- TOC entry 5142 (class 2606 OID 17040)
 -- Name: product_images fk_product_images_product; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3216,7 +5749,7 @@ ALTER TABLE ONLY public.product_images
 
 
 --
--- TOC entry 5142 (class 2606 OID 17045)
+-- TOC entry 5143 (class 2606 OID 17045)
 -- Name: product_images fk_product_images_variant; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3225,7 +5758,7 @@ ALTER TABLE ONLY public.product_images
 
 
 --
--- TOC entry 5143 (class 2606 OID 17050)
+-- TOC entry 5144 (class 2606 OID 17050)
 -- Name: product_reviews fk_product_reviews_order_item; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3234,7 +5767,7 @@ ALTER TABLE ONLY public.product_reviews
 
 
 --
--- TOC entry 5144 (class 2606 OID 17055)
+-- TOC entry 5145 (class 2606 OID 17055)
 -- Name: product_reviews fk_product_reviews_product; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3243,7 +5776,7 @@ ALTER TABLE ONLY public.product_reviews
 
 
 --
--- TOC entry 5145 (class 2606 OID 17060)
+-- TOC entry 5146 (class 2606 OID 17060)
 -- Name: product_reviews fk_product_reviews_user; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3252,7 +5785,7 @@ ALTER TABLE ONLY public.product_reviews
 
 
 --
--- TOC entry 5146 (class 2606 OID 17065)
+-- TOC entry 5147 (class 2606 OID 17065)
 -- Name: product_specifications fk_product_specifications_key; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3261,7 +5794,7 @@ ALTER TABLE ONLY public.product_specifications
 
 
 --
--- TOC entry 5147 (class 2606 OID 17070)
+-- TOC entry 5148 (class 2606 OID 17070)
 -- Name: product_specifications fk_product_specifications_product; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3270,7 +5803,7 @@ ALTER TABLE ONLY public.product_specifications
 
 
 --
--- TOC entry 5148 (class 2606 OID 17075)
+-- TOC entry 5149 (class 2606 OID 17075)
 -- Name: product_variants fk_product_variants_product; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3279,7 +5812,7 @@ ALTER TABLE ONLY public.product_variants
 
 
 --
--- TOC entry 5149 (class 2606 OID 17080)
+-- TOC entry 5150 (class 2606 OID 17080)
 -- Name: products fk_products_brand; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3288,7 +5821,7 @@ ALTER TABLE ONLY public.products
 
 
 --
--- TOC entry 5150 (class 2606 OID 17085)
+-- TOC entry 5151 (class 2606 OID 17085)
 -- Name: products fk_products_category; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3297,7 +5830,7 @@ ALTER TABLE ONLY public.products
 
 
 --
--- TOC entry 5151 (class 2606 OID 17090)
+-- TOC entry 5152 (class 2606 OID 17090)
 -- Name: specification_keys fk_specification_keys_category; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -3305,11 +5838,11 @@ ALTER TABLE ONLY public.specification_keys
     ADD CONSTRAINT fk_specification_keys_category FOREIGN KEY (category_id) REFERENCES public.categories(id) ON DELETE RESTRICT;
 
 
--- Completed on 2026-05-24 05:02:00
+-- Completed on 2026-05-25 13:55:21
 
 --
 -- PostgreSQL database dump complete
 --
 
-\unrestrict V704YmN2pzdoc4bfG4X5H3ApTdab3fX2IFOdDJFBFfQjmdRJIiNTLcYStvj4jgg
+\unrestrict s5wAi7iZudDpoSxBy4a6MEaerdIniOvSYFDVl6JgPtTt9CF76eCV62bn9XL94jU
 

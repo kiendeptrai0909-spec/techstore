@@ -253,4 +253,12 @@ public class ChatService {
                 .createdAt(message.getCreatedAt())
                 .build();
     }
+    @Transactional
+    public void deleteSession(Long sessionId) {
+        ChatSession session = chatSessionRepository.findById(sessionId)
+                .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy phiên chat"));
+
+        chatMessageRepository.deleteBySessionId(sessionId);
+        chatSessionRepository.delete(session);
+    }
 }

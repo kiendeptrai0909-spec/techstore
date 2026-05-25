@@ -9,6 +9,10 @@ import OrderStatusBadge from '../../components/order/OrderStatusBadge'
 import PaymentStatusBadge from '../../components/order/PaymentStatusBadge'
 import OrderItemList from '../../components/order/OrderItemList'
 import ReviewModal from '../../components/review/ReviewModal'
+import {
+  bankTransferConfig,
+  buildVietQrUrl,
+} from '../../config/bankTransferConfig'
 
 function OrderDetailPage() {
   const { orderId } = useParams()
@@ -21,8 +25,42 @@ function OrderDetailPage() {
   const [reviewSubmitting, setReviewSubmitting] = useState(false)
   const [reviewMessage, setReviewMessage] = useState('')
 
-  const fetchOrder = async () => {
-    setLoading(true)
+  const payment = order?.payment || order?.paymentResponse
+  const paymentMethod = payment?.method || order?.paymentMethod
+  const paymentStatus = payment?.status || order?.paymentStatus
+  const orderStatus = order?.orderStatus || order?.status
+
+  const subtotal =
+    order?.subtotalAmount ||
+    order?.totalProductAmount ||
+    order?.totalAmount ||
+    0
+
+  const discountAmount = order?.discountAmount || 0
+  const shippingFee = order?.shippingFee || 0
+
+  const finalAmount =
+    order?.finalAmount ||
+    order?.totalAmount ||
+    payment?.amount ||
+    subtotal - discountAmount + shippingFee
+
+  const canPayAgain =
+    paymentMethod === 'BANK_TRANSFER' &&
+    paymentStatus === 'PENDING' &&
+    orderStatus !== 'CANCELLED'
+
+  const isPaid = paymentStatus === 'PAID'
+  const isFailed = paymentStatus === 'FAILED'
+  const isCancelled = orderStatus === 'CANCELLED'
+
+  const transferNote = `TECHSTORE ${order?.orderCode || order?.id || ''}`
+
+  const fetchOrder = async (showLoading = true) => {
+    if (showLoading) {
+      setLoading(true)
+    }
+
     setMessage('')
 
     try {
@@ -31,13 +69,27 @@ function OrderDetailPage() {
     } catch (error) {
       setMessage(error.message || 'Không thể tải chi tiết đơn hàng')
     } finally {
-      setLoading(false)
+      if (showLoading) {
+        setLoading(false)
+      }
     }
   }
 
   useEffect(() => {
     fetchOrder()
   }, [orderId])
+
+  useEffect(() => {
+    if (!canPayAgain) return undefined
+
+    const intervalId = window.setInterval(() => {
+      fetchOrder(false)
+    }, 5000)
+
+    return () => {
+      window.clearInterval(intervalId)
+    }
+  }, [canPayAgain, orderId])
 
   const items = useMemo(() => {
     if (!order) {
@@ -67,56 +119,57 @@ function OrderDetailPage() {
 
     setReviewProduct(null)
   }
+
   const handleReviewSubmitted = async () => {
-  setReviewProduct(null)
-  setReviewMessage('Đánh giá sản phẩm thành công')
-  await fetchOrder()
-}
-
-  const handleSubmitReview = async ({ rating, comment, content }) => {
-  const productId = reviewProduct?.productId
-  const orderItemId = reviewProduct?.orderItemId || reviewProduct?.id
-  const reviewContent = content || comment || ''
-
-  if (!productId) {
-    setReviewMessage('Không xác định được sản phẩm cần đánh giá')
-    return
-  }
-
-  if (!orderItemId) {
-    setReviewMessage('Không xác định được chi tiết đơn hàng cần đánh giá')
-    return
-  }
-
-  if (!rating) {
-    setReviewMessage('Vui lòng chọn số sao đánh giá')
-    return
-  }
-
-  if (!reviewContent.trim()) {
-    setReviewMessage('Vui lòng nhập nội dung đánh giá')
-    return
-  }
-
-  setReviewSubmitting(true)
-  setReviewMessage('')
-
-  try {
-    await reviewApi.createReview(productId, {
-      orderItemId,
-      rating,
-      content: reviewContent.trim(),
-    })
-
     setReviewProduct(null)
     setReviewMessage('Đánh giá sản phẩm thành công')
-    await fetchOrder()
-  } catch (error) {
-    setReviewMessage(error.message || 'Không thể gửi đánh giá')
-  } finally {
-    setReviewSubmitting(false)
+    await fetchOrder(false)
   }
-}
+
+  const handleSubmitReview = async ({ rating, comment, content }) => {
+    const productId = reviewProduct?.productId
+    const orderItemId = reviewProduct?.orderItemId || reviewProduct?.id
+    const reviewContent = content || comment || ''
+
+    if (!productId) {
+      setReviewMessage('Không xác định được sản phẩm cần đánh giá')
+      return
+    }
+
+    if (!orderItemId) {
+      setReviewMessage('Không xác định được chi tiết đơn hàng cần đánh giá')
+      return
+    }
+
+    if (!rating) {
+      setReviewMessage('Vui lòng chọn số sao đánh giá')
+      return
+    }
+
+    if (!reviewContent.trim()) {
+      setReviewMessage('Vui lòng nhập nội dung đánh giá')
+      return
+    }
+
+    setReviewSubmitting(true)
+    setReviewMessage('')
+
+    try {
+      await reviewApi.createReview(productId, {
+        orderItemId,
+        rating,
+        content: reviewContent.trim(),
+      })
+
+      setReviewProduct(null)
+      setReviewMessage('Đánh giá sản phẩm thành công')
+      await fetchOrder(false)
+    } catch (error) {
+      setReviewMessage(error.message || 'Không thể gửi đánh giá')
+    } finally {
+      setReviewSubmitting(false)
+    }
+  }
 
   if (loading) {
     return (
@@ -155,32 +208,16 @@ function OrderDetailPage() {
     )
   }
 
-  const payment = order.payment || order.paymentResponse
-  const orderStatus = order.orderStatus || order.status
-  const paymentStatus = payment?.status || order.paymentStatus
-
-  const subtotal =
-    order.subtotalAmount ||
-    order.totalProductAmount ||
-    order.totalAmount ||
-    0
-
-  const discountAmount = order.discountAmount || 0
-  const shippingFee = order.shippingFee || 0
-
-  const finalAmount =
-    order.finalAmount ||
-    order.totalAmount ||
-    subtotal - discountAmount + shippingFee
-
   return (
     <div className="bg-[#e9e9e9]">
       <ReviewModal
-  open={Boolean(reviewProduct)}
-  item={reviewProduct}
-  onClose={handleCloseReview}
-  onSubmitted={handleReviewSubmitted}
-/>
+        open={Boolean(reviewProduct)}
+        item={reviewProduct}
+        onClose={handleCloseReview}
+        onSubmitted={handleReviewSubmitted}
+        onSubmit={handleSubmitReview}
+        submitting={reviewSubmitting}
+      />
 
       <div className="mx-auto max-w-7xl px-4 py-6">
         <div className="mb-4 rounded-md bg-white p-4 shadow-sm">
@@ -222,6 +259,18 @@ function OrderDetailPage() {
         {message && (
           <div className="mb-4 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">
             {message}
+          </div>
+        )}
+
+        {isPaid && (
+          <div className="mb-4 rounded border border-green-200 bg-green-50 px-4 py-3 text-sm font-bold text-green-700">
+            Thanh toán thành công. TechStore đang xử lý đơn hàng của bạn.
+          </div>
+        )}
+
+        {(isCancelled || isFailed) && (
+          <div className="mb-4 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm font-bold text-red-600">
+            Đơn hàng đã bị hủy hoặc quá hạn thanh toán. Vui lòng đặt lại đơn mới.
           </div>
         )}
 
@@ -274,6 +323,70 @@ function OrderDetailPage() {
                 </div>
               )}
             </div>
+
+            {canPayAgain && (
+              <div className="rounded-md border border-blue-200 bg-blue-50 p-5 text-sm text-gray-700 shadow-sm">
+                <h2 className="text-xl font-black text-gray-900">
+                  Tiếp tục thanh toán chuyển khoản
+                </h2>
+
+                <p className="mt-1 text-gray-600">
+                  Đơn hàng của bạn chưa được thanh toán. Vui lòng quét mã QR bên dưới để thanh toán lại.
+                </p>
+
+                <div className="mt-4 grid gap-5 md:grid-cols-[240px_minmax(0,1fr)]">
+                  <div className="rounded bg-white p-3 shadow-sm">
+                    <img
+                      src={buildVietQrUrl({
+                        amount: finalAmount,
+                        note: transferNote,
+                      })}
+                      alt="Mã QR chuyển khoản TechStore"
+                      className="mx-auto h-56 w-56 object-contain"
+                    />
+
+                    <p className="mt-2 text-center text-xs font-semibold text-gray-500">
+                      Mở app ngân hàng và quét mã QR
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <p>
+                      <span className="font-bold">Ngân hàng:</span>{' '}
+                      {bankTransferConfig.bankName}
+                    </p>
+
+                    <p>
+                      <span className="font-bold">Số tài khoản:</span>{' '}
+                      {bankTransferConfig.accountNumber}
+                    </p>
+
+                    <p>
+                      <span className="font-bold">Chủ tài khoản:</span>{' '}
+                      {bankTransferConfig.accountName}
+                    </p>
+
+                    <p>
+                      <span className="font-bold">Số tiền:</span>{' '}
+                      {formatCurrency(finalAmount)}
+                    </p>
+
+                    <p>
+                      <span className="font-bold">Nội dung:</span>{' '}
+                      {transferNote}
+                    </p>
+
+                    <p className="pt-2 font-semibold text-red-600">
+                      Vui lòng chuyển khoản đúng số tiền và đúng nội dung để hệ thống tự động xác nhận thanh toán.
+                    </p>
+
+                    <p className="font-semibold text-gray-600">
+                      Nếu quá 15 phút chưa thanh toán, đơn hàng sẽ tự động bị hủy.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="space-y-5">
@@ -285,7 +398,7 @@ function OrderDetailPage() {
               <div className="mt-4 space-y-3 text-sm">
                 <SummaryRow
                   label="Phương thức"
-                  value={order.paymentMethod || payment?.method || 'COD'}
+                  value={getPaymentMethodLabel(paymentMethod)}
                 />
 
                 <SummaryRow
@@ -422,6 +535,13 @@ function TimelineItem({ active, danger, title, description }) {
       </div>
     </div>
   )
+}
+
+function getPaymentMethodLabel(method) {
+  if (method === 'BANK_TRANSFER') return 'Chuyển khoản ngân hàng'
+  if (method === 'COD') return 'Thanh toán khi nhận hàng'
+
+  return method || 'Đang cập nhật'
 }
 
 export default OrderDetailPage

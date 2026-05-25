@@ -10,7 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.http.ResponseEntity;
 @RestController
 @RequestMapping("/api/v1/admin/chat")
 @RequiredArgsConstructor
@@ -50,5 +50,10 @@ public class AdminChatController {
     @PutMapping("/sessions/{sessionId}/close")
     public ChatSessionResponse closeSession(@PathVariable Long sessionId) {
         return chatService.closeSession(sessionId);
+    }
+    @DeleteMapping("/sessions/{sessionId}")
+    public ResponseEntity<Void> deleteSession(@PathVariable Long sessionId) {
+        chatService.deleteSession(sessionId);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { MessageSquare, Send, XCircle } from 'lucide-react'
+import { MessageSquare, Send, Trash2, XCircle } from 'lucide-react'
 import { adminChatApi } from '../../api/adminChatApi'
 import { useAuth } from '../../contexts/AuthContext'
 
@@ -16,13 +16,14 @@ function AdminChatPage() {
   const [loadingSessions, setLoadingSessions] = useState(true)
   const [loadingMessages, setLoadingMessages] = useState(false)
   const [sending, setSending] = useState(false)
+  const [deletingSessionId, setDeletingSessionId] = useState(null)
 
   useEffect(() => {
     fetchSessions()
   }, [status])
 
   useEffect(() => {
-    if (!selectedSession) return
+    if (!selectedSession) return undefined
 
     fetchMessages(selectedSession.id)
 
@@ -62,6 +63,14 @@ function AdminChatPage() {
 
       if (!selectedSession && list.length > 0) {
         setSelectedSession(list[0])
+      }
+
+      if (
+        selectedSession &&
+        !list.some((session) => session.id === selectedSession.id)
+      ) {
+        setSelectedSession(null)
+        setMessages([])
       }
     } catch (error) {
       setMessage(error.message || 'Không thể tải danh sách chat')
@@ -143,6 +152,35 @@ function AdminChatPage() {
     }
   }
 
+  const handleDeleteSession = async (sessionId) => {
+    const confirmed = window.confirm(
+      'Bạn có chắc muốn xóa phiên chat này? Tất cả tin nhắn trong phiên cũng sẽ bị xóa.'
+    )
+
+    if (!confirmed) return
+
+    setDeletingSessionId(sessionId)
+    setMessage('')
+
+    try {
+      await adminChatApi.deleteSession(sessionId)
+
+      setSessions((prev) =>
+        prev.filter((session) => session.id !== sessionId)
+      )
+
+      if (selectedSession?.id === sessionId) {
+        setSelectedSession(null)
+        setMessages([])
+        setInput('')
+      }
+    } catch (error) {
+      setMessage(error.message || 'Không thể xóa phiên chat')
+    } finally {
+      setDeletingSessionId(null)
+    }
+  }
+
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && !event.shiftKey) {
       event.preventDefault()
@@ -201,43 +239,72 @@ function AdminChatPage() {
                 Chưa có phiên chat nào.
               </div>
             ) : (
-              sessions.map((session) => (
-                <button
-                  key={session.id}
-                  type="button"
-                  onClick={() => handleSelectSession(session)}
-                  className={
-                    selectedSession?.id === session.id
-                      ? 'block w-full border-b bg-red-50 px-4 py-4 text-left'
-                      : 'block w-full border-b px-4 py-4 text-left hover:bg-gray-50'
-                  }
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="font-black text-gray-900">
-                      {session.customerName || `Khách hàng #${session.customerId}`}
-                    </div>
+              sessions.map((session) => {
+                const active = selectedSession?.id === session.id
+                const deleting = deletingSessionId === session.id
 
-                    <span
-                      className={
-                        session.status === 'CLOSED'
-                          ? 'rounded-full border bg-gray-50 px-2 py-1 text-xs font-bold text-gray-600'
-                          : 'rounded-full border border-green-200 bg-green-50 px-2 py-1 text-xs font-bold text-green-600'
+                return (
+                  <div
+                    key={session.id}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => handleSelectSession(session)}
+                    onKeyDown={(event) => {
+                      if (event.key === 'Enter') {
+                        handleSelectSession(session)
                       }
-                    >
-                      {session.status === 'CLOSED' ? 'Đã đóng' : 'Đang mở'}
-                    </span>
-                  </div>
+                    }}
+                    className={
+                      active
+                        ? 'block w-full cursor-pointer border-b bg-red-50 px-4 py-4 text-left'
+                        : 'block w-full cursor-pointer border-b px-4 py-4 text-left hover:bg-gray-50'
+                    }
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="font-black text-gray-900">
+                          {session.customerName ||
+                            `Khách hàng #${session.customerId}`}
+                        </div>
 
-                  <div className="mt-1 line-clamp-1 text-sm text-gray-500">
-                    {session.lastMessage || 'Chưa có tin nhắn'}
-                  </div>
+                        <div className="mt-1 line-clamp-1 text-sm text-gray-500">
+                          {session.lastMessage || 'Chưa có tin nhắn'}
+                        </div>
 
-                  <div className="mt-2 text-xs text-gray-400">
-                    #{session.id}
-                    {session.staffName ? ` · NV: ${session.staffName}` : ''}
+                        <div className="mt-2 text-xs text-gray-400">
+                          #{session.id}
+                          {session.staffName ? ` · NV: ${session.staffName}` : ''}
+                        </div>
+                      </div>
+
+                      <div className="flex shrink-0 items-center gap-2">
+                        <span
+                          className={
+                            session.status === 'CLOSED'
+                              ? 'rounded-full border bg-gray-50 px-2 py-1 text-xs font-bold text-gray-600'
+                              : 'rounded-full border border-green-200 bg-green-50 px-2 py-1 text-xs font-bold text-green-600'
+                          }
+                        >
+                          {session.status === 'CLOSED' ? 'Đã đóng' : 'Đang mở'}
+                        </span>
+
+                        <button
+                          type="button"
+                          onClick={(event) => {
+                            event.stopPropagation()
+                            handleDeleteSession(session.id)
+                          }}
+                          disabled={deleting}
+                          className="rounded border p-2 text-gray-500 hover:border-red-500 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-50"
+                          title="Xóa phiên chat"
+                        >
+                          <Trash2 size={15} />
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                </button>
-              ))
+                )
+              })
             )}
           </div>
         </div>
@@ -264,15 +331,16 @@ function AdminChatPage() {
                 </div>
 
                 <div className="flex gap-2">
-                  {!selectedSession.staffId && selectedSession.status !== 'CLOSED' && (
-                    <button
-                      type="button"
-                      onClick={handleAssign}
-                      className="rounded bg-blue-600 px-4 py-2 text-sm font-black text-white hover:bg-blue-700"
-                    >
-                      Nhận chat
-                    </button>
-                  )}
+                  {!selectedSession.staffId &&
+                    selectedSession.status !== 'CLOSED' && (
+                      <button
+                        type="button"
+                        onClick={handleAssign}
+                        className="rounded bg-blue-600 px-4 py-2 text-sm font-black text-white hover:bg-blue-700"
+                      >
+                        Nhận chat
+                      </button>
+                    )}
 
                   {selectedSession.status !== 'CLOSED' && (
                     <button
@@ -284,6 +352,16 @@ function AdminChatPage() {
                       Đóng phiên
                     </button>
                   )}
+
+                  <button
+                    type="button"
+                    onClick={() => handleDeleteSession(selectedSession.id)}
+                    disabled={deletingSessionId === selectedSession.id}
+                    className="inline-flex items-center gap-2 rounded border px-4 py-2 text-sm font-black text-gray-700 hover:border-red-500 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-50"
+                  >
+                    <Trash2 size={17} />
+                    Xóa phiên
+                  </button>
                 </div>
               </div>
 
@@ -304,7 +382,9 @@ function AdminChatPage() {
                       return (
                         <div
                           key={chatMessage.id}
-                          className={isMine ? 'flex justify-end' : 'flex justify-start'}
+                          className={
+                            isMine ? 'flex justify-end' : 'flex justify-start'
+                          }
                         >
                           <div
                             className={
@@ -329,9 +409,9 @@ function AdminChatPage() {
                               }
                             >
                               {chatMessage.createdAt
-                                ? new Date(chatMessage.createdAt).toLocaleString(
-                                    'vi-VN'
-                                  )
+                                ? new Date(
+                                    chatMessage.createdAt
+                                  ).toLocaleString('vi-VN')
                                 : ''}
                             </div>
                           </div>

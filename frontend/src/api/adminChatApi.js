@@ -22,4 +22,7 @@ export const adminChatApi = {
   closeSession: (sessionId) => {
     return axiosClient.put(`/admin/chat/sessions/${sessionId}/close`)
   },
+  deleteSession: (sessionId) => {
+  return axiosClient.delete(`/admin/chat/sessions/${sessionId}`)
+},
 }

@@ -1,4 +1,4 @@
-import { Banknote, CreditCard } from 'lucide-react'
+import { Banknote, Landmark } from 'lucide-react'
 
 function PaymentMethodBox({ value, onChange }) {
   const methods = [
@@ -9,10 +9,11 @@ function PaymentMethodBox({ value, onChange }) {
       icon: Banknote,
     },
     {
-      value: 'MOCK_BANKING',
-      title: 'Thanh toán giả lập',
-      description: 'Dùng để test luồng thanh toán online trong hệ thống.',
-      icon: CreditCard,
+      value: 'BANK_TRANSFER',
+      title: 'Chuyển khoản ngân hàng',
+      description:
+        'Sau khi đặt hàng, hệ thống sẽ hiển thị mã QR để bạn chuyển khoản theo mã đơn hàng.',
+      icon: Landmark,
     },
   ]
 
@@ -58,6 +59,13 @@ function PaymentMethodBox({ value, onChange }) {
           )
         })}
       </div>
+
+      {value === 'BANK_TRANSFER' && (
+        <div className="mt-4 rounded border border-blue-200 bg-blue-50 p-4 text-sm font-semibold text-blue-800">
+          Mã QR chuyển khoản sẽ được hiển thị sau khi bạn bấm Đặt hàng.
+          Vui lòng không chuyển khoản trước khi đơn hàng được tạo.
+        </div>
+      )}
     </div>
   )
 }

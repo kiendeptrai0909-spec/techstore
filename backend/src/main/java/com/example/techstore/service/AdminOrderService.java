@@ -33,6 +33,7 @@ public class AdminOrderService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
     private final PaymentRepository paymentRepository;
+    private final OrderInventoryService orderInventoryService;
 
     @Transactional(readOnly = true)
     public Page<OrderResponse> getOrders(OrderStatus status, Pageable pageable) {
@@ -62,6 +63,10 @@ public class AdminOrderService {
         OrderStatus newStatus = request.getOrderStatus();
 
         validateStatusTransition(currentStatus, newStatus);
+
+        if (newStatus == OrderStatus.CANCELLED) {
+            handleCancelOrder(order);
+        }
 
         order.setOrderStatus(newStatus);
 
@@ -111,6 +116,42 @@ public class AdminOrderService {
                             + newStatus
             );
         }
+    }
+
+    private void handleCancelOrder(Order order) {
+        Payment payment = paymentRepository.findByOrderId(order.getId())
+                .orElse(null);
+
+        /*
+         * Nếu không có payment thì vẫn hoàn tồn kho để tránh mất hàng.
+         */
+        if (payment == null) {
+            orderInventoryService.restoreStock(order);
+            return;
+        }
+
+        /*
+         * Đơn chưa thanh toán bị hủy:
+         * - Hoàn tồn kho
+         * - Payment chuyển FAILED
+         */
+        if (payment.getStatus() == PaymentStatus.PENDING) {
+            orderInventoryService.restoreStock(order);
+
+            payment.setStatus(PaymentStatus.FAILED);
+            paymentRepository.save(payment);
+
+            return;
+        }
+
+        /*
+         * Đơn đã thanh toán bị hủy/refund:
+         * Không tự hoàn tồn kho ở đây.
+         * Vì refund còn tùy trường hợp:
+         * - Shop chưa giao hàng: có thể hoàn tồn kho
+         * - Khách đã nhận rồi trả hàng: chỉ hoàn tồn kho khi nhận lại hàng còn bán được
+         * - Hàng lỗi/hỏng: không nên hoàn tồn kho
+         */
     }
 
     private void markCodPaymentAsPaidIfNeeded(Order order) {

@@ -1,7 +1,7 @@
 import axiosClient from './axiosClient'
 
 export const paymentApi = {
-  mockPay: (orderId) => {
-    return axiosClient.post(`/payments/${orderId}/mock-pay`)
-  },
+  confirmBankTransfer: (orderId) => {
+  return axiosClient.post(`/payments/${orderId}/confirm-bank-transfer`)
+},
 }

@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation, useParams } from 'react-router'
-import { CheckCircle2, CreditCard, PackageCheck } from 'lucide-react'
+import { CheckCircle2, PackageCheck } from 'lucide-react'
 
+import {
+  bankTransferConfig,
+  buildVietQrUrl,
+} from '../../config/bankTransferConfig'
 import { orderApi } from '../../api/orderApi'
-import { paymentApi } from '../../api/paymentApi'
 import { formatCurrency } from '../../utils/formatCurrency'
 
 function OrderSuccessPage() {
@@ -12,18 +15,27 @@ function OrderSuccessPage() {
 
   const [order, setOrder] = useState(location.state?.order || null)
   const [loading, setLoading] = useState(!location.state?.order)
-  const [paying, setPaying] = useState(false)
   const [message, setMessage] = useState('')
 
   const payment = order?.payment || order?.paymentResponse
   const paymentMethod = order?.paymentMethod || payment?.method
   const paymentStatus = payment?.status || order?.paymentStatus
+  const orderStatus = order?.orderStatus || order?.status || 'PENDING'
 
   const finalAmount =
     order?.finalAmount ||
     order?.totalAmount ||
+    payment?.amount ||
     order?.subtotalAmount ||
     0
+
+  const isBankTransfer = paymentMethod === 'BANK_TRANSFER'
+  const isPaid = paymentStatus === 'PAID'
+  const isFailed = paymentStatus === 'FAILED'
+  const isCancelled = orderStatus === 'CANCELLED'
+
+  const canShowBankTransferQr =
+    isBankTransfer && !isPaid && !isFailed && !isCancelled
 
   useEffect(() => {
     const fetchOrder = async () => {
@@ -46,21 +58,24 @@ function OrderSuccessPage() {
     fetchOrder()
   }, [order, orderId])
 
-  const handleMockPay = async () => {
-    setPaying(true)
-    setMessage('')
+  useEffect(() => {
+    if (!orderId) return undefined
+    if (!isBankTransfer) return undefined
+    if (isPaid || isFailed || isCancelled) return undefined
 
-    try {
-      await paymentApi.mockPay(orderId)
-      const updatedOrder = await orderApi.getOrderById(orderId)
-      setOrder(updatedOrder)
-      setMessage('Thanh toán giả lập thành công')
-    } catch (error) {
-      setMessage(error.message || 'Thanh toán thất bại')
-    } finally {
-      setPaying(false)
+    const intervalId = window.setInterval(async () => {
+      try {
+        const updatedOrder = await orderApi.getOrderById(orderId)
+        setOrder(updatedOrder)
+      } catch {
+        // Bỏ qua lỗi tạm thời khi polling
+      }
+    }, 5000)
+
+    return () => {
+      window.clearInterval(intervalId)
     }
-  }
+  }, [orderId, isBankTransfer, isPaid, isFailed, isCancelled])
 
   if (loading) {
     return (
@@ -95,11 +110,6 @@ function OrderSuccessPage() {
     )
   }
 
-  const canMockPay =
-    paymentMethod === 'MOCK_BANKING' &&
-    paymentStatus !== 'PAID' &&
-    paymentStatus !== 'SUCCESS'
-
   return (
     <div className="bg-[#e9e9e9]">
       <div className="mx-auto max-w-4xl px-4 py-10">
@@ -117,7 +127,7 @@ function OrderSuccessPage() {
           </p>
 
           {message && (
-            <div className="mt-5 rounded border border-green-200 bg-green-50 px-4 py-3 text-sm font-semibold text-green-700">
+            <div className="mt-5 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">
               {message}
             </div>
           )}
@@ -131,17 +141,17 @@ function OrderSuccessPage() {
 
               <InfoItem
                 label="Trạng thái đơn"
-                value={order.orderStatus || order.status || 'PENDING'}
+                value={getOrderStatusLabel(orderStatus)}
               />
 
               <InfoItem
                 label="Phương thức thanh toán"
-                value={paymentMethod || 'COD'}
+                value={getPaymentMethodLabel(paymentMethod)}
               />
 
               <InfoItem
                 label="Trạng thái thanh toán"
-                value={paymentStatus || 'PENDING'}
+                value={getPaymentStatusLabel(paymentStatus)}
               />
 
               <InfoItem
@@ -173,16 +183,64 @@ function OrderSuccessPage() {
             </div>
           </div>
 
-          {canMockPay && (
-            <button
-              type="button"
-              onClick={handleMockPay}
-              disabled={paying}
-              className="mt-6 inline-flex items-center justify-center gap-2 rounded bg-blue-600 px-6 py-3 font-black text-white hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
-            >
-              <CreditCard size={20} />
-              {paying ? 'Đang thanh toán...' : 'Thanh toán giả lập'}
-            </button>
+          {isPaid && (
+            <div className="mt-6 rounded border border-green-200 bg-green-50 p-4 text-sm font-bold text-green-700">
+              Thanh toán thành công. TechStore đang xử lý đơn hàng của bạn.
+            </div>
+          )}
+
+          {(isCancelled || isFailed) && (
+            <div className="mt-6 rounded border border-red-200 bg-red-50 p-4 text-sm font-bold text-red-600">
+              Đơn hàng đã quá hạn thanh toán hoặc đã bị hủy. Vui lòng đặt lại đơn mới.
+            </div>
+          )}
+
+          {canShowBankTransferQr && (
+            <div className="mt-6 rounded border border-blue-200 bg-blue-50 p-5 text-left text-sm text-gray-700">
+              <h2 className="font-black text-gray-900">
+                Quét mã QR để chuyển khoản
+              </h2>
+
+              <img
+                src={buildVietQrUrl({
+                  amount: finalAmount,
+                  note: `TECHSTORE ${order.orderCode || order.id}`,
+                })}
+                alt="Mã QR chuyển khoản TechStore"
+                className="mx-auto my-4 h-56 w-56 rounded bg-white p-2 object-contain shadow-sm"
+              />
+
+              <div className="mt-3 space-y-1">
+                <p>
+                  <span className="font-bold">Ngân hàng:</span>{' '}
+                  {bankTransferConfig.bankName}
+                </p>
+
+                <p>
+                  <span className="font-bold">Số tài khoản:</span>{' '}
+                  {bankTransferConfig.accountNumber}
+                </p>
+
+                <p>
+                  <span className="font-bold">Chủ tài khoản:</span>{' '}
+                  {bankTransferConfig.accountName}
+                </p>
+
+                <p>
+                  <span className="font-bold">Số tiền:</span>{' '}
+                  {formatCurrency(finalAmount)}
+                </p>
+
+                <p>
+                  <span className="font-bold">Nội dung:</span>{' '}
+                  TECHSTORE {order.orderCode || order.id}
+                </p>
+              </div>
+
+              <p className="mt-3 font-semibold text-red-600">
+                Vui lòng thanh toán trong 15 phút. Sau thời gian này đơn hàng sẽ tự động hủy và sản phẩm sẽ được hoàn lại kho.
+              </p>
+            </div>
           )}
 
           <div className="mt-6 flex flex-wrap justify-center gap-3">
@@ -214,6 +272,40 @@ function InfoItem({ label, value }) {
       <div className="mt-1 font-bold text-gray-900">{value}</div>
     </div>
   )
+}
+
+function getOrderStatusLabel(status) {
+  if (status === 'PENDING') return 'Chờ xác nhận'
+  if (status === 'CONFIRMED') return 'Đã xác nhận'
+  if (status === 'SHIPPING') return 'Đang giao hàng'
+  if (status === 'COMPLETED') return 'Hoàn thành'
+  if (status === 'CANCELLED') return 'Đã hủy'
+
+  return status || 'Chờ xác nhận'
+}
+
+function getPaymentMethodLabel(method) {
+  if (method === 'BANK_TRANSFER') {
+    return 'Chuyển khoản ngân hàng'
+  }
+
+  if (method === 'COD') {
+    return 'Thanh toán khi nhận hàng'
+  }
+
+  return method || 'COD'
+}
+
+function getPaymentStatusLabel(status) {
+  if (status === 'PAID') {
+    return 'Đã thanh toán'
+  }
+
+  if (status === 'FAILED') {
+    return 'Thanh toán thất bại'
+  }
+
+  return 'Chờ thanh toán'
 }
 
 export default OrderSuccessPage

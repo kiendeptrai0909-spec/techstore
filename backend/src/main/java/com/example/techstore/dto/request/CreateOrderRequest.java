@@ -22,7 +22,7 @@ public class CreateOrderRequest {
     private String note;
 
     /*
-     * COD hoặc MOCK_BANKING
+     * COD hoặc BANK_TRANSFER
      */
     @NotNull(message = "Phương thức thanh toán không được để trống")
     private PaymentMethod paymentMethod;
