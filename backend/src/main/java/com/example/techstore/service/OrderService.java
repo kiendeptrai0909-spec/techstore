@@ -173,12 +173,16 @@ public class OrderService {
             ProductVariant variant = cartItem.getProductVariant();
             Product product = variant.getProduct();
 
-            if (product.getStatus() != ProductStatus.ACTIVE) {
-                throw new BadRequestException("Sản phẩm " + product.getName() + " hiện không hoạt động");
+            if (product.getStatus() != ProductStatus.ACTIVE || product.getDeletedAt() != null) {
+                throw new BadRequestException(
+                        "Sản phẩm " + product.getName() + " đã ngừng bán, vui lòng xóa khỏi giỏ hàng"
+                );
             }
 
-            if (variant.getStatus() != ProductStatus.ACTIVE) {
-                throw new BadRequestException("Biến thể " + variant.getName() + " hiện không hoạt động");
+            if (variant.getStatus() != ProductStatus.ACTIVE || variant.getDeletedAt() != null) {
+                throw new BadRequestException(
+                        "Phiên bản " + variant.getName() + " đã ngừng bán, vui lòng xóa khỏi giỏ hàng"
+                );
             }
 
             if (cartItem.getQuantity() <= 0) {
@@ -265,13 +269,27 @@ public class OrderService {
     }
 
     private OrderItemResponse toOrderItemResponse(OrderItem orderItem) {
+        ProductVariant variant = orderItem.getProductVariant();
+        Product product = orderItem.getProduct();
+
+        String thumbnailUrl = null;
+
+        if (
+                variant != null
+                        && variant.getThumbnailUrl() != null
+                        && !variant.getThumbnailUrl().isBlank()
+        ) {
+            thumbnailUrl = variant.getThumbnailUrl();
+        }
+
         return OrderItemResponse.builder()
                 .id(orderItem.getId())
-                .productId(orderItem.getProduct().getId())
-                .productVariantId(orderItem.getProductVariant().getId())
+                .productId(product != null ? product.getId() : null)
+                .productVariantId(variant != null ? variant.getId() : null)
                 .productName(orderItem.getProductName())
                 .variantName(orderItem.getVariantName())
                 .productSku(orderItem.getProductSku())
+                .thumbnailUrl(thumbnailUrl)
                 .price(orderItem.getPrice())
                 .quantity(orderItem.getQuantity())
                 .totalPrice(orderItem.getTotalPrice())

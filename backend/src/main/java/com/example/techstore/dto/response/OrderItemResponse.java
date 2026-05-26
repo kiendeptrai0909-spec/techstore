@@ -15,6 +15,7 @@ public class OrderItemResponse {
 
     private Long productVariantId;
 
+    private String thumbnailUrl;
     /*
      * Snapshot tên sản phẩm tại thời điểm đặt hàng.
      */

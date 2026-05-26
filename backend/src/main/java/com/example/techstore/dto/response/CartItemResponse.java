@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.math.BigDecimal;
-
+import com.example.techstore.enums.ProductStatus;
 @Getter
 @Builder
 public class CartItemResponse {
@@ -36,4 +36,12 @@ public class CartItemResponse {
     private BigDecimal totalPrice;
 
     private Integer stock;
+
+    private ProductStatus productStatus;
+
+    private ProductStatus variantStatus;
+
+    private Boolean available;
+
+    private String unavailableReason;
 }

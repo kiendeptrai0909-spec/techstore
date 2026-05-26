@@ -25,7 +25,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
-
+import com.example.techstore.entity.Product;
+import com.example.techstore.entity.ProductVariant;
 @Service
 @RequiredArgsConstructor
 public class AdminOrderService {
@@ -216,13 +217,27 @@ public class AdminOrderService {
     }
 
     private OrderItemResponse toOrderItemResponse(OrderItem orderItem) {
+        ProductVariant variant = orderItem.getProductVariant();
+        Product product = orderItem.getProduct();
+
+        String thumbnailUrl = null;
+
+        if (
+                variant != null
+                        && variant.getThumbnailUrl() != null
+                        && !variant.getThumbnailUrl().isBlank()
+        ) {
+            thumbnailUrl = variant.getThumbnailUrl();
+        }
+
         return OrderItemResponse.builder()
                 .id(orderItem.getId())
-                .productId(orderItem.getProduct().getId())
-                .productVariantId(orderItem.getProductVariant().getId())
+                .productId(product != null ? product.getId() : null)
+                .productVariantId(variant != null ? variant.getId() : null)
                 .productName(orderItem.getProductName())
                 .variantName(orderItem.getVariantName())
                 .productSku(orderItem.getProductSku())
+                .thumbnailUrl(thumbnailUrl)
                 .price(orderItem.getPrice())
                 .quantity(orderItem.getQuantity())
                 .totalPrice(orderItem.getTotalPrice())

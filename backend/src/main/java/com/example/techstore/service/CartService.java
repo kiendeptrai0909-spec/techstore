@@ -218,7 +218,19 @@ public class CartService {
 
         BigDecimal finalPrice = getFinalPrice(variant);
         BigDecimal totalPrice = finalPrice.multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+        boolean available = true;
+        String unavailableReason = null;
 
+        if (product.getStatus() != ProductStatus.ACTIVE || product.getDeletedAt() != null) {
+            available = false;
+            unavailableReason = "Sản phẩm đã ngừng bán";
+        } else if (variant.getStatus() != ProductStatus.ACTIVE || variant.getDeletedAt() != null) {
+            available = false;
+            unavailableReason = "Phiên bản sản phẩm đã ngừng bán";
+        } else if (variant.getStock() < cartItem.getQuantity()) {
+            available = false;
+            unavailableReason = "Sản phẩm không đủ tồn kho";
+        }
         return CartItemResponse.builder()
                 .cartItemId(cartItem.getId())
                 .productId(product.getId())
@@ -233,6 +245,10 @@ public class CartService {
                 .finalPrice(finalPrice)
                 .quantity(cartItem.getQuantity())
                 .totalPrice(totalPrice)
+                .productStatus(product.getStatus())
+                .variantStatus(variant.getStatus())
+                .available(available)
+                .unavailableReason(unavailableReason)
                 .stock(variant.getStock())
                 .build();
     }
