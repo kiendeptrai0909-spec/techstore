@@ -6,22 +6,44 @@ function CartItem({ item, onUpdateQuantity, onRemove, updating }) {
   const cartItemId = item.cartItemId || item.id
 
   const productName = item.productName || item.name || 'Sản phẩm'
-  const productSlug = item.productSlug || item.slug
-  const variantName = item.variantName || item.productVariantName || item.sku
+
+  const productSlug =
+    item.productSlug ||
+    item.slug ||
+    item.product?.slug ||
+    item.product?.productSlug ||
+    ''
+
+  const productDetailUrl = productSlug ? `/products/${productSlug}` : '/products'
+
+  const available = item.available !== false
+  const unavailableReason =
+    item.unavailableReason || 'Sản phẩm hiện không thể mua'
+
+  const variantName = item.variantName || item.productVariantName
   const productSku = item.productSku || item.sku
 
   const imageUrl =
     item.thumbnailUrl ||
     item.imageUrl ||
     item.productImage ||
+    item.productThumbnailUrl ||
     'https://placehold.co/300x300?text=TechStore'
 
-  const price = item.price || item.unitPrice || item.salePrice || 0
-  const quantity = item.quantity || 1
-  const totalPrice = item.totalPrice || price * quantity
+  const originalPrice = Number(
+    item.price || item.originalPrice || item.unitPrice || 0
+  )
+
+  const salePrice = Number(item.salePrice || 0)
+
+  const finalPrice =
+    salePrice > 0 && salePrice < originalPrice ? salePrice : originalPrice
+
+  const quantity = Number(item.quantity || 1)
+  const totalPrice = Number(item.totalPrice || finalPrice * quantity)
 
   const decreaseQuantity = () => {
-    if (quantity <= 1) {
+    if (quantity <= 1 || updating || !available) {
       return
     }
 
@@ -29,14 +51,34 @@ function CartItem({ item, onUpdateQuantity, onRemove, updating }) {
   }
 
   const increaseQuantity = () => {
+    if (updating || !available) {
+      return
+    }
+
     onUpdateQuantity(cartItemId, quantity + 1)
   }
 
+  const handleQuantityChange = (event) => {
+    const value = Number(event.target.value)
+
+    if (!value || value < 1 || updating || !available) {
+      return
+    }
+
+    onUpdateQuantity(cartItemId, value)
+  }
+
   return (
-    <div className="rounded-md bg-white p-4 shadow-sm">
+    <div
+      className={
+        available
+          ? 'rounded-md bg-white p-4 shadow-sm'
+          : 'rounded-md bg-white p-4 opacity-75 shadow-sm'
+      }
+    >
       <div className="grid gap-4 md:grid-cols-[120px_minmax(0,1fr)_180px_140px_40px] md:items-center">
         <Link
-          to={productSlug ? `/products/${productSlug}` : '/products'}
+          to={productDetailUrl}
           className="flex h-[120px] w-[120px] items-center justify-center overflow-hidden rounded border bg-white"
         >
           <img
@@ -48,15 +90,20 @@ function CartItem({ item, onUpdateQuantity, onRemove, updating }) {
 
         <div>
           <Link
-            to={productSlug ? `/products/${productSlug}` : '/products'}
-            className="line-clamp-2 font-bold text-gray-900 hover:text-red-600"
+            to={productDetailUrl}
+            className={
+              available
+                ? 'line-clamp-2 font-bold text-red-600 hover:underline'
+                : 'line-clamp-2 font-bold text-gray-500 hover:underline'
+            }
           >
             {productName}
           </Link>
 
           {variantName && (
             <p className="mt-1 text-sm text-gray-500">
-              Phiên bản: <span className="font-semibold">{variantName}</span>
+              Phiên bản:{' '}
+              <span className="font-semibold">{variantName}</span>
             </p>
           )}
 
@@ -66,13 +113,47 @@ function CartItem({ item, onUpdateQuantity, onRemove, updating }) {
             </p>
           )}
 
-          <p className="mt-3 text-lg font-black text-red-600 md:hidden">
-            {formatCurrency(price)}
-          </p>
+          {!available && (
+            <div className="mt-3 rounded border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-600">
+              {unavailableReason}
+            </div>
+          )}
+
+          <div className="mt-3 md:hidden">
+            {salePrice > 0 && salePrice < originalPrice && (
+              <div className="text-sm text-gray-400 line-through">
+                {formatCurrency(originalPrice)}
+              </div>
+            )}
+
+            <div
+              className={
+                available
+                  ? 'text-lg font-black text-red-600'
+                  : 'text-lg font-black text-gray-400'
+              }
+            >
+              {formatCurrency(finalPrice)}
+            </div>
+          </div>
         </div>
 
-        <div className="hidden text-lg font-black text-red-600 md:block">
-          {formatCurrency(price)}
+        <div className="hidden md:block">
+          {salePrice > 0 && salePrice < originalPrice && (
+            <div className="text-sm text-gray-400 line-through">
+              {formatCurrency(originalPrice)}
+            </div>
+          )}
+
+          <div
+            className={
+              available
+                ? 'text-lg font-black text-red-600'
+                : 'text-lg font-black text-gray-400'
+            }
+          >
+            {formatCurrency(finalPrice)}
+          </div>
         </div>
 
         <div>
@@ -80,7 +161,7 @@ function CartItem({ item, onUpdateQuantity, onRemove, updating }) {
             <button
               type="button"
               onClick={decreaseQuantity}
-              disabled={updating || quantity <= 1}
+              disabled={updating || quantity <= 1 || !available}
               className="flex h-9 w-9 items-center justify-center hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <Minus size={16} />
@@ -88,23 +169,17 @@ function CartItem({ item, onUpdateQuantity, onRemove, updating }) {
 
             <input
               value={quantity}
-              onChange={(event) => {
-                const value = Number(event.target.value)
-
-                if (value > 0) {
-                  onUpdateQuantity(cartItemId, value)
-                }
-              }}
+              onChange={handleQuantityChange}
               type="number"
               min="1"
-              disabled={updating}
-              className="h-9 w-14 border-x text-center text-sm outline-none"
+              disabled={updating || !available}
+              className="h-9 w-14 border-x text-center text-sm outline-none disabled:cursor-not-allowed disabled:bg-gray-100 disabled:opacity-70"
             />
 
             <button
               type="button"
               onClick={increaseQuantity}
-              disabled={updating}
+              disabled={updating || !available}
               className="flex h-9 w-9 items-center justify-center hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-50"
             >
               <Plus size={16} />

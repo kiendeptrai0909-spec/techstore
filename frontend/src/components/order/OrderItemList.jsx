@@ -85,6 +85,7 @@ function OrderItemList({ items = [], orderStatus, onOpenReview }) {
             <div>
               <Link
                 to={productUrl}
+                target="_blank"
                 className="line-clamp-2 font-bold text-gray-900 hover:text-red-600"
               >
                 {productName}

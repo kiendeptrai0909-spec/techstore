@@ -15,7 +15,7 @@ function CartSummary({ cart, items = [], onClearCart, clearing }) {
     (sum, item) => sum + (item.quantity || 1),
     0
   )
-
+  const hasUnavailableItem = items.some((item) => item.available === false)
   return (
     <div className="rounded-md bg-white p-5 shadow-sm">
       <h2 className="text-xl font-black text-gray-900">
@@ -47,21 +47,25 @@ function CartSummary({ cart, items = [], onClearCart, clearing }) {
       </div>
 
       <Link
-        to="/checkout"
-        className={
-          items.length === 0
-            ? 'mt-5 block cursor-not-allowed rounded bg-gray-300 px-5 py-3 text-center font-black text-white'
-            : 'mt-5 block rounded bg-red-600 px-5 py-3 text-center font-black text-white hover:bg-red-700'
-        }
+        to={hasUnavailableItem ? '#' : '/checkout'}
         onClick={(event) => {
-          if (items.length === 0) {
+          if (hasUnavailableItem) {
             event.preventDefault()
           }
         }}
+        className={
+          hasUnavailableItem
+            ? 'block rounded bg-gray-400 px-5 py-3 text-center font-black text-white cursor-not-allowed'
+            : 'block rounded bg-red-600 px-5 py-3 text-center font-black text-white hover:bg-red-700'
+        }
       >
         Tiến hành đặt hàng
       </Link>
-
+      {hasUnavailableItem && (
+        <div className="mb-3 rounded border border-red-200 bg-red-50 px-3 py-2 text-sm font-bold text-red-600">
+          Giỏ hàng có sản phẩm đã ngừng bán. Vui lòng xóa sản phẩm đó trước khi đặt hàng.
+        </div>
+      )}
       <button
         type="button"
         onClick={onClearCart}
