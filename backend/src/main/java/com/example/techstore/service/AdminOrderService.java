@@ -235,6 +235,7 @@ public class AdminOrderService {
                 .productId(product != null ? product.getId() : null)
                 .productVariantId(variant != null ? variant.getId() : null)
                 .productName(orderItem.getProductName())
+                .productSlug(product != null ? product.getSlug() : null)
                 .variantName(orderItem.getVariantName())
                 .productSku(orderItem.getProductSku())
                 .thumbnailUrl(thumbnailUrl)
