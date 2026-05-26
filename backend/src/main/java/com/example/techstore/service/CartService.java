@@ -222,6 +222,7 @@ public class CartService {
         return CartItemResponse.builder()
                 .cartItemId(cartItem.getId())
                 .productId(product.getId())
+                .productSlug(product.getSlug())
                 .productName(product.getName())
                 .productVariantId(variant.getId())
                 .variantName(variant.getName())
