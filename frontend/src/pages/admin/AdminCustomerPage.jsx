@@ -108,13 +108,13 @@ function AdminCustomerPage() {
   }
 
   const handleToggleStatus = async (customer) => {
-    const nextStatus = customer.status === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE'
+  const nextStatus = customer.status === 'ACTIVE' ? 'BLOCKED' : 'ACTIVE'
 
-    const confirmed = window.confirm(
-      nextStatus === 'INACTIVE'
-        ? 'Bạn có chắc muốn khóa tài khoản khách hàng này?'
-        : 'Bạn có chắc muốn mở khóa tài khoản khách hàng này?'
-    )
+  const confirmed = window.confirm(
+    nextStatus === 'BLOCKED'
+      ? 'Bạn có chắc muốn khóa tài khoản khách hàng này?'
+      : 'Bạn có chắc muốn mở khóa tài khoản khách hàng này?'
+  )
 
     if (!confirmed) return
 
@@ -127,10 +127,10 @@ function AdminCustomerPage() {
       })
 
       setSuccessMessage(
-        nextStatus === 'INACTIVE'
-          ? 'Khóa tài khoản khách hàng thành công'
-          : 'Mở khóa tài khoản khách hàng thành công'
-      )
+  nextStatus === 'BLOCKED'
+    ? 'Khóa tài khoản khách hàng thành công'
+    : 'Mở khóa tài khoản khách hàng thành công'
+)
 
       await fetchCustomers()
     } catch (error) {
@@ -218,7 +218,7 @@ function AdminCustomerPage() {
               >
                 <option value="">Tất cả</option>
                 <option value="ACTIVE">Đang hoạt động</option>
-                <option value="INACTIVE">Đã khóa</option>
+                <option value="BLOCKED">Đã khóa</option>
               </select>
             </div>
 
@@ -302,12 +302,12 @@ function AdminCustomerPage() {
                     <td className="px-4 py-4">
                       <span
                         className={
-                          customer.status === 'INACTIVE'
+                          customer.status === 'BLOCKED'
                             ? 'inline-flex rounded-full border border-red-200 bg-red-50 px-3 py-1 text-xs font-bold text-red-600'
                             : 'inline-flex rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-bold text-green-600'
                         }
                       >
-                        {customer.status === 'INACTIVE'
+                        {customer.status === 'BLOCKED'
                           ? 'Đã khóa'
                           : 'Hoạt động'}
                       </span>

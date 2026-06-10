@@ -134,12 +134,12 @@ function AdminCustomerDetailPage() {
               <span className="text-gray-500">Trạng thái</span>
               <span
                 className={
-                  customer.status === 'INACTIVE'
+                  customer.status === 'BLOCKED'
                     ? 'rounded-full border border-red-200 bg-red-50 px-3 py-1 text-xs font-bold text-red-600'
                     : 'rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-bold text-green-600'
                 }
               >
-                {customer.status === 'INACTIVE' ? 'Đã khóa' : 'Hoạt động'}
+                {customer.status === 'BLOCKED' ? 'Đã khóa' : 'Hoạt động'}
               </span>
             </div>
 
