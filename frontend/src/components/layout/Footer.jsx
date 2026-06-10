@@ -1,3 +1,7 @@
+import { Banknote, Landmark } from 'lucide-react'
+import { FaFacebookF, FaTiktok, FaYoutube } from 'react-icons/fa6'
+import { SiZalo } from 'react-icons/si'
+
 function Footer() {
   return (
     <footer className="mt-8 bg-white">
@@ -60,27 +64,61 @@ function Footer() {
 
         <div>
           <h4 className="mb-3 font-bold uppercase">Thanh toán</h4>
-          <div className="grid grid-cols-3 gap-2">
-            {['VISA', 'JCB', 'ATM', 'ZaloPay', 'MoMo', 'COD'].map((item) => (
-              <div
-                key={item}
-                className="rounded border bg-gray-50 px-2 py-2 text-center text-xs font-bold text-gray-700"
-              >
-                {item}
-              </div>
-            ))}
+
+          <div className="grid grid-cols-2 gap-2">
+            <div className="flex h-10 items-center justify-center gap-2 rounded border bg-gray-50 px-2 py-2 text-center text-xs font-bold text-gray-700">
+              <Landmark size={17} />
+              Chuyển khoản
+            </div>
+
+            <div className="flex h-10 items-center justify-center gap-2 rounded border bg-gray-50 px-2 py-2 text-center text-xs font-bold text-gray-700">
+              <Banknote size={17} />
+              COD
+            </div>
           </div>
 
           <h4 className="mb-3 mt-5 font-bold uppercase">Kết nối</h4>
+
           <div className="flex gap-2">
-            {['f', 't', '▶', 'Z'].map((item) => (
-              <div
-                key={item}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 font-bold text-white"
-              >
-                {item}
-              </div>
-            ))}
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-600 text-white hover:bg-blue-700"
+            >
+              <FaFacebookF size={17} />
+            </a>
+
+            <a
+              href="https://www.tiktok.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="TikTok"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-black text-white hover:bg-gray-800"
+            >
+              <FaTiktok size={17} />
+            </a>
+
+            <a
+              href="https://www.youtube.com/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="YouTube"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-red-600 text-white hover:bg-red-700"
+            >
+              <FaYoutube size={18} />
+            </a>
+
+            <a
+              href="https://zalo.me/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Zalo"
+              className="flex h-9 w-9 items-center justify-center rounded-full bg-blue-500 text-white hover:bg-blue-600"
+            >
+              <SiZalo size={20} />
+            </a>
           </div>
         </div>
       </div>
