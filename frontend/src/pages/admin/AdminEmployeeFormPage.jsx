@@ -269,7 +269,7 @@ function AdminEmployeeFormPage() {
               }
             >
               <option value="ACTIVE">Đang hoạt động</option>
-              <option value="INACTIVE">Đã khóa</option>
+              <option value="BLOCKED">Đã khóa</option>
             </select>
 
             {errors.status && (

@@ -119,10 +119,10 @@ function AdminEmployeePage() {
   }
 
   const handleToggleStatus = async (employee) => {
-    const nextStatus = employee.status === 'ACTIVE' ? 'INACTIVE' : 'ACTIVE'
+    const nextStatus = employee.status === 'ACTIVE' ? 'BLOCKED' : 'ACTIVE'
 
     const confirmed = window.confirm(
-      nextStatus === 'INACTIVE'
+      nextStatus === 'BLOCKED'
         ? 'Bạn có chắc muốn khóa tài khoản nhân viên này?'
         : 'Bạn có chắc muốn mở khóa tài khoản nhân viên này?'
     )
@@ -138,7 +138,7 @@ function AdminEmployeePage() {
       })
 
       setSuccessMessage(
-        nextStatus === 'INACTIVE'
+        nextStatus === 'BLOCKED'
           ? 'Khóa tài khoản nhân viên thành công'
           : 'Mở khóa tài khoản nhân viên thành công'
       )
@@ -260,7 +260,7 @@ function AdminEmployeePage() {
               >
                 <option value="">Tất cả</option>
                 <option value="ACTIVE">Đang hoạt động</option>
-                <option value="INACTIVE">Đã khóa</option>
+                <option value="BLOCKED">Đã khóa</option>
               </select>
             </div>
 
@@ -353,12 +353,12 @@ function AdminEmployeePage() {
                     <td className="px-4 py-4">
                       <span
                         className={
-                          employee.status === 'INACTIVE'
+                          employee.status === 'BLOCKED'
                             ? 'inline-flex rounded-full border border-red-200 bg-red-50 px-3 py-1 text-xs font-bold text-red-600'
                             : 'inline-flex rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-bold text-green-600'
                         }
                       >
-                        {employee.status === 'INACTIVE'
+                        {employee.status === 'BLOCKED'
                           ? 'Đã khóa'
                           : 'Hoạt động'}
                       </span>
