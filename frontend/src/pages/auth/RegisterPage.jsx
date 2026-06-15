@@ -17,6 +17,7 @@ function RegisterPage() {
 
   const [errors, setErrors] = useState({})
   const [message, setMessage] = useState('')
+  const [messageType, setMessageType] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
   const handleChange = (event) => {
@@ -33,6 +34,7 @@ function RegisterPage() {
     }))
 
     setMessage('')
+    setMessageType('')
   }
 
   const validateForm = () => {
@@ -66,6 +68,7 @@ function RegisterPage() {
 
     setSubmitting(true)
     setMessage('')
+    setMessageType('')
 
     try {
       await register({
@@ -75,8 +78,22 @@ function RegisterPage() {
         phone: formData.phone.trim(),
       })
 
-      navigate('/', { replace: true })
+      setErrors({})
+      setMessageType('success')
+      setMessage('Đăng ký tài khoản thành công. Vui lòng đăng nhập.')
+
+      setFormData({
+        fullName: '',
+        email: '',
+        password: '',
+        phone: '',
+      })
+
+      setTimeout(() => {
+        navigate('/login', { replace: true })
+      }, 1500)
     } catch (error) {
+      setMessageType('error')
       setMessage(error.message || 'Đăng ký thất bại')
       setErrors(error.errors || {})
     } finally {
@@ -93,7 +110,13 @@ function RegisterPage() {
       footerLinkTo="/login"
     >
       {message && (
-        <div className="mb-4 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-600">
+        <div
+          className={`mb-4 rounded border px-4 py-3 text-sm font-medium ${
+            messageType === 'success'
+              ? 'border-green-200 bg-green-50 text-green-700'
+              : 'border-red-200 bg-red-50 text-red-600'
+          }`}
+        >
           {message}
         </div>
       )}

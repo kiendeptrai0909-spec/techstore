@@ -1,11 +1,15 @@
 import { useEffect, useMemo, useState } from 'react'
 import {
+  AlertTriangle,
+  Boxes,
+  CreditCard,
   DollarSign,
   Package,
   ShoppingBag,
-  Users,
-  TrendingUp,
   Star,
+  Tags,
+  TrendingUp,
+  Users,
 } from 'lucide-react'
 import { adminDashboardApi } from '../../api/adminDashboardApi'
 import { formatCurrency } from '../../utils/formatCurrency'
@@ -14,80 +18,132 @@ function AdminDashboardPage() {
   const [summary, setSummary] = useState(null)
   const [revenueStatistics, setRevenueStatistics] = useState([])
   const [topProducts, setTopProducts] = useState([])
+  const [categoryStatistics, setCategoryStatistics] = useState([])
+  const [brandStatistics, setBrandStatistics] = useState([])
+  const [paymentStatistics, setPaymentStatistics] = useState([])
+  const [lowStockProducts, setLowStockProducts] = useState([])
+  const [recentOrders, setRecentOrders] = useState([])
+
+  const [revenueType, setRevenueType] = useState('month')
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    const fetchDashboard = async () => {
-      setLoading(true)
-      setMessage('')
-
-      try {
-        const [summaryData, revenueData, topProductData] = await Promise.all([
-          adminDashboardApi.getSummary(),
-          adminDashboardApi.getRevenueStatistics({
-            type: 'MONTH',
-          }),
-          adminDashboardApi.getTopProducts({
-            limit: 5,
-          }),
-        ])
-
-        setSummary(summaryData)
-        setRevenueStatistics(normalizeList(revenueData))
-        setTopProducts(normalizeList(topProductData))
-      } catch (error) {
-        setMessage(error.message || 'Không thể tải dữ liệu dashboard')
-      } finally {
-        setLoading(false)
-      }
-    }
-
     fetchDashboard()
-  }, [])
+  }, [revenueType])
+
+  const fetchDashboard = async () => {
+    setLoading(true)
+    setMessage('')
+
+    try {
+      const [
+        summaryData,
+        revenueData,
+        topProductData,
+        categoryData,
+        brandData,
+        paymentData,
+        lowStockData,
+        recentOrderData,
+      ] = await Promise.all([
+        adminDashboardApi.getSummary(),
+        adminDashboardApi.getRevenueStatistics({
+          type: revenueType,
+        }),
+        adminDashboardApi.getTopProducts({
+          limit: 5,
+        }),
+        adminDashboardApi.getCategoryStatistics({
+          limit: 8,
+        }),
+        adminDashboardApi.getBrandStatistics({
+          limit: 8,
+        }),
+        adminDashboardApi.getPaymentStatistics(),
+        adminDashboardApi.getLowStockProducts({
+          limit: 5,
+          threshold: 5,
+        }),
+        adminDashboardApi.getRecentOrders({
+          limit: 5,
+        }),
+      ])
+
+      setSummary(unwrapData(summaryData))
+      setRevenueStatistics(normalizeList(revenueData))
+      setTopProducts(normalizeList(topProductData))
+      setCategoryStatistics(normalizeList(categoryData))
+      setBrandStatistics(normalizeList(brandData))
+      setPaymentStatistics(normalizeList(paymentData))
+      setLowStockProducts(normalizeList(lowStockData))
+      setRecentOrders(normalizeList(recentOrderData))
+    } catch (error) {
+      setMessage(
+        error?.response?.data?.message ||
+          error?.message ||
+          'Không thể tải dữ liệu dashboard'
+      )
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const cards = useMemo(() => {
     return [
       {
-        title: 'Tổng doanh thu',
-        value: formatCurrency(
-          summary?.totalRevenue ||
-            summary?.revenue ||
-            summary?.totalAmount ||
-            0
-        ),
+        title: 'Doanh thu',
+        value: formatCurrency(toNumber(summary?.totalRevenue)),
         icon: DollarSign,
         color: 'bg-green-50 text-green-600',
       },
       {
         title: 'Tổng đơn hàng',
-        value:
-          summary?.totalOrders ||
-          summary?.orderCount ||
-          summary?.orders ||
-          0,
+        value: toNumber(summary?.totalOrders),
         icon: ShoppingBag,
         color: 'bg-blue-50 text-blue-600',
       },
       {
         title: 'Tổng sản phẩm',
-        value:
-          summary?.totalProducts ||
-          summary?.productCount ||
-          summary?.products ||
-          0,
+        value: toNumber(summary?.totalProducts),
         icon: Package,
         color: 'bg-purple-50 text-purple-600',
       },
       {
         title: 'Tổng khách hàng',
-        value:
-          summary?.totalCustomers ||
-          summary?.customerCount ||
-          summary?.users ||
-          0,
+        value: toNumber(summary?.totalCustomers),
         icon: Users,
         color: 'bg-orange-50 text-orange-600',
+      },
+    ]
+  }, [summary])
+
+  const orderStatusCards = useMemo(() => {
+    return [
+      {
+        title: 'Chờ xử lý',
+        value: toNumber(summary?.pendingOrders),
+        color: 'bg-yellow-50 text-yellow-700',
+      },
+      {
+        title: 'Đã xác nhận',
+        value: toNumber(summary?.confirmedOrders),
+        color: 'bg-blue-50 text-blue-700',
+      },
+      {
+        title: 'Đang giao',
+        value: toNumber(summary?.shippingOrders),
+        color: 'bg-indigo-50 text-indigo-700',
+      },
+      {
+        title: 'Hoàn thành',
+        value: toNumber(summary?.completedOrders),
+        color: 'bg-green-50 text-green-700',
+      },
+      {
+        title: 'Đã hủy',
+        value: toNumber(summary?.cancelledOrders),
+        color: 'bg-red-50 text-red-700',
       },
     ]
   }, [summary])
@@ -101,14 +157,23 @@ function AdminDashboardPage() {
           {Array.from({ length: 4 }).map((_, index) => (
             <div
               key={index}
-              className="h-32 animate-pulse rounded bg-gray-200"
+              className="h-28 animate-pulse rounded-lg bg-gray-200"
             />
           ))}
         </div>
 
-        <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
-          <div className="h-96 animate-pulse rounded bg-gray-200" />
-          <div className="h-96 animate-pulse rounded bg-gray-200" />
+        <div className="mt-6 grid gap-4 md:grid-cols-5">
+          {Array.from({ length: 5 }).map((_, index) => (
+            <div
+              key={index}
+              className="h-20 animate-pulse rounded-lg bg-gray-200"
+            />
+          ))}
+        </div>
+
+        <div className="mt-6 grid gap-6 xl:grid-cols-2">
+          <div className="h-96 animate-pulse rounded-lg bg-gray-200" />
+          <div className="h-96 animate-pulse rounded-lg bg-gray-200" />
         </div>
       </div>
     )
@@ -116,13 +181,30 @@ function AdminDashboardPage() {
 
   return (
     <div>
-      <div className="mb-6">
-        <h2 className="text-2xl font-black text-gray-900">
-          Dashboard
-        </h2>
-        <p className="mt-1 text-sm text-gray-500">
-          Tổng quan hoạt động kinh doanh của TechStore.
-        </p>
+      <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <h2 className="text-2xl font-black text-gray-900">
+            Dashboard
+          </h2>
+          <p className="mt-1 text-sm text-gray-500">
+            Tổng quan hoạt động kinh doanh của TechStore.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <span className="text-sm font-semibold text-gray-600">
+            Doanh thu:
+          </span>
+
+          <select
+            value={revenueType}
+            onChange={(event) => setRevenueType(event.target.value)}
+            className="rounded border px-3 py-2 text-sm font-semibold outline-none focus:border-red-500"
+          >
+            <option value="day">Theo ngày</option>
+            <option value="month">Theo tháng</option>
+          </select>
+        </div>
       </div>
 
       {message && (
@@ -161,124 +243,112 @@ function AdminDashboardPage() {
         })}
       </div>
 
+      <div className="mt-6 grid gap-4 md:grid-cols-5">
+        {orderStatusCards.map((item) => (
+          <div
+            key={item.title}
+            className={`rounded-lg p-4 text-center shadow-sm ${item.color}`}
+          >
+            <p className="text-sm font-bold">{item.title}</p>
+            <p className="mt-2 text-2xl font-black">{item.value}</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <SmallSummaryCard
+          title="Tổng biến thể"
+          value={toNumber(summary?.totalProductVariants)}
+          icon={Boxes}
+          color="bg-cyan-50 text-cyan-700"
+        />
+
+        <SmallSummaryCard
+          title="Tổng đánh giá"
+          value={toNumber(summary?.totalReviews)}
+          icon={Star}
+          color="bg-amber-50 text-amber-700"
+        />
+
+        <SmallSummaryCard
+          title="Sản phẩm tồn kho thấp"
+          value={lowStockProducts.length}
+          icon={AlertTriangle}
+          color="bg-red-50 text-red-700"
+        />
+      </div>
+
       <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
-        <div className="rounded-lg bg-white p-5 shadow-sm">
-          <div className="mb-5 flex items-center justify-between">
-            <div>
-              <h3 className="text-xl font-black text-gray-900">
-                Doanh thu
-              </h3>
-              <p className="mt-1 text-sm text-gray-500">
-                Thống kê doanh thu theo thời gian.
-              </p>
-            </div>
+        <DashboardPanel
+          title="Doanh thu"
+          description="Thống kê doanh thu theo ngày hoặc theo tháng."
+          icon={TrendingUp}
+          iconClassName="text-green-600"
+        >
+          <BarList
+            data={revenueStatistics}
+            emptyText="Chưa có dữ liệu doanh thu."
+            getLabel={(item, index) =>
+              item?.label ||
+              item?.date ||
+              item?.month ||
+              item?.period ||
+              `Mốc ${index + 1}`
+            }
+            getValue={(item) =>
+              toNumber(
+                item?.revenue ||
+                  item?.totalRevenue ||
+                  item?.amount ||
+                  item?.totalAmount
+              )
+            }
+            getSubText={(item) =>
+              `Số đơn: ${toNumber(item?.orderCount || item?.totalOrders)}`
+            }
+          />
+        </DashboardPanel>
 
-            <TrendingUp size={24} className="text-green-600" />
-          </div>
-
-          {revenueStatistics.length === 0 ? (
-            <div className="rounded border border-dashed p-10 text-center text-gray-500">
-              Chưa có dữ liệu doanh thu.
-            </div>
-          ) : (
-            <div className="space-y-4">
-              {revenueStatistics.slice(0, 12).map((item, index) => {
-                const label =
-                  item.date ||
-                  item.month ||
-                  item.period ||
-                  item.label ||
-                  `Mốc ${index + 1}`
-
-                const revenue =
-                  item.revenue ||
-                  item.totalRevenue ||
-                  item.amount ||
-                  item.totalAmount ||
-                  0
-
-                const maxRevenue = Math.max(
-                  ...revenueStatistics.map(
-                    (row) =>
-                      row.revenue ||
-                      row.totalRevenue ||
-                      row.amount ||
-                      row.totalAmount ||
-                      0
-                  ),
-                  1
-                )
-
-                const percent = Math.round((revenue / maxRevenue) * 100)
-
-                return (
-                  <div key={`${label}-${index}`}>
-                    <div className="mb-1 flex justify-between text-sm">
-                      <span className="font-semibold text-gray-700">
-                        {label}
-                      </span>
-                      <span className="font-bold text-red-600">
-                        {formatCurrency(revenue)}
-                      </span>
-                    </div>
-
-                    <div className="h-3 overflow-hidden rounded-full bg-gray-100">
-                      <div
-                        className="h-full rounded-full bg-red-600"
-                        style={{ width: `${percent}%` }}
-                      />
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          )}
-        </div>
-
-        <div className="rounded-lg bg-white p-5 shadow-sm">
-          <div className="mb-5 flex items-center justify-between">
-            <div>
-              <h3 className="text-xl font-black text-gray-900">
-                Sản phẩm bán chạy
-              </h3>
-              <p className="mt-1 text-sm text-gray-500">
-                Top sản phẩm có doanh số tốt.
-              </p>
-            </div>
-
-            <Star size={24} className="text-orange-500" />
-          </div>
-
+        <DashboardPanel
+          title="Sản phẩm bán chạy"
+          description="Top sản phẩm có số lượng bán tốt."
+          icon={Star}
+          iconClassName="text-orange-500"
+        >
           {topProducts.length === 0 ? (
-            <div className="rounded border border-dashed p-10 text-center text-gray-500">
-              Chưa có dữ liệu sản phẩm bán chạy.
-            </div>
+            <EmptyBox text="Chưa có dữ liệu sản phẩm bán chạy." />
           ) : (
             <div className="space-y-4">
               {topProducts.map((product, index) => {
                 const productName =
-                  product.productName ||
-                  product.name ||
-                  product.product?.name ||
+                  product?.productName ||
+                  product?.name ||
+                  product?.product?.name ||
                   'Sản phẩm'
 
-                const soldQuantity =
-                  product.soldQuantity ||
-                  product.quantitySold ||
-                  product.totalSold ||
-                  product.quantity ||
-                  0
+                const variantName =
+                  product?.variantName ||
+                  product?.productVariantName ||
+                  ''
 
-                const revenue =
-                  product.revenue ||
-                  product.totalRevenue ||
-                  product.totalAmount ||
-                  0
+                const soldQuantity = toNumber(
+                  product?.totalQuantitySold ||
+                    product?.soldQuantity ||
+                    product?.quantitySold ||
+                    product?.totalSold ||
+                    product?.quantity
+                )
+
+                const revenue = toNumber(
+                  product?.totalRevenue ||
+                    product?.revenue ||
+                    product?.totalAmount
+                )
 
                 const imageUrl =
-                  product.thumbnailUrl ||
-                  product.imageUrl ||
-                  product.productImage ||
+                  product?.thumbnailUrl ||
+                  product?.imageUrl ||
+                  product?.productImage ||
                   'https://placehold.co/120x120?text=TechStore'
 
                 return (
@@ -303,6 +373,12 @@ function AdminDashboardPage() {
                         {productName}
                       </div>
 
+                      {variantName && (
+                        <div className="mt-1 line-clamp-1 text-xs text-gray-500">
+                          {variantName}
+                        </div>
+                      )}
+
                       <div className="mt-1 text-sm text-gray-500">
                         Đã bán: {soldQuantity}
                       </div>
@@ -316,13 +392,350 @@ function AdminDashboardPage() {
               })}
             </div>
           )}
-        </div>
+        </DashboardPanel>
+      </div>
+
+      <div className="mt-6 grid gap-6 xl:grid-cols-2">
+        <DashboardPanel
+          title="Doanh thu theo danh mục"
+          description="Thống kê số lượng bán và doanh thu theo danh mục."
+          icon={Tags}
+          iconClassName="text-purple-600"
+        >
+          <BarList
+            data={categoryStatistics}
+            emptyText="Chưa có dữ liệu thống kê danh mục."
+            getLabel={(item, index) =>
+              item?.categoryName || item?.name || `Danh mục ${index + 1}`
+            }
+            getValue={(item) => toNumber(item?.totalRevenue)}
+            getSubText={(item) =>
+              `Đã bán: ${toNumber(
+                item?.totalQuantitySold
+              )} | Số đơn: ${toNumber(item?.totalOrders)}`
+            }
+          />
+        </DashboardPanel>
+
+        <DashboardPanel
+          title="Doanh thu theo thương hiệu"
+          description="Thống kê số lượng bán và doanh thu theo thương hiệu."
+          icon={Package}
+          iconClassName="text-blue-600"
+        >
+          <BarList
+            data={brandStatistics}
+            emptyText="Chưa có dữ liệu thống kê thương hiệu."
+            getLabel={(item, index) =>
+              item?.brandName || item?.name || `Thương hiệu ${index + 1}`
+            }
+            getValue={(item) => toNumber(item?.totalRevenue)}
+            getSubText={(item) =>
+              `Đã bán: ${toNumber(
+                item?.totalQuantitySold
+              )} | Số đơn: ${toNumber(item?.totalOrders)}`
+            }
+          />
+        </DashboardPanel>
+      </div>
+
+      <div className="mt-6 grid gap-6 xl:grid-cols-2">
+        <DashboardPanel
+          title="Thống kê thanh toán"
+          description="Thống kê theo phương thức và trạng thái thanh toán."
+          icon={CreditCard}
+          iconClassName="text-indigo-600"
+        >
+          {paymentStatistics.length === 0 ? (
+            <EmptyBox text="Chưa có dữ liệu thanh toán." />
+          ) : (
+            <div className="overflow-hidden rounded border">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-gray-50 text-gray-600">
+                  <tr>
+                    <th className="px-4 py-3">Phương thức</th>
+                    <th className="px-4 py-3">Trạng thái</th>
+                    <th className="px-4 py-3 text-center">Số đơn</th>
+                    <th className="px-4 py-3 text-right">Số tiền</th>
+                  </tr>
+                </thead>
+
+                <tbody className="divide-y">
+                  {paymentStatistics.map((item, index) => (
+                    <tr key={index}>
+                      <td className="px-4 py-3 font-semibold text-gray-900">
+                        {formatPaymentMethod(item?.method)}
+                      </td>
+                      <td className="px-4 py-3">
+                        <StatusBadge value={item?.status} />
+                      </td>
+                      <td className="px-4 py-3 text-center font-bold">
+                        {toNumber(item?.totalOrders)}
+                      </td>
+                      <td className="px-4 py-3 text-right font-bold text-red-600">
+                        {formatCurrency(toNumber(item?.totalAmount))}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </DashboardPanel>
+
+        <DashboardPanel
+          title="Sản phẩm tồn kho thấp"
+          description="Các biến thể sản phẩm có số lượng tồn kho thấp."
+          icon={AlertTriangle}
+          iconClassName="text-red-600"
+        >
+          {lowStockProducts.length === 0 ? (
+            <EmptyBox text="Không có sản phẩm tồn kho thấp." />
+          ) : (
+            <div className="space-y-3">
+              {lowStockProducts.map((item, index) => {
+                const productName = item?.productName || 'Sản phẩm'
+                const variantName = item?.variantName || ''
+                const sku = item?.productSku || item?.sku || ''
+                const stock = toNumber(item?.stock)
+
+                return (
+                  <div
+                    key={`${sku}-${index}`}
+                    className="flex items-center justify-between gap-4 rounded border p-3"
+                  >
+                    <div className="min-w-0">
+                      <p className="line-clamp-1 font-bold text-gray-900">
+                        {productName}
+                      </p>
+
+                      <p className="mt-1 line-clamp-1 text-xs text-gray-500">
+                        {variantName}
+                        {sku ? ` | SKU: ${sku}` : ''}
+                      </p>
+                    </div>
+
+                    <div className="rounded bg-red-50 px-3 py-1 text-sm font-black text-red-600">
+                      Còn {stock}
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          )}
+        </DashboardPanel>
+      </div>
+
+      <div className="mt-6">
+        <DashboardPanel
+          title="Đơn hàng gần đây"
+          description="Danh sách các đơn hàng mới phát sinh trong hệ thống."
+          icon={ShoppingBag}
+          iconClassName="text-blue-600"
+        >
+          {recentOrders.length === 0 ? (
+            <EmptyBox text="Chưa có đơn hàng gần đây." />
+          ) : (
+            <div className="overflow-hidden rounded border">
+              <table className="w-full text-left text-sm">
+                <thead className="bg-gray-50 text-gray-600">
+                  <tr>
+                    <th className="px-4 py-3">Mã đơn</th>
+                    <th className="px-4 py-3">Khách hàng</th>
+                    <th className="px-4 py-3">Trạng thái đơn</th>
+                    <th className="px-4 py-3">Thanh toán</th>
+                    <th className="px-4 py-3 text-right">Tổng tiền</th>
+                    <th className="px-4 py-3 text-right">Ngày đặt</th>
+                  </tr>
+                </thead>
+
+                <tbody className="divide-y">
+                  {recentOrders.map((order, index) => (
+                    <tr key={`${order?.orderCode}-${index}`}>
+                      <td className="px-4 py-3 font-bold text-gray-900">
+                        {order?.orderCode || '---'}
+                      </td>
+
+                      <td className="px-4 py-3">
+                        {order?.customerName || 'Khách hàng'}
+                      </td>
+
+                      <td className="px-4 py-3">
+                        <OrderStatusBadge value={order?.orderStatus} />
+                      </td>
+
+                      <td className="px-4 py-3">
+                        <div className="space-y-1">
+                          <div className="font-semibold text-gray-700">
+                            {formatPaymentMethod(order?.paymentMethod)}
+                          </div>
+                          <StatusBadge value={order?.paymentStatus} />
+                        </div>
+                      </td>
+
+                      <td className="px-4 py-3 text-right font-bold text-red-600">
+                        {formatCurrency(toNumber(order?.finalAmount))}
+                      </td>
+
+                      <td className="px-4 py-3 text-right text-gray-500">
+                        {formatDateTime(order?.createdAt)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </DashboardPanel>
       </div>
     </div>
   )
 }
 
-function normalizeList(data) {
+function SmallSummaryCard({ title, value, icon: Icon, color }) {
+  return (
+    <div className={`rounded-lg p-4 shadow-sm ${color}`}>
+      <div className="flex items-center justify-between gap-4">
+        <div>
+          <p className="text-sm font-bold">{title}</p>
+          <p className="mt-2 text-2xl font-black">{value}</p>
+        </div>
+
+        <Icon size={26} />
+      </div>
+    </div>
+  )
+}
+
+function DashboardPanel({
+  title,
+  description,
+  icon: Icon,
+  iconClassName = '',
+  children,
+}) {
+  return (
+    <div className="rounded-lg bg-white p-5 shadow-sm">
+      <div className="mb-5 flex items-center justify-between gap-4">
+        <div>
+          <h3 className="text-xl font-black text-gray-900">
+            {title}
+          </h3>
+          <p className="mt-1 text-sm text-gray-500">{description}</p>
+        </div>
+
+        {Icon && <Icon size={24} className={iconClassName} />}
+      </div>
+
+      {children}
+    </div>
+  )
+}
+
+function BarList({ data, emptyText, getLabel, getValue, getSubText }) {
+  if (!data || data.length === 0) {
+    return <EmptyBox text={emptyText} />
+  }
+
+  const maxValue = Math.max(...data.map((item) => toNumber(getValue(item))), 1)
+
+  return (
+    <div className="space-y-4">
+      {data.slice(0, 12).map((item, index) => {
+        const label = getLabel(item, index)
+        const value = toNumber(getValue(item))
+        const percent = Math.max(Math.round((value / maxValue) * 100), 4)
+
+        return (
+          <div key={`${label}-${index}`}>
+            <div className="mb-1 flex justify-between gap-4 text-sm">
+              <div>
+                <span className="font-semibold text-gray-700">
+                  {label}
+                </span>
+
+                {getSubText && (
+                  <div className="mt-0.5 text-xs text-gray-500">
+                    {getSubText(item)}
+                  </div>
+                )}
+              </div>
+
+              <span className="shrink-0 font-bold text-red-600">
+                {formatCurrency(value)}
+              </span>
+            </div>
+
+            <div className="h-3 overflow-hidden rounded-full bg-gray-100">
+              <div
+                className="h-full rounded-full bg-red-600"
+                style={{ width: `${percent}%` }}
+              />
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
+function EmptyBox({ text }) {
+  return (
+    <div className="rounded border border-dashed p-10 text-center text-gray-500">
+      {text}
+    </div>
+  )
+}
+
+function StatusBadge({ value }) {
+  const status = value || 'PENDING'
+
+  const className =
+    status === 'PAID'
+      ? 'bg-green-50 text-green-700'
+      : status === 'FAILED'
+        ? 'bg-red-50 text-red-700'
+        : 'bg-yellow-50 text-yellow-700'
+
+  return (
+    <span className={`rounded px-2 py-1 text-xs font-bold ${className}`}>
+      {formatPaymentStatus(status)}
+    </span>
+  )
+}
+
+function OrderStatusBadge({ value }) {
+  const status = value || 'PENDING'
+
+  const className =
+    status === 'COMPLETED'
+      ? 'bg-green-50 text-green-700'
+      : status === 'CANCELLED'
+        ? 'bg-red-50 text-red-700'
+        : status === 'SHIPPING'
+          ? 'bg-indigo-50 text-indigo-700'
+          : status === 'CONFIRMED'
+            ? 'bg-blue-50 text-blue-700'
+            : 'bg-yellow-50 text-yellow-700'
+
+  return (
+    <span className={`rounded px-2 py-1 text-xs font-bold ${className}`}>
+      {formatOrderStatus(status)}
+    </span>
+  )
+}
+
+function unwrapData(response) {
+  if (response?.data !== undefined) {
+    return response.data
+  }
+
+  return response
+}
+
+function normalizeList(response) {
+  const data = unwrapData(response)
+
   if (Array.isArray(data)) {
     return data
   }
@@ -340,6 +753,86 @@ function normalizeList(data) {
   }
 
   return []
+}
+
+function toNumber(value) {
+  if (value === null || value === undefined || value === '') {
+    return 0
+  }
+
+  const numberValue = Number(value)
+
+  if (Number.isNaN(numberValue)) {
+    return 0
+  }
+
+  return numberValue
+}
+
+function formatPaymentMethod(value) {
+  if (value === 'BANK_TRANSFER') {
+    return 'Chuyển khoản'
+  }
+
+  if (value === 'COD') {
+    return 'COD'
+  }
+
+  return value || '---'
+}
+
+function formatPaymentStatus(value) {
+  if (value === 'PAID') {
+    return 'Đã thanh toán'
+  }
+
+  if (value === 'FAILED') {
+    return 'Thất bại'
+  }
+
+  if (value === 'PENDING') {
+    return 'Chờ thanh toán'
+  }
+
+  return value || '---'
+}
+
+function formatOrderStatus(value) {
+  if (value === 'PENDING') {
+    return 'Chờ xử lý'
+  }
+
+  if (value === 'CONFIRMED') {
+    return 'Đã xác nhận'
+  }
+
+  if (value === 'SHIPPING') {
+    return 'Đang giao'
+  }
+
+  if (value === 'COMPLETED') {
+    return 'Hoàn thành'
+  }
+
+  if (value === 'CANCELLED') {
+    return 'Đã hủy'
+  }
+
+  return value || '---'
+}
+
+function formatDateTime(value) {
+  if (!value) {
+    return '---'
+  }
+
+  const date = new Date(value)
+
+  if (Number.isNaN(date.getTime())) {
+    return value
+  }
+
+  return date.toLocaleString('vi-VN')
 }
 
 export default AdminDashboardPage

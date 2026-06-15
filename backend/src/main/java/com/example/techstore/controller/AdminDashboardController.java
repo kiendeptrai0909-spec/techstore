@@ -1,12 +1,20 @@
 package com.example.techstore.controller;
 
+import com.example.techstore.dto.response.BrandStatisticResponse;
+import com.example.techstore.dto.response.CategoryStatisticResponse;
 import com.example.techstore.dto.response.DashboardSummaryResponse;
+import com.example.techstore.dto.response.LowStockProductResponse;
+import com.example.techstore.dto.response.PaymentStatisticResponse;
+import com.example.techstore.dto.response.RecentOrderResponse;
 import com.example.techstore.dto.response.RevenueStatisticResponse;
 import com.example.techstore.dto.response.TopProductResponse;
 import com.example.techstore.service.DashboardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -18,27 +26,11 @@ public class AdminDashboardController {
 
     private final DashboardService dashboardService;
 
-    /*
-     * Tổng quan dashboard:
-     * - Tổng doanh thu
-     * - Tổng đơn hàng
-     * - Đơn theo trạng thái
-     * - Tổng khách hàng
-     * - Tổng sản phẩm
-     */
     @GetMapping("/summary")
     public DashboardSummaryResponse getSummary() {
         return dashboardService.getSummary();
     }
 
-    /*
-     * Thống kê doanh thu.
-     *
-     * Ví dụ:
-     * GET /api/v1/admin/dashboard/revenue?type=day
-     * GET /api/v1/admin/dashboard/revenue?type=month
-     * GET /api/v1/admin/dashboard/revenue?type=day&fromDate=2026-05-01&toDate=2026-05-31
-     */
     @GetMapping("/revenue")
     public List<RevenueStatisticResponse> getRevenueStatistics(
             @RequestParam(defaultValue = "day") String type,
@@ -52,16 +44,63 @@ public class AdminDashboardController {
         return dashboardService.getRevenueStatistics(type, fromDate, toDate);
     }
 
-    /*
-     * Sản phẩm bán chạy.
-     *
-     * Ví dụ:
-     * GET /api/v1/admin/dashboard/top-products?limit=5
-     */
     @GetMapping("/top-products")
     public List<TopProductResponse> getTopProducts(
             @RequestParam(defaultValue = "5") Integer limit
     ) {
         return dashboardService.getTopProducts(limit);
+    }
+
+    @GetMapping("/category-statistics")
+    public List<CategoryStatisticResponse> getCategoryStatistics(
+            @RequestParam(defaultValue = "5") Integer limit,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate fromDate,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate toDate
+    ) {
+        return dashboardService.getCategoryStatistics(limit, fromDate, toDate);
+    }
+
+    @GetMapping("/brand-statistics")
+    public List<BrandStatisticResponse> getBrandStatistics(
+            @RequestParam(defaultValue = "5") Integer limit,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate fromDate,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate toDate
+    ) {
+        return dashboardService.getBrandStatistics(limit, fromDate, toDate);
+    }
+
+    @GetMapping("/payment-statistics")
+    public List<PaymentStatisticResponse> getPaymentStatistics(
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate fromDate,
+            @RequestParam(required = false)
+            @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            LocalDate toDate
+    ) {
+        return dashboardService.getPaymentStatistics(fromDate, toDate);
+    }
+
+    @GetMapping("/low-stock-products")
+    public List<LowStockProductResponse> getLowStockProducts(
+            @RequestParam(defaultValue = "5") Integer limit,
+            @RequestParam(defaultValue = "5") Integer threshold
+    ) {
+        return dashboardService.getLowStockProducts(limit, threshold);
+    }
+
+    @GetMapping("/recent-orders")
+    public List<RecentOrderResponse> getRecentOrders(
+            @RequestParam(defaultValue = "5") Integer limit
+    ) {
+        return dashboardService.getRecentOrders(limit);
     }
 }

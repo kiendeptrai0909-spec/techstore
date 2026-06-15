@@ -48,4 +48,21 @@ public interface PaymentRepository extends JpaRepository<Payment, Long> {
             @Param("orderStatus") OrderStatus orderStatus,
             @Param("expiredAt") LocalDateTime expiredAt
     );
+
+    @Query(value = """
+    select
+        p.method as method,
+        p.status as status,
+        count(*) as total_orders,
+        coalesce(sum(p.amount), 0) as total_amount
+    from payments p
+    where (cast(:fromDate as timestamp) is null or p.created_at >= cast(:fromDate as timestamp))
+      and (cast(:toDate as timestamp) is null or p.created_at <= cast(:toDate as timestamp))
+    group by p.method, p.status
+    order by p.method, p.status
+    """, nativeQuery = true)
+    List<Object[]> findPaymentStatistics(
+            @Param("fromDate") LocalDateTime fromDate,
+            @Param("toDate") LocalDateTime toDate
+    );
 }
