@@ -11,8 +11,33 @@ import {
   TrendingUp,
   Users,
 } from 'lucide-react'
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  Line,
+  LineChart,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from 'recharts'
 import { adminDashboardApi } from '../../api/adminDashboardApi'
 import { formatCurrency } from '../../utils/formatCurrency'
+
+const CHART_COLORS = [
+  '#ef4444',
+  '#3b82f6',
+  '#22c55e',
+  '#f97316',
+  '#8b5cf6',
+  '#06b6d4',
+  '#eab308',
+  '#ec4899',
+]
 
 function AdminDashboardPage() {
   const [summary, setSummary] = useState(null)
@@ -162,15 +187,6 @@ function AdminDashboardPage() {
           ))}
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-5">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <div
-              key={index}
-              className="h-20 animate-pulse rounded-lg bg-gray-200"
-            />
-          ))}
-        </div>
-
         <div className="mt-6 grid gap-6 xl:grid-cols-2">
           <div className="h-96 animate-pulse rounded-lg bg-gray-200" />
           <div className="h-96 animate-pulse rounded-lg bg-gray-200" />
@@ -285,28 +301,7 @@ function AdminDashboardPage() {
           icon={TrendingUp}
           iconClassName="text-green-600"
         >
-          <BarList
-            data={revenueStatistics}
-            emptyText="Chưa có dữ liệu doanh thu."
-            getLabel={(item, index) =>
-              item?.label ||
-              item?.date ||
-              item?.month ||
-              item?.period ||
-              `Mốc ${index + 1}`
-            }
-            getValue={(item) =>
-              toNumber(
-                item?.revenue ||
-                  item?.totalRevenue ||
-                  item?.amount ||
-                  item?.totalAmount
-              )
-            }
-            getSubText={(item) =>
-              `Số đơn: ${toNumber(item?.orderCount || item?.totalOrders)}`
-            }
-          />
+          <RevenueLineChart data={revenueStatistics} />
         </DashboardPanel>
 
         <DashboardPanel
@@ -402,18 +397,10 @@ function AdminDashboardPage() {
           icon={Tags}
           iconClassName="text-purple-600"
         >
-          <BarList
+          <StatisticBarChart
             data={categoryStatistics}
             emptyText="Chưa có dữ liệu thống kê danh mục."
-            getLabel={(item, index) =>
-              item?.categoryName || item?.name || `Danh mục ${index + 1}`
-            }
-            getValue={(item) => toNumber(item?.totalRevenue)}
-            getSubText={(item) =>
-              `Đã bán: ${toNumber(
-                item?.totalQuantitySold
-              )} | Số đơn: ${toNumber(item?.totalOrders)}`
-            }
+            nameKey="categoryName"
           />
         </DashboardPanel>
 
@@ -423,18 +410,10 @@ function AdminDashboardPage() {
           icon={Package}
           iconClassName="text-blue-600"
         >
-          <BarList
+          <StatisticBarChart
             data={brandStatistics}
             emptyText="Chưa có dữ liệu thống kê thương hiệu."
-            getLabel={(item, index) =>
-              item?.brandName || item?.name || `Thương hiệu ${index + 1}`
-            }
-            getValue={(item) => toNumber(item?.totalRevenue)}
-            getSubText={(item) =>
-              `Đã bán: ${toNumber(
-                item?.totalQuantitySold
-              )} | Số đơn: ${toNumber(item?.totalOrders)}`
-            }
+            nameKey="brandName"
           />
         </DashboardPanel>
       </div>
@@ -449,36 +428,40 @@ function AdminDashboardPage() {
           {paymentStatistics.length === 0 ? (
             <EmptyBox text="Chưa có dữ liệu thanh toán." />
           ) : (
-            <div className="overflow-hidden rounded border">
-              <table className="w-full text-left text-sm">
-                <thead className="bg-gray-50 text-gray-600">
-                  <tr>
-                    <th className="px-4 py-3">Phương thức</th>
-                    <th className="px-4 py-3">Trạng thái</th>
-                    <th className="px-4 py-3 text-center">Số đơn</th>
-                    <th className="px-4 py-3 text-right">Số tiền</th>
-                  </tr>
-                </thead>
+            <div className="grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)]">
+              <PaymentPieChart data={paymentStatistics} />
 
-                <tbody className="divide-y">
-                  {paymentStatistics.map((item, index) => (
-                    <tr key={index}>
-                      <td className="px-4 py-3 font-semibold text-gray-900">
-                        {formatPaymentMethod(item?.method)}
-                      </td>
-                      <td className="px-4 py-3">
-                        <StatusBadge value={item?.status} />
-                      </td>
-                      <td className="px-4 py-3 text-center font-bold">
-                        {toNumber(item?.totalOrders)}
-                      </td>
-                      <td className="px-4 py-3 text-right font-bold text-red-600">
-                        {formatCurrency(toNumber(item?.totalAmount))}
-                      </td>
+              <div className="overflow-hidden rounded border">
+                <table className="w-full text-left text-sm">
+                  <thead className="bg-gray-50 text-gray-600">
+                    <tr>
+                      <th className="px-4 py-3">Phương thức</th>
+                      <th className="px-4 py-3">Trạng thái</th>
+                      <th className="px-4 py-3 text-center">Số đơn</th>
+                      <th className="px-4 py-3 text-right">Số tiền</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+
+                  <tbody className="divide-y">
+                    {paymentStatistics.map((item, index) => (
+                      <tr key={index}>
+                        <td className="px-4 py-3 font-semibold text-gray-900">
+                          {formatPaymentMethod(item?.method)}
+                        </td>
+                        <td className="px-4 py-3">
+                          <StatusBadge value={item?.status} />
+                        </td>
+                        <td className="px-4 py-3 text-center font-bold">
+                          {toNumber(item?.totalOrders)}
+                        </td>
+                        <td className="px-4 py-3 text-right font-bold text-red-600">
+                          {formatCurrency(toNumber(item?.totalAmount))}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
         </DashboardPanel>
@@ -592,6 +575,181 @@ function AdminDashboardPage() {
   )
 }
 
+function RevenueLineChart({ data }) {
+  const chartData = normalizeList(data).map((item, index) => ({
+    name:
+      item?.label ||
+      item?.date ||
+      item?.month ||
+      item?.period ||
+      `Mốc ${index + 1}`,
+    revenue: toNumber(
+      item?.revenue ||
+        item?.totalRevenue ||
+        item?.amount ||
+        item?.totalAmount
+    ),
+    orderCount: toNumber(item?.orderCount || item?.totalOrders),
+  }))
+
+  if (chartData.length === 0) {
+    return <EmptyBox text="Chưa có dữ liệu doanh thu." />
+  }
+
+  return (
+    <div className="h-80">
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis tickFormatter={formatShortCurrency} />
+          <Tooltip content={<RevenueTooltip />} />
+          <Line
+            type="monotone"
+            dataKey="revenue"
+            stroke="#ef4444"
+            strokeWidth={3}
+            dot={{ r: 5 }}
+            activeDot={{ r: 7 }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
+function StatisticBarChart({ data, emptyText, nameKey }) {
+  const chartData = normalizeList(data).map((item, index) => ({
+    name: item?.[nameKey] || item?.name || `Mục ${index + 1}`,
+    revenue: toNumber(item?.totalRevenue),
+    quantity: toNumber(item?.totalQuantitySold),
+    orders: toNumber(item?.totalOrders),
+  }))
+
+  if (chartData.length === 0) {
+    return <EmptyBox text={emptyText} />
+  }
+
+  return (
+    <div className="h-80">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={chartData} margin={{ top: 10, right: 20, left: 0, bottom: 5 }}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis tickFormatter={formatShortCurrency} />
+          <Tooltip content={<StatisticTooltip />} />
+          <Bar dataKey="revenue" radius={[6, 6, 0, 0]}>
+            {chartData.map((_, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={CHART_COLORS[index % CHART_COLORS.length]}
+              />
+            ))}
+          </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
+function PaymentPieChart({ data }) {
+  const chartData = normalizeList(data).map((item, index) => {
+    const amount = toNumber(item?.totalAmount)
+    const orders = toNumber(item?.totalOrders)
+
+    return {
+      name: `${formatPaymentMethod(item?.method)} - ${formatPaymentStatus(
+        item?.status
+      )}`,
+      value: amount > 0 ? amount : orders,
+      amount,
+      orders,
+      color: CHART_COLORS[index % CHART_COLORS.length],
+    }
+  })
+
+  if (chartData.length === 0) {
+    return <EmptyBox text="Chưa có dữ liệu thanh toán." />
+  }
+
+  return (
+    <div className="h-64">
+      <ResponsiveContainer width="100%" height="100%">
+        <PieChart>
+          <Tooltip content={<PaymentTooltip />} />
+          <Pie
+            data={chartData}
+            dataKey="value"
+            nameKey="name"
+            outerRadius={85}
+            innerRadius={45}
+            paddingAngle={4}
+          >
+            {chartData.map((item, index) => (
+              <Cell key={`payment-${index}`} fill={item.color} />
+            ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
+  )
+}
+
+function RevenueTooltip({ active, payload, label }) {
+  if (!active || !payload || payload.length === 0) {
+    return null
+  }
+
+  const item = payload[0].payload
+
+  return (
+    <div className="rounded border bg-white px-3 py-2 shadow">
+      <p className="font-bold text-gray-900">{label}</p>
+      <p className="text-sm text-red-600">
+        Doanh thu: {formatCurrency(item.revenue)}
+      </p>
+      <p className="text-sm text-gray-600">Số đơn: {item.orderCount}</p>
+    </div>
+  )
+}
+
+function StatisticTooltip({ active, payload, label }) {
+  if (!active || !payload || payload.length === 0) {
+    return null
+  }
+
+  const item = payload[0].payload
+
+  return (
+    <div className="rounded border bg-white px-3 py-2 shadow">
+      <p className="font-bold text-gray-900">{label}</p>
+      <p className="text-sm text-red-600">
+        Doanh thu: {formatCurrency(item.revenue)}
+      </p>
+      <p className="text-sm text-gray-600">Đã bán: {item.quantity}</p>
+      <p className="text-sm text-gray-600">Số đơn: {item.orders}</p>
+    </div>
+  )
+}
+
+function PaymentTooltip({ active, payload }) {
+  if (!active || !payload || payload.length === 0) {
+    return null
+  }
+
+  const item = payload[0].payload
+
+  return (
+    <div className="rounded border bg-white px-3 py-2 shadow">
+      <p className="font-bold text-gray-900">{item.name}</p>
+      <p className="text-sm text-red-600">
+        Số tiền: {formatCurrency(item.amount)}
+      </p>
+      <p className="text-sm text-gray-600">Số đơn: {item.orders}</p>
+    </div>
+  )
+}
+
 function SmallSummaryCard({ title, value, icon: Icon, color }) {
   return (
     <div className={`rounded-lg p-4 shadow-sm ${color}`}>
@@ -618,9 +776,7 @@ function DashboardPanel({
     <div className="rounded-lg bg-white p-5 shadow-sm">
       <div className="mb-5 flex items-center justify-between gap-4">
         <div>
-          <h3 className="text-xl font-black text-gray-900">
-            {title}
-          </h3>
+          <h3 className="text-xl font-black text-gray-900">{title}</h3>
           <p className="mt-1 text-sm text-gray-500">{description}</p>
         </div>
 
@@ -628,53 +784,6 @@ function DashboardPanel({
       </div>
 
       {children}
-    </div>
-  )
-}
-
-function BarList({ data, emptyText, getLabel, getValue, getSubText }) {
-  if (!data || data.length === 0) {
-    return <EmptyBox text={emptyText} />
-  }
-
-  const maxValue = Math.max(...data.map((item) => toNumber(getValue(item))), 1)
-
-  return (
-    <div className="space-y-4">
-      {data.slice(0, 12).map((item, index) => {
-        const label = getLabel(item, index)
-        const value = toNumber(getValue(item))
-        const percent = Math.max(Math.round((value / maxValue) * 100), 4)
-
-        return (
-          <div key={`${label}-${index}`}>
-            <div className="mb-1 flex justify-between gap-4 text-sm">
-              <div>
-                <span className="font-semibold text-gray-700">
-                  {label}
-                </span>
-
-                {getSubText && (
-                  <div className="mt-0.5 text-xs text-gray-500">
-                    {getSubText(item)}
-                  </div>
-                )}
-              </div>
-
-              <span className="shrink-0 font-bold text-red-600">
-                {formatCurrency(value)}
-              </span>
-            </div>
-
-            <div className="h-3 overflow-hidden rounded-full bg-gray-100">
-              <div
-                className="h-full rounded-full bg-red-600"
-                style={{ width: `${percent}%` }}
-              />
-            </div>
-          </div>
-        )
-      })}
     </div>
   )
 }
@@ -764,6 +873,24 @@ function toNumber(value) {
 
   if (Number.isNaN(numberValue)) {
     return 0
+  }
+
+  return numberValue
+}
+
+function formatShortCurrency(value) {
+  const numberValue = toNumber(value)
+
+  if (numberValue >= 1000000000) {
+    return `${numberValue / 1000000000} tỷ`
+  }
+
+  if (numberValue >= 1000000) {
+    return `${numberValue / 1000000} tr`
+  }
+
+  if (numberValue >= 1000) {
+    return `${numberValue / 1000}k`
   }
 
   return numberValue
