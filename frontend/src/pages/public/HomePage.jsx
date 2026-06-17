@@ -16,7 +16,7 @@ function HomePage() {
   const [categories, setCategories] = useState([])
   const [featuredProducts, setFeaturedProducts] = useState([])
   const [allProducts, setAllProducts] = useState([])
-  const [laptopGamingProducts, setLaptopGamingProducts] = useState([])
+  const [keyboardProducts, setKeyboardProducts] = useState([])
   const [officeProducts, setOfficeProducts] = useState([])
   const [pcProducts, setPcProducts] = useState([])
   const [mouseProducts, setMouseProducts] = useState([])
@@ -61,9 +61,14 @@ function HomePage() {
           'may tinh bo',
           'build pc',
         ])
-
+        const keyboardCategory = findCategoryByKeywords(normalizedCategories, [
+          'ban phim',
+          'ban phim co',
+          'phim co',
+          'keyboard',
+        ])
         const [
-          laptopGamingData,
+          keyboardData,
           officeProductData,
           pcProductData,
         ] = await Promise.all([
@@ -71,17 +76,16 @@ function HomePage() {
             page: 0,
             size: 5,
             status: 'ACTIVE',
-            keyword: 'gaming',
-            ...(laptopCategory?.id ? { categoryId: laptopCategory.id } : {}),
+            ...(keyboardCategory?.id
+              ? { categoryId: keyboardCategory.id }
+              : { keyword: 'ban phim' }),
           }),
 
           productApi.getProducts({
             page: 0,
             size: 5,
             status: 'ACTIVE',
-            ...(laptopCategory?.id
-              ? { categoryId: laptopCategory.id }
-              : { keyword: 'laptop' }),
+            keyword: 'laptop',
           }),
 
           productApi.getProducts({
@@ -92,7 +96,7 @@ function HomePage() {
           }),
         ])
 
-        setLaptopGamingProducts(normalizeList(laptopGamingData))
+        setKeyboardProducts(normalizeList(keyboardData))
         setOfficeProducts(normalizeList(officeProductData))
         setPcProducts(normalizeList(pcProductData))
         const mouseCategory = normalizedCategories.find((category) => {
@@ -196,7 +200,7 @@ function HomePage() {
 
   const middleSlotBanners = middleBanners.slice(0, 4)
 
-  
+
 
   return (
     <div className="bg-[#e9e9e9]">
@@ -319,20 +323,20 @@ function HomePage() {
           ) : (
             <>
               <ProductSection
-                title="Laptop gaming bán chạy"
-                products={laptopGamingProducts}
+                title="Bàn phím bán chạy"
+                products={keyboardProducts}
                 tabs={[
-                  { label: 'ASUS', url: '/products?keyword=asus' },
-                  { label: 'ACER', url: '/products?keyword=acer' },
-                  { label: 'MSI', url: '/products?keyword=msi' },
-                  { label: 'LENOVO', url: '/products?keyword=lenovo' },
-                  { label: 'DELL', url: '/products?keyword=dell' },
+                  { label: 'AULA', url: '/products?keyword=aula' },
+                  { label: 'AKKO', url: '/products?keyword=akko' },
+                  { label: 'Logitech', url: '/products?keyword=logitech' },
+                  { label: 'Razer', url: '/products?keyword=razer' },
+                  { label: 'Corsair', url: '/products?keyword=corsair' },
                 ]}
-                viewAllUrl="/products?keyword=laptop+gaming"
+                viewAllUrl="/products?keyword=ban+phim"
               />
 
               <ProductSection
-                title="Laptop văn phòng bán chạy"
+                title="Laptop bán chạy"
                 products={officeProducts}
                 tabs={[
                   { label: 'ASUS', url: '/products?keyword=asus' },
