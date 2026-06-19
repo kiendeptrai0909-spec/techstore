@@ -49,18 +49,31 @@ function AdminDashboardPage() {
   const [lowStockProducts, setLowStockProducts] = useState([])
   const [recentOrders, setRecentOrders] = useState([])
 
-  const [revenueType, setRevenueType] = useState('month')
+  const [fromDate, setFromDate] = useState('')
+  const [toDate, setToDate] = useState('')
+  const [dateFilter, setDateFilter] = useState({
+    fromDate: '',
+    toDate: '',
+  })
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-    fetchDashboard()
-  }, [revenueType])
+  fetchDashboard()
+}, [dateFilter])
 
   const fetchDashboard = async () => {
     setLoading(true)
     setMessage('')
+    const dateParams = {}
 
+    if (dateFilter.fromDate) {
+      dateParams.fromDate = dateFilter.fromDate
+    }
+
+    if (dateFilter.toDate) {
+      dateParams.toDate = dateFilter.toDate
+    }
     try {
       const [
         summaryData,
@@ -74,18 +87,21 @@ function AdminDashboardPage() {
       ] = await Promise.all([
         adminDashboardApi.getSummary(),
         adminDashboardApi.getRevenueStatistics({
-          type: revenueType,
-        }),
+  type: dateFilter.fromDate || dateFilter.toDate ? 'day' : 'month',
+  ...dateParams,
+}),
         adminDashboardApi.getTopProducts({
           limit: 5,
         }),
         adminDashboardApi.getCategoryStatistics({
           limit: 8,
+          ...dateParams,
         }),
         adminDashboardApi.getBrandStatistics({
           limit: 8,
+          ...dateParams,
         }),
-        adminDashboardApi.getPaymentStatistics(),
+        adminDashboardApi.getPaymentStatistics(dateParams),
         adminDashboardApi.getLowStockProducts({
           limit: 5,
           threshold: 5,
@@ -106,8 +122,8 @@ function AdminDashboardPage() {
     } catch (error) {
       setMessage(
         error?.response?.data?.message ||
-          error?.message ||
-          'Không thể tải dữ liệu dashboard'
+        error?.message ||
+        'Không thể tải dữ liệu dashboard'
       )
     } finally {
       setLoading(false)
@@ -142,37 +158,61 @@ function AdminDashboardPage() {
       },
     ]
   }, [summary])
+const orderStatusCards = useMemo(() => {
+  return [
+    {
+      title: 'Chờ xử lý',
+      value: toNumber(summary?.pendingOrders),
+      color: 'bg-yellow-50 text-yellow-700',
+    },
+    {
+      title: 'Đã xác nhận',
+      value: toNumber(summary?.confirmedOrders),
+      color: 'bg-blue-50 text-blue-700',
+    },
+    {
+      title: 'Đang giao',
+      value: toNumber(summary?.shippingOrders),
+      color: 'bg-indigo-50 text-indigo-700',
+    },
+    {
+      title: 'Hoàn thành',
+      value: toNumber(summary?.completedOrders),
+      color: 'bg-green-50 text-green-700',
+    },
+    {
+      title: 'Đã hủy',
+      value: toNumber(summary?.cancelledOrders),
+      color: 'bg-red-50 text-red-700',
+    },
+  ]
+}, [summary])
+   const handleApplyDateFilter = () => {
+    if (fromDate && toDate && fromDate > toDate) {
+      setMessage('Ngày bắt đầu không được lớn hơn ngày kết thúc')
+      return
+    }
 
-  const orderStatusCards = useMemo(() => {
-    return [
-      {
-        title: 'Chờ xử lý',
-        value: toNumber(summary?.pendingOrders),
-        color: 'bg-yellow-50 text-yellow-700',
-      },
-      {
-        title: 'Đã xác nhận',
-        value: toNumber(summary?.confirmedOrders),
-        color: 'bg-blue-50 text-blue-700',
-      },
-      {
-        title: 'Đang giao',
-        value: toNumber(summary?.shippingOrders),
-        color: 'bg-indigo-50 text-indigo-700',
-      },
-      {
-        title: 'Hoàn thành',
-        value: toNumber(summary?.completedOrders),
-        color: 'bg-green-50 text-green-700',
-      },
-      {
-        title: 'Đã hủy',
-        value: toNumber(summary?.cancelledOrders),
-        color: 'bg-red-50 text-red-700',
-      },
-    ]
-  }, [summary])
+    setMessage('')
+    setDateFilter({
+      fromDate,
+      toDate,
+    })
+  }
 
+  const handleClearDateFilter = () => {
+    setFromDate('')
+    setToDate('')
+    setDateFilter({
+      fromDate: '',
+      toDate: '',
+    })
+    setMessage('')
+  }
+
+  const activeDateFilterText = getDateFilterText(dateFilter)
+
+ 
   if (loading) {
     return (
       <div>
@@ -197,31 +237,81 @@ function AdminDashboardPage() {
 
   return (
     <div>
-      <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-        <div>
-          <h2 className="text-2xl font-black text-gray-900">
-            Dashboard
-          </h2>
-          <p className="mt-1 text-sm text-gray-500">
-            Tổng quan hoạt động kinh doanh của TechStore.
-          </p>
-        </div>
+      <div className="mb-6 space-y-4">
+  <div>
+    <h2 className="text-2xl font-black text-gray-900">
+      Dashboard
+    </h2>
+    <p className="mt-1 text-sm text-gray-500">
+      Tổng quan hoạt động kinh doanh của TechStore.
+    </p>
+  </div>
 
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-semibold text-gray-600">
-            Doanh thu:
+  <div className="rounded-lg border border-gray-100 bg-white p-4 shadow-sm">
+    <div className="flex flex-col gap-4 xl:flex-row xl:items-end xl:justify-between">
+      <div>
+        <h3 className="text-sm font-black uppercase text-gray-900">
+          Bộ lọc thống kê
+        </h3>
+        <p className="mt-1 text-xs text-gray-500">
+          Chọn khoảng thời gian cần xem doanh thu.
+        </p>
+
+        {activeDateFilterText && (
+          <p className="mt-2 text-xs font-semibold text-blue-600">
+            Đang lọc: {activeDateFilterText}
+          </p>
+        )}
+      </div>
+
+      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-[180px_180px_auto_auto] lg:items-end">
+
+
+        <label className="block">
+          <span className="mb-1 block text-xs font-bold text-gray-600">
+            Từ ngày
           </span>
 
-          <select
-            value={revenueType}
-            onChange={(event) => setRevenueType(event.target.value)}
-            className="rounded border px-3 py-2 text-sm font-semibold outline-none focus:border-red-500"
-          >
-            <option value="day">Theo ngày</option>
-            <option value="month">Theo tháng</option>
-          </select>
-        </div>
+          <input
+            type="date"
+            value={fromDate}
+            onChange={(event) => setFromDate(event.target.value)}
+            className="h-10 w-full rounded border border-gray-300 bg-white px-3 text-sm font-semibold outline-none focus:border-red-500"
+          />
+        </label>
+
+        <label className="block">
+          <span className="mb-1 block text-xs font-bold text-gray-600">
+            Đến ngày
+          </span>
+
+          <input
+            type="date"
+            value={toDate}
+            onChange={(event) => setToDate(event.target.value)}
+            className="h-10 w-full rounded border border-gray-300 bg-white px-3 text-sm font-semibold outline-none focus:border-red-500"
+          />
+        </label>
+
+        <button
+          type="button"
+          onClick={handleApplyDateFilter}
+          className="h-10 rounded bg-red-600 px-5 text-sm font-black text-white hover:bg-red-700"
+        >
+          Lọc
+        </button>
+
+        <button
+          type="button"
+          onClick={handleClearDateFilter}
+          className="h-10 rounded border border-gray-300 bg-white px-5 text-sm font-black text-gray-700 hover:bg-gray-50"
+        >
+          Bỏ lọc
+        </button>
       </div>
+    </div>
+  </div>
+</div>
 
       {message && (
         <div className="mb-5 rounded border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">
@@ -328,16 +418,16 @@ function AdminDashboardPage() {
 
                 const soldQuantity = toNumber(
                   product?.totalQuantitySold ||
-                    product?.soldQuantity ||
-                    product?.quantitySold ||
-                    product?.totalSold ||
-                    product?.quantity
+                  product?.soldQuantity ||
+                  product?.quantitySold ||
+                  product?.totalSold ||
+                  product?.quantity
                 )
 
                 const revenue = toNumber(
                   product?.totalRevenue ||
-                    product?.revenue ||
-                    product?.totalAmount
+                  product?.revenue ||
+                  product?.totalAmount
                 )
 
                 const imageUrl =
@@ -585,9 +675,9 @@ function RevenueLineChart({ data }) {
       `Mốc ${index + 1}`,
     revenue: toNumber(
       item?.revenue ||
-        item?.totalRevenue ||
-        item?.amount ||
-        item?.totalAmount
+      item?.totalRevenue ||
+      item?.amount ||
+      item?.totalAmount
     ),
     orderCount: toNumber(item?.orderCount || item?.totalOrders),
   }))
@@ -961,5 +1051,35 @@ function formatDateTime(value) {
 
   return date.toLocaleString('vi-VN')
 }
+function getDateFilterText(dateFilter) {
+  if (!dateFilter?.fromDate && !dateFilter?.toDate) {
+    return ''
+  }
 
+  if (dateFilter.fromDate && dateFilter.toDate) {
+    return `từ ${formatDateOnly(dateFilter.fromDate)} đến ${formatDateOnly(
+      dateFilter.toDate
+    )}`
+  }
+
+  if (dateFilter.fromDate) {
+    return `từ ${formatDateOnly(dateFilter.fromDate)}`
+  }
+
+  return `đến ${formatDateOnly(dateFilter.toDate)}`
+}
+
+function formatDateOnly(value) {
+  if (!value) {
+    return ''
+  }
+
+  const [year, month, day] = String(value).split('-')
+
+  if (!year || !month || !day) {
+    return value
+  }
+
+  return `${day}/${month}/${year}`
+}
 export default AdminDashboardPage
