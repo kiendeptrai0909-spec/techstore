@@ -18,6 +18,8 @@ import com.google.api.client.json.gson.GsonFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authentication.LockedException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -70,6 +72,8 @@ public class AuthService {
                             request.getPassword()
                     )
             );
+        } catch (LockedException | DisabledException exception) {
+            throw exception; // Let CustomUserDetailsService configuration propagate the state
         } catch (AuthenticationException exception) {
             throw new BadRequestException("Email hoặc mật khẩu không đúng");
         }

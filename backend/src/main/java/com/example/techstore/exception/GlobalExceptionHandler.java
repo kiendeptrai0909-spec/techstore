@@ -227,6 +227,23 @@ public class GlobalExceptionHandler {
      * Lỗi cuối cùng, tránh lộ stack trace ra client.
      */
     @ExceptionHandler({
+            org.springframework.security.authentication.LockedException.class,
+            org.springframework.security.authentication.DisabledException.class
+    })
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleAccountStatusException(
+            Exception exception,
+            HttpServletRequest request
+    ) {
+        return buildErrorResponse(
+                HttpStatus.BAD_REQUEST,
+                "Tài khoản đã bị khóa hoặc ngừng hoạt động",
+                request.getRequestURI(),
+                null
+        );
+    }
+
+    @ExceptionHandler({
             BadCredentialsException.class,
             UsernameNotFoundException.class,
             AuthenticationException.class

@@ -1,5 +1,6 @@
 package com.example.techstore.dto.response;
 
+import com.example.techstore.enums.ProductStatus;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -16,4 +17,6 @@ public class BrandResponse {
     private String logoUrl;
 
     private String description;
+
+    private ProductStatus status;
 }

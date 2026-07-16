@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.example.techstore.dto.response.InventoryWarningResponse;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -63,7 +63,21 @@ public class AdminDashboardController {
     ) {
         return dashboardService.getCategoryStatistics(limit, fromDate, toDate);
     }
+    @GetMapping("/old-stock-products")
+    public List<InventoryWarningResponse> getOldStockProducts(
+            @RequestParam(defaultValue = "5") Integer limit,
+            @RequestParam(defaultValue = "180") Integer days
+    ) {
+        return dashboardService.getOldStockProducts(limit, days);
+    }
 
+    @GetMapping("/stagnant-products")
+    public List<InventoryWarningResponse> getStagnantProducts(
+            @RequestParam(defaultValue = "5") Integer limit,
+            @RequestParam(defaultValue = "90") Integer days
+    ) {
+        return dashboardService.getStagnantProducts(limit, days);
+    }
     @GetMapping("/brand-statistics")
     public List<BrandStatisticResponse> getBrandStatistics(
             @RequestParam(defaultValue = "5") Integer limit,

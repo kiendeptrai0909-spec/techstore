@@ -15,7 +15,10 @@ public class BrandController {
     private final BrandService brandService;
 
     @GetMapping
-    public List<BrandResponse> getBrands() {
+    public List<BrandResponse> getBrands(@RequestParam(required = false) Long categoryId) {
+        if (categoryId != null) {
+            return brandService.getActiveBrandsByCategory(categoryId);
+        }
         return brandService.getActiveBrands();
     }
 }

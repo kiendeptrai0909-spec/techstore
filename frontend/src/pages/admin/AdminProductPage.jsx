@@ -8,8 +8,13 @@ import { brandApi } from '../../api/brandApi'
 
 import AdminProductFilter from '../../components/admin/product/AdminProductFilter'
 import AdminProductTable from '../../components/admin/product/AdminProductTable'
+import { useAuth } from '../../contexts/AuthContext'
 
 function AdminProductPage() {
+  const { user } = useAuth()
+  const role = user?.role || user?.authorities?.[0]?.authority
+  const isStaff = role === 'ROLE_STAFF' || role === 'STAFF'
+
   const [searchParams, setSearchParams] = useSearchParams()
 
   const [categories, setCategories] = useState([])
@@ -31,17 +36,28 @@ function AdminProductPage() {
 
   const fetchFilterData = async () => {
     try {
-      const [categoryData, brandData] = await Promise.all([
-        categoryApi.getCategories(),
-        brandApi.getBrands(),
-      ])
-
+      const categoryData = await categoryApi.getCategories()
       setCategories(normalizeList(categoryData))
-      setBrands(normalizeList(brandData))
     } catch (error) {
       console.error(error.message)
     }
   }
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        const params = {}
+        if (filters.categoryId) {
+          params.categoryId = filters.categoryId
+        }
+        const brandData = await brandApi.getBrands(params)
+        setBrands(normalizeList(brandData))
+      } catch (error) {
+        console.error(error.message)
+      }
+    }
+    fetchBrands()
+  }, [filters.categoryId])
 
   const fetchProducts = async () => {
     setLoading(true)
@@ -186,18 +202,20 @@ function AdminProductPage() {
               Quản lý sản phẩm
             </h2>
             <p className="mt-1 text-sm text-gray-500">
-              Tạo, cập nhật và quản lý sản phẩm trong hệ thống.
+              {isStaff ? 'Xem thông tin và tìm kiếm sản phẩm trong hệ thống.' : 'Tạo, cập nhật và quản lý sản phẩm trong hệ thống.'}
             </p>
           </div>
         </div>
 
-        <Link
-          to="/admin/products/create"
-          className="inline-flex items-center gap-2 rounded bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700"
-        >
-          <Plus size={20} />
-          Thêm sản phẩm
-        </Link>
+        {!isStaff && (
+          <Link
+            to="/admin/products/create"
+            className="inline-flex items-center gap-2 rounded bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700"
+          >
+            <Plus size={20} />
+            Thêm sản phẩm
+          </Link>
+        )}
       </div>
 
       <div className="space-y-5">
@@ -226,6 +244,7 @@ function AdminProductPage() {
           products={products}
           loading={loading}
           onDelete={handleDeleteProduct}
+          isStaff={isStaff}
         />
 
         <AdminProductPagination

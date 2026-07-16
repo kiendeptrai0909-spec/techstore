@@ -1,6 +1,7 @@
 import { Banknote, Landmark } from 'lucide-react'
 import { FaFacebookF, FaTiktok, FaYoutube } from 'react-icons/fa6'
 import { SiZalo } from 'react-icons/si'
+import { Link } from 'react-router'
 
 function Footer() {
   return (
@@ -19,10 +20,26 @@ function Footer() {
         <div>
           <h4 className="mb-3 font-bold uppercase">Chính sách</h4>
           <ul className="space-y-2 text-sm text-gray-700">
-            <li>Chính sách bảo hành</li>
-            <li>Chính sách giao hàng</li>
-            <li>Chính sách bảo mật</li>
-            <li>Chính sách đổi trả</li>
+            <li>
+              <Link to="/warranty-policy" className="hover:text-red-600 transition-colors">
+                Chính sách bảo hành
+              </Link>
+            </li>
+            <li>
+              <Link to="/shipping-policy" className="hover:text-red-600 transition-colors">
+                Chính sách giao hàng
+              </Link>
+            </li>
+            <li>
+              <Link to="/privacy-policy" className="hover:text-red-600 transition-colors">
+                Chính sách bảo mật
+              </Link>
+            </li>
+            <li>
+              <Link to="/return-policy" className="hover:text-red-600 transition-colors">
+                Chính sách đổi trả
+              </Link>
+            </li>
           </ul>
         </div>
 

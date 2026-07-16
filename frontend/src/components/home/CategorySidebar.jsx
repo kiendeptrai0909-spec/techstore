@@ -1,53 +1,14 @@
-import {
-  ChevronRight,
-  Laptop,
-  Monitor,
-  Cpu,
-  HardDrive,
-  Keyboard,
-  Mouse,
-  Headphones,
-  Gamepad2,
-  Armchair,
-  Server,
-  Package,
-  Cable,
-  MemoryStick,
-} from 'lucide-react'
 import { Link } from 'react-router'
-
-const fallbackCategories = [
-  { id: 1, name: 'Laptop', icon: Laptop },
-  { id: 2, name: 'Laptop Gaming', icon: Laptop },
-  { id: 3, name: 'PC TechStore', icon: Server },
-  { id: 4, name: 'Main, CPU, VGA', icon: Cpu },
-  { id: 5, name: 'Case, Nguồn, Tản', icon: Package },
-  { id: 6, name: 'Ổ cứng, RAM, Thẻ nhớ', icon: MemoryStick },
-  { id: 7, name: 'Loa, Micro, Webcam', icon: Headphones },
-  { id: 8, name: 'Màn hình', icon: Monitor },
-  { id: 9, name: 'Bàn phím', icon: Keyboard },
-  { id: 10, name: 'Chuột + Lót chuột', icon: Mouse },
-  { id: 11, name: 'Tai nghe', icon: Headphones },
-  { id: 12, name: 'Ghế - Bàn', icon: Armchair },
-  { id: 13, name: 'Handheld, Console', icon: Gamepad2 },
-  { id: 14, name: 'Phụ kiện', icon: Cable },
-  { id: 15, name: 'Dịch vụ và thông tin khác', icon: HardDrive },
-]
-
+import { getCategoryIcon } from '../../utils/categoryIcons'
+import { ChevronRight } from 'lucide-react'
 function CategorySidebar({ categories = [] }) {
-  const items =
-    categories.length > 0
-      ? categories.map((category, index) => ({
-          ...category,
-          icon: fallbackCategories[index % fallbackCategories.length].icon,
-        }))
-      : fallbackCategories
+  const items = categories.length > 0 ? categories : []
 
   return (
     <div className="h-full overflow-hidden rounded-md bg-white shadow-sm">
       <ul className="divide-y divide-gray-100">
         {items.slice(0, 15).map((category) => {
-          const Icon = category.icon || Laptop
+          const Icon = getCategoryIcon(category.imageUrl)
 
           return (
             <li key={category.id}>

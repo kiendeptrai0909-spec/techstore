@@ -1,0 +1,3479 @@
+[
+  {
+    "path": "frontend/src/api/adminBannerApi.js",
+    "name": "adminBannerApi.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminBannerFormPage.jsx",
+      "frontend/src/pages/admin/AdminBannerPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/adminCategoryApi.js",
+    "name": "adminCategoryApi.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminCategoryFormPage.jsx",
+      "frontend/src/pages/admin/AdminCategoryPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/adminChatApi.js",
+    "name": "adminChatApi.js",
+    "ext": ".js",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminChatPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/adminContactMessageApi.js",
+    "name": "adminContactMessageApi.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminContactMessageDetailPage.jsx",
+      "frontend/src/pages/admin/AdminContactMessagePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/adminCouponApi.js",
+    "name": "adminCouponApi.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminCouponFormPage.jsx",
+      "frontend/src/pages/admin/AdminCouponPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/adminCustomerApi.js",
+    "name": "adminCustomerApi.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminCustomerDetailPage.jsx",
+      "frontend/src/pages/admin/AdminCustomerPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/adminDashboardApi.js",
+    "name": "adminDashboardApi.js",
+    "ext": ".js",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminDashboardPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/adminEmployeeApi.js",
+    "name": "adminEmployeeApi.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminEmployeeFormPage.jsx",
+      "frontend/src/pages/admin/AdminEmployeePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/adminFaqApi.js",
+    "name": "adminFaqApi.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminFaqFormPage.jsx",
+      "frontend/src/pages/admin/AdminFaqPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/adminNewsApi.js",
+    "name": "adminNewsApi.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminNewsFormPage.jsx",
+      "frontend/src/pages/admin/AdminNewsPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/adminOrderApi.js",
+    "name": "adminOrderApi.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminOrderDetailPage.jsx",
+      "frontend/src/pages/admin/AdminOrderPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/adminProductApi.js",
+    "name": "adminProductApi.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminProductFormPage.jsx",
+      "frontend/src/pages/admin/AdminProductPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/authApi.js",
+    "name": "authApi.js",
+    "ext": ".js",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/contexts/AuthContext.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/axiosClient.js",
+    "name": "axiosClient.js",
+    "ext": ".js",
+    "refCount": 29,
+    "referencedBy": [
+      "frontend/src/api/adminBannerApi.js",
+      "frontend/src/api/adminCategoryApi.js",
+      "frontend/src/api/adminChatApi.js",
+      "frontend/src/api/adminContactMessageApi.js",
+      "frontend/src/api/adminCouponApi.js",
+      "frontend/src/api/adminCustomerApi.js",
+      "frontend/src/api/adminDashboardApi.js",
+      "frontend/src/api/adminEmployeeApi.js",
+      "frontend/src/api/adminFaqApi.js",
+      "frontend/src/api/adminNewsApi.js",
+      "frontend/src/api/adminOrderApi.js",
+      "frontend/src/api/adminProductApi.js",
+      "frontend/src/api/authApi.js",
+      "frontend/src/api/bannerApi.js",
+      "frontend/src/api/brandApi.js",
+      "frontend/src/api/cartApi.js",
+      "frontend/src/api/categoryApi.js",
+      "frontend/src/api/chatApi.js",
+      "frontend/src/api/contactMessageApi.js",
+      "frontend/src/api/couponApi.js",
+      "frontend/src/api/faqApi.js",
+      "frontend/src/api/newsApi.js",
+      "frontend/src/api/orderApi.js",
+      "frontend/src/api/passwordResetApi.js",
+      "frontend/src/api/paymentApi.js",
+      "frontend/src/api/productApi.js",
+      "frontend/src/api/reviewApi.js",
+      "frontend/src/api/uploadApi.js",
+      "frontend/src/api/userApi.js"
+    ]
+  },
+  {
+    "path": "frontend/src/api/bannerApi.js",
+    "name": "bannerApi.js",
+    "ext": ".js",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/HomePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/brandApi.js",
+    "name": "brandApi.js",
+    "ext": ".js",
+    "refCount": 5,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminBrandFormPage.jsx",
+      "frontend/src/pages/admin/AdminBrandPage.jsx",
+      "frontend/src/pages/admin/AdminProductFormPage.jsx",
+      "frontend/src/pages/admin/AdminProductPage.jsx",
+      "frontend/src/pages/public/ProductListPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/cartApi.js",
+    "name": "cartApi.js",
+    "ext": ".js",
+    "refCount": 3,
+    "referencedBy": [
+      "frontend/src/contexts/CartContext.jsx",
+      "frontend/src/pages/user/CartPage.jsx",
+      "frontend/src/pages/user/CheckoutPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/categoryApi.js",
+    "name": "categoryApi.js",
+    "ext": ".js",
+    "refCount": 4,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminProductFormPage.jsx",
+      "frontend/src/pages/admin/AdminProductPage.jsx",
+      "frontend/src/pages/public/HomePage.jsx",
+      "frontend/src/pages/public/ProductListPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/chatApi.js",
+    "name": "chatApi.js",
+    "ext": ".js",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/components/chat/ChatWidget.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/contactMessageApi.js",
+    "name": "contactMessageApi.js",
+    "ext": ".js",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/components/contact/ContactForm.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/couponApi.js",
+    "name": "couponApi.js",
+    "ext": ".js",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/user/CheckoutPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/faqApi.js",
+    "name": "faqApi.js",
+    "ext": ".js",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/FaqPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/newsApi.js",
+    "name": "newsApi.js",
+    "ext": ".js",
+    "refCount": 3,
+    "referencedBy": [
+      "frontend/src/pages/public/HomePage.jsx",
+      "frontend/src/pages/public/NewsDetailPage.jsx",
+      "frontend/src/pages/public/NewsListPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/orderApi.js",
+    "name": "orderApi.js",
+    "ext": ".js",
+    "refCount": 4,
+    "referencedBy": [
+      "frontend/src/pages/user/CheckoutPage.jsx",
+      "frontend/src/pages/user/MyOrdersPage.jsx",
+      "frontend/src/pages/user/OrderDetailPage.jsx",
+      "frontend/src/pages/user/OrderSuccessPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/passwordResetApi.js",
+    "name": "passwordResetApi.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/auth/ForgotPasswordPage.jsx",
+      "frontend/src/pages/auth/ResetPasswordPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/paymentApi.js",
+    "name": "paymentApi.js",
+    "ext": ".js",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "frontend/src/api/productApi.js",
+    "name": "productApi.js",
+    "ext": ".js",
+    "refCount": 4,
+    "referencedBy": [
+      "frontend/src/components/layout/Header.jsx",
+      "frontend/src/pages/public/HomePage.jsx",
+      "frontend/src/pages/public/ProductDetailPage.jsx",
+      "frontend/src/pages/public/ProductListPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/reviewApi.js",
+    "name": "reviewApi.js",
+    "ext": ".js",
+    "refCount": 3,
+    "referencedBy": [
+      "frontend/src/components/review/ReviewModal.jsx",
+      "frontend/src/pages/public/ProductDetailPage.jsx",
+      "frontend/src/pages/user/OrderDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/uploadApi.js",
+    "name": "uploadApi.js",
+    "ext": ".js",
+    "refCount": 4,
+    "referencedBy": [
+      "frontend/src/components/admin/product/ProductVariantForm.jsx",
+      "frontend/src/pages/admin/AdminBannerFormPage.jsx",
+      "frontend/src/pages/admin/AdminNewsFormPage.jsx",
+      "frontend/src/pages/admin/AdminProductFormPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/api/userApi.js",
+    "name": "userApi.js",
+    "ext": ".js",
+    "refCount": 4,
+    "referencedBy": [
+      "frontend/src/components/user/AvatarUpload.jsx",
+      "frontend/src/components/user/ChangePasswordForm.jsx",
+      "frontend/src/components/user/ProfileForm.jsx",
+      "frontend/src/pages/user/ProfilePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/assets/hero.png",
+    "name": "hero.png",
+    "ext": ".png",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "frontend/src/assets/react.svg",
+    "name": "react.svg",
+    "ext": ".svg",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "frontend/src/assets/vite.svg",
+    "name": "vite.svg",
+    "ext": ".svg",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "frontend/src/components/admin/banner/AdminBannerFilter.jsx",
+    "name": "AdminBannerFilter.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminBannerPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/banner/AdminBannerTable.jsx",
+    "name": "AdminBannerTable.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminBannerPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/contact/AdminContactMessageFilter.jsx",
+    "name": "AdminContactMessageFilter.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminContactMessagePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/contact/AdminContactMessageTable.jsx",
+    "name": "AdminContactMessageTable.jsx",
+    "ext": ".jsx",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminContactMessageDetailPage.jsx",
+      "frontend/src/pages/admin/AdminContactMessagePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/contact/UpdateContactMessageStatusBox.jsx",
+    "name": "UpdateContactMessageStatusBox.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminContactMessageDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/coupon/AdminCouponFilter.jsx",
+    "name": "AdminCouponFilter.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminCouponPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/coupon/AdminCouponTable.jsx",
+    "name": "AdminCouponTable.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminCouponPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/faq/AdminFaqFilter.jsx",
+    "name": "AdminFaqFilter.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminFaqPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/faq/AdminFaqTable.jsx",
+    "name": "AdminFaqTable.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminFaqPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/faq/FaqAccordion.jsx",
+    "name": "FaqAccordion.jsx",
+    "ext": ".jsx",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/components/faq/FaqAccordion.jsx",
+      "frontend/src/pages/public/FaqPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/news/AdminNewsFilter.jsx",
+    "name": "AdminNewsFilter.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminNewsPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/news/AdminNewsTable.jsx",
+    "name": "AdminNewsTable.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminNewsPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/order/AdminOrderFilter.jsx",
+    "name": "AdminOrderFilter.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminOrderPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/order/AdminOrderTable.jsx",
+    "name": "AdminOrderTable.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminOrderPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/order/UpdateOrderStatusBox.jsx",
+    "name": "UpdateOrderStatusBox.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminOrderDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/product/AdminProductFilter.jsx",
+    "name": "AdminProductFilter.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminProductPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/product/AdminProductTable.jsx",
+    "name": "AdminProductTable.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminProductPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/admin/product/ProductVariantForm.jsx",
+    "name": "ProductVariantForm.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminProductFormPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/auth/AuthCard.jsx",
+    "name": "AuthCard.jsx",
+    "ext": ".jsx",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/auth/LoginPage.jsx",
+      "frontend/src/pages/auth/RegisterPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/auth/FormInput.jsx",
+    "name": "FormInput.jsx",
+    "ext": ".jsx",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/auth/LoginPage.jsx",
+      "frontend/src/pages/auth/RegisterPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/cart/CartItem.jsx",
+    "name": "CartItem.jsx",
+    "ext": ".jsx",
+    "refCount": 5,
+    "referencedBy": [
+      "frontend/src/pages/user/CartPage.jsx",
+      "backend/src/main/java/com/example/techstore/entity/CartItem.java",
+      "backend/src/main/java/com/example/techstore/repository/CartItemRepository.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java"
+    ]
+  },
+  {
+    "path": "frontend/src/components/cart/CartSummary.jsx",
+    "name": "CartSummary.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/user/CartPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/chat/ChatWidget.jsx",
+    "name": "ChatWidget.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/main.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/checkout/CheckoutForm.jsx",
+    "name": "CheckoutForm.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/user/CheckoutPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/checkout/CheckoutSummary.jsx",
+    "name": "CheckoutSummary.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/user/CheckoutPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/checkout/CouponBox.jsx",
+    "name": "CouponBox.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/user/CheckoutPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/checkout/PaymentMethodBox.jsx",
+    "name": "PaymentMethodBox.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/user/CheckoutPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/common/AdminProtectedRoute.jsx",
+    "name": "AdminProtectedRoute.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/common/ProtectedRoute.jsx",
+    "name": "ProtectedRoute.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/common/ScrollToTop.jsx",
+    "name": "ScrollToTop.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/main.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/contact/ContactForm.jsx",
+    "name": "ContactForm.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/ContactPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/contact/ContactInfoBox.jsx",
+    "name": "ContactInfoBox.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/ContactPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/faq/FaqAccordion.jsx",
+    "name": "FaqAccordion.jsx",
+    "ext": ".jsx",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/components/admin/faq/FaqAccordion.jsx",
+      "frontend/src/pages/public/FaqPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/home/CategoryIconGrid.jsx",
+    "name": "CategoryIconGrid.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/HomePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/home/CategorySidebar.jsx",
+    "name": "CategorySidebar.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/HomePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/home/NewsSection.jsx",
+    "name": "NewsSection.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/HomePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/home/ProductCard.jsx",
+    "name": "ProductCard.jsx",
+    "ext": ".jsx",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/components/home/ProductSection.jsx",
+      "frontend/src/components/product/ProductGrid.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/home/ProductSection.jsx",
+    "name": "ProductSection.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/HomePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/home/SideBanner.jsx",
+    "name": "SideBanner.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/HomePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/layout/Footer.jsx",
+    "name": "Footer.jsx",
+    "ext": ".jsx",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/layouts/MainLayout.jsx",
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/layout/Header.jsx",
+    "name": "Header.jsx",
+    "ext": ".jsx",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/layouts/MainLayout.jsx",
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/news/NewsCard.jsx",
+    "name": "NewsCard.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/NewsListPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/news/NewsSidebar.jsx",
+    "name": "NewsSidebar.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/NewsDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/order/OrderItemList.jsx",
+    "name": "OrderItemList.jsx",
+    "ext": ".jsx",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/admin/AdminOrderDetailPage.jsx",
+      "frontend/src/pages/user/OrderDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/order/OrderStatusBadge.jsx",
+    "name": "OrderStatusBadge.jsx",
+    "ext": ".jsx",
+    "refCount": 5,
+    "referencedBy": [
+      "frontend/src/components/admin/order/AdminOrderTable.jsx",
+      "frontend/src/pages/admin/AdminDashboardPage.jsx",
+      "frontend/src/pages/admin/AdminOrderDetailPage.jsx",
+      "frontend/src/pages/user/MyOrdersPage.jsx",
+      "frontend/src/pages/user/OrderDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/order/PaymentStatusBadge.jsx",
+    "name": "PaymentStatusBadge.jsx",
+    "ext": ".jsx",
+    "refCount": 4,
+    "referencedBy": [
+      "frontend/src/components/admin/order/AdminOrderTable.jsx",
+      "frontend/src/pages/admin/AdminOrderDetailPage.jsx",
+      "frontend/src/pages/user/MyOrdersPage.jsx",
+      "frontend/src/pages/user/OrderDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/product/ProductDescriptionTabs.jsx",
+    "name": "ProductDescriptionTabs.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/ProductDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/product/ProductFilterSidebar.jsx",
+    "name": "ProductFilterSidebar.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/ProductListPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/product/ProductGrid.jsx",
+    "name": "ProductGrid.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/ProductListPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/product/ProductImageGallery.jsx",
+    "name": "ProductImageGallery.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/ProductDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/product/ProductInfoBox.jsx",
+    "name": "ProductInfoBox.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/ProductDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/product/ProductPagination.jsx",
+    "name": "ProductPagination.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/ProductListPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/product/ProductReviewList.jsx",
+    "name": "ProductReviewList.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/public/ProductDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/product/ProductVariantSelector.jsx",
+    "name": "ProductVariantSelector.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/components/product/ProductInfoBox.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/review/ReviewModal.jsx",
+    "name": "ReviewModal.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/user/OrderDetailPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/review/StarRatingInput.jsx",
+    "name": "StarRatingInput.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/components/review/ReviewModal.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/user/AvatarUpload.jsx",
+    "name": "AvatarUpload.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/user/ProfilePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/user/ChangePasswordForm.jsx",
+    "name": "ChangePasswordForm.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/user/ProfilePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/components/user/ProfileForm.jsx",
+    "name": "ProfileForm.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/pages/user/ProfilePage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/config/bankTransferConfig.js",
+    "name": "bankTransferConfig.js",
+    "ext": ".js",
+    "refCount": 2,
+    "referencedBy": [
+      "frontend/src/pages/user/OrderDetailPage.jsx",
+      "frontend/src/pages/user/OrderSuccessPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/contexts/AuthContext.jsx",
+    "name": "AuthContext.jsx",
+    "ext": ".jsx",
+    "refCount": 14,
+    "referencedBy": [
+      "frontend/src/components/chat/ChatWidget.jsx",
+      "frontend/src/components/common/AdminProtectedRoute.jsx",
+      "frontend/src/components/common/ProtectedRoute.jsx",
+      "frontend/src/components/layout/Header.jsx",
+      "frontend/src/contexts/CartContext.jsx",
+      "frontend/src/layouts/AdminLayout.jsx",
+      "frontend/src/main.jsx",
+      "frontend/src/pages/admin/AdminChatPage.jsx",
+      "frontend/src/pages/admin/AdminDashboardPage.jsx",
+      "frontend/src/pages/admin/AdminFaqPage.jsx",
+      "frontend/src/pages/admin/AdminProductPage.jsx",
+      "frontend/src/pages/auth/LoginPage.jsx",
+      "frontend/src/pages/auth/RegisterPage.jsx",
+      "frontend/src/pages/user/CheckoutPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/contexts/CartContext.jsx",
+    "name": "CartContext.jsx",
+    "ext": ".jsx",
+    "refCount": 5,
+    "referencedBy": [
+      "frontend/src/components/layout/Header.jsx",
+      "frontend/src/main.jsx",
+      "frontend/src/pages/public/ProductDetailPage.jsx",
+      "frontend/src/pages/user/CartPage.jsx",
+      "frontend/src/pages/user/CheckoutPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/layouts/AdminLayout.jsx",
+    "name": "AdminLayout.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/layouts/MainLayout.jsx",
+    "name": "MainLayout.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminBannerFormPage.jsx",
+    "name": "AdminBannerFormPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminBannerPage.jsx",
+    "name": "AdminBannerPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminBrandFormPage.jsx",
+    "name": "AdminBrandFormPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminBrandPage.jsx",
+    "name": "AdminBrandPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminCategoryFormPage.jsx",
+    "name": "AdminCategoryFormPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminCategoryPage.jsx",
+    "name": "AdminCategoryPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminChatPage.jsx",
+    "name": "AdminChatPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminContactMessageDetailPage.jsx",
+    "name": "AdminContactMessageDetailPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminContactMessagePage.jsx",
+    "name": "AdminContactMessagePage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminCouponFormPage.jsx",
+    "name": "AdminCouponFormPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminCouponPage.jsx",
+    "name": "AdminCouponPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminCustomerDetailPage.jsx",
+    "name": "AdminCustomerDetailPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminCustomerPage.jsx",
+    "name": "AdminCustomerPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminDashboardPage.jsx",
+    "name": "AdminDashboardPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminEmployeeFormPage.jsx",
+    "name": "AdminEmployeeFormPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminEmployeePage.jsx",
+    "name": "AdminEmployeePage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminFaqFormPage.jsx",
+    "name": "AdminFaqFormPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminFaqPage.jsx",
+    "name": "AdminFaqPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminNewsFormPage.jsx",
+    "name": "AdminNewsFormPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminNewsPage.jsx",
+    "name": "AdminNewsPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminOrderDetailPage.jsx",
+    "name": "AdminOrderDetailPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminOrderPage.jsx",
+    "name": "AdminOrderPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminProductFormPage.jsx",
+    "name": "AdminProductFormPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/admin/AdminProductPage.jsx",
+    "name": "AdminProductPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/auth/ForgotPasswordPage.jsx",
+    "name": "ForgotPasswordPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/auth/LoginPage.jsx",
+    "name": "LoginPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/auth/RegisterPage.jsx",
+    "name": "RegisterPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/auth/ResetPasswordPage.jsx",
+    "name": "ResetPasswordPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/public/ContactPage.jsx",
+    "name": "ContactPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/public/FaqPage.jsx",
+    "name": "FaqPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/public/HomePage.jsx",
+    "name": "HomePage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/public/NewsDetailPage.jsx",
+    "name": "NewsDetailPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/public/NewsListPage.jsx",
+    "name": "NewsListPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/public/ProductDetailPage.jsx",
+    "name": "ProductDetailPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/public/ProductListPage.jsx",
+    "name": "ProductListPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/user/CartPage.jsx",
+    "name": "CartPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/user/CheckoutPage.jsx",
+    "name": "CheckoutPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/user/MyOrdersPage.jsx",
+    "name": "MyOrdersPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/user/OrderDetailPage.jsx",
+    "name": "OrderDetailPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/user/OrderSuccessPage.jsx",
+    "name": "OrderSuccessPage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/pages/user/ProfilePage.jsx",
+    "name": "ProfilePage.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/routes/AppRoutes.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/routes/AppRoutes.jsx",
+    "name": "AppRoutes.jsx",
+    "ext": ".jsx",
+    "refCount": 1,
+    "referencedBy": [
+      "frontend/src/App.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/utils/categoryIcons.js",
+    "name": "categoryIcons.js",
+    "ext": ".js",
+    "refCount": 4,
+    "referencedBy": [
+      "frontend/src/components/home/CategoryIconGrid.jsx",
+      "frontend/src/components/home/CategorySidebar.jsx",
+      "frontend/src/pages/admin/AdminCategoryFormPage.jsx",
+      "frontend/src/pages/admin/AdminCategoryPage.jsx"
+    ]
+  },
+  {
+    "path": "frontend/src/utils/formatCurrency.js",
+    "name": "formatCurrency.js",
+    "ext": ".js",
+    "refCount": 17,
+    "referencedBy": [
+      "frontend/src/components/admin/coupon/AdminCouponTable.jsx",
+      "frontend/src/components/admin/order/AdminOrderTable.jsx",
+      "frontend/src/components/admin/product/AdminProductTable.jsx",
+      "frontend/src/components/cart/CartItem.jsx",
+      "frontend/src/components/cart/CartSummary.jsx",
+      "frontend/src/components/checkout/CheckoutSummary.jsx",
+      "frontend/src/components/checkout/CouponBox.jsx",
+      "frontend/src/components/home/ProductCard.jsx",
+      "frontend/src/components/layout/Header.jsx",
+      "frontend/src/components/order/OrderItemList.jsx",
+      "frontend/src/components/product/ProductInfoBox.jsx",
+      "frontend/src/components/product/ProductVariantSelector.jsx",
+      "frontend/src/pages/admin/AdminDashboardPage.jsx",
+      "frontend/src/pages/admin/AdminOrderDetailPage.jsx",
+      "frontend/src/pages/user/MyOrdersPage.jsx",
+      "frontend/src/pages/user/OrderDetailPage.jsx",
+      "frontend/src/pages/user/OrderSuccessPage.jsx"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/config/CloudinaryConfig.java",
+    "name": "CloudinaryConfig.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/config/DatabaseMigrationRunner.java",
+    "name": "DatabaseMigrationRunner.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/config/DatabaseStartupValidator.java",
+    "name": "DatabaseStartupValidator.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/config/JpaDependsOnConfig.java",
+    "name": "JpaDependsOnConfig.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/config/SecurityConfig.java",
+    "name": "SecurityConfig.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/exception/GlobalExceptionHandler.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/config/SwaggerConfig.java",
+    "name": "SwaggerConfig.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminBannerController.java",
+    "name": "AdminBannerController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminBrandController.java",
+    "name": "AdminBrandController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminCategoryController.java",
+    "name": "AdminCategoryController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminChatController.java",
+    "name": "AdminChatController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminContactMessageController.java",
+    "name": "AdminContactMessageController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminCouponController.java",
+    "name": "AdminCouponController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminCustomerController.java",
+    "name": "AdminCustomerController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java",
+    "name": "AdminDashboardController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java",
+    "name": "AdminEmployeeController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminFaqController.java",
+    "name": "AdminFaqController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminNewsPostController.java",
+    "name": "AdminNewsPostController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminOrderController.java",
+    "name": "AdminOrderController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminProductController.java",
+    "name": "AdminProductController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AdminUploadController.java",
+    "name": "AdminUploadController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/AuthController.java",
+    "name": "AuthController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/BannerController.java",
+    "name": "BannerController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/BrandController.java",
+    "name": "BrandController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/CartController.java",
+    "name": "CartController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/CategoryController.java",
+    "name": "CategoryController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/ChatController.java",
+    "name": "ChatController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/ContactMessageController.java",
+    "name": "ContactMessageController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/CouponController.java",
+    "name": "CouponController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/FaqController.java",
+    "name": "FaqController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/NewsPostController.java",
+    "name": "NewsPostController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/OrderController.java",
+    "name": "OrderController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/PasswordResetController.java",
+    "name": "PasswordResetController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/PaymentController.java",
+    "name": "PaymentController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/ProductController.java",
+    "name": "ProductController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/ProductReviewController.java",
+    "name": "ProductReviewController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/controller/UserProfileController.java",
+    "name": "UserProfileController.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/AddToCartRequest.java",
+    "name": "AddToCartRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/CartController.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/AdminProductRequest.java",
+    "name": "AdminProductRequest.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/BannerRequest.java",
+    "name": "BannerRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminBannerController.java",
+      "backend/src/main/java/com/example/techstore/service/BannerService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/BrandRequest.java",
+    "name": "BrandRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminBrandController.java",
+      "backend/src/main/java/com/example/techstore/service/AdminBrandService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/CategoryRequest.java",
+    "name": "CategoryRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminCategoryController.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCategoryService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/ChangePasswordRequest.java",
+    "name": "ChangePasswordRequest.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/UserProfileController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/ChatMessageRequest.java",
+    "name": "ChatMessageRequest.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminChatController.java",
+      "backend/src/main/java/com/example/techstore/controller/ChatController.java",
+      "backend/src/main/java/com/example/techstore/service/ChatService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/ContactMessageRequest.java",
+    "name": "ContactMessageRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/ContactMessageController.java",
+      "backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/CouponRequest.java",
+    "name": "CouponRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminCouponController.java",
+      "backend/src/main/java/com/example/techstore/service/CouponService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/CreateOrderRequest.java",
+    "name": "CreateOrderRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/OrderController.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/CustomerStatusRequest.java",
+    "name": "CustomerStatusRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminCustomerController.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCustomerService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/EmployeeRequest.java",
+    "name": "EmployeeRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java",
+      "backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/EmployeeStatusRequest.java",
+    "name": "EmployeeStatusRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java",
+      "backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/FaqRequest.java",
+    "name": "FaqRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminFaqController.java",
+      "backend/src/main/java/com/example/techstore/service/FaqService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/ForgotPasswordRequest.java",
+    "name": "ForgotPasswordRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/PasswordResetController.java",
+      "backend/src/main/java/com/example/techstore/service/PasswordResetService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/GoogleLoginRequest.java",
+    "name": "GoogleLoginRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AuthController.java",
+      "backend/src/main/java/com/example/techstore/service/AuthService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/LoginRequest.java",
+    "name": "LoginRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AuthController.java",
+      "backend/src/main/java/com/example/techstore/service/AuthService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/NewsPostRequest.java",
+    "name": "NewsPostRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminNewsPostController.java",
+      "backend/src/main/java/com/example/techstore/service/NewsPostService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/ProductRequest.java",
+    "name": "ProductRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminProductController.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/ProductReviewRequest.java",
+    "name": "ProductReviewRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/ProductReviewController.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/ProductSpecificationRequest.java",
+    "name": "ProductSpecificationRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/request/ProductVariantRequest.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/ProductVariantRequest.java",
+    "name": "ProductVariantRequest.java",
+    "ext": ".java",
+    "refCount": 4,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminProductController.java",
+      "backend/src/main/java/com/example/techstore/dto/request/AdminProductRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/request/ProductRequest.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/RegisterRequest.java",
+    "name": "RegisterRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AuthController.java",
+      "backend/src/main/java/com/example/techstore/service/AuthService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/ResetPasswordRequest.java",
+    "name": "ResetPasswordRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/PasswordResetController.java",
+      "backend/src/main/java/com/example/techstore/service/PasswordResetService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/SePayWebhookRequest.java",
+    "name": "SePayWebhookRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/PaymentController.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/UpdateCartItemRequest.java",
+    "name": "UpdateCartItemRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/CartController.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/UpdateContactMessageStatusRequest.java",
+    "name": "UpdateContactMessageStatusRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminContactMessageController.java",
+      "backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/UpdateOrderStatusRequest.java",
+    "name": "UpdateOrderStatusRequest.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminOrderController.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/request/UserProfileRequest.java",
+    "name": "UserProfileRequest.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/UserProfileController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/AdminCustomerResponse.java",
+    "name": "AdminCustomerResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminCustomerController.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCustomerService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/AdminEmployeeResponse.java",
+    "name": "AdminEmployeeResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java",
+      "backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/AuthResponse.java",
+    "name": "AuthResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AuthController.java",
+      "backend/src/main/java/com/example/techstore/service/AuthService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/BannerResponse.java",
+    "name": "BannerResponse.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminBannerController.java",
+      "backend/src/main/java/com/example/techstore/controller/BannerController.java",
+      "backend/src/main/java/com/example/techstore/service/BannerService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/BrandResponse.java",
+    "name": "BrandResponse.java",
+    "ext": ".java",
+    "refCount": 8,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminBrandController.java",
+      "backend/src/main/java/com/example/techstore/controller/BrandController.java",
+      "backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/ProductResponse.java",
+      "backend/src/main/java/com/example/techstore/service/AdminBrandService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/BrandService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/BrandStatisticResponse.java",
+    "name": "BrandStatisticResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/CartItemResponse.java",
+    "name": "CartItemResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/response/CartResponse.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/CartResponse.java",
+    "name": "CartResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/CartController.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/CategoryResponse.java",
+    "name": "CategoryResponse.java",
+    "ext": ".java",
+    "refCount": 8,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminCategoryController.java",
+      "backend/src/main/java/com/example/techstore/controller/CategoryController.java",
+      "backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/ProductResponse.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCategoryService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/CategoryService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/CategoryStatisticResponse.java",
+    "name": "CategoryStatisticResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/ChatMessageResponse.java",
+    "name": "ChatMessageResponse.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminChatController.java",
+      "backend/src/main/java/com/example/techstore/controller/ChatController.java",
+      "backend/src/main/java/com/example/techstore/service/ChatService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/ChatSessionResponse.java",
+    "name": "ChatSessionResponse.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminChatController.java",
+      "backend/src/main/java/com/example/techstore/controller/ChatController.java",
+      "backend/src/main/java/com/example/techstore/service/ChatService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/ContactMessageResponse.java",
+    "name": "ContactMessageResponse.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminContactMessageController.java",
+      "backend/src/main/java/com/example/techstore/controller/ContactMessageController.java",
+      "backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/CouponResponse.java",
+    "name": "CouponResponse.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminCouponController.java",
+      "backend/src/main/java/com/example/techstore/controller/CouponController.java",
+      "backend/src/main/java/com/example/techstore/service/CouponService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/DashboardSummaryResponse.java",
+    "name": "DashboardSummaryResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/ErrorResponse.java",
+    "name": "ErrorResponse.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/exception/GlobalExceptionHandler.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/FaqResponse.java",
+    "name": "FaqResponse.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminFaqController.java",
+      "backend/src/main/java/com/example/techstore/controller/FaqController.java",
+      "backend/src/main/java/com/example/techstore/service/FaqService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/ImageUploadResponse.java",
+    "name": "ImageUploadResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminUploadController.java",
+      "backend/src/main/java/com/example/techstore/service/CloudinaryUploadService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/InventoryWarningResponse.java",
+    "name": "InventoryWarningResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/LowStockProductResponse.java",
+    "name": "LowStockProductResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/NewsPostResponse.java",
+    "name": "NewsPostResponse.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminNewsPostController.java",
+      "backend/src/main/java/com/example/techstore/controller/NewsPostController.java",
+      "backend/src/main/java/com/example/techstore/service/NewsPostService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/OrderItemResponse.java",
+    "name": "OrderItemResponse.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/response/OrderResponse.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/OrderResponse.java",
+    "name": "OrderResponse.java",
+    "ext": ".java",
+    "refCount": 4,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminOrderController.java",
+      "backend/src/main/java/com/example/techstore/controller/OrderController.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/PaymentResponse.java",
+    "name": "PaymentResponse.java",
+    "ext": ".java",
+    "refCount": 5,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/PaymentController.java",
+      "backend/src/main/java/com/example/techstore/dto/response/OrderResponse.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/PaymentStatisticResponse.java",
+    "name": "PaymentStatisticResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java",
+    "name": "ProductDetailResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/ProductController.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/ProductResponse.java",
+    "name": "ProductResponse.java",
+    "ext": ".java",
+    "refCount": 4,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminProductController.java",
+      "backend/src/main/java/com/example/techstore/controller/ProductController.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/ProductReviewResponse.java",
+    "name": "ProductReviewResponse.java",
+    "ext": ".java",
+    "refCount": 4,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/ProductReviewController.java",
+      "backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/ProductSpecificationResponse.java",
+    "name": "ProductSpecificationResponse.java",
+    "ext": ".java",
+    "refCount": 4,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/ProductVariantResponse.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/ProductVariantResponse.java",
+    "name": "ProductVariantResponse.java",
+    "ext": ".java",
+    "refCount": 4,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/ProductResponse.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/RecentOrderResponse.java",
+    "name": "RecentOrderResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/RevenueStatisticResponse.java",
+    "name": "RevenueStatisticResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/SpecificationKeyResponse.java",
+    "name": "SpecificationKeyResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/CategoryController.java",
+      "backend/src/main/java/com/example/techstore/service/CategoryService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/TopProductResponse.java",
+    "name": "TopProductResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/UserProfileResponse.java",
+    "name": "UserProfileResponse.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/UserProfileController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/dto/response/UserResponse.java",
+    "name": "UserResponse.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AuthController.java",
+      "backend/src/main/java/com/example/techstore/service/AuthService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/Banner.java",
+    "name": "Banner.java",
+    "ext": ".java",
+    "refCount": 7,
+    "referencedBy": [
+      "frontend/src/components/admin/banner/AdminBannerFilter.jsx",
+      "frontend/src/components/admin/banner/AdminBannerTable.jsx",
+      "frontend/src/layouts/AdminLayout.jsx",
+      "frontend/src/pages/admin/AdminBannerFormPage.jsx",
+      "frontend/src/pages/public/HomePage.jsx",
+      "backend/src/main/java/com/example/techstore/repository/BannerRepository.java",
+      "backend/src/main/java/com/example/techstore/service/BannerService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/Brand.java",
+    "name": "Brand.java",
+    "ext": ".java",
+    "refCount": 6,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/entity/Product.java",
+      "backend/src/main/java/com/example/techstore/repository/BrandRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminBrandService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/BrandService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/Cart.java",
+    "name": "Cart.java",
+    "ext": ".java",
+    "refCount": 4,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/entity/CartItem.java",
+      "backend/src/main/java/com/example/techstore/repository/CartRepository.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/CartItem.java",
+    "name": "CartItem.java",
+    "ext": ".java",
+    "refCount": 5,
+    "referencedBy": [
+      "frontend/src/components/cart/CartItem.jsx",
+      "frontend/src/pages/user/CartPage.jsx",
+      "backend/src/main/java/com/example/techstore/repository/CartItemRepository.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/Category.java",
+    "name": "Category.java",
+    "ext": ".java",
+    "refCount": 7,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/entity/Product.java",
+      "backend/src/main/java/com/example/techstore/entity/SpecificationKey.java",
+      "backend/src/main/java/com/example/techstore/repository/CategoryRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCategoryService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/CategoryService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/ChatMessage.java",
+    "name": "ChatMessage.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/repository/ChatMessageRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AiChatService.java",
+      "backend/src/main/java/com/example/techstore/service/ChatService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/ChatSession.java",
+    "name": "ChatSession.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/entity/ChatMessage.java",
+      "backend/src/main/java/com/example/techstore/repository/ChatSessionRepository.java",
+      "backend/src/main/java/com/example/techstore/service/ChatService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/ContactMessage.java",
+    "name": "ContactMessage.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/repository/ContactMessageRepository.java",
+      "backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/Coupon.java",
+    "name": "Coupon.java",
+    "ext": ".java",
+    "refCount": 6,
+    "referencedBy": [
+      "frontend/src/layouts/AdminLayout.jsx",
+      "backend/src/main/java/com/example/techstore/entity/CouponUsage.java",
+      "backend/src/main/java/com/example/techstore/entity/Order.java",
+      "backend/src/main/java/com/example/techstore/repository/CouponRepository.java",
+      "backend/src/main/java/com/example/techstore/service/CouponService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/CouponUsage.java",
+    "name": "CouponUsage.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/repository/CouponUsageRepository.java",
+      "backend/src/main/java/com/example/techstore/service/CouponService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/Faq.java",
+    "name": "Faq.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/repository/FaqRepository.java",
+      "backend/src/main/java/com/example/techstore/service/FaqService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/NewsPost.java",
+    "name": "NewsPost.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/repository/NewsPostRepository.java",
+      "backend/src/main/java/com/example/techstore/service/NewsPostService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/Order.java",
+    "name": "Order.java",
+    "ext": ".java",
+    "refCount": 10,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/entity/CouponUsage.java",
+      "backend/src/main/java/com/example/techstore/entity/OrderItem.java",
+      "backend/src/main/java/com/example/techstore/entity/Payment.java",
+      "backend/src/main/java/com/example/techstore/repository/OrderRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/CouponService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderInventoryService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/OrderItem.java",
+    "name": "OrderItem.java",
+    "ext": ".java",
+    "refCount": 6,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/entity/ProductReview.java",
+      "backend/src/main/java/com/example/techstore/repository/OrderItemRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderInventoryService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/PasswordResetToken.java",
+    "name": "PasswordResetToken.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/repository/PasswordResetTokenRepository.java",
+      "backend/src/main/java/com/example/techstore/service/PasswordResetService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/Payment.java",
+    "name": "Payment.java",
+    "ext": ".java",
+    "refCount": 5,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/repository/PaymentRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/Product.java",
+    "name": "Product.java",
+    "ext": ".java",
+    "refCount": 12,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/entity/OrderItem.java",
+      "backend/src/main/java/com/example/techstore/entity/ProductImage.java",
+      "backend/src/main/java/com/example/techstore/entity/ProductReview.java",
+      "backend/src/main/java/com/example/techstore/entity/ProductVariant.java",
+      "backend/src/main/java/com/example/techstore/repository/BrandRepository.java",
+      "backend/src/main/java/com/example/techstore/repository/ProductRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/ProductImage.java",
+    "name": "ProductImage.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java",
+      "backend/src/main/java/com/example/techstore/repository/ProductImageRepository.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/ProductReview.java",
+    "name": "ProductReview.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/repository/ProductReviewRepository.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/ProductSpecification.java",
+    "name": "ProductSpecification.java",
+    "ext": ".java",
+    "refCount": 4,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/response/ProductSpecificationResponse.java",
+      "backend/src/main/java/com/example/techstore/repository/ProductSpecificationRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/ProductVariant.java",
+    "name": "ProductVariant.java",
+    "ext": ".java",
+    "refCount": 13,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/config/DatabaseMigrationRunner.java",
+      "backend/src/main/java/com/example/techstore/entity/CartItem.java",
+      "backend/src/main/java/com/example/techstore/entity/OrderItem.java",
+      "backend/src/main/java/com/example/techstore/entity/ProductImage.java",
+      "backend/src/main/java/com/example/techstore/entity/ProductSpecification.java",
+      "backend/src/main/java/com/example/techstore/repository/ProductRepository.java",
+      "backend/src/main/java/com/example/techstore/repository/ProductVariantRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderInventoryService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/SpecificationKey.java",
+    "name": "SpecificationKey.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/entity/ProductSpecification.java",
+      "backend/src/main/java/com/example/techstore/repository/SpecificationKeyRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/entity/User.java",
+    "name": "User.java",
+    "ext": ".java",
+    "refCount": 32,
+    "referencedBy": [
+      "frontend/src/components/chat/ChatWidget.jsx",
+      "frontend/src/components/layout/Header.jsx",
+      "frontend/src/components/user/AvatarUpload.jsx",
+      "frontend/src/pages/admin/AdminContactMessageDetailPage.jsx",
+      "frontend/src/pages/admin/AdminCustomerDetailPage.jsx",
+      "frontend/src/pages/admin/AdminOrderDetailPage.jsx",
+      "frontend/src/pages/user/OrderDetailPage.jsx",
+      "backend/src/main/java/com/example/techstore/controller/CouponController.java",
+      "backend/src/main/java/com/example/techstore/controller/ProductReviewController.java",
+      "backend/src/main/java/com/example/techstore/controller/UserProfileController.java",
+      "backend/src/main/java/com/example/techstore/dto/response/UserProfileResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/Cart.java",
+      "backend/src/main/java/com/example/techstore/entity/ChatMessage.java",
+      "backend/src/main/java/com/example/techstore/entity/ChatSession.java",
+      "backend/src/main/java/com/example/techstore/entity/CouponUsage.java",
+      "backend/src/main/java/com/example/techstore/entity/NewsPost.java",
+      "backend/src/main/java/com/example/techstore/entity/Order.java",
+      "backend/src/main/java/com/example/techstore/entity/PasswordResetToken.java",
+      "backend/src/main/java/com/example/techstore/entity/ProductReview.java",
+      "backend/src/main/java/com/example/techstore/repository/UserRepository.java",
+      "backend/src/main/java/com/example/techstore/security/CustomUserDetailsService.java",
+      "backend/src/main/java/com/example/techstore/security/JwtService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCustomerService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java",
+      "backend/src/main/java/com/example/techstore/service/AuthService.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/ChatService.java",
+      "backend/src/main/java/com/example/techstore/service/CouponService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PasswordResetService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/BannerPosition.java",
+    "name": "BannerPosition.java",
+    "ext": ".java",
+    "refCount": 6,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/BannerController.java",
+      "backend/src/main/java/com/example/techstore/dto/request/BannerRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/response/BannerResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/Banner.java",
+      "backend/src/main/java/com/example/techstore/repository/BannerRepository.java",
+      "backend/src/main/java/com/example/techstore/service/BannerService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/BannerStatus.java",
+    "name": "BannerStatus.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/ChatStatus.java",
+    "name": "ChatStatus.java",
+    "ext": ".java",
+    "refCount": 5,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminChatController.java",
+      "backend/src/main/java/com/example/techstore/dto/response/ChatSessionResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/ChatSession.java",
+      "backend/src/main/java/com/example/techstore/repository/ChatSessionRepository.java",
+      "backend/src/main/java/com/example/techstore/service/ChatService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/ContactStatus.java",
+    "name": "ContactStatus.java",
+    "ext": ".java",
+    "refCount": 6,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminContactMessageController.java",
+      "backend/src/main/java/com/example/techstore/dto/request/UpdateContactMessageStatusRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/response/ContactMessageResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/ContactMessage.java",
+      "backend/src/main/java/com/example/techstore/repository/ContactMessageRepository.java",
+      "backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/CouponStatus.java",
+    "name": "CouponStatus.java",
+    "ext": ".java",
+    "refCount": 5,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/request/CouponRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/response/CouponResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/Coupon.java",
+      "backend/src/main/java/com/example/techstore/repository/CouponRepository.java",
+      "backend/src/main/java/com/example/techstore/service/CouponService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/DiscountType.java",
+    "name": "DiscountType.java",
+    "ext": ".java",
+    "refCount": 4,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/request/CouponRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/response/CouponResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/Coupon.java",
+      "backend/src/main/java/com/example/techstore/service/CouponService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/Gender.java",
+    "name": "Gender.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/request/UserProfileRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/response/UserProfileResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/User.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/NewsStatus.java",
+    "name": "NewsStatus.java",
+    "ext": ".java",
+    "refCount": 5,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/request/NewsPostRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/response/NewsPostResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/NewsPost.java",
+      "backend/src/main/java/com/example/techstore/repository/NewsPostRepository.java",
+      "backend/src/main/java/com/example/techstore/service/NewsPostService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/OrderStatus.java",
+    "name": "OrderStatus.java",
+    "ext": ".java",
+    "refCount": 13,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminOrderController.java",
+      "backend/src/main/java/com/example/techstore/dto/request/UpdateOrderStatusRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/response/OrderResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/Order.java",
+      "backend/src/main/java/com/example/techstore/repository/OrderItemRepository.java",
+      "backend/src/main/java/com/example/techstore/repository/OrderRepository.java",
+      "backend/src/main/java/com/example/techstore/repository/PaymentRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/PaymentMethod.java",
+    "name": "PaymentMethod.java",
+    "ext": ".java",
+    "refCount": 8,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/request/CreateOrderRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/response/PaymentResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/Payment.java",
+      "backend/src/main/java/com/example/techstore/repository/PaymentRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/PaymentStatus.java",
+    "name": "PaymentStatus.java",
+    "ext": ".java",
+    "refCount": 7,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/response/PaymentResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/Payment.java",
+      "backend/src/main/java/com/example/techstore/repository/PaymentRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/ProductStatus.java",
+    "name": "ProductStatus.java",
+    "ext": ".java",
+    "refCount": 38,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminBrandController.java",
+      "backend/src/main/java/com/example/techstore/controller/AdminCategoryController.java",
+      "backend/src/main/java/com/example/techstore/controller/AdminProductController.java",
+      "backend/src/main/java/com/example/techstore/dto/request/AdminProductRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/request/BannerRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/request/BrandRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/request/CategoryRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/request/FaqRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/request/ProductRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/request/ProductVariantRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/response/BannerResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/BrandResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/CartItemResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/CategoryResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/FaqResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/ProductResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/Banner.java",
+      "backend/src/main/java/com/example/techstore/entity/Brand.java",
+      "backend/src/main/java/com/example/techstore/entity/Category.java",
+      "backend/src/main/java/com/example/techstore/entity/Faq.java",
+      "backend/src/main/java/com/example/techstore/entity/Product.java",
+      "backend/src/main/java/com/example/techstore/entity/ProductVariant.java",
+      "backend/src/main/java/com/example/techstore/repository/BannerRepository.java",
+      "backend/src/main/java/com/example/techstore/repository/BrandRepository.java",
+      "backend/src/main/java/com/example/techstore/repository/CategoryRepository.java",
+      "backend/src/main/java/com/example/techstore/repository/FaqRepository.java",
+      "backend/src/main/java/com/example/techstore/repository/ProductRepository.java",
+      "backend/src/main/java/com/example/techstore/repository/ProductVariantRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminBrandService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCategoryService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/BannerService.java",
+      "backend/src/main/java/com/example/techstore/service/BrandService.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/CategoryService.java",
+      "backend/src/main/java/com/example/techstore/service/FaqService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/ReviewStatus.java",
+    "name": "ReviewStatus.java",
+    "ext": ".java",
+    "refCount": 4,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/dto/response/ProductReviewResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/ProductReview.java",
+      "backend/src/main/java/com/example/techstore/repository/ProductReviewRepository.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/UserRole.java",
+    "name": "UserRole.java",
+    "ext": ".java",
+    "refCount": 13,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java",
+      "backend/src/main/java/com/example/techstore/dto/request/EmployeeRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/response/AuthResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/UserProfileResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/UserResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/User.java",
+      "backend/src/main/java/com/example/techstore/repository/UserRepository.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCustomerService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java",
+      "backend/src/main/java/com/example/techstore/service/AuthService.java",
+      "backend/src/main/java/com/example/techstore/service/ChatService.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/enums/UserStatus.java",
+    "name": "UserStatus.java",
+    "ext": ".java",
+    "refCount": 15,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminCustomerController.java",
+      "backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java",
+      "backend/src/main/java/com/example/techstore/dto/request/CustomerStatusRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/request/EmployeeRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/request/EmployeeStatusRequest.java",
+      "backend/src/main/java/com/example/techstore/dto/response/AdminCustomerResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/AdminEmployeeResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/UserProfileResponse.java",
+      "backend/src/main/java/com/example/techstore/dto/response/UserResponse.java",
+      "backend/src/main/java/com/example/techstore/entity/User.java",
+      "backend/src/main/java/com/example/techstore/repository/UserRepository.java",
+      "backend/src/main/java/com/example/techstore/security/CustomUserDetailsService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCustomerService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java",
+      "backend/src/main/java/com/example/techstore/service/AuthService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/exception/BadRequestException.java",
+    "name": "BadRequestException.java",
+    "ext": ".java",
+    "refCount": 18,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/UserProfileController.java",
+      "backend/src/main/java/com/example/techstore/exception/GlobalExceptionHandler.java",
+      "backend/src/main/java/com/example/techstore/service/AdminBrandService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCategoryService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/AuthService.java",
+      "backend/src/main/java/com/example/techstore/service/BannerService.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/ChatService.java",
+      "backend/src/main/java/com/example/techstore/service/CloudinaryService.java",
+      "backend/src/main/java/com/example/techstore/service/CouponService.java",
+      "backend/src/main/java/com/example/techstore/service/NewsPostService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PasswordResetService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/exception/GlobalExceptionHandler.java",
+    "name": "GlobalExceptionHandler.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/exception/ResourceNotFoundException.java",
+    "name": "ResourceNotFoundException.java",
+    "ext": ".java",
+    "refCount": 18,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/exception/GlobalExceptionHandler.java",
+      "backend/src/main/java/com/example/techstore/service/AdminBrandService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCategoryService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCustomerService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/BannerService.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/ChatService.java",
+      "backend/src/main/java/com/example/techstore/service/ContactMessageService.java",
+      "backend/src/main/java/com/example/techstore/service/CouponService.java",
+      "backend/src/main/java/com/example/techstore/service/FaqService.java",
+      "backend/src/main/java/com/example/techstore/service/NewsPostService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/BannerRepository.java",
+    "name": "BannerRepository.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/BannerService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/BrandRepository.java",
+    "name": "BrandRepository.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/AdminBrandService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/BrandService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/CartItemRepository.java",
+    "name": "CartItemRepository.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/CartRepository.java",
+    "name": "CartRepository.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/CategoryRepository.java",
+    "name": "CategoryRepository.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/AdminCategoryService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/CategoryService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/ChatMessageRepository.java",
+    "name": "ChatMessageRepository.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/ChatService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/ChatSessionRepository.java",
+    "name": "ChatSessionRepository.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/ChatService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/ContactMessageRepository.java",
+    "name": "ContactMessageRepository.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/CouponRepository.java",
+    "name": "CouponRepository.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/CouponService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/CouponUsageRepository.java",
+    "name": "CouponUsageRepository.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/CouponService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/FaqRepository.java",
+    "name": "FaqRepository.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/FaqService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/NewsPostRepository.java",
+    "name": "NewsPostRepository.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/NewsPostService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/OrderItemRepository.java",
+    "name": "OrderItemRepository.java",
+    "ext": ".java",
+    "refCount": 5,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderInventoryService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/OrderRepository.java",
+    "name": "OrderRepository.java",
+    "ext": ".java",
+    "refCount": 5,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/PasswordResetTokenRepository.java",
+    "name": "PasswordResetTokenRepository.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/PasswordResetService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/PaymentRepository.java",
+    "name": "PaymentRepository.java",
+    "ext": ".java",
+    "refCount": 5,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/ProductImageRepository.java",
+    "name": "ProductImageRepository.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/ProductRepository.java",
+    "name": "ProductRepository.java",
+    "ext": ".java",
+    "refCount": 5,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/AdminCategoryService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/ProductReviewRepository.java",
+    "name": "ProductReviewRepository.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/ProductSpecificationRepository.java",
+    "name": "ProductSpecificationRepository.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/ProductVariantRepository.java",
+    "name": "ProductVariantRepository.java",
+    "ext": ".java",
+    "refCount": 6,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderInventoryService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/SpecificationKeyRepository.java",
+    "name": "SpecificationKeyRepository.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "backend/src/main/java/com/example/techstore/service/CategoryService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/repository/UserRepository.java",
+    "name": "UserRepository.java",
+    "ext": ".java",
+    "refCount": 12,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/UserProfileController.java",
+      "backend/src/main/java/com/example/techstore/security/CustomUserDetailsService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminCustomerService.java",
+      "backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java",
+      "backend/src/main/java/com/example/techstore/service/AuthService.java",
+      "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "backend/src/main/java/com/example/techstore/service/ChatService.java",
+      "backend/src/main/java/com/example/techstore/service/DashboardService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PasswordResetService.java",
+      "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/security/CustomUserDetailsService.java",
+    "name": "CustomUserDetailsService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/security/JwtAuthenticationFilter.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/security/JwtAuthenticationFilter.java",
+    "name": "JwtAuthenticationFilter.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/config/SecurityConfig.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/security/JwtService.java",
+    "name": "JwtService.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/security/JwtAuthenticationFilter.java",
+      "backend/src/main/java/com/example/techstore/service/AuthService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/AdminBrandService.java",
+    "name": "AdminBrandService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminBrandController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/AdminCategoryService.java",
+    "name": "AdminCategoryService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminCategoryController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/AdminCustomerService.java",
+    "name": "AdminCustomerService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminCustomerController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java",
+    "name": "AdminEmployeeService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+    "name": "AdminOrderService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminOrderController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+    "name": "AdminProductService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminProductController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/AiChatService.java",
+    "name": "AiChatService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/ChatService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/AuthService.java",
+    "name": "AuthService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AuthController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/BannerService.java",
+    "name": "BannerService.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminBannerController.java",
+      "backend/src/main/java/com/example/techstore/controller/BannerController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/BrandService.java",
+    "name": "BrandService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/BrandController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/CartService.java",
+    "name": "CartService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/CartController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/CategoryService.java",
+    "name": "CategoryService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/CategoryController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/ChatService.java",
+    "name": "ChatService.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminChatController.java",
+      "backend/src/main/java/com/example/techstore/controller/ChatController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/CloudinaryService.java",
+    "name": "CloudinaryService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/UserProfileController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/CloudinaryUploadService.java",
+    "name": "CloudinaryUploadService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminUploadController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/ContactMessageService.java",
+    "name": "ContactMessageService.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminContactMessageController.java",
+      "backend/src/main/java/com/example/techstore/controller/ContactMessageController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/CouponService.java",
+    "name": "CouponService.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminCouponController.java",
+      "backend/src/main/java/com/example/techstore/controller/CouponController.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/DashboardService.java",
+    "name": "DashboardService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/FaqService.java",
+    "name": "FaqService.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminFaqController.java",
+      "backend/src/main/java/com/example/techstore/controller/FaqController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/NewsPostService.java",
+    "name": "NewsPostService.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/AdminNewsPostController.java",
+      "backend/src/main/java/com/example/techstore/controller/NewsPostController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/OrderInventoryService.java",
+    "name": "OrderInventoryService.java",
+    "ext": ".java",
+    "refCount": 3,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/OrderService.java",
+    "name": "OrderService.java",
+    "ext": ".java",
+    "refCount": 2,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/OrderController.java",
+      "backend/src/main/java/com/example/techstore/service/CouponService.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/PasswordResetService.java",
+    "name": "PasswordResetService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/PasswordResetController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+    "name": "PaymentService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/PaymentController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java",
+    "name": "PendingPaymentCleanupService.java",
+    "ext": ".java",
+    "refCount": 0,
+    "referencedBy": []
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/ProductReviewService.java",
+    "name": "ProductReviewService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/ProductReviewController.java"
+    ]
+  },
+  {
+    "path": "backend/src/main/java/com/example/techstore/service/ProductService.java",
+    "name": "ProductService.java",
+    "ext": ".java",
+    "refCount": 1,
+    "referencedBy": [
+      "backend/src/main/java/com/example/techstore/controller/ProductController.java"
+    ]
+  }
+]

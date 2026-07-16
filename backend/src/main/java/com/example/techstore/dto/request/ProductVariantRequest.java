@@ -1,6 +1,7 @@
 package com.example.techstore.dto.request;
 
 import com.example.techstore.enums.ProductStatus;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -9,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,6 +36,11 @@ public class ProductVariantRequest {
     private Integer stock;
 
     private String thumbnailUrl;
+
+    private String description;
+
+    @Valid
+    private List<ProductSpecificationRequest> specifications;
 
     private ProductStatus status;
 }

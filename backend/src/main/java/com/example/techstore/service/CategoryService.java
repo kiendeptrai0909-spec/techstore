@@ -1,9 +1,11 @@
 package com.example.techstore.service;
 
 import com.example.techstore.dto.response.CategoryResponse;
+import com.example.techstore.dto.response.SpecificationKeyResponse;
 import com.example.techstore.entity.Category;
 import com.example.techstore.enums.ProductStatus;
 import com.example.techstore.repository.CategoryRepository;
+import com.example.techstore.repository.SpecificationKeyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,19 @@ import java.util.List;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final SpecificationKeyRepository specificationKeyRepository;
+
+    public List<SpecificationKeyResponse> getSpecificationKeys(Long categoryId) {
+        return specificationKeyRepository.findByCategoryIdAndDeletedAtIsNullOrderBySortOrderAsc(categoryId)
+                .stream()
+                .map(key -> SpecificationKeyResponse.builder()
+                        .id(key.getId())
+                        .name(key.getName())
+                        .unit(key.getUnit())
+                        .sortOrder(key.getSortOrder())
+                        .build())
+                .toList();
+    }
 
     public List<CategoryResponse> getActiveCategories() {
         return categoryRepository.findByStatusOrderBySortOrderAsc(ProductStatus.ACTIVE)

@@ -1,0 +1,1350 @@
+{
+  "safeToDelete": [
+    {
+      "path": "frontend/src/api/paymentApi.js",
+      "reason": "Javascript/React file (API/Component/Page) không được import hoặc reference bởi bất kỳ file nào khác."
+    },
+    {
+      "path": "frontend/src/assets/hero.png",
+      "reason": "Asset/CSS file không được reference hoặc sử dụng."
+    },
+    {
+      "path": "frontend/src/assets/react.svg",
+      "reason": "Asset/CSS file không được reference hoặc sử dụng."
+    },
+    {
+      "path": "frontend/src/assets/vite.svg",
+      "reason": "Asset/CSS file không được reference hoặc sử dụng."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/config/SwaggerConfig.java",
+      "reason": "Java class (Entity/DTO/Repository/Service) không được import hoặc reference bởi bất kỳ file nào khác."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/AdminProductRequest.java",
+      "reason": "Java class (Entity/DTO/Repository/Service) không được import hoặc reference bởi bất kỳ file nào khác."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/BannerStatus.java",
+      "reason": "Java class (Entity/DTO/Repository/Service) không được import hoặc reference bởi bất kỳ file nào khác."
+    }
+  ],
+  "keep": [
+    {
+      "path": "frontend/src/api/adminBannerApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminBannerFormPage.jsx, frontend/src/pages/admin/AdminBannerPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/adminCategoryApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminCategoryFormPage.jsx, frontend/src/pages/admin/AdminCategoryPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/adminChatApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminChatPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/adminContactMessageApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminContactMessageDetailPage.jsx, frontend/src/pages/admin/AdminContactMessagePage.jsx"
+    },
+    {
+      "path": "frontend/src/api/adminCouponApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminCouponFormPage.jsx, frontend/src/pages/admin/AdminCouponPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/adminCustomerApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminCustomerDetailPage.jsx, frontend/src/pages/admin/AdminCustomerPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/adminDashboardApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminDashboardPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/adminEmployeeApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminEmployeeFormPage.jsx, frontend/src/pages/admin/AdminEmployeePage.jsx"
+    },
+    {
+      "path": "frontend/src/api/adminFaqApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminFaqFormPage.jsx, frontend/src/pages/admin/AdminFaqPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/adminNewsApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminNewsFormPage.jsx, frontend/src/pages/admin/AdminNewsPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/adminOrderApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminOrderDetailPage.jsx, frontend/src/pages/admin/AdminOrderPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/adminProductApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminProductFormPage.jsx, frontend/src/pages/admin/AdminProductPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/authApi.js",
+      "reason": "Được reference bởi: frontend/src/contexts/AuthContext.jsx"
+    },
+    {
+      "path": "frontend/src/api/axiosClient.js",
+      "reason": "Được reference bởi: frontend/src/api/adminBannerApi.js, frontend/src/api/adminCategoryApi.js, frontend/src/api/adminChatApi.js, frontend/src/api/adminContactMessageApi.js, frontend/src/api/adminCouponApi.js, frontend/src/api/adminCustomerApi.js, frontend/src/api/adminDashboardApi.js, frontend/src/api/adminEmployeeApi.js, frontend/src/api/adminFaqApi.js, frontend/src/api/adminNewsApi.js, frontend/src/api/adminOrderApi.js, frontend/src/api/adminProductApi.js, frontend/src/api/authApi.js, frontend/src/api/bannerApi.js, frontend/src/api/brandApi.js, frontend/src/api/cartApi.js, frontend/src/api/categoryApi.js, frontend/src/api/chatApi.js, frontend/src/api/contactMessageApi.js, frontend/src/api/couponApi.js, frontend/src/api/faqApi.js, frontend/src/api/newsApi.js, frontend/src/api/orderApi.js, frontend/src/api/passwordResetApi.js, frontend/src/api/paymentApi.js, frontend/src/api/productApi.js, frontend/src/api/reviewApi.js, frontend/src/api/uploadApi.js, frontend/src/api/userApi.js"
+    },
+    {
+      "path": "frontend/src/api/bannerApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/public/HomePage.jsx"
+    },
+    {
+      "path": "frontend/src/api/brandApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminBrandFormPage.jsx, frontend/src/pages/admin/AdminBrandPage.jsx, frontend/src/pages/admin/AdminProductFormPage.jsx, frontend/src/pages/admin/AdminProductPage.jsx, frontend/src/pages/public/ProductListPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/cartApi.js",
+      "reason": "Được reference bởi: frontend/src/contexts/CartContext.jsx, frontend/src/pages/user/CartPage.jsx, frontend/src/pages/user/CheckoutPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/categoryApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminProductFormPage.jsx, frontend/src/pages/admin/AdminProductPage.jsx, frontend/src/pages/public/HomePage.jsx, frontend/src/pages/public/ProductListPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/chatApi.js",
+      "reason": "Được reference bởi: frontend/src/components/chat/ChatWidget.jsx"
+    },
+    {
+      "path": "frontend/src/api/contactMessageApi.js",
+      "reason": "Được reference bởi: frontend/src/components/contact/ContactForm.jsx"
+    },
+    {
+      "path": "frontend/src/api/couponApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/user/CheckoutPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/faqApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/public/FaqPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/newsApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/public/HomePage.jsx, frontend/src/pages/public/NewsDetailPage.jsx, frontend/src/pages/public/NewsListPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/orderApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/user/CheckoutPage.jsx, frontend/src/pages/user/MyOrdersPage.jsx, frontend/src/pages/user/OrderDetailPage.jsx, frontend/src/pages/user/OrderSuccessPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/passwordResetApi.js",
+      "reason": "Được reference bởi: frontend/src/pages/auth/ForgotPasswordPage.jsx, frontend/src/pages/auth/ResetPasswordPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/productApi.js",
+      "reason": "Được reference bởi: frontend/src/components/layout/Header.jsx, frontend/src/pages/public/HomePage.jsx, frontend/src/pages/public/ProductDetailPage.jsx, frontend/src/pages/public/ProductListPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/reviewApi.js",
+      "reason": "Được reference bởi: frontend/src/components/review/ReviewModal.jsx, frontend/src/pages/public/ProductDetailPage.jsx, frontend/src/pages/user/OrderDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/uploadApi.js",
+      "reason": "Được reference bởi: frontend/src/components/admin/product/ProductVariantForm.jsx, frontend/src/pages/admin/AdminBannerFormPage.jsx, frontend/src/pages/admin/AdminNewsFormPage.jsx, frontend/src/pages/admin/AdminProductFormPage.jsx"
+    },
+    {
+      "path": "frontend/src/api/userApi.js",
+      "reason": "Được reference bởi: frontend/src/components/user/AvatarUpload.jsx, frontend/src/components/user/ChangePasswordForm.jsx, frontend/src/components/user/ProfileForm.jsx, frontend/src/pages/user/ProfilePage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/banner/AdminBannerFilter.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminBannerPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/banner/AdminBannerTable.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminBannerPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/contact/AdminContactMessageFilter.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminContactMessagePage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/contact/AdminContactMessageTable.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminContactMessageDetailPage.jsx, frontend/src/pages/admin/AdminContactMessagePage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/contact/UpdateContactMessageStatusBox.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminContactMessageDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/coupon/AdminCouponFilter.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminCouponPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/coupon/AdminCouponTable.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminCouponPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/faq/AdminFaqFilter.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminFaqPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/faq/AdminFaqTable.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminFaqPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/faq/FaqAccordion.jsx",
+      "reason": "Được reference bởi: frontend/src/components/faq/FaqAccordion.jsx, frontend/src/pages/public/FaqPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/news/AdminNewsFilter.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminNewsPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/news/AdminNewsTable.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminNewsPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/order/AdminOrderFilter.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminOrderPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/order/AdminOrderTable.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminOrderPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/order/UpdateOrderStatusBox.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminOrderDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/product/AdminProductFilter.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminProductPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/product/AdminProductTable.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminProductPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/admin/product/ProductVariantForm.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminProductFormPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/auth/AuthCard.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/auth/LoginPage.jsx, frontend/src/pages/auth/RegisterPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/auth/FormInput.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/auth/LoginPage.jsx, frontend/src/pages/auth/RegisterPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/cart/CartItem.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/user/CartPage.jsx, backend/src/main/java/com/example/techstore/entity/CartItem.java, backend/src/main/java/com/example/techstore/repository/CartItemRepository.java, backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/OrderService.java"
+    },
+    {
+      "path": "frontend/src/components/cart/CartSummary.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/user/CartPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/chat/ChatWidget.jsx",
+      "reason": "Được reference bởi: frontend/src/main.jsx"
+    },
+    {
+      "path": "frontend/src/components/checkout/CheckoutForm.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/user/CheckoutPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/checkout/CheckoutSummary.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/user/CheckoutPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/checkout/CouponBox.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/user/CheckoutPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/checkout/PaymentMethodBox.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/user/CheckoutPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/common/AdminProtectedRoute.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/components/common/ProtectedRoute.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/components/common/ScrollToTop.jsx",
+      "reason": "Được reference bởi: frontend/src/main.jsx"
+    },
+    {
+      "path": "frontend/src/components/contact/ContactForm.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/ContactPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/contact/ContactInfoBox.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/ContactPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/faq/FaqAccordion.jsx",
+      "reason": "Được reference bởi: frontend/src/components/admin/faq/FaqAccordion.jsx, frontend/src/pages/public/FaqPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/home/CategoryIconGrid.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/HomePage.jsx"
+    },
+    {
+      "path": "frontend/src/components/home/CategorySidebar.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/HomePage.jsx"
+    },
+    {
+      "path": "frontend/src/components/home/NewsSection.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/HomePage.jsx"
+    },
+    {
+      "path": "frontend/src/components/home/ProductCard.jsx",
+      "reason": "Được reference bởi: frontend/src/components/home/ProductSection.jsx, frontend/src/components/product/ProductGrid.jsx"
+    },
+    {
+      "path": "frontend/src/components/home/ProductSection.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/HomePage.jsx"
+    },
+    {
+      "path": "frontend/src/components/home/SideBanner.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/HomePage.jsx"
+    },
+    {
+      "path": "frontend/src/components/layout/Footer.jsx",
+      "reason": "Được reference bởi: frontend/src/layouts/MainLayout.jsx, frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/components/layout/Header.jsx",
+      "reason": "Được reference bởi: frontend/src/layouts/MainLayout.jsx, frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/components/news/NewsCard.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/NewsListPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/news/NewsSidebar.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/NewsDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/order/OrderItemList.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/admin/AdminOrderDetailPage.jsx, frontend/src/pages/user/OrderDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/order/OrderStatusBadge.jsx",
+      "reason": "Được reference bởi: frontend/src/components/admin/order/AdminOrderTable.jsx, frontend/src/pages/admin/AdminDashboardPage.jsx, frontend/src/pages/admin/AdminOrderDetailPage.jsx, frontend/src/pages/user/MyOrdersPage.jsx, frontend/src/pages/user/OrderDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/order/PaymentStatusBadge.jsx",
+      "reason": "Được reference bởi: frontend/src/components/admin/order/AdminOrderTable.jsx, frontend/src/pages/admin/AdminOrderDetailPage.jsx, frontend/src/pages/user/MyOrdersPage.jsx, frontend/src/pages/user/OrderDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/product/ProductDescriptionTabs.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/ProductDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/product/ProductFilterSidebar.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/ProductListPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/product/ProductGrid.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/ProductListPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/product/ProductImageGallery.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/ProductDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/product/ProductInfoBox.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/ProductDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/product/ProductPagination.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/ProductListPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/product/ProductReviewList.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/public/ProductDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/product/ProductVariantSelector.jsx",
+      "reason": "Được reference bởi: frontend/src/components/product/ProductInfoBox.jsx"
+    },
+    {
+      "path": "frontend/src/components/review/ReviewModal.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/user/OrderDetailPage.jsx"
+    },
+    {
+      "path": "frontend/src/components/review/StarRatingInput.jsx",
+      "reason": "Được reference bởi: frontend/src/components/review/ReviewModal.jsx"
+    },
+    {
+      "path": "frontend/src/components/user/AvatarUpload.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/user/ProfilePage.jsx"
+    },
+    {
+      "path": "frontend/src/components/user/ChangePasswordForm.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/user/ProfilePage.jsx"
+    },
+    {
+      "path": "frontend/src/components/user/ProfileForm.jsx",
+      "reason": "Được reference bởi: frontend/src/pages/user/ProfilePage.jsx"
+    },
+    {
+      "path": "frontend/src/config/bankTransferConfig.js",
+      "reason": "Được reference bởi: frontend/src/pages/user/OrderDetailPage.jsx, frontend/src/pages/user/OrderSuccessPage.jsx"
+    },
+    {
+      "path": "frontend/src/contexts/AuthContext.jsx",
+      "reason": "Được reference bởi: frontend/src/components/chat/ChatWidget.jsx, frontend/src/components/common/AdminProtectedRoute.jsx, frontend/src/components/common/ProtectedRoute.jsx, frontend/src/components/layout/Header.jsx, frontend/src/contexts/CartContext.jsx, frontend/src/layouts/AdminLayout.jsx, frontend/src/main.jsx, frontend/src/pages/admin/AdminChatPage.jsx, frontend/src/pages/admin/AdminDashboardPage.jsx, frontend/src/pages/admin/AdminFaqPage.jsx, frontend/src/pages/admin/AdminProductPage.jsx, frontend/src/pages/auth/LoginPage.jsx, frontend/src/pages/auth/RegisterPage.jsx, frontend/src/pages/user/CheckoutPage.jsx"
+    },
+    {
+      "path": "frontend/src/contexts/CartContext.jsx",
+      "reason": "Được reference bởi: frontend/src/components/layout/Header.jsx, frontend/src/main.jsx, frontend/src/pages/public/ProductDetailPage.jsx, frontend/src/pages/user/CartPage.jsx, frontend/src/pages/user/CheckoutPage.jsx"
+    },
+    {
+      "path": "frontend/src/layouts/AdminLayout.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/layouts/MainLayout.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminBannerFormPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminBannerPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminBrandFormPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminBrandPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminCategoryFormPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminCategoryPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminChatPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminContactMessageDetailPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminContactMessagePage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminCouponFormPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminCouponPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminCustomerDetailPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminCustomerPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminDashboardPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminEmployeeFormPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminEmployeePage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminFaqFormPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminFaqPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminNewsFormPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminNewsPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminOrderDetailPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminOrderPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminProductFormPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/admin/AdminProductPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/auth/ForgotPasswordPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/auth/LoginPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/auth/RegisterPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/auth/ResetPasswordPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/public/ContactPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/public/FaqPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/public/HomePage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/public/NewsDetailPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/public/NewsListPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/public/ProductDetailPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/public/ProductListPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/user/CartPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/user/CheckoutPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/user/MyOrdersPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/user/OrderDetailPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/user/OrderSuccessPage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/pages/user/ProfilePage.jsx",
+      "reason": "Được reference bởi: frontend/src/routes/AppRoutes.jsx"
+    },
+    {
+      "path": "frontend/src/routes/AppRoutes.jsx",
+      "reason": "Được reference bởi: frontend/src/App.jsx"
+    },
+    {
+      "path": "frontend/src/utils/categoryIcons.js",
+      "reason": "Được reference bởi: frontend/src/components/home/CategoryIconGrid.jsx, frontend/src/components/home/CategorySidebar.jsx, frontend/src/pages/admin/AdminCategoryFormPage.jsx, frontend/src/pages/admin/AdminCategoryPage.jsx"
+    },
+    {
+      "path": "frontend/src/utils/formatCurrency.js",
+      "reason": "Được reference bởi: frontend/src/components/admin/coupon/AdminCouponTable.jsx, frontend/src/components/admin/order/AdminOrderTable.jsx, frontend/src/components/admin/product/AdminProductTable.jsx, frontend/src/components/cart/CartItem.jsx, frontend/src/components/cart/CartSummary.jsx, frontend/src/components/checkout/CheckoutSummary.jsx, frontend/src/components/checkout/CouponBox.jsx, frontend/src/components/home/ProductCard.jsx, frontend/src/components/layout/Header.jsx, frontend/src/components/order/OrderItemList.jsx, frontend/src/components/product/ProductInfoBox.jsx, frontend/src/components/product/ProductVariantSelector.jsx, frontend/src/pages/admin/AdminDashboardPage.jsx, frontend/src/pages/admin/AdminOrderDetailPage.jsx, frontend/src/pages/user/MyOrdersPage.jsx, frontend/src/pages/user/OrderDetailPage.jsx, frontend/src/pages/user/OrderSuccessPage.jsx"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/config/CloudinaryConfig.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/config/DatabaseMigrationRunner.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/config/DatabaseStartupValidator.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/config/JpaDependsOnConfig.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/config/SecurityConfig.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/exception/GlobalExceptionHandler.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminBannerController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminBrandController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminCategoryController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminChatController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminContactMessageController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminCouponController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminCustomerController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminFaqController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminNewsPostController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminOrderController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminProductController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AdminUploadController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/AuthController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/BannerController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/BrandController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/CartController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/CategoryController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/ChatController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/ContactMessageController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/CouponController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/FaqController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/NewsPostController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/OrderController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/PasswordResetController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/PaymentController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/ProductController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/ProductReviewController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/controller/UserProfileController.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/AddToCartRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/CartController.java, backend/src/main/java/com/example/techstore/service/CartService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/BannerRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminBannerController.java, backend/src/main/java/com/example/techstore/service/BannerService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/BrandRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminBrandController.java, backend/src/main/java/com/example/techstore/service/AdminBrandService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/CategoryRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminCategoryController.java, backend/src/main/java/com/example/techstore/service/AdminCategoryService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/ChangePasswordRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/UserProfileController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/ChatMessageRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminChatController.java, backend/src/main/java/com/example/techstore/controller/ChatController.java, backend/src/main/java/com/example/techstore/service/ChatService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/ContactMessageRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/ContactMessageController.java, backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/CouponRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminCouponController.java, backend/src/main/java/com/example/techstore/service/CouponService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/CreateOrderRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/OrderController.java, backend/src/main/java/com/example/techstore/service/OrderService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/CustomerStatusRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminCustomerController.java, backend/src/main/java/com/example/techstore/service/AdminCustomerService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/EmployeeRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java, backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/EmployeeStatusRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java, backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/FaqRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminFaqController.java, backend/src/main/java/com/example/techstore/service/FaqService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/ForgotPasswordRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/PasswordResetController.java, backend/src/main/java/com/example/techstore/service/PasswordResetService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/GoogleLoginRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AuthController.java, backend/src/main/java/com/example/techstore/service/AuthService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/LoginRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AuthController.java, backend/src/main/java/com/example/techstore/service/AuthService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/NewsPostRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminNewsPostController.java, backend/src/main/java/com/example/techstore/service/NewsPostService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/ProductRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminProductController.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/ProductReviewRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/ProductReviewController.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/ProductSpecificationRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/request/ProductVariantRequest.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/ProductVariantRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminProductController.java, backend/src/main/java/com/example/techstore/dto/request/AdminProductRequest.java, backend/src/main/java/com/example/techstore/dto/request/ProductRequest.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/RegisterRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AuthController.java, backend/src/main/java/com/example/techstore/service/AuthService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/ResetPasswordRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/PasswordResetController.java, backend/src/main/java/com/example/techstore/service/PasswordResetService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/SePayWebhookRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/PaymentController.java, backend/src/main/java/com/example/techstore/service/PaymentService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/UpdateCartItemRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/CartController.java, backend/src/main/java/com/example/techstore/service/CartService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/UpdateContactMessageStatusRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminContactMessageController.java, backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/UpdateOrderStatusRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminOrderController.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/request/UserProfileRequest.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/UserProfileController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/AdminCustomerResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminCustomerController.java, backend/src/main/java/com/example/techstore/service/AdminCustomerService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/AdminEmployeeResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java, backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/AuthResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AuthController.java, backend/src/main/java/com/example/techstore/service/AuthService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/BannerResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminBannerController.java, backend/src/main/java/com/example/techstore/controller/BannerController.java, backend/src/main/java/com/example/techstore/service/BannerService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/BrandResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminBrandController.java, backend/src/main/java/com/example/techstore/controller/BrandController.java, backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java, backend/src/main/java/com/example/techstore/dto/response/ProductResponse.java, backend/src/main/java/com/example/techstore/service/AdminBrandService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/BrandService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/BrandStatisticResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java, backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/CartItemResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/response/CartResponse.java, backend/src/main/java/com/example/techstore/service/CartService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/CartResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/CartController.java, backend/src/main/java/com/example/techstore/service/CartService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/CategoryResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminCategoryController.java, backend/src/main/java/com/example/techstore/controller/CategoryController.java, backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java, backend/src/main/java/com/example/techstore/dto/response/ProductResponse.java, backend/src/main/java/com/example/techstore/service/AdminCategoryService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/CategoryService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/CategoryStatisticResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java, backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/ChatMessageResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminChatController.java, backend/src/main/java/com/example/techstore/controller/ChatController.java, backend/src/main/java/com/example/techstore/service/ChatService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/ChatSessionResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminChatController.java, backend/src/main/java/com/example/techstore/controller/ChatController.java, backend/src/main/java/com/example/techstore/service/ChatService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/ContactMessageResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminContactMessageController.java, backend/src/main/java/com/example/techstore/controller/ContactMessageController.java, backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/CouponResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminCouponController.java, backend/src/main/java/com/example/techstore/controller/CouponController.java, backend/src/main/java/com/example/techstore/service/CouponService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/DashboardSummaryResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java, backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/ErrorResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/exception/GlobalExceptionHandler.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/FaqResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminFaqController.java, backend/src/main/java/com/example/techstore/controller/FaqController.java, backend/src/main/java/com/example/techstore/service/FaqService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/ImageUploadResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminUploadController.java, backend/src/main/java/com/example/techstore/service/CloudinaryUploadService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/InventoryWarningResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java, backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/LowStockProductResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java, backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/NewsPostResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminNewsPostController.java, backend/src/main/java/com/example/techstore/controller/NewsPostController.java, backend/src/main/java/com/example/techstore/service/NewsPostService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/OrderItemResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/response/OrderResponse.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/OrderService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/OrderResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminOrderController.java, backend/src/main/java/com/example/techstore/controller/OrderController.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/OrderService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/PaymentResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/PaymentController.java, backend/src/main/java/com/example/techstore/dto/response/OrderResponse.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/PaymentStatisticResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java, backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/ProductController.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/ProductResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminProductController.java, backend/src/main/java/com/example/techstore/controller/ProductController.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/ProductReviewResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/ProductReviewController.java, backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/ProductSpecificationResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java, backend/src/main/java/com/example/techstore/dto/response/ProductVariantResponse.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/ProductVariantResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java, backend/src/main/java/com/example/techstore/dto/response/ProductResponse.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/RecentOrderResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java, backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/RevenueStatisticResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java, backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/SpecificationKeyResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/CategoryController.java, backend/src/main/java/com/example/techstore/service/CategoryService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/TopProductResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java, backend/src/main/java/com/example/techstore/service/DashboardService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/UserProfileResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/UserProfileController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/dto/response/UserResponse.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AuthController.java, backend/src/main/java/com/example/techstore/service/AuthService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/Banner.java",
+      "reason": "Được reference bởi: frontend/src/components/admin/banner/AdminBannerFilter.jsx, frontend/src/components/admin/banner/AdminBannerTable.jsx, frontend/src/layouts/AdminLayout.jsx, frontend/src/pages/admin/AdminBannerFormPage.jsx, frontend/src/pages/public/HomePage.jsx, backend/src/main/java/com/example/techstore/repository/BannerRepository.java, backend/src/main/java/com/example/techstore/service/BannerService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/Brand.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/entity/Product.java, backend/src/main/java/com/example/techstore/repository/BrandRepository.java, backend/src/main/java/com/example/techstore/service/AdminBrandService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/BrandService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/Cart.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/entity/CartItem.java, backend/src/main/java/com/example/techstore/repository/CartRepository.java, backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/OrderService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/CartItem.java",
+      "reason": "Được reference bởi: frontend/src/components/cart/CartItem.jsx, frontend/src/pages/user/CartPage.jsx, backend/src/main/java/com/example/techstore/repository/CartItemRepository.java, backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/OrderService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/Category.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/entity/Product.java, backend/src/main/java/com/example/techstore/entity/SpecificationKey.java, backend/src/main/java/com/example/techstore/repository/CategoryRepository.java, backend/src/main/java/com/example/techstore/service/AdminCategoryService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/CategoryService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/ChatMessage.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/repository/ChatMessageRepository.java, backend/src/main/java/com/example/techstore/service/AiChatService.java, backend/src/main/java/com/example/techstore/service/ChatService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/ChatSession.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/entity/ChatMessage.java, backend/src/main/java/com/example/techstore/repository/ChatSessionRepository.java, backend/src/main/java/com/example/techstore/service/ChatService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/ContactMessage.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/repository/ContactMessageRepository.java, backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/Coupon.java",
+      "reason": "Được reference bởi: frontend/src/layouts/AdminLayout.jsx, backend/src/main/java/com/example/techstore/entity/CouponUsage.java, backend/src/main/java/com/example/techstore/entity/Order.java, backend/src/main/java/com/example/techstore/repository/CouponRepository.java, backend/src/main/java/com/example/techstore/service/CouponService.java, backend/src/main/java/com/example/techstore/service/OrderService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/CouponUsage.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/repository/CouponUsageRepository.java, backend/src/main/java/com/example/techstore/service/CouponService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/Faq.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/repository/FaqRepository.java, backend/src/main/java/com/example/techstore/service/FaqService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/NewsPost.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/repository/NewsPostRepository.java, backend/src/main/java/com/example/techstore/service/NewsPostService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/Order.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/entity/CouponUsage.java, backend/src/main/java/com/example/techstore/entity/OrderItem.java, backend/src/main/java/com/example/techstore/entity/Payment.java, backend/src/main/java/com/example/techstore/repository/OrderRepository.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/CouponService.java, backend/src/main/java/com/example/techstore/service/OrderInventoryService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java, backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/OrderItem.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/entity/ProductReview.java, backend/src/main/java/com/example/techstore/repository/OrderItemRepository.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/OrderInventoryService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/PasswordResetToken.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/repository/PasswordResetTokenRepository.java, backend/src/main/java/com/example/techstore/service/PasswordResetService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/Payment.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/repository/PaymentRepository.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java, backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/Product.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/entity/OrderItem.java, backend/src/main/java/com/example/techstore/entity/ProductImage.java, backend/src/main/java/com/example/techstore/entity/ProductReview.java, backend/src/main/java/com/example/techstore/entity/ProductVariant.java, backend/src/main/java/com/example/techstore/repository/BrandRepository.java, backend/src/main/java/com/example/techstore/repository/ProductRepository.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/ProductImage.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/response/ProductDetailResponse.java, backend/src/main/java/com/example/techstore/repository/ProductImageRepository.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/ProductReview.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/repository/ProductReviewRepository.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/ProductSpecification.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/response/ProductSpecificationResponse.java, backend/src/main/java/com/example/techstore/repository/ProductSpecificationRepository.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/ProductVariant.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/config/DatabaseMigrationRunner.java, backend/src/main/java/com/example/techstore/entity/CartItem.java, backend/src/main/java/com/example/techstore/entity/OrderItem.java, backend/src/main/java/com/example/techstore/entity/ProductImage.java, backend/src/main/java/com/example/techstore/entity/ProductSpecification.java, backend/src/main/java/com/example/techstore/repository/ProductRepository.java, backend/src/main/java/com/example/techstore/repository/ProductVariantRepository.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/OrderInventoryService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/SpecificationKey.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/entity/ProductSpecification.java, backend/src/main/java/com/example/techstore/repository/SpecificationKeyRepository.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/entity/User.java",
+      "reason": "Được reference bởi: frontend/src/components/chat/ChatWidget.jsx, frontend/src/components/layout/Header.jsx, frontend/src/components/user/AvatarUpload.jsx, frontend/src/pages/admin/AdminContactMessageDetailPage.jsx, frontend/src/pages/admin/AdminCustomerDetailPage.jsx, frontend/src/pages/admin/AdminOrderDetailPage.jsx, frontend/src/pages/user/OrderDetailPage.jsx, backend/src/main/java/com/example/techstore/controller/CouponController.java, backend/src/main/java/com/example/techstore/controller/ProductReviewController.java, backend/src/main/java/com/example/techstore/controller/UserProfileController.java, backend/src/main/java/com/example/techstore/dto/response/UserProfileResponse.java, backend/src/main/java/com/example/techstore/entity/Cart.java, backend/src/main/java/com/example/techstore/entity/ChatMessage.java, backend/src/main/java/com/example/techstore/entity/ChatSession.java, backend/src/main/java/com/example/techstore/entity/CouponUsage.java, backend/src/main/java/com/example/techstore/entity/NewsPost.java, backend/src/main/java/com/example/techstore/entity/Order.java, backend/src/main/java/com/example/techstore/entity/PasswordResetToken.java, backend/src/main/java/com/example/techstore/entity/ProductReview.java, backend/src/main/java/com/example/techstore/repository/UserRepository.java, backend/src/main/java/com/example/techstore/security/CustomUserDetailsService.java, backend/src/main/java/com/example/techstore/security/JwtService.java, backend/src/main/java/com/example/techstore/service/AdminCustomerService.java, backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java, backend/src/main/java/com/example/techstore/service/AuthService.java, backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/ChatService.java, backend/src/main/java/com/example/techstore/service/CouponService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PasswordResetService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/BannerPosition.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/BannerController.java, backend/src/main/java/com/example/techstore/dto/request/BannerRequest.java, backend/src/main/java/com/example/techstore/dto/response/BannerResponse.java, backend/src/main/java/com/example/techstore/entity/Banner.java, backend/src/main/java/com/example/techstore/repository/BannerRepository.java, backend/src/main/java/com/example/techstore/service/BannerService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/ChatStatus.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminChatController.java, backend/src/main/java/com/example/techstore/dto/response/ChatSessionResponse.java, backend/src/main/java/com/example/techstore/entity/ChatSession.java, backend/src/main/java/com/example/techstore/repository/ChatSessionRepository.java, backend/src/main/java/com/example/techstore/service/ChatService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/ContactStatus.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminContactMessageController.java, backend/src/main/java/com/example/techstore/dto/request/UpdateContactMessageStatusRequest.java, backend/src/main/java/com/example/techstore/dto/response/ContactMessageResponse.java, backend/src/main/java/com/example/techstore/entity/ContactMessage.java, backend/src/main/java/com/example/techstore/repository/ContactMessageRepository.java, backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/CouponStatus.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/request/CouponRequest.java, backend/src/main/java/com/example/techstore/dto/response/CouponResponse.java, backend/src/main/java/com/example/techstore/entity/Coupon.java, backend/src/main/java/com/example/techstore/repository/CouponRepository.java, backend/src/main/java/com/example/techstore/service/CouponService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/DiscountType.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/request/CouponRequest.java, backend/src/main/java/com/example/techstore/dto/response/CouponResponse.java, backend/src/main/java/com/example/techstore/entity/Coupon.java, backend/src/main/java/com/example/techstore/service/CouponService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/Gender.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/request/UserProfileRequest.java, backend/src/main/java/com/example/techstore/dto/response/UserProfileResponse.java, backend/src/main/java/com/example/techstore/entity/User.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/NewsStatus.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/request/NewsPostRequest.java, backend/src/main/java/com/example/techstore/dto/response/NewsPostResponse.java, backend/src/main/java/com/example/techstore/entity/NewsPost.java, backend/src/main/java/com/example/techstore/repository/NewsPostRepository.java, backend/src/main/java/com/example/techstore/service/NewsPostService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/OrderStatus.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminOrderController.java, backend/src/main/java/com/example/techstore/dto/request/UpdateOrderStatusRequest.java, backend/src/main/java/com/example/techstore/dto/response/OrderResponse.java, backend/src/main/java/com/example/techstore/entity/Order.java, backend/src/main/java/com/example/techstore/repository/OrderItemRepository.java, backend/src/main/java/com/example/techstore/repository/OrderRepository.java, backend/src/main/java/com/example/techstore/repository/PaymentRepository.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/DashboardService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java, backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/PaymentMethod.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/request/CreateOrderRequest.java, backend/src/main/java/com/example/techstore/dto/response/PaymentResponse.java, backend/src/main/java/com/example/techstore/entity/Payment.java, backend/src/main/java/com/example/techstore/repository/PaymentRepository.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java, backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/PaymentStatus.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/response/PaymentResponse.java, backend/src/main/java/com/example/techstore/entity/Payment.java, backend/src/main/java/com/example/techstore/repository/PaymentRepository.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java, backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/ProductStatus.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminBrandController.java, backend/src/main/java/com/example/techstore/controller/AdminCategoryController.java, backend/src/main/java/com/example/techstore/controller/AdminProductController.java, backend/src/main/java/com/example/techstore/dto/request/AdminProductRequest.java, backend/src/main/java/com/example/techstore/dto/request/BannerRequest.java, backend/src/main/java/com/example/techstore/dto/request/BrandRequest.java, backend/src/main/java/com/example/techstore/dto/request/CategoryRequest.java, backend/src/main/java/com/example/techstore/dto/request/FaqRequest.java, backend/src/main/java/com/example/techstore/dto/request/ProductRequest.java, backend/src/main/java/com/example/techstore/dto/request/ProductVariantRequest.java, backend/src/main/java/com/example/techstore/dto/response/BannerResponse.java, backend/src/main/java/com/example/techstore/dto/response/BrandResponse.java, backend/src/main/java/com/example/techstore/dto/response/CartItemResponse.java, backend/src/main/java/com/example/techstore/dto/response/CategoryResponse.java, backend/src/main/java/com/example/techstore/dto/response/FaqResponse.java, backend/src/main/java/com/example/techstore/dto/response/ProductResponse.java, backend/src/main/java/com/example/techstore/entity/Banner.java, backend/src/main/java/com/example/techstore/entity/Brand.java, backend/src/main/java/com/example/techstore/entity/Category.java, backend/src/main/java/com/example/techstore/entity/Faq.java, backend/src/main/java/com/example/techstore/entity/Product.java, backend/src/main/java/com/example/techstore/entity/ProductVariant.java, backend/src/main/java/com/example/techstore/repository/BannerRepository.java, backend/src/main/java/com/example/techstore/repository/BrandRepository.java, backend/src/main/java/com/example/techstore/repository/CategoryRepository.java, backend/src/main/java/com/example/techstore/repository/FaqRepository.java, backend/src/main/java/com/example/techstore/repository/ProductRepository.java, backend/src/main/java/com/example/techstore/repository/ProductVariantRepository.java, backend/src/main/java/com/example/techstore/service/AdminBrandService.java, backend/src/main/java/com/example/techstore/service/AdminCategoryService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/BannerService.java, backend/src/main/java/com/example/techstore/service/BrandService.java, backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/CategoryService.java, backend/src/main/java/com/example/techstore/service/FaqService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/ReviewStatus.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/dto/response/ProductReviewResponse.java, backend/src/main/java/com/example/techstore/entity/ProductReview.java, backend/src/main/java/com/example/techstore/repository/ProductReviewRepository.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/UserRole.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java, backend/src/main/java/com/example/techstore/dto/request/EmployeeRequest.java, backend/src/main/java/com/example/techstore/dto/response/AuthResponse.java, backend/src/main/java/com/example/techstore/dto/response/UserProfileResponse.java, backend/src/main/java/com/example/techstore/dto/response/UserResponse.java, backend/src/main/java/com/example/techstore/entity/User.java, backend/src/main/java/com/example/techstore/repository/UserRepository.java, backend/src/main/java/com/example/techstore/service/AdminCustomerService.java, backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java, backend/src/main/java/com/example/techstore/service/AuthService.java, backend/src/main/java/com/example/techstore/service/ChatService.java, backend/src/main/java/com/example/techstore/service/DashboardService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/enums/UserStatus.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminCustomerController.java, backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java, backend/src/main/java/com/example/techstore/dto/request/CustomerStatusRequest.java, backend/src/main/java/com/example/techstore/dto/request/EmployeeRequest.java, backend/src/main/java/com/example/techstore/dto/request/EmployeeStatusRequest.java, backend/src/main/java/com/example/techstore/dto/response/AdminCustomerResponse.java, backend/src/main/java/com/example/techstore/dto/response/AdminEmployeeResponse.java, backend/src/main/java/com/example/techstore/dto/response/UserProfileResponse.java, backend/src/main/java/com/example/techstore/dto/response/UserResponse.java, backend/src/main/java/com/example/techstore/entity/User.java, backend/src/main/java/com/example/techstore/repository/UserRepository.java, backend/src/main/java/com/example/techstore/security/CustomUserDetailsService.java, backend/src/main/java/com/example/techstore/service/AdminCustomerService.java, backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java, backend/src/main/java/com/example/techstore/service/AuthService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/exception/BadRequestException.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/UserProfileController.java, backend/src/main/java/com/example/techstore/exception/GlobalExceptionHandler.java, backend/src/main/java/com/example/techstore/service/AdminBrandService.java, backend/src/main/java/com/example/techstore/service/AdminCategoryService.java, backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/AuthService.java, backend/src/main/java/com/example/techstore/service/BannerService.java, backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/ChatService.java, backend/src/main/java/com/example/techstore/service/CloudinaryService.java, backend/src/main/java/com/example/techstore/service/CouponService.java, backend/src/main/java/com/example/techstore/service/NewsPostService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PasswordResetService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/exception/GlobalExceptionHandler.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/exception/ResourceNotFoundException.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/exception/GlobalExceptionHandler.java, backend/src/main/java/com/example/techstore/service/AdminBrandService.java, backend/src/main/java/com/example/techstore/service/AdminCategoryService.java, backend/src/main/java/com/example/techstore/service/AdminCustomerService.java, backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java, backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/BannerService.java, backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/ChatService.java, backend/src/main/java/com/example/techstore/service/ContactMessageService.java, backend/src/main/java/com/example/techstore/service/CouponService.java, backend/src/main/java/com/example/techstore/service/FaqService.java, backend/src/main/java/com/example/techstore/service/NewsPostService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/BannerRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/BannerService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/BrandRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/AdminBrandService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/BrandService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/CartItemRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/OrderService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/CartRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/OrderService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/CategoryRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/AdminCategoryService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/CategoryService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/ChatMessageRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/ChatService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/ChatSessionRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/ChatService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/ContactMessageRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/ContactMessageService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/CouponRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/CouponService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/CouponUsageRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/CouponService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/FaqRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/FaqService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/NewsPostRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/NewsPostService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/OrderItemRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/DashboardService.java, backend/src/main/java/com/example/techstore/service/OrderInventoryService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/OrderRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/DashboardService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java, backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/PasswordResetTokenRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/PasswordResetService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/PaymentRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/DashboardService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java, backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/ProductImageRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/ProductRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/AdminCategoryService.java, backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/DashboardService.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/ProductReviewRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/DashboardService.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/ProductSpecificationRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/ProductVariantRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/DashboardService.java, backend/src/main/java/com/example/techstore/service/OrderInventoryService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/ProductService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/SpecificationKeyRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/AdminProductService.java, backend/src/main/java/com/example/techstore/service/CategoryService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/repository/UserRepository.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/UserProfileController.java, backend/src/main/java/com/example/techstore/security/CustomUserDetailsService.java, backend/src/main/java/com/example/techstore/service/AdminCustomerService.java, backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java, backend/src/main/java/com/example/techstore/service/AuthService.java, backend/src/main/java/com/example/techstore/service/CartService.java, backend/src/main/java/com/example/techstore/service/ChatService.java, backend/src/main/java/com/example/techstore/service/DashboardService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PasswordResetService.java, backend/src/main/java/com/example/techstore/service/PaymentService.java, backend/src/main/java/com/example/techstore/service/ProductReviewService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/security/CustomUserDetailsService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/security/JwtAuthenticationFilter.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/security/JwtAuthenticationFilter.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/config/SecurityConfig.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/security/JwtService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/security/JwtAuthenticationFilter.java, backend/src/main/java/com/example/techstore/service/AuthService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/AdminBrandService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminBrandController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/AdminCategoryService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminCategoryController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/AdminCustomerService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminCustomerController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/AdminEmployeeService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminEmployeeController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/AdminOrderService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminOrderController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/AdminProductService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminProductController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/AiChatService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/ChatService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/AuthService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AuthController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/BannerService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminBannerController.java, backend/src/main/java/com/example/techstore/controller/BannerController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/BrandService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/BrandController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/CartService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/CartController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/CategoryService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/CategoryController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/ChatService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminChatController.java, backend/src/main/java/com/example/techstore/controller/ChatController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/CloudinaryService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/UserProfileController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/CloudinaryUploadService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminUploadController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/ContactMessageService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminContactMessageController.java, backend/src/main/java/com/example/techstore/controller/ContactMessageController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/CouponService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminCouponController.java, backend/src/main/java/com/example/techstore/controller/CouponController.java, backend/src/main/java/com/example/techstore/service/OrderService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/DashboardService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminDashboardController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/FaqService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminFaqController.java, backend/src/main/java/com/example/techstore/controller/FaqController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/NewsPostService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/AdminNewsPostController.java, backend/src/main/java/com/example/techstore/controller/NewsPostController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/OrderInventoryService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/service/AdminOrderService.java, backend/src/main/java/com/example/techstore/service/OrderService.java, backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/OrderService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/OrderController.java, backend/src/main/java/com/example/techstore/service/CouponService.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/PasswordResetService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/PasswordResetController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/PaymentService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/PaymentController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/PendingPaymentCleanupService.java",
+      "reason": "Spring Boot Component (Controller/Config/App/Scheduler) được Spring tự động load."
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/ProductReviewService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/ProductReviewController.java"
+    },
+    {
+      "path": "backend/src/main/java/com/example/techstore/service/ProductService.java",
+      "reason": "Được reference bởi: backend/src/main/java/com/example/techstore/controller/ProductController.java"
+    }
+  ]
+}

@@ -7,6 +7,7 @@ import com.example.techstore.enums.ProductStatus;
 import com.example.techstore.exception.BadRequestException;
 import com.example.techstore.exception.ResourceNotFoundException;
 import com.example.techstore.repository.CategoryRepository;
+import com.example.techstore.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 public class AdminCategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final ProductRepository productRepository;
 
     @Transactional(readOnly = true)
     public Page<CategoryResponse> getCategories(
@@ -102,6 +104,10 @@ public class AdminCategoryService {
     public void deleteCategory(Long categoryId) {
         Category category = categoryRepository.findById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy danh mục"));
+
+        if (productRepository.existsByCategoryIdAndDeletedAtIsNull(categoryId)) {
+            throw new BadRequestException("Không thể xóa danh mục đang có sản phẩm");
+        }
 
         category.setStatus(ProductStatus.INACTIVE);
         category.setDeletedAt(LocalDateTime.now());

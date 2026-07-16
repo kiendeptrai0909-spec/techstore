@@ -19,6 +19,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     boolean existsByNameIgnoreCase(String name);
 
+    boolean existsByCategoryIdAndDeletedAtIsNull(Long categoryId);
+
     Page<Product> findByStatus(ProductStatus status, Pageable pageable);
 
     Page<Product> findByDeletedAtIsNull(Pageable pageable);

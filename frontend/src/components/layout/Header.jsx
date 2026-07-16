@@ -332,7 +332,7 @@ function Header() {
                       className="flex items-center gap-3 px-4 py-3 text-sm font-bold hover:bg-red-50 hover:text-red-600"
                     >
                       <LayoutDashboard size={18} />
-                      Trang quản trị
+                      {user?.role === 'ROLE_ADMIN' ? 'Trang quản trị' : 'Trang quản lý'}
                     </Link>
                   )}
 

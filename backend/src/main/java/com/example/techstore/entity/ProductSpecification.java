@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
         name = "product_specifications",
         uniqueConstraints = {
                 @UniqueConstraint(
-                        name = "uk_product_specification_key",
-                        columnNames = {"product_id", "specification_key_id"}
+                        name = "uk_variant_specification_key",
+                        columnNames = {"product_variant_id", "specification_key_id"}
                 )
         }
 )
@@ -26,10 +26,10 @@ public class ProductSpecification {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Sản phẩm được gán thông số
+    // Biến thể sản phẩm được gán thông số
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    @JoinColumn(name = "product_variant_id", nullable = false)
+    private ProductVariant productVariant;
 
     // Tên thông số, ví dụ: RAM, CPU, SSD, Độ phân giải
     @ManyToOne(fetch = FetchType.LAZY)

@@ -19,7 +19,8 @@ function ChatWidget() {
   const location = useLocation()
   const { user } = useAuth()
   const messagesEndRef = useRef(null)
-
+const chatContainerRef = useRef(null)
+const previousMessageCount = useRef(0)
   const [open, setOpen] = useState(false)
   const [minimized, setMinimized] = useState(false)
   const [input, setInput] = useState('')
@@ -60,10 +61,30 @@ function ChatWidget() {
   }, [open, minimized, sessionId, user])
 
   useEffect(() => {
-    if (open && !minimized) {
-      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [messages, open, minimized])
+  if (!open || minimized) return
+
+  const container = chatContainerRef.current
+
+  if (!container) return
+
+  const hasNewMessage =
+    messages.length > previousMessageCount.current
+
+  previousMessageCount.current = messages.length
+
+  if (!hasNewMessage) return
+
+  const distanceFromBottom =
+    container.scrollHeight -
+    container.scrollTop -
+    container.clientHeight
+
+  if (distanceFromBottom < 120) {
+    messagesEndRef.current?.scrollIntoView({
+      behavior: 'smooth',
+    })
+  }
+}, [messages])
 
   if (shouldHide) {
     return null
@@ -259,7 +280,10 @@ function ChatWidget() {
             </div>
           ) : (
             <>
-              <div className="h-[360px] overflow-y-auto bg-gray-50 p-4">
+              <div
+    ref={chatContainerRef}
+    className="h-[360px] overflow-y-auto bg-gray-50 p-4"
+>
                 {loading ? (
                   <div className="py-10 text-center text-sm text-gray-500">
                     Đang tải tin nhắn...

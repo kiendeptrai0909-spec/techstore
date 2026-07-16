@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
-import { ArrowLeft, Save } from 'lucide-react'
+import { ArrowLeft, Save, Tags } from 'lucide-react'
 import { adminCategoryApi } from '../../api/adminCategoryApi'
+import { CATEGORY_ICON_OPTIONS, getCategoryIcon } from '../../utils/categoryIcons'
 
 function AdminCategoryFormPage() {
   const navigate = useNavigate()
@@ -12,9 +13,9 @@ function AdminCategoryFormPage() {
     name: '',
     slug: '',
     description: '',
-    imageUrl: '',
     sortOrder: 0,
     status: 'ACTIVE',
+    imageUrl: 'Laptop',
   })
 
   const [errors, setErrors] = useState({})
@@ -36,9 +37,9 @@ function AdminCategoryFormPage() {
           name: category.name || '',
           slug: category.slug || '',
           description: category.description || '',
-          imageUrl: category.imageUrl || '',
           sortOrder: category.sortOrder ?? 0,
           status: category.status || 'ACTIVE',
+          imageUrl: category.imageUrl || 'Laptop',
         })
       } catch (error) {
         setMessage(error.message || 'Không thể tải thông tin danh mục')
@@ -109,9 +110,9 @@ function AdminCategoryFormPage() {
       name: formData.name.trim(),
       slug: formData.slug.trim().toLowerCase(),
       description: formData.description.trim(),
-      imageUrl: formData.imageUrl.trim() || null,
       sortOrder: Number(formData.sortOrder || 0),
       status: formData.status,
+      imageUrl: formData.imageUrl,
     }
   }
 
@@ -154,6 +155,8 @@ function AdminCategoryFormPage() {
       </div>
     )
   }
+
+  const PreviewIcon = getCategoryIcon(formData.imageUrl)
 
   return (
     <form onSubmit={handleSubmit}>
@@ -251,16 +254,6 @@ function AdminCategoryFormPage() {
             </div>
 
             <div className="md:col-span-2">
-              <FormField
-                label="URL ảnh danh mục"
-                value={formData.imageUrl}
-                onChange={(value) => handleChange('imageUrl', value)}
-                error={errors.imageUrl}
-                placeholder="https://..."
-              />
-            </div>
-
-            <div className="md:col-span-2">
               <label className="mb-2 block text-sm font-bold text-gray-700">
                 Mô tả
               </label>
@@ -275,6 +268,34 @@ function AdminCategoryFormPage() {
                 className="w-full rounded border px-4 py-3 text-sm outline-none focus:border-red-500"
               />
             </div>
+
+            <div className="md:col-span-2">
+              <label className="mb-2 block text-sm font-bold text-gray-700">
+                Biểu tượng (Icon)
+              </label>
+              
+              <div className="grid grid-cols-6 gap-3 sm:grid-cols-9">
+                {CATEGORY_ICON_OPTIONS.map(option => {
+                  const IconComponent = option.icon
+                  const isSelected = formData.imageUrl === option.value
+                  return (
+                    <button
+                      key={option.value}
+                      type="button"
+                      onClick={() => handleChange('imageUrl', option.value)}
+                      className={`flex h-12 flex-col items-center justify-center rounded border ${
+                        isSelected 
+                          ? 'border-red-500 bg-red-50 text-red-600 shadow-sm' 
+                          : 'border-gray-200 bg-gray-50 text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+                      }`}
+                      title={option.label}
+                    >
+                      <IconComponent size={24} />
+                    </button>
+                  )
+                })}
+              </div>
+            </div>
           </div>
         </div>
 
@@ -284,18 +305,8 @@ function AdminCategoryFormPage() {
           </h3>
 
           <div className="mt-5 rounded border p-4">
-            <div className="flex h-40 items-center justify-center overflow-hidden rounded border bg-gray-50">
-              {formData.imageUrl ? (
-                <img
-                  src={formData.imageUrl}
-                  alt={formData.name || 'Danh mục'}
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <span className="text-sm text-gray-400">
-                  Chưa có ảnh danh mục
-                </span>
-              )}
+            <div className="flex h-40 items-center justify-center overflow-hidden rounded border bg-gray-50 text-gray-400">
+              <PreviewIcon size={64} />
             </div>
 
             <div className="mt-4">

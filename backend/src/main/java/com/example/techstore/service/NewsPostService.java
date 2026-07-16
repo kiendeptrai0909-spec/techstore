@@ -25,7 +25,12 @@ public class NewsPostService {
      * Public: lấy danh sách bài viết ACTIVE.
      */
     @Transactional(readOnly = true)
-    public Page<NewsPostResponse> getActiveNewsPosts(Pageable pageable) {
+    public Page<NewsPostResponse> getActiveNewsPosts(String keyword, Pageable pageable) {
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            return newsPostRepository
+                    .searchActiveNews(NewsStatus.PUBLISHED, keyword.trim().toLowerCase(), pageable)
+                    .map(this::toResponse);
+        }
         return newsPostRepository
                 .findByStatusAndDeletedAtIsNull(NewsStatus.PUBLISHED, pageable)
                 .map(this::toResponse);

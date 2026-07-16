@@ -5,8 +5,13 @@ import { HelpCircle, Plus } from 'lucide-react'
 import { adminFaqApi } from '../../api/adminFaqApi'
 import AdminFaqFilter from '../../components/admin/faq/AdminFaqFilter'
 import AdminFaqTable from '../../components/admin/faq/AdminFaqTable'
+import { useAuth } from '../../contexts/AuthContext'
 
 function AdminFaqPage() {
+  const { user } = useAuth()
+  const role = user?.role || user?.authorities?.[0]?.authority
+  const isStaff = role === 'ROLE_STAFF' || role === 'STAFF'
+
   const [searchParams, setSearchParams] = useSearchParams()
 
   const [pageData, setPageData] = useState(null)
@@ -60,15 +65,16 @@ function AdminFaqPage() {
     ? pageData
     : pageData?.content || []
   const filteredFaqs = faqs.filter((faq) => {
-    const keyword = filters.keyword.trim().toLowerCase()
+    const keyword = (searchParams.get('keyword') || '').trim().toLowerCase()
 
     const matchKeyword =
       !keyword ||
       faq.question?.toLowerCase().includes(keyword) ||
       faq.answer?.toLowerCase().includes(keyword)
 
+    const statusParam = searchParams.get('status') || ''
     const matchStatus =
-      !filters.status || faq.status === filters.status
+      !statusParam || faq.status === statusParam
 
     return matchKeyword && matchStatus
   })
@@ -153,18 +159,20 @@ function AdminFaqPage() {
               Quản lý FAQ
             </h2>
             <p className="mt-1 text-sm text-gray-500">
-              Tạo và quản lý câu hỏi thường gặp hiển thị cho khách hàng.
+              {isStaff ? 'Xem danh sách câu hỏi thường gặp của hệ thống.' : 'Tạo và quản lý câu hỏi thường gặp hiển thị cho khách hàng.'}
             </p>
           </div>
         </div>
 
-        <Link
-          to="/admin/faqs/create"
-          className="inline-flex items-center gap-2 rounded bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700"
-        >
-          <Plus size={20} />
-          Thêm FAQ
-        </Link>
+        {!isStaff && (
+          <Link
+            to="/admin/faqs/create"
+            className="inline-flex items-center gap-2 rounded bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700"
+          >
+            <Plus size={20} />
+            Thêm FAQ
+          </Link>
+        )}
       </div>
 
       <div className="space-y-5">
@@ -191,6 +199,7 @@ function AdminFaqPage() {
           faqs={filteredFaqs}
           loading={loading}
           onDelete={handleDeleteFaq}
+          isStaff={isStaff}
         />
 
         <AdminFaqPagination

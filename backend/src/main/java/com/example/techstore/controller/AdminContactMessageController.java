@@ -19,10 +19,11 @@ public class AdminContactMessageController {
 
     @GetMapping
     public Page<ContactMessageResponse> getContactMessages(
+            @RequestParam(required = false) String keyword,
             @RequestParam(required = false) ContactStatus status,
             Pageable pageable
     ) {
-        return contactMessageService.getContactMessages(status, pageable);
+        return contactMessageService.getContactMessages(keyword, status, pageable);
     }
 
     @GetMapping("/{id}")

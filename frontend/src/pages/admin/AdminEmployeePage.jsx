@@ -62,7 +62,7 @@ function AdminEmployeePage() {
     : pageData?.content || []
 
   const filteredEmployees = employees.filter((employee) => {
-    const keyword = filters.keyword.trim().toLowerCase()
+    const keyword = (searchParams.get('keyword') || '').trim().toLowerCase()
 
     const fullName = employee.fullName || ''
     const email = employee.email || ''
@@ -74,10 +74,12 @@ function AdminEmployeePage() {
       email.toLowerCase().includes(keyword) ||
       phone.toLowerCase().includes(keyword)
 
-    const matchRole = !filters.role || employee.role === filters.role
+    const roleParam = searchParams.get('role') || ''
+    const matchRole = !roleParam || employee.role === roleParam
 
+    const statusParam = searchParams.get('status') || ''
     const matchStatus =
-      !filters.status || employee.status === filters.status
+      !statusParam || employee.status === statusParam
 
     return matchKeyword && matchRole && matchStatus
   })

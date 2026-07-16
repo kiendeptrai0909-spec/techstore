@@ -2,6 +2,7 @@ package com.example.techstore.repository;
 
 import com.example.techstore.entity.ProductSpecification;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -9,26 +10,27 @@ import java.util.Optional;
 
 public interface ProductSpecificationRepository extends JpaRepository<ProductSpecification, Long> {
 
-    List<ProductSpecification> findByProductId(Long productId);
+    List<ProductSpecification> findByProductVariantId(Long productVariantId);
 
-    List<ProductSpecification> findByProductIdAndDeletedAtIsNull(Long productId);
+    List<ProductSpecification> findByProductVariantIdAndDeletedAtIsNull(Long productVariantId);
 
-    List<ProductSpecification> findByProductIdOrderBySpecificationKeySortOrderAsc(Long productId);
+    List<ProductSpecification> findByProductVariantIdOrderBySpecificationKeySortOrderAsc(Long productVariantId);
 
-    List<ProductSpecification> findByProductIdAndDeletedAtIsNullOrderBySpecificationKeySortOrderAsc(
-            Long productId
+    List<ProductSpecification> findByProductVariantIdAndDeletedAtIsNullOrderBySpecificationKeySortOrderAsc(
+            Long productVariantId
     );
 
-    Optional<ProductSpecification> findByProductIdAndSpecificationKeyId(
-            Long productId,
+    Optional<ProductSpecification> findByProductVariantIdAndSpecificationKeyId(
+            Long productVariantId,
             Long specificationKeyId
     );
 
-    Optional<ProductSpecification> findByProductIdAndSpecificationKeyIdAndDeletedAtIsNull(
-            Long productId,
+    Optional<ProductSpecification> findByProductVariantIdAndSpecificationKeyIdAndDeletedAtIsNull(
+            Long productVariantId,
             Long specificationKeyId
     );
 
+    @Modifying(clearAutomatically = true, flushAutomatically = true)
     @Transactional
-    void deleteByProductId(Long productId);
-}
+    void deleteByProductVariantId(Long productVariantId);
+}

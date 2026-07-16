@@ -2,7 +2,7 @@ import { Link } from 'react-router'
 import { Edit, Eye, Trash2 } from 'lucide-react'
 import { formatCurrency } from '../../../utils/formatCurrency'
 
-function AdminProductTable({ products = [], loading, onDelete }) {
+function AdminProductTable({ products = [], loading, onDelete, isStaff = false }) {
   if (loading) {
     return (
       <div className="rounded-lg bg-white p-5 shadow-sm">
@@ -42,7 +42,7 @@ function AdminProductTable({ products = [], loading, onDelete }) {
               <th className="px-4 py-3 font-bold">Thương hiệu</th>
               <th className="px-4 py-3 font-bold">Giá</th>
               <th className="px-4 py-3 font-bold">Tồn kho</th>
-              <th className="px-4 py-3 font-bold">Trạng thái</th>
+              <th className="w-32 px-4 py-3 font-bold">Trạng thái</th>
               <th className="px-4 py-3 text-center font-bold">Thao tác</th>
             </tr>
           </thead>
@@ -132,22 +132,26 @@ function AdminProductTable({ products = [], loading, onDelete }) {
                         <Eye size={16} />
                       </Link>
 
-                      <Link
-                        to={`/admin/products/${product.id}/edit`}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded border text-gray-600 hover:border-red-500 hover:text-red-600"
-                        title="Sửa sản phẩm"
-                      >
-                        <Edit size={16} />
-                      </Link>
+                      {!isStaff && (
+                        <>
+                          <Link
+                            to={`/admin/products/${product.id}/edit`}
+                            className="inline-flex h-9 w-9 items-center justify-center rounded border text-gray-600 hover:border-red-500 hover:text-red-600"
+                            title="Sửa sản phẩm"
+                          >
+                            <Edit size={16} />
+                          </Link>
 
-                      <button
-                        type="button"
-                        onClick={() => onDelete(product.id)}
-                        className="inline-flex h-9 w-9 items-center justify-center rounded border text-gray-600 hover:border-red-500 hover:text-red-600"
-                        title="Xóa sản phẩm"
-                      >
-                        <Trash2 size={16} />
-                      </button>
+                          <button
+                            type="button"
+                            onClick={() => onDelete(product.id)}
+                            className="inline-flex h-9 w-9 items-center justify-center rounded border text-gray-600 hover:border-red-500 hover:text-red-600"
+                            title="Xóa sản phẩm"
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </>
+                      )}
                     </div>
                   </td>
                 </tr>

@@ -39,18 +39,14 @@ public class ContactMessageService {
 
     @Transactional(readOnly = true)
     public Page<ContactMessageResponse> getContactMessages(
+            String keyword,
             ContactStatus status,
             Pageable pageable
     ) {
-        Page<ContactMessage> messages;
-
-        if (status != null) {
-            messages = contactMessageRepository.findByStatusAndDeletedAtIsNull(status, pageable);
-        } else {
-            messages = contactMessageRepository.findByDeletedAtIsNull(pageable);
-        }
-
-        return messages.map(this::toResponse);
+        String normalizedKeyword = (keyword == null) ? "" : keyword.trim();
+        return contactMessageRepository
+                .searchContactMessages(normalizedKeyword, status, pageable)
+                .map(this::toResponse);
     }
 
     @Transactional(readOnly = true)

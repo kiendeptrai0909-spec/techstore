@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router'
 import { Edit, Plus, Tags, Trash2 } from 'lucide-react'
 import { adminCategoryApi } from '../../api/adminCategoryApi'
+import { getCategoryIcon } from '../../utils/categoryIcons'
 
 function AdminCategoryPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -56,21 +57,6 @@ function AdminCategoryPage() {
   const categories = Array.isArray(pageData)
     ? pageData
     : pageData?.content || []
-
-  const filteredCategories = categories.filter((category) => {
-    const keyword = filters.keyword.trim().toLowerCase()
-
-    const matchKeyword =
-      !keyword ||
-      category.name?.toLowerCase().includes(keyword) ||
-      category.slug?.toLowerCase().includes(keyword) ||
-      category.description?.toLowerCase().includes(keyword)
-
-    const matchStatus =
-      !filters.status || category.status === filters.status
-
-    return matchKeyword && matchStatus
-  })
 
   const handleSubmitFilter = (event) => {
     event.preventDefault()
@@ -242,27 +228,22 @@ function AdminCategoryPage() {
                     Đang tải danh mục...
                   </td>
                 </tr>
-              ) : filteredCategories.length === 0 ? (
+              ) : categories.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="px-4 py-8 text-center text-gray-500">
                     Không có danh mục nào.
                   </td>
                 </tr>
               ) : (
-                filteredCategories.map((category) => (
+                categories.map((category) => {
+                  const Icon = getCategoryIcon(category.imageUrl)
+                  
+                  return (
                   <tr key={category.id} className="border-t">
                     <td className="px-4 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded border bg-gray-50">
-                          {category.imageUrl ? (
-                            <img
-                              src={category.imageUrl}
-                              alt={category.name}
-                              className="h-full w-full object-cover"
-                            />
-                          ) : (
-                            <Tags size={22} className="text-gray-400" />
-                          )}
+                        <div className="flex h-14 w-14 items-center justify-center overflow-hidden rounded border bg-gray-50 text-gray-400">
+                          <Icon size={22} />
                         </div>
 
                         <div>
@@ -317,7 +298,7 @@ function AdminCategoryPage() {
                       </div>
                     </td>
                   </tr>
-                ))
+                )})
               )}
             </tbody>
           </table>

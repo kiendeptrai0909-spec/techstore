@@ -16,4 +16,19 @@ public interface BrandRepository extends JpaRepository<Brand, Long> {
     boolean existsByNameIgnoreCase(String name);
 
     boolean existsBySlug(String slug);
+
+    @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.brand FROM Product p WHERE p.category.id = :categoryId AND p.brand.status = 'ACTIVE' AND p.deletedAt IS NULL")
+    List<Brand> findActiveBrandsByCategoryId(@org.springframework.data.repository.query.Param("categoryId") Long categoryId);
+
+    @org.springframework.data.jpa.repository.Query("""
+            SELECT b FROM Brand b
+            WHERE b.deletedAt IS NULL
+              AND (:keyword = '' OR LOWER(b.name) LIKE CONCAT('%', :keyword, '%') OR LOWER(b.slug) LIKE CONCAT('%', :keyword, '%'))
+              AND (:status IS NULL OR b.status = :status)
+            """)
+    org.springframework.data.domain.Page<Brand> searchAdminBrands(
+            @org.springframework.data.repository.query.Param("keyword") String keyword,
+            @org.springframework.data.repository.query.Param("status") ProductStatus status,
+            org.springframework.data.domain.Pageable pageable
+    );
 }

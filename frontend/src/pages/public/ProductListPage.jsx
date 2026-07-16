@@ -44,13 +44,8 @@ function ProductListPage() {
   useEffect(() => {
     const fetchFilterData = async () => {
       try {
-        const [categoryData, brandData] = await Promise.all([
-          categoryApi.getCategories(),
-          brandApi.getBrands(),
-        ])
-
+        const categoryData = await categoryApi.getCategories()
         setCategories(normalizeList(categoryData))
-        setBrands(normalizeList(brandData))
       } catch (error) {
         console.error(error.message)
       }
@@ -58,6 +53,23 @@ function ProductListPage() {
 
     fetchFilterData()
   }, [])
+
+  useEffect(() => {
+    const fetchBrands = async () => {
+      try {
+        const params = {}
+        if (filters.categoryId) {
+          params.categoryId = filters.categoryId
+        }
+        const brandData = await brandApi.getBrands(params)
+        setBrands(normalizeList(brandData))
+      } catch (error) {
+        console.error(error.message)
+      }
+    }
+
+    fetchBrands()
+  }, [filters.categoryId])
 
   useEffect(() => {
     setFilters({

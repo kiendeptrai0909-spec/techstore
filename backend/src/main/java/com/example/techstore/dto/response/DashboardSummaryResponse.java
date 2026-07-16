@@ -20,6 +20,11 @@ public class DashboardSummaryResponse {
     private Long totalOrders;
 
     /*
+     * Số đơn hàng hôm nay.
+     */
+    private Long todayOrders;
+
+    /*
      * Số đơn hàng đang chờ xử lý.
      */
     private Long pendingOrders;

@@ -23,9 +23,9 @@ public class ChatMessage {
     @JoinColumn(name = "session_id", nullable = false)
     private ChatSession session;
 
-    // Người gửi tin nhắn, có thể là customer hoặc staff
+    // Người gửi tin nhắn, có thể là customer hoặc staff (null nếu là bot)
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "sender_id", nullable = false)
+    @JoinColumn(name = "sender_id")
     private User sender;
 
     @Column(nullable = false, columnDefinition = "TEXT")

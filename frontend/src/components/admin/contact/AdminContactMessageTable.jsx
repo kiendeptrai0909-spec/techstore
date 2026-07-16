@@ -74,7 +74,7 @@ function AdminContactMessageTable({ messages = [], loading }) {
               <th className="px-4 py-3 font-bold">Liên hệ</th>
               <th className="px-4 py-3 font-bold">Chủ đề</th>
               <th className="px-4 py-3 font-bold">Nội dung</th>
-              <th className="px-4 py-3 font-bold">Trạng thái</th>
+              <th className="w-40 px-4 py-3 font-bold">Trạng thái</th>
               <th className="px-4 py-3 font-bold">Ngày gửi</th>
               <th className="px-4 py-3 text-center font-bold">Thao tác</th>
             </tr>

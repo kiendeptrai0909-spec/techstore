@@ -34,4 +34,4 @@ public class ProductRequest {
 
     @Valid
     private List<ProductVariantRequest> variants;
-}
+}

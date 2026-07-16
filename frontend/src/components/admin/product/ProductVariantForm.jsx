@@ -1,6 +1,11 @@
+import { useState } from 'react'
 import { Plus, Trash2 } from 'lucide-react'
+import { uploadApi } from '../../../api/uploadApi'
 
-function ProductVariantForm({ variants, setVariants }) {
+function ProductVariantForm({ variants, setVariants, specificationKeys = [] }) {
+  const [uploadingVariantIndex, setUploadingVariantIndex] = useState(null)
+  const [uploadError, setUploadError] = useState('')
+
   const handleAddVariant = () => {
     setVariants((prev) => [
       ...prev,
@@ -11,6 +16,8 @@ function ProductVariantForm({ variants, setVariants }) {
         salePrice: '',
         stock: '',
         thumbnailUrl: '',
+        description: '',
+        specifications: {},
       },
     ])
   }
@@ -30,6 +37,64 @@ function ProductVariantForm({ variants, setVariants }) {
           : variant
       )
     )
+  }
+
+  const handleSpecChange = (index, keyId, value) => {
+    setVariants((prev) =>
+      prev.map((variant, itemIndex) =>
+        itemIndex === index
+          ? {
+              ...variant,
+              specifications: {
+                ...(variant.specifications || {}),
+                [keyId]: value,
+              },
+            }
+          : variant
+      )
+    )
+  }
+
+  const handleImageChange = async (index, event) => {
+    const file = event.target.files?.[0]
+    if (!file) return
+
+    if (!file.type.startsWith('image/')) {
+      setUploadError(`Biến thể #${index + 1}: Vui lòng chọn file hình ảnh`)
+      return
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setUploadError(`Biến thể #${index + 1}: Kích thước ảnh không được vượt quá 5MB`)
+      return
+    }
+
+    setUploadingVariantIndex(index)
+    setUploadError('')
+
+    try {
+      const response = await uploadApi.uploadImage(file)
+      const imageUrl =
+        response?.data?.url ||
+        response?.url ||
+        response?.data?.secureUrl ||
+        response?.secureUrl ||
+        ''
+
+      if (imageUrl) {
+        handleChangeVariant(index, 'thumbnailUrl', imageUrl)
+      } else {
+        setUploadError(`Biến thể #${index + 1}: Lỗi không lấy được đường dẫn ảnh`)
+      }
+    } catch (error) {
+      setUploadError(
+        `Biến thể #${index + 1}: ` +
+          (error?.response?.data?.message || error?.message || 'Upload ảnh thất bại')
+      )
+    } finally {
+      setUploadingVariantIndex(null)
+      event.target.value = ''
+    }
   }
 
   return (
@@ -60,6 +125,12 @@ function ProductVariantForm({ variants, setVariants }) {
         </div>
       ) : (
         <div className="space-y-4">
+          {uploadError && (
+            <div className="rounded border border-red-200 bg-red-50 px-4 py-3 text-sm font-semibold text-red-600">
+              {uploadError}
+            </div>
+          )}
+
           {variants.map((variant, index) => (
             <div key={index} className="rounded border bg-gray-50 p-4">
               <div className="mb-3 flex items-center justify-between">
@@ -126,14 +197,79 @@ function ProductVariantForm({ variants, setVariants }) {
                   placeholder="VD: 20"
                 />
 
-                <FormField
-                  label="Ảnh biến thể"
-                  value={variant.thumbnailUrl}
-                  onChange={(value) =>
-                    handleChangeVariant(index, 'thumbnailUrl', value)
-                  }
-                  placeholder="https://..."
-                />
+                <div className="md:col-span-2 xl:col-span-1">
+                  <label className="mb-2 block text-sm font-bold text-gray-700">
+                    Ảnh biến thể
+                  </label>
+                  
+                  <div className="space-y-3">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => handleImageChange(index, e)}
+                      disabled={uploadingVariantIndex === index}
+                      className="block h-11 w-full rounded border px-4 py-2 text-sm outline-none file:mr-4 file:rounded file:border-0 file:bg-red-600 file:px-4 file:py-2 file:text-sm file:font-bold file:text-white hover:file:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
+                    />
+
+                    {uploadingVariantIndex === index && (
+                      <p className="text-sm font-semibold text-blue-600">
+                        Đang upload ảnh lên Cloudinary...
+                      </p>
+                    )}
+
+                    {variant.thumbnailUrl && (
+                      <div className="rounded border bg-white p-3">
+                        <img
+                          src={variant.thumbnailUrl}
+                          alt={`Variant ${index + 1}`}
+                          className="h-20 w-20 rounded border object-contain"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => handleChangeVariant(index, 'thumbnailUrl', '')}
+                          className="mt-2 text-xs font-bold text-red-600 hover:underline"
+                        >
+                          Xóa ảnh
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="md:col-span-2">
+                  <label className="mb-2 block text-sm font-bold text-gray-700">
+                    Mô tả biến thể
+                  </label>
+                  <textarea
+                    value={variant.description || ''}
+                    onChange={(e) => handleChangeVariant(index, 'description', e.target.value)}
+                    rows="3"
+                    placeholder="Mô tả riêng cho biến thể này..."
+                    className="w-full rounded border bg-white px-4 py-2 text-sm outline-none focus:border-red-500"
+                  />
+                </div>
+
+                {specificationKeys.length > 0 && (
+                  <div className="md:col-span-2 bg-white rounded border p-4 mt-2">
+                    <h4 className="mb-3 text-sm font-bold text-gray-800">Thông số kỹ thuật biến thể</h4>
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {specificationKeys.map((key) => (
+                        <div key={key.id}>
+                          <label className="mb-1 block text-xs font-bold text-gray-600">
+                            {key.name} {key.unit ? `(${key.unit})` : ''}
+                          </label>
+                          <input
+                            type="text"
+                            value={(variant.specifications && variant.specifications[key.id]) || ''}
+                            onChange={(e) => handleSpecChange(index, key.id, e.target.value)}
+                            placeholder={`Nhập ${key.name.toLowerCase()}`}
+                            className="h-10 w-full rounded border bg-white px-3 text-xs outline-none focus:border-red-500"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           ))}

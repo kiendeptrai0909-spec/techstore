@@ -13,12 +13,16 @@ import {
   MessageSquare,
   LogOut,
   Home,
+  Award,
 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 
 function AdminLayout() {
   const navigate = useNavigate()
   const { user, logout } = useAuth()
+  
+  const role = user?.role || user?.authorities?.[0]?.authority
+  const isStaff = role === 'ROLE_STAFF' || role === 'STAFF'
 
   const handleLogout = () => {
     logout()
@@ -41,6 +45,11 @@ function AdminLayout() {
       label: 'Danh mục',
       path: '/admin/categories',
       icon: Tags,
+    },
+    {
+      label: 'Thương hiệu',
+      path: '/admin/brands',
+      icon: Award,
     },
     {
       label: 'Đơn hàng',
@@ -89,6 +98,12 @@ function AdminLayout() {
     },
   ]
 
+  const visibleMenuItems = isStaff 
+    ? menuItems.filter(item => 
+        ['Dashboard', 'Đơn hàng', 'Khách hàng', 'Sản phẩm', 'Chat', 'FAQ', 'Liên hệ', 'Thương hiệu'].includes(item.label)
+      )
+    : menuItems;
+
   const navClassName = ({ isActive }) =>
     isActive
       ? 'flex items-center gap-3 rounded bg-red-600 px-4 py-3 font-bold text-white'
@@ -96,7 +111,7 @@ function AdminLayout() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-      <aside className="fixed left-0 top-0 z-40 hidden h-screen w-260px border-r bg-white lg:block lg:w-[260px]">
+      <aside className="fixed left-0 top-0 z-40 hidden h-screen w-[260px] overflow-y-auto border-r bg-white lg:block">
         <div className="flex h-16 items-center border-b px-5">
           <div className="flex h-10 w-10 items-center justify-center rounded bg-red-600 text-xl font-black text-white">
             T
@@ -111,7 +126,7 @@ function AdminLayout() {
         </div>
 
         <nav className="space-y-1 p-4">
-          {menuItems.map((item) => {
+          {visibleMenuItems.map((item) => {
             const Icon = item.icon
 
             return (

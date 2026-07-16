@@ -3,16 +3,18 @@ import { useAuth } from '../../contexts/AuthContext'
 
 function AdminProtectedRoute({ children }) {
   const location = useLocation()
-  const { loading, isAuthenticated, user } = useAuth()
 
-  const role = user?.role || user?.authorities?.[0]?.authority
-  const isAdmin = role === 'ROLE_ADMIN' || role === 'ADMIN'
+  const {
+    loading,
+    isAuthenticated,
+    isAdminOrStaff,
+  } = useAuth()
 
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-gray-100">
         <div className="rounded bg-white px-6 py-4 font-semibold shadow-sm">
-          Đang kiểm tra quyền admin...
+          Đang kiểm tra quyền truy cập...
         </div>
       </div>
     )
@@ -28,7 +30,7 @@ function AdminProtectedRoute({ children }) {
     )
   }
 
-  if (!isAdmin) {
+  if (!isAdminOrStaff) {
     return <Navigate to="/" replace />
   }
 

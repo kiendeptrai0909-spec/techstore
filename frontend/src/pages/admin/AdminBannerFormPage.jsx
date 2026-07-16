@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router'
 import { ArrowLeft, Save } from 'lucide-react'
 
 import { adminBannerApi } from '../../api/adminBannerApi'
+import { uploadApi } from '../../api/uploadApi'
 
 function AdminBannerFormPage() {
   const { bannerId } = useParams()
@@ -23,6 +24,7 @@ function AdminBannerFormPage() {
 
   const [loading, setLoading] = useState(isEditMode)
   const [submitting, setSubmitting] = useState(false)
+  const [uploadingImage, setUploadingImage] = useState(false)
   const [message, setMessage] = useState('')
   const [errors, setErrors] = useState({})
 
@@ -75,6 +77,53 @@ function AdminBannerFormPage() {
     setMessage('')
   }
 
+  const handleImageChange = async (event) => {
+    const file = event.target.files?.[0]
+
+    if (!file) return
+
+    if (!file.type.startsWith('image/')) {
+      setMessage('Vui lòng chọn file hình ảnh')
+      return
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setMessage('Kích thước ảnh không được vượt quá 5MB')
+      return
+    }
+
+    setUploadingImage(true)
+    setMessage('')
+
+    try {
+      const response = await uploadApi.uploadImage(file)
+
+      const imageUrl =
+        response?.data?.url ||
+        response?.url ||
+        response?.data?.secureUrl ||
+        response?.secureUrl ||
+        ''
+
+      if (!imageUrl) {
+        setMessage('Upload ảnh thành công nhưng không nhận được đường dẫn ảnh')
+        return
+      }
+
+      setFormData((prev) => ({ ...prev, imageUrl }))
+      setErrors((prev) => ({ ...prev, imageUrl: '' }))
+    } catch (error) {
+      setMessage(
+        error?.response?.data?.message ||
+          error?.message ||
+          'Upload ảnh thất bại'
+      )
+    } finally {
+      setUploadingImage(false)
+      event.target.value = ''
+    }
+  }
+
   const validateForm = () => {
     const nextErrors = {}
 
@@ -83,7 +132,7 @@ function AdminBannerFormPage() {
     }
 
     if (!formData.imageUrl.trim()) {
-      nextErrors.imageUrl = 'Ảnh banner không được để trống'
+      nextErrors.imageUrl = 'Vui lòng upload ảnh banner'
     }
 
     if (!formData.position) {
@@ -190,11 +239,15 @@ function AdminBannerFormPage() {
 
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || uploadingImage}
             className="inline-flex items-center gap-2 rounded bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
             <Save size={20} />
-            {submitting ? 'Đang lưu...' : 'Lưu banner'}
+            {uploadingImage
+              ? 'Đang upload ảnh...'
+              : submitting
+                ? 'Đang lưu...'
+                : 'Lưu banner'}
           </button>
         </div>
       </div>
@@ -297,13 +350,59 @@ function AdminBannerFormPage() {
             </div>
 
             <div className="md:col-span-2">
-              <FormField
-                label="URL ảnh banner"
-                value={formData.imageUrl}
-                onChange={(value) => handleChange('imageUrl', value)}
-                error={errors.imageUrl}
-                placeholder="https://..."
-              />
+              <label className="mb-2 block text-sm font-bold text-gray-700">
+                Ảnh banner
+              </label>
+
+              <div className="space-y-3">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  disabled={uploadingImage}
+                  className={
+                    errors.imageUrl
+                      ? 'block h-11 w-full rounded border border-red-500 px-4 py-2 text-sm outline-none file:mr-4 file:rounded file:border-0 file:bg-red-600 file:px-4 file:py-2 file:text-sm file:font-bold file:text-white hover:file:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60'
+                      : 'block h-11 w-full rounded border px-4 py-2 text-sm outline-none file:mr-4 file:rounded file:border-0 file:bg-red-600 file:px-4 file:py-2 file:text-sm file:font-bold file:text-white hover:file:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60'
+                  }
+                />
+
+                {errors.imageUrl && (
+                  <p className="text-sm text-red-600">{errors.imageUrl}</p>
+                )}
+
+                {uploadingImage && (
+                  <p className="text-sm font-semibold text-blue-600">
+                    Đang upload ảnh lên Cloudinary...
+                  </p>
+                )}
+
+                {formData.imageUrl && (
+                  <div className="rounded border bg-gray-50 p-3">
+                    <p className="mb-2 text-sm font-bold text-gray-700">
+                      Ảnh đã chọn
+                    </p>
+
+                    <img
+                      src={formData.imageUrl}
+                      alt="Ảnh banner"
+                      className="h-40 w-full rounded border bg-white object-cover"
+                    />
+
+                    <p className="mt-2 break-all text-xs text-gray-500">
+                      {formData.imageUrl}
+                    </p>
+
+                    <button
+                      type="button"
+                      onClick={() => handleChange('imageUrl', '')}
+                      className="mt-3 rounded border border-red-200 px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-50"
+                    >
+                      Xóa ảnh
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

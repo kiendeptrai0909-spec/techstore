@@ -9,6 +9,7 @@ import lombok.Getter;
 public class ProductSpecificationResponse {
 
     private Long id;
+    private Long specificationKeyId;
     private String name;
     private String value;
     private String unit;
@@ -17,6 +18,7 @@ public class ProductSpecificationResponse {
     public static ProductSpecificationResponse from(ProductSpecification specification) {
         return ProductSpecificationResponse.builder()
                 .id(specification.getId())
+                .specificationKeyId(specification.getSpecificationKey().getId())
                 .name(specification.getSpecificationKey().getName())
                 .value(specification.getValue())
                 .unit(specification.getSpecificationKey().getUnit())

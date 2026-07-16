@@ -57,41 +57,26 @@ function AdminCustomerPage() {
     ? pageData
     : pageData?.content || []
 
-  const filteredCustomers = customers.filter((customer) => {
-    const keyword = filters.keyword.trim().toLowerCase()
-
-    const fullName = customer.fullName || customer.name || ''
-    const email = customer.email || ''
-    const phone = customer.phone || ''
-
-    const matchKeyword =
-      !keyword ||
-      fullName.toLowerCase().includes(keyword) ||
-      email.toLowerCase().includes(keyword) ||
-      phone.toLowerCase().includes(keyword)
-
-    const matchStatus =
-      !filters.status || customer.status === filters.status
-
-    return matchKeyword && matchStatus
-  })
-
-  const handleSubmitFilter = (event) => {
-    event.preventDefault()
-
+  // Update searchParams when inputs change (automatic search)
+  const handleKeywordChange = (keyword) => {
+    setFilters((prev) => ({ ...prev, keyword }))
     const nextParams = {
       page: '0',
       size: String(pageSize),
     }
+    if (keyword.trim()) nextParams.keyword = keyword.trim()
+    if (filters.status) nextParams.status = filters.status
+    setSearchParams(nextParams)
+  }
 
-    if (filters.keyword.trim()) {
-      nextParams.keyword = filters.keyword.trim()
+  const handleStatusChange = (status) => {
+    setFilters((prev) => ({ ...prev, status }))
+    const nextParams = {
+      page: '0',
+      size: String(pageSize),
     }
-
-    if (filters.status) {
-      nextParams.status = filters.status
-    }
-
+    if (filters.keyword.trim()) nextParams.keyword = filters.keyword.trim()
+    if (status) nextParams.status = status
     setSearchParams(nextParams)
   }
 
@@ -106,6 +91,7 @@ function AdminCustomerPage() {
       size: String(pageSize),
     })
   }
+
 
   const handleToggleStatus = async (customer) => {
   const nextStatus = customer.status === 'ACTIVE' ? 'BLOCKED' : 'ACTIVE'
@@ -179,10 +165,7 @@ function AdminCustomerPage() {
 
       <div className="space-y-5">
         <div className="rounded-lg bg-white p-5 shadow-sm">
-          <form
-            onSubmit={handleSubmitFilter}
-            className="grid gap-4 lg:grid-cols-[1fr_220px_140px]"
-          >
+          <div className="grid gap-4 lg:grid-cols-[1fr_220px_100px]">
             <div>
               <label className="mb-2 block text-sm font-bold text-gray-700">
                 Tìm kiếm
@@ -190,12 +173,7 @@ function AdminCustomerPage() {
 
               <input
                 value={filters.keyword}
-                onChange={(event) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    keyword: event.target.value,
-                  }))
-                }
+                onChange={(event) => handleKeywordChange(event.target.value)}
                 placeholder="Tên, email, số điện thoại..."
                 className="h-11 w-full rounded border px-4 text-sm outline-none focus:border-red-500"
               />
@@ -208,12 +186,7 @@ function AdminCustomerPage() {
 
               <select
                 value={filters.status}
-                onChange={(event) =>
-                  setFilters((prev) => ({
-                    ...prev,
-                    status: event.target.value,
-                  }))
-                }
+                onChange={(event) => handleStatusChange(event.target.value)}
                 className="h-11 w-full rounded border px-4 text-sm outline-none focus:border-red-500"
               >
                 <option value="">Tất cả</option>
@@ -222,23 +195,16 @@ function AdminCustomerPage() {
               </select>
             </div>
 
-            <div className="flex items-end gap-2">
-              <button
-                type="submit"
-                className="h-11 flex-1 rounded bg-red-600 px-4 text-sm font-black text-white hover:bg-red-700"
-              >
-                Lọc
-              </button>
-
+            <div className="flex items-end">
               <button
                 type="button"
                 onClick={handleResetFilter}
-                className="h-11 rounded border px-4 text-sm font-bold text-gray-700 hover:border-red-500 hover:text-red-600"
+                className="h-11 w-full rounded border text-sm font-bold text-gray-700 hover:border-red-500 hover:text-red-600"
               >
-                Xóa
+                Xóa lọc
               </button>
             </div>
-          </form>
+          </div>
         </div>
 
         {message && (
@@ -273,14 +239,14 @@ function AdminCustomerPage() {
                     Đang tải khách hàng...
                   </td>
                 </tr>
-              ) : filteredCustomers.length === 0 ? (
+              ) : customers.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-4 py-8 text-center text-gray-500">
                     Không có khách hàng nào.
                   </td>
                 </tr>
               ) : (
-                filteredCustomers.map((customer) => (
+                customers.map((customer) => (
                   <tr key={customer.id} className="border-t">
                     <td className="px-4 py-4">
                       <div className="font-black text-gray-900">

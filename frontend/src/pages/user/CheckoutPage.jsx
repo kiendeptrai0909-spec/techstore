@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router'
 import { ShoppingBag } from 'lucide-react'
 
 import { useAuth } from '../../contexts/AuthContext'
+import { useCart } from '../../contexts/CartContext'
 import { cartApi } from '../../api/cartApi'
 import { couponApi } from '../../api/couponApi'
 import { orderApi } from '../../api/orderApi'
@@ -15,6 +16,7 @@ import CouponBox from '../../components/checkout/CouponBox'
 function CheckoutPage() {
   const navigate = useNavigate()
   const { user } = useAuth()
+  const { clearCartState } = useCart()
 
   const [cart, setCart] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -207,6 +209,8 @@ function CheckoutPage() {
 
       const order = await orderApi.createOrder(payload)
       const orderId = order.id || order.orderId
+
+      clearCartState()
 
       navigate(`/orders/success/${orderId}`, {
         replace: true,

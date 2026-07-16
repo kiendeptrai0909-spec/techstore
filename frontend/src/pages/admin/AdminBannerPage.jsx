@@ -64,7 +64,7 @@ function AdminBannerPage() {
     ? pageData
     : pageData?.content || []
   const filteredBanners = banners.filter((banner) => {
-    const keyword = filters.keyword.trim().toLowerCase()
+    const keyword = (searchParams.get('keyword') || '').trim().toLowerCase()
 
     const matchKeyword =
       !keyword ||
@@ -72,11 +72,13 @@ function AdminBannerPage() {
       banner.linkUrl?.toLowerCase().includes(keyword) ||
       banner.imageUrl?.toLowerCase().includes(keyword)
 
+    const positionParam = searchParams.get('position') || ''
     const matchPosition =
-      !filters.position || banner.position === filters.position
+      !positionParam || banner.position === positionParam
 
+    const statusParam = searchParams.get('status') || ''
     const matchStatus =
-      !filters.status || banner.status === filters.status
+      !statusParam || banner.status === statusParam
 
     return matchKeyword && matchPosition && matchStatus
   })

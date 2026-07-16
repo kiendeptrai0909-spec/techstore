@@ -12,4 +12,8 @@ export const orderApi = {
   getOrderById: (orderId) => {
     return axiosClient.get(`/orders/${orderId}`)
   },
+
+  cancelOrder: (orderId) => {
+    return axiosClient.post(`/orders/${orderId}/cancel`)
+  },
 }

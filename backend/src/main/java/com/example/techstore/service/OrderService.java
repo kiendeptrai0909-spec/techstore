@@ -52,6 +52,7 @@ public class OrderService {
     private final PaymentRepository paymentRepository;
     private final ProductVariantRepository productVariantRepository;
     private final CouponService couponService;
+    private final OrderInventoryService orderInventoryService;
 
     @Transactional
     public OrderResponse createOrder(CreateOrderRequest request) {
@@ -327,5 +328,42 @@ public class OrderService {
                     "Bạn đang có quá nhiều đơn chuyển khoản chưa thanh toán. Vui lòng thanh toán hoặc chờ hệ thống hủy đơn quá hạn trước khi đặt tiếp."
             );
         }
+    }
+
+    @Transactional
+    public OrderResponse cancelOrder(Long orderId) {
+        User user = getCurrentUser();
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy đơn hàng"));
+
+        if (!order.getUser().getId().equals(user.getId())) {
+            throw new ResourceNotFoundException("Không tìm thấy đơn hàng");
+        }
+
+        if (order.getOrderStatus() != OrderStatus.PENDING) {
+            throw new BadRequestException("Chỉ có thể hủy đơn hàng ở trạng thái chờ xác nhận");
+        }
+
+        Payment payment = paymentRepository.findByOrderId(order.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy thông tin thanh toán"));
+
+        if (payment.getStatus() != PaymentStatus.PENDING) {
+            throw new BadRequestException("Đơn hàng đã thanh toán, không thể hủy");
+        }
+
+        // Cập nhật trạng thái
+        order.setOrderStatus(OrderStatus.CANCELLED);
+        orderRepository.save(order);
+
+        payment.setStatus(PaymentStatus.FAILED);
+        paymentRepository.save(payment);
+
+        // Hoàn kho
+        orderInventoryService.restoreStock(order);
+
+        // Hoàn coupon
+        couponService.releaseCoupon(order);
+
+        return toOrderResponse(order);
     }
 }

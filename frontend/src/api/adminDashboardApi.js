@@ -41,7 +41,13 @@ export const adminDashboardApi = {
   getLowStockProducts: (params = {}) => {
     return axiosClient.get('/admin/dashboard/low-stock-products', { params })
   },
+getOldStockProducts: (params = {}) => {
+  return axiosClient.get('/admin/dashboard/old-stock-products', { params })
+},
 
+getStagnantProducts: (params = {}) => {
+  return axiosClient.get('/admin/dashboard/stagnant-products', { params })
+},
   // Đơn hàng gần đây
   // params: { limit: 5 }
   getRecentOrders: (params = {}) => {

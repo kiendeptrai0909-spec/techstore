@@ -27,6 +27,7 @@ import {
 } from 'recharts'
 import { adminDashboardApi } from '../../api/adminDashboardApi'
 import { formatCurrency } from '../../utils/formatCurrency'
+import { useAuth } from '../../contexts/AuthContext'
 
 const CHART_COLORS = [
   '#ef4444',
@@ -40,6 +41,10 @@ const CHART_COLORS = [
 ]
 
 function AdminDashboardPage() {
+  const { user } = useAuth()
+  const role = user?.role || user?.authorities?.[0]?.authority
+  const isStaff = role === 'ROLE_STAFF' || role === 'STAFF'
+
   const [summary, setSummary] = useState(null)
   const [revenueStatistics, setRevenueStatistics] = useState([])
   const [topProducts, setTopProducts] = useState([])
@@ -47,6 +52,8 @@ function AdminDashboardPage() {
   const [brandStatistics, setBrandStatistics] = useState([])
   const [paymentStatistics, setPaymentStatistics] = useState([])
   const [lowStockProducts, setLowStockProducts] = useState([])
+  const [oldStockProducts, setOldStockProducts] = useState([])
+  const [stagnantProducts, setStagnantProducts] = useState([])
   const [recentOrders, setRecentOrders] = useState([])
 
   const [fromDate, setFromDate] = useState('')
@@ -59,76 +66,103 @@ function AdminDashboardPage() {
   const [message, setMessage] = useState('')
 
   useEffect(() => {
-  fetchDashboard()
-}, [dateFilter])
+    let isMounted = true
 
-  const fetchDashboard = async () => {
-    setLoading(true)
-    setMessage('')
-    const dateParams = {}
+    const fetchDashboard = async () => {
+      const dateParams = {}
 
-    if (dateFilter.fromDate) {
-      dateParams.fromDate = dateFilter.fromDate
+      if (dateFilter.fromDate) {
+        dateParams.fromDate = dateFilter.fromDate
+      }
+
+      if (dateFilter.toDate) {
+        dateParams.toDate = dateFilter.toDate
+      }
+
+      try {
+        const [
+          summaryData,
+          revenueData,
+          topProductData,
+          categoryData,
+          brandData,
+          paymentData,
+          lowStockData,
+          oldStockData,
+          stagnantData,
+          recentOrderData,
+        ] = await Promise.all([
+          adminDashboardApi.getSummary(),
+          adminDashboardApi.getRevenueStatistics({
+            type: dateFilter.fromDate || dateFilter.toDate ? 'day' : 'month',
+            ...dateParams,
+          }),
+          adminDashboardApi.getTopProducts({
+            limit: 5,
+          }),
+          adminDashboardApi.getCategoryStatistics({
+            limit: 8,
+            ...dateParams,
+          }),
+          adminDashboardApi.getBrandStatistics({
+            limit: 8,
+            ...dateParams,
+          }),
+          adminDashboardApi.getPaymentStatistics(dateParams),
+          adminDashboardApi.getLowStockProducts({
+            limit: 5,
+            threshold: 5,
+          }),
+          isStaff ? Promise.resolve([]) : adminDashboardApi.getOldStockProducts({
+            limit: 5,
+            days: 180,
+          }),
+          isStaff ? Promise.resolve([]) : adminDashboardApi.getStagnantProducts({
+            limit: 5,
+            days: 90,
+          }),
+          adminDashboardApi.getRecentOrders({
+            limit: 5,
+          }),
+        ])
+
+        if (!isMounted) {
+          return
+        }
+
+        setSummary(unwrapData(summaryData))
+        setRevenueStatistics(normalizeList(revenueData))
+        setTopProducts(normalizeList(topProductData))
+        setCategoryStatistics(normalizeList(categoryData))
+        setBrandStatistics(normalizeList(brandData))
+        setPaymentStatistics(normalizeList(paymentData))
+        setLowStockProducts(normalizeList(lowStockData))
+        setOldStockProducts(normalizeList(oldStockData))
+        setStagnantProducts(normalizeList(stagnantData))
+        setRecentOrders(normalizeList(recentOrderData))
+      } catch (error) {
+        if (!isMounted) {
+          return
+        }
+
+        setMessage(
+          error?.response?.data?.message ||
+            error?.message ||
+            'Không thể tải dữ liệu dashboard'
+        )
+      } finally {
+        if (isMounted) {
+          setLoading(false)
+        }
+      }
     }
 
-    if (dateFilter.toDate) {
-      dateParams.toDate = dateFilter.toDate
-    }
-    try {
-      const [
-        summaryData,
-        revenueData,
-        topProductData,
-        categoryData,
-        brandData,
-        paymentData,
-        lowStockData,
-        recentOrderData,
-      ] = await Promise.all([
-        adminDashboardApi.getSummary(),
-        adminDashboardApi.getRevenueStatistics({
-  type: dateFilter.fromDate || dateFilter.toDate ? 'day' : 'month',
-  ...dateParams,
-}),
-        adminDashboardApi.getTopProducts({
-          limit: 5,
-        }),
-        adminDashboardApi.getCategoryStatistics({
-          limit: 8,
-          ...dateParams,
-        }),
-        adminDashboardApi.getBrandStatistics({
-          limit: 8,
-          ...dateParams,
-        }),
-        adminDashboardApi.getPaymentStatistics(dateParams),
-        adminDashboardApi.getLowStockProducts({
-          limit: 5,
-          threshold: 5,
-        }),
-        adminDashboardApi.getRecentOrders({
-          limit: 5,
-        }),
-      ])
+    fetchDashboard()
 
-      setSummary(unwrapData(summaryData))
-      setRevenueStatistics(normalizeList(revenueData))
-      setTopProducts(normalizeList(topProductData))
-      setCategoryStatistics(normalizeList(categoryData))
-      setBrandStatistics(normalizeList(brandData))
-      setPaymentStatistics(normalizeList(paymentData))
-      setLowStockProducts(normalizeList(lowStockData))
-      setRecentOrders(normalizeList(recentOrderData))
-    } catch (error) {
-      setMessage(
-        error?.response?.data?.message ||
-        error?.message ||
-        'Không thể tải dữ liệu dashboard'
-      )
-    } finally {
-      setLoading(false)
+    return () => {
+      isMounted = false
     }
-  }
+  }, [dateFilter])
 
   const cards = useMemo(() => {
     return [
@@ -276,7 +310,8 @@ const orderStatusCards = useMemo(() => {
             type="date"
             value={fromDate}
             onChange={(event) => setFromDate(event.target.value)}
-            className="h-10 w-full rounded border border-gray-300 bg-white px-3 text-sm font-semibold outline-none focus:border-red-500"
+            disabled={isStaff}
+            className="h-10 w-full rounded border border-gray-300 bg-white px-3 text-sm font-semibold outline-none focus:border-red-500 disabled:bg-gray-100 disabled:text-gray-500 disabled:cursor-not-allowed"
           />
         </label>
 
@@ -289,14 +324,16 @@ const orderStatusCards = useMemo(() => {
             type="date"
             value={toDate}
             onChange={(event) => setToDate(event.target.value)}
-            className="h-10 w-full rounded border border-gray-300 bg-white px-3 text-sm font-semibold outline-none focus:border-red-500"
+            disabled={isStaff}
+            className="h-10 w-full rounded border border-gray-300 bg-white px-3 text-sm font-semibold outline-none focus:border-red-500 disabled:bg-gray-100 disabled:text-gray-500 disabled:cursor-not-allowed"
           />
         </label>
 
         <button
           type="button"
           onClick={handleApplyDateFilter}
-          className="h-10 rounded bg-red-600 px-5 text-sm font-black text-white hover:bg-red-700"
+          disabled={isStaff}
+          className="h-10 rounded bg-red-600 px-5 text-sm font-black text-white hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Lọc
         </button>
@@ -304,7 +341,8 @@ const orderStatusCards = useMemo(() => {
         <button
           type="button"
           onClick={handleClearDateFilter}
-          className="h-10 rounded border border-gray-300 bg-white px-5 text-sm font-black text-gray-700 hover:bg-gray-50"
+          disabled={isStaff}
+          className="h-10 rounded border border-gray-300 bg-white px-5 text-sm font-black text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Bỏ lọc
         </button>
@@ -319,62 +357,87 @@ const orderStatusCards = useMemo(() => {
         </div>
       )}
 
-      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {cards.map((card) => {
-          const Icon = card.icon
+      {!isStaff && (
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {cards.map((card) => {
+            const Icon = card.icon
 
-          return (
-            <div
-              key={card.title}
-              className="rounded-lg bg-white p-5 shadow-sm"
-            >
-              <div className="flex items-center justify-between gap-4">
-                <div>
-                  <p className="text-sm font-semibold text-gray-500">
-                    {card.title}
-                  </p>
-                  <p className="mt-2 text-2xl font-black text-gray-900">
-                    {card.value}
-                  </p>
-                </div>
+            return (
+              <div
+                key={card.title}
+                className="rounded-lg bg-white p-5 shadow-sm"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-semibold text-gray-500">
+                      {card.title}
+                    </p>
+                    <p className="mt-2 text-2xl font-black text-gray-900">
+                      {card.value}
+                    </p>
+                  </div>
 
-                <div
-                  className={`flex h-12 w-12 items-center justify-center rounded-full ${card.color}`}
-                >
-                  <Icon size={24} />
+                  <div
+                    className={`flex h-12 w-12 items-center justify-center rounded-full ${card.color}`}
+                  >
+                    <Icon size={24} />
+                  </div>
                 </div>
               </div>
-            </div>
-          )
-        })}
-      </div>
+            )
+          })}
+        </div>
+      )}
 
-      <div className="mt-6 grid gap-4 md:grid-cols-5">
-        {orderStatusCards.map((item) => (
-          <div
-            key={item.title}
-            className={`rounded-lg p-4 text-center shadow-sm ${item.color}`}
-          >
-            <p className="text-sm font-bold">{item.title}</p>
-            <p className="mt-2 text-2xl font-black">{item.value}</p>
+      {!isStaff && (
+        <div className="mt-6 grid gap-4 md:grid-cols-5">
+          {orderStatusCards.map((item) => (
+            <div
+              key={item.title}
+              className={`rounded-lg p-4 text-center shadow-sm ${item.color}`}
+            >
+              <p className="text-sm font-bold">{item.title}</p>
+              <p className="mt-2 text-2xl font-black">{item.value}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {isStaff && (
+        <div className="grid gap-4 md:grid-cols-3">
+          <div className="rounded-lg bg-blue-50 p-5 text-center shadow-sm text-blue-700">
+            <p className="text-sm font-bold">Đơn hàng hôm nay</p>
+            <p className="mt-2 text-3xl font-black">{toNumber(summary?.todayOrders)}</p>
           </div>
-        ))}
-      </div>
+          <div className="rounded-lg bg-yellow-50 p-5 text-center shadow-sm text-yellow-700">
+            <p className="text-sm font-bold">Đơn cần xử lý</p>
+            <p className="mt-2 text-3xl font-black">{toNumber(summary?.pendingOrders)}</p>
+          </div>
+          <div className="rounded-lg bg-red-50 p-5 text-center shadow-sm text-red-700">
+            <p className="text-sm font-bold">Sản phẩm sắp hết hàng</p>
+            <p className="mt-2 text-3xl font-black">{lowStockProducts.length}</p>
+          </div>
+        </div>
+      )}
 
       <div className="mt-6 grid gap-4 md:grid-cols-3">
-        <SmallSummaryCard
-          title="Tổng biến thể"
-          value={toNumber(summary?.totalProductVariants)}
-          icon={Boxes}
-          color="bg-cyan-50 text-cyan-700"
-        />
+        {!isStaff && (
+          <>
+            <SmallSummaryCard
+              title="Tổng biến thể"
+              value={toNumber(summary?.totalProductVariants)}
+              icon={Boxes}
+              color="bg-cyan-50 text-cyan-700"
+            />
 
-        <SmallSummaryCard
-          title="Tổng đánh giá"
-          value={toNumber(summary?.totalReviews)}
-          icon={Star}
-          color="bg-amber-50 text-amber-700"
-        />
+            <SmallSummaryCard
+              title="Tổng đánh giá"
+              value={toNumber(summary?.totalReviews)}
+              icon={Star}
+              color="bg-amber-50 text-amber-700"
+            />
+          </>
+        )}
 
         <SmallSummaryCard
           title="Sản phẩm tồn kho thấp"
@@ -384,221 +447,254 @@ const orderStatusCards = useMemo(() => {
         />
       </div>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
-        <DashboardPanel
-          title="Doanh thu"
-          description="Thống kê doanh thu theo ngày hoặc theo tháng."
-          icon={TrendingUp}
-          iconClassName="text-green-600"
-        >
-          <RevenueLineChart data={revenueStatistics} />
-        </DashboardPanel>
+      {!isStaff && (
+        <>
+          <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_420px]">
+            <DashboardPanel
+              title="Doanh thu"
+              description="Thống kê doanh thu theo ngày hoặc theo tháng."
+              icon={TrendingUp}
+              iconClassName="text-green-600"
+            >
+              <RevenueLineChart data={revenueStatistics} />
+            </DashboardPanel>
 
-        <DashboardPanel
-          title="Sản phẩm bán chạy"
-          description="Top sản phẩm có số lượng bán tốt."
-          icon={Star}
-          iconClassName="text-orange-500"
-        >
-          {topProducts.length === 0 ? (
-            <EmptyBox text="Chưa có dữ liệu sản phẩm bán chạy." />
-          ) : (
-            <div className="space-y-4">
-              {topProducts.map((product, index) => {
-                const productName =
-                  product?.productName ||
-                  product?.name ||
-                  product?.product?.name ||
-                  'Sản phẩm'
+            <DashboardPanel
+              title="Sản phẩm bán chạy"
+              description="Top sản phẩm có số lượng bán tốt."
+              icon={Star}
+              iconClassName="text-orange-500"
+            >
+              {topProducts.length === 0 ? (
+                <EmptyBox text="Chưa có dữ liệu sản phẩm bán chạy." />
+              ) : (
+                <div className="space-y-4">
+                  {topProducts.map((product, index) => {
+                    const productName =
+                      product?.productName ||
+                      product?.name ||
+                      product?.product?.name ||
+                      'Sản phẩm'
 
-                const variantName =
-                  product?.variantName ||
-                  product?.productVariantName ||
-                  ''
+                    const variantName =
+                      product?.variantName ||
+                      product?.productVariantName ||
+                      ''
 
-                const soldQuantity = toNumber(
-                  product?.totalQuantitySold ||
-                  product?.soldQuantity ||
-                  product?.quantitySold ||
-                  product?.totalSold ||
-                  product?.quantity
-                )
+                    const soldQuantity = toNumber(
+                      product?.totalQuantitySold ||
+                      product?.soldQuantity ||
+                      product?.quantitySold ||
+                      product?.totalSold ||
+                      product?.quantity
+                    )
 
-                const revenue = toNumber(
-                  product?.totalRevenue ||
-                  product?.revenue ||
-                  product?.totalAmount
-                )
+                    const revenue = toNumber(
+                      product?.totalRevenue ||
+                      product?.revenue ||
+                      product?.totalAmount
+                    )
 
-                const imageUrl =
-                  product?.thumbnailUrl ||
-                  product?.imageUrl ||
-                  product?.productImage ||
-                  'https://placehold.co/120x120?text=TechStore'
+                    const imageUrl =
+                      product?.thumbnailUrl ||
+                      product?.imageUrl ||
+                      product?.productImage ||
+                      'https://placehold.co/120x120?text=TechStore'
 
-                return (
-                  <div
-                    key={`${productName}-${index}`}
-                    className="flex items-center gap-3 rounded border p-3"
-                  >
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-600 font-black text-white">
-                      {index + 1}
-                    </div>
-
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded border bg-white">
-                      <img
-                        src={imageUrl}
-                        alt={productName}
-                        className="max-h-full max-w-full object-contain"
-                      />
-                    </div>
-
-                    <div className="min-w-0 flex-1">
-                      <div className="line-clamp-2 font-bold text-gray-900">
-                        {productName}
-                      </div>
-
-                      {variantName && (
-                        <div className="mt-1 line-clamp-1 text-xs text-gray-500">
-                          {variantName}
+                    return (
+                      <div
+                        key={`${productName}-${index}`}
+                        className="flex items-center gap-3 rounded border p-3"
+                      >
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-600 font-black text-white">
+                          {index + 1}
                         </div>
-                      )}
 
-                      <div className="mt-1 text-sm text-gray-500">
-                        Đã bán: {soldQuantity}
+                        <div className="flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded border bg-white">
+                          <img
+                            src={imageUrl}
+                            alt={productName}
+                            className="max-h-full max-w-full object-contain"
+                          />
+                        </div>
+
+                        <div className="min-w-0 flex-1">
+                          <div className="line-clamp-2 font-bold text-gray-900">
+                            {productName}
+                          </div>
+
+                          {variantName && (
+                            <div className="mt-1 line-clamp-1 text-xs text-gray-500">
+                              {variantName}
+                            </div>
+                          )}
+
+                          <div className="mt-1 text-sm text-gray-500">
+                            Đã bán: {soldQuantity}
+                          </div>
+                        </div>
+
+                        <div className="text-right text-sm font-bold text-red-600">
+                          {formatCurrency(revenue)}
+                        </div>
                       </div>
-                    </div>
+                    )
+                  })}
+                </div>
+              )}
+            </DashboardPanel>
+          </div>
 
-                    <div className="text-right text-sm font-bold text-red-600">
-                      {formatCurrency(revenue)}
-                    </div>
+          <div className="mt-6 grid gap-6 xl:grid-cols-2">
+            <DashboardPanel
+              title="Doanh thu theo danh mục"
+              description="Thống kê số lượng bán và doanh thu theo danh mục."
+              icon={Tags}
+              iconClassName="text-purple-600"
+            >
+              <StatisticBarChart
+                data={categoryStatistics}
+                emptyText="Chưa có dữ liệu thống kê danh mục."
+                nameKey="categoryName"
+              />
+            </DashboardPanel>
+
+            <DashboardPanel
+              title="Doanh thu theo thương hiệu"
+              description="Thống kê số lượng bán và doanh thu theo thương hiệu."
+              icon={Package}
+              iconClassName="text-blue-600"
+            >
+              <StatisticBarChart
+                data={brandStatistics}
+                emptyText="Chưa có dữ liệu thống kê thương hiệu."
+                nameKey="brandName"
+              />
+            </DashboardPanel>
+          </div>
+
+          <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_520px]">
+            <DashboardPanel
+              title="Thống kê thanh toán"
+              description="Thống kê theo phương thức và trạng thái thanh toán."
+              icon={CreditCard}
+              iconClassName="text-indigo-600"
+            >
+              {paymentStatistics.length === 0 ? (
+                <EmptyBox text="Chưa có dữ liệu thanh toán." />
+              ) : (
+                <div className="grid gap-5 2xl:grid-cols-[260px_minmax(0,1fr)]">
+                  <PaymentPieChart data={paymentStatistics} />
+
+                  <div className="overflow-x-auto rounded border">
+                    <table className="min-w-[620px] w-full text-left text-sm">
+                      <thead className="bg-gray-50 text-gray-600">
+                        <tr>
+                          <th className="px-4 py-3">Phương thức</th>
+                          <th className="px-4 py-3">Trạng thái</th>
+                          <th className="px-4 py-3 text-center">Số đơn</th>
+                          <th className="whitespace-nowrap px-4 py-3 text-right">Số tiền</th>
+                        </tr>
+                      </thead>
+
+                      <tbody className="divide-y">
+                        {paymentStatistics.map((item, index) => (
+                          <tr key={index}>
+                            <td className="px-4 py-3 font-semibold text-gray-900">
+                              {formatPaymentMethod(item?.method)}
+                            </td>
+                            <td className="px-4 py-3">
+                              <StatusBadge value={item?.status} />
+                            </td>
+                            <td className="px-4 py-3 text-center font-bold">
+                              {toNumber(item?.totalOrders)}
+                            </td>
+                            <td className="whitespace-nowrap px-4 py-3 text-right font-bold text-red-600">
+                              {formatCurrency(toNumber(item?.totalAmount))}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
-                )
-              })}
-            </div>
-          )}
-        </DashboardPanel>
-      </div>
+                </div>
+              )}
+            </DashboardPanel>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-2">
-        <DashboardPanel
-          title="Doanh thu theo danh mục"
-          description="Thống kê số lượng bán và doanh thu theo danh mục."
-          icon={Tags}
-          iconClassName="text-purple-600"
-        >
-          <StatisticBarChart
-            data={categoryStatistics}
-            emptyText="Chưa có dữ liệu thống kê danh mục."
-            nameKey="categoryName"
-          />
-        </DashboardPanel>
+            <DashboardPanel
+              title="Sản phẩm tồn kho thấp"
+              description="Các biến thể sản phẩm có số lượng tồn kho thấp."
+              icon={AlertTriangle}
+              iconClassName="text-red-600"
+            >
+              {lowStockProducts.length === 0 ? (
+                <EmptyBox text="Không có sản phẩm tồn kho thấp." />
+              ) : (
+                <div className="space-y-3">
+                  {lowStockProducts.map((item, index) => {
+                    const productName = item?.productName || 'Sản phẩm'
+                    const variantName = item?.variantName || ''
+                    const sku = item?.productSku || item?.sku || ''
+                    const stock = toNumber(item?.stock)
 
-        <DashboardPanel
-          title="Doanh thu theo thương hiệu"
-          description="Thống kê số lượng bán và doanh thu theo thương hiệu."
-          icon={Package}
-          iconClassName="text-blue-600"
-        >
-          <StatisticBarChart
-            data={brandStatistics}
-            emptyText="Chưa có dữ liệu thống kê thương hiệu."
-            nameKey="brandName"
-          />
-        </DashboardPanel>
-      </div>
+                    return (
+                      <div
+                        key={`${sku}-${index}`}
+                        className="flex items-center justify-between gap-4 rounded border p-3"
+                      >
+                        <div className="min-w-0">
+                          <p className="line-clamp-1 font-bold text-gray-900">
+                            {productName}
+                          </p>
 
-      <div className="mt-6 grid gap-6 xl:grid-cols-2">
-        <DashboardPanel
-          title="Thống kê thanh toán"
-          description="Thống kê theo phương thức và trạng thái thanh toán."
-          icon={CreditCard}
-          iconClassName="text-indigo-600"
-        >
-          {paymentStatistics.length === 0 ? (
-            <EmptyBox text="Chưa có dữ liệu thanh toán." />
-          ) : (
-            <div className="grid gap-5 lg:grid-cols-[260px_minmax(0,1fr)]">
-              <PaymentPieChart data={paymentStatistics} />
+                          <p className="mt-1 line-clamp-1 text-xs text-gray-500">
+                            {variantName}
+                            {sku ? ` | SKU: ${sku}` : ''}
+                          </p>
+                        </div>
 
-              <div className="overflow-hidden rounded border">
-                <table className="w-full text-left text-sm">
-                  <thead className="bg-gray-50 text-gray-600">
-                    <tr>
-                      <th className="px-4 py-3">Phương thức</th>
-                      <th className="px-4 py-3">Trạng thái</th>
-                      <th className="px-4 py-3 text-center">Số đơn</th>
-                      <th className="px-4 py-3 text-right">Số tiền</th>
-                    </tr>
-                  </thead>
+                        <div className="rounded bg-red-50 px-3 py-1 text-sm font-black text-red-600">
+                          Còn {stock}
+                        </div>
+                      </div>
+                    )
+                  })}
+                </div>
+              )}
+            </DashboardPanel>
+          </div>
 
-                  <tbody className="divide-y">
-                    {paymentStatistics.map((item, index) => (
-                      <tr key={index}>
-                        <td className="px-4 py-3 font-semibold text-gray-900">
-                          {formatPaymentMethod(item?.method)}
-                        </td>
-                        <td className="px-4 py-3">
-                          <StatusBadge value={item?.status} />
-                        </td>
-                        <td className="px-4 py-3 text-center font-bold">
-                          {toNumber(item?.totalOrders)}
-                        </td>
-                        <td className="px-4 py-3 text-right font-bold text-red-600">
-                          {formatCurrency(toNumber(item?.totalAmount))}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-        </DashboardPanel>
+          <div className="mt-6 grid gap-6 xl:grid-cols-2">
+            <DashboardPanel
+              title="Hàng tồn kho lâu năm"
+              description="Sản phẩm còn tồn kho và đã ở trong hệ thống trên 180 ngày."
+              icon={AlertTriangle}
+              iconClassName="text-orange-600"
+            >
+              <InventoryWarningList
+                data={oldStockProducts}
+                emptyText="Không có hàng tồn kho lâu năm."
+                type="old"
+              />
+            </DashboardPanel>
 
-        <DashboardPanel
-          title="Sản phẩm tồn kho thấp"
-          description="Các biến thể sản phẩm có số lượng tồn kho thấp."
-          icon={AlertTriangle}
-          iconClassName="text-red-600"
-        >
-          {lowStockProducts.length === 0 ? (
-            <EmptyBox text="Không có sản phẩm tồn kho thấp." />
-          ) : (
-            <div className="space-y-3">
-              {lowStockProducts.map((item, index) => {
-                const productName = item?.productName || 'Sản phẩm'
-                const variantName = item?.variantName || ''
-                const sku = item?.productSku || item?.sku || ''
-                const stock = toNumber(item?.stock)
+            <DashboardPanel
+              title="Hàng tồn đọng / chậm bán"
+              description="Sản phẩm còn tồn nhưng lâu chưa phát sinh đơn hàng."
+              icon={AlertTriangle}
+              iconClassName="text-red-600"
+            >
+              <InventoryWarningList
+                data={stagnantProducts}
+                emptyText="Không có hàng tồn đọng."
+                type="stagnant"
+              />
+            </DashboardPanel>
+          </div>
+        </>
+      )}
 
-                return (
-                  <div
-                    key={`${sku}-${index}`}
-                    className="flex items-center justify-between gap-4 rounded border p-3"
-                  >
-                    <div className="min-w-0">
-                      <p className="line-clamp-1 font-bold text-gray-900">
-                        {productName}
-                      </p>
-
-                      <p className="mt-1 line-clamp-1 text-xs text-gray-500">
-                        {variantName}
-                        {sku ? ` | SKU: ${sku}` : ''}
-                      </p>
-                    </div>
-
-                    <div className="rounded bg-red-50 px-3 py-1 text-sm font-black text-red-600">
-                      Còn {stock}
-                    </div>
-                  </div>
-                )
-              })}
-            </div>
-          )}
-        </DashboardPanel>
-      </div>
-
+      {/* Staff can see recent orders but maybe only ones assigned to them? The backend getRecentOrders doesn't filter. It's okay. */}
       <div className="mt-6">
         <DashboardPanel
           title="Đơn hàng gần đây"
@@ -1081,5 +1177,88 @@ function formatDateOnly(value) {
   }
 
   return `${day}/${month}/${year}`
+}
+function InventoryWarningList({ data, emptyText, type }) {
+  if (!data || data.length === 0) {
+    return <EmptyBox text={emptyText} />
+  }
+
+  return (
+    <div className="space-y-3">
+      {data.map((item, index) => {
+        const productName = item?.productName || 'Sản phẩm'
+        const variantName = item?.variantName || ''
+        const sku = item?.productSku || item?.sku || ''
+        const stock = toNumber(item?.stock)
+        const daysInStock = toNumber(item?.daysInStock)
+        const daysSinceLastSold = item?.daysSinceLastSold
+
+        const imageUrl =
+          item?.thumbnailUrl ||
+          item?.imageUrl ||
+          item?.productImage ||
+          item?.productThumbnailUrl ||
+          'https://placehold.co/120x120?text=TechStore'
+
+        return (
+          <div
+            key={`${sku}-${index}`}
+            className="rounded border border-orange-100 bg-orange-50/40 p-4"
+          >
+            <div className="flex items-start gap-4">
+              <div className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded border bg-white">
+                <img
+                  src={imageUrl}
+                  alt={productName}
+                  className="max-h-full max-w-full object-contain"
+                />
+              </div>
+
+              <div className="min-w-0 flex-1">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <p className="line-clamp-1 font-black text-gray-900">
+                      {productName}
+                    </p>
+
+                    <p className="mt-1 line-clamp-1 text-xs text-gray-500">
+                      {variantName}
+                      {sku ? ` | SKU: ${sku}` : ''}
+                    </p>
+                  </div>
+
+                  <div className="shrink-0 rounded bg-white px-3 py-1 text-sm font-black text-red-600">
+                    Tồn: {stock}
+                  </div>
+                </div>
+
+                <div className="mt-3 grid gap-2 text-sm text-gray-700 md:grid-cols-2">
+                  <div>
+                    <span className="font-bold">Tồn trong kho:</span>{' '}
+                    {daysInStock} ngày
+                  </div>
+
+                  <div>
+                    <span className="font-bold">Lần bán gần nhất:</span>{' '}
+                    {daysSinceLastSold === null ||
+                    daysSinceLastSold === undefined
+                      ? 'Chưa từng bán'
+                      : `${daysSinceLastSold} ngày trước`}
+                  </div>
+                </div>
+
+                <div className="mt-3 rounded bg-white px-3 py-2 text-sm font-semibold text-orange-700">
+                  {item?.suggestion ||
+                    (type === 'old'
+                      ? 'Nên xem xét giảm giá hoặc xả kho.'
+                      : 'Nên tạo khuyến mãi để kích cầu mua hàng.')}
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 export default AdminDashboardPage

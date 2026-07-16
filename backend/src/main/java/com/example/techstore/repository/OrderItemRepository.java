@@ -65,9 +65,11 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
             oi.variant_name,
             oi.product_sku,
             sum(oi.quantity) as total_quantity_sold,
-            coalesce(sum(oi.total_price), 0) as total_revenue
+            coalesce(sum(oi.total_price), 0) as total_revenue,
+            pv.thumbnail_url
         from order_items oi
         join orders o on o.id = oi.order_id
+        left join product_variants pv on pv.id = oi.product_variant_id
         where o.deleted_at is null
           and o.order_status in ('CONFIRMED', 'SHIPPING', 'COMPLETED')
         group by 
@@ -75,7 +77,8 @@ public interface OrderItemRepository extends JpaRepository<OrderItem, Long> {
             oi.product_name,
             oi.product_variant_id,
             oi.variant_name,
-            oi.product_sku
+            oi.product_sku,
+            pv.thumbnail_url
         order by total_quantity_sold desc, total_revenue desc
         limit :limit
         """, nativeQuery = true)

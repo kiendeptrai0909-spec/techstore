@@ -214,6 +214,20 @@ public class CouponService {
         couponUsageRepository.save(couponUsage);
     }
 
+    @Transactional
+    public void releaseCoupon(Order order) {
+        if (order.getCoupon() == null) {
+            return;
+        }
+
+        Coupon coupon = order.getCoupon();
+        coupon.setUsedCount(Math.max(0, coupon.getUsedCount() - 1));
+        couponRepository.save(coupon);
+
+        couponUsageRepository.findByOrderId(order.getId())
+                .ifPresent(couponUsageRepository::delete);
+    }
+
     private void validateCouponRequest(CouponRequest request) {
         if (request.getDiscountType() == DiscountType.PERCENTAGE) {
             if (request.getDiscountValue().compareTo(new BigDecimal("100")) > 0) {

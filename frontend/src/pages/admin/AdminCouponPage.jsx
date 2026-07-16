@@ -64,7 +64,7 @@ function AdminCouponPage() {
     ? pageData
     : pageData?.content || []
   const filteredCoupons = coupons.filter((coupon) => {
-    const keyword = filters.keyword.trim().toLowerCase()
+    const keyword = (searchParams.get('keyword') || '').trim().toLowerCase()
 
     const matchKeyword =
       !keyword ||
@@ -72,11 +72,13 @@ function AdminCouponPage() {
       coupon.name?.toLowerCase().includes(keyword) ||
       coupon.description?.toLowerCase().includes(keyword)
 
+    const discountTypeParam = searchParams.get('discountType') || ''
     const matchDiscountType =
-      !filters.discountType || coupon.discountType === filters.discountType
+      !discountTypeParam || coupon.discountType === discountTypeParam
 
+    const statusParam = searchParams.get('status') || ''
     const matchStatus =
-      !filters.status || coupon.status === filters.status
+      !statusParam || coupon.status === statusParam
 
     return matchKeyword && matchDiscountType && matchStatus
   })

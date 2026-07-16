@@ -171,6 +171,20 @@ function OrderDetailPage() {
     }
   }
 
+  const handleCancelOrder = async () => {
+    if (!window.confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?')) {
+      return
+    }
+
+    try {
+      await orderApi.cancelOrder(orderId)
+      alert('Hủy đơn hàng thành công!')
+      fetchOrder()
+    } catch (err) {
+      alert(err.message || 'Không thể hủy đơn hàng')
+    }
+  }
+
   if (loading) {
     return (
       <div className="bg-[#e9e9e9]">
@@ -475,6 +489,16 @@ function OrderDetailPage() {
                   />
                 )}
               </div>
+
+              {orderStatus === 'PENDING' && paymentStatus === 'PENDING' && (
+                <button
+                  type="button"
+                  onClick={handleCancelOrder}
+                  className="w-full rounded bg-red-600 py-3 mt-5 font-black text-white hover:bg-red-700 transition-colors"
+                >
+                  Hủy đơn hàng
+                </button>
+              )}
             </div>
           </div>
         </div>

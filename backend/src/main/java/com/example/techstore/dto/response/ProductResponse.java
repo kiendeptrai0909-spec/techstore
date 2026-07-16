@@ -27,4 +27,4 @@ public class ProductResponse {
     private BrandResponse brand;
 
     private List<ProductVariantResponse> variants;
-}
+}

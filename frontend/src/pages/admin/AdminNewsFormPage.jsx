@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router'
 import { ArrowLeft, Save } from 'lucide-react'
 
 import { adminNewsApi } from '../../api/adminNewsApi'
+import { uploadApi } from '../../api/uploadApi'
 
 function AdminNewsFormPage() {
   const { newsId } = useParams()
@@ -21,6 +22,7 @@ function AdminNewsFormPage() {
 
   const [loading, setLoading] = useState(isEditMode)
   const [submitting, setSubmitting] = useState(false)
+  const [uploadingImage, setUploadingImage] = useState(false)
   const [message, setMessage] = useState('')
   const [errors, setErrors] = useState({})
 
@@ -72,6 +74,53 @@ function AdminNewsFormPage() {
     }))
 
     setMessage('')
+  }
+
+  const handleImageChange = async (event) => {
+    const file = event.target.files?.[0]
+
+    if (!file) return
+
+    if (!file.type.startsWith('image/')) {
+      setMessage('Vui lòng chọn file hình ảnh')
+      return
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      setMessage('Kích thước ảnh không được vượt quá 5MB')
+      return
+    }
+
+    setUploadingImage(true)
+    setMessage('')
+
+    try {
+      const response = await uploadApi.uploadImage(file)
+
+      const imageUrl =
+        response?.data?.url ||
+        response?.url ||
+        response?.data?.secureUrl ||
+        response?.secureUrl ||
+        ''
+
+      if (!imageUrl) {
+        setMessage('Upload ảnh thành công nhưng không nhận được đường dẫn ảnh')
+        return
+      }
+
+      setFormData((prev) => ({ ...prev, thumbnailUrl: imageUrl }))
+      setErrors((prev) => ({ ...prev, thumbnailUrl: '' }))
+    } catch (error) {
+      setMessage(
+        error?.response?.data?.message ||
+          error?.message ||
+          'Upload ảnh thất bại'
+      )
+    } finally {
+      setUploadingImage(false)
+      event.target.value = ''
+    }
   }
 
   const validateForm = () => {
@@ -171,11 +220,15 @@ function AdminNewsFormPage() {
 
           <button
             type="submit"
-            disabled={submitting}
+            disabled={submitting || uploadingImage}
             className="inline-flex items-center gap-2 rounded bg-red-600 px-5 py-3 font-black text-white hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
           >
             <Save size={20} />
-            {submitting ? 'Đang lưu...' : 'Lưu bài viết'}
+            {uploadingImage
+              ? 'Đang upload ảnh...'
+              : submitting
+                ? 'Đang lưu...'
+                : 'Lưu bài viết'}
           </button>
         </div>
       </div>
@@ -228,13 +281,61 @@ function AdminNewsFormPage() {
                 </select>
               </div>
 
-              <FormField
-                label="Ảnh đại diện"
-                value={formData.thumbnailUrl}
-                onChange={(value) => handleChange('thumbnailUrl', value)}
-                error={errors.thumbnailUrl}
-                placeholder="https://..."
-              />
+              <div className="md:col-span-2">
+                <label className="mb-2 block text-sm font-bold text-gray-700">
+                  Ảnh đại diện
+                </label>
+
+                <div className="space-y-3">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    disabled={uploadingImage}
+                    className={
+                      errors.thumbnailUrl
+                        ? 'block h-11 w-full rounded border border-red-500 px-4 py-2 text-sm outline-none file:mr-4 file:rounded file:border-0 file:bg-red-600 file:px-4 file:py-2 file:text-sm file:font-bold file:text-white hover:file:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60'
+                        : 'block h-11 w-full rounded border px-4 py-2 text-sm outline-none file:mr-4 file:rounded file:border-0 file:bg-red-600 file:px-4 file:py-2 file:text-sm file:font-bold file:text-white hover:file:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60'
+                    }
+                  />
+
+                  {errors.thumbnailUrl && (
+                    <p className="text-sm text-red-600">{errors.thumbnailUrl}</p>
+                  )}
+
+                  {uploadingImage && (
+                    <p className="text-sm font-semibold text-blue-600">
+                      Đang upload ảnh lên Cloudinary...
+                    </p>
+                  )}
+
+                  {formData.thumbnailUrl && (
+                    <div className="rounded border bg-gray-50 p-3">
+                      <p className="mb-2 text-sm font-bold text-gray-700">
+                        Ảnh đã chọn
+                      </p>
+
+                      <img
+                        src={formData.thumbnailUrl}
+                        alt="Ảnh đại diện"
+                        className="h-40 w-[220px] rounded border bg-white object-cover"
+                      />
+
+                      <p className="mt-2 break-all text-xs text-gray-500">
+                        {formData.thumbnailUrl}
+                      </p>
+
+                      <button
+                        type="button"
+                        onClick={() => handleChange('thumbnailUrl', '')}
+                        className="mt-3 rounded border border-red-200 px-3 py-2 text-sm font-bold text-red-600 hover:bg-red-50"
+                      >
+                        Xóa ảnh
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
 
               <div className="md:col-span-2">
                 <label className="mb-2 block text-sm font-bold text-gray-700">

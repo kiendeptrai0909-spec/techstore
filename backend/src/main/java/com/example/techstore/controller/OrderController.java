@@ -30,4 +30,9 @@ public class OrderController {
     public OrderResponse getMyOrderById(@PathVariable Long orderId) {
         return orderService.getMyOrderById(orderId);
     }
+
+    @PostMapping("/{orderId}/cancel")
+    public OrderResponse cancelOrder(@PathVariable Long orderId) {
+        return orderService.cancelOrder(orderId);
+    }
 }

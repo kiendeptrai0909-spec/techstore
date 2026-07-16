@@ -10,6 +10,10 @@ import FaqPage from '../pages/public/FaqPage'
 import ContactPage from '../pages/public/ContactPage'
 import NewsListPage from '../pages/public/NewsListPage'
 import NewsDetailPage from '../pages/public/NewsDetailPage'
+import WarrantyPolicyPage from '../pages/public/WarrantyPolicyPage'
+import ShippingPolicyPage from '../pages/public/ShippingPolicyPage'
+import PrivacyPolicyPage from '../pages/public/PrivacyPolicyPage'
+import ReturnPolicyPage from '../pages/public/ReturnPolicyPage'
 
 import LoginPage from '../pages/auth/LoginPage'
 import RegisterPage from '../pages/auth/RegisterPage'
@@ -43,6 +47,8 @@ import AdminFaqPage from '../pages/admin/AdminFaqPage'
 import AdminFaqFormPage from '../pages/admin/AdminFaqFormPage'
 import AdminContactMessagePage from '../pages/admin/AdminContactMessagePage'
 import AdminContactMessageDetailPage from '../pages/admin/AdminContactMessageDetailPage'
+import AdminBrandPage from '../pages/admin/AdminBrandPage'
+import AdminBrandFormPage from '../pages/admin/AdminBrandFormPage'
 import AdminCategoryPage from '../pages/admin/AdminCategoryPage'
 import AdminCategoryFormPage from '../pages/admin/AdminCategoryFormPage'
 import AdminChatPage from '../pages/admin/AdminChatPage'
@@ -61,6 +67,10 @@ function AppRoutes() {
 
         <Route path="/faqs" element={<FaqPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/warranty-policy" element={<WarrantyPolicyPage />} />
+        <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+        <Route path="/return-policy" element={<ReturnPolicyPage />} />
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
@@ -141,6 +151,10 @@ function AppRoutes() {
         <Route path="categories" element={<AdminCategoryPage />} />
         <Route path="categories/create" element={<AdminCategoryFormPage />} />
         <Route path="categories/:categoryId/edit" element={<AdminCategoryFormPage />} />
+
+        <Route path="brands" element={<AdminBrandPage />} />
+        <Route path="brands/create" element={<AdminBrandFormPage />} />
+        <Route path="brands/edit/:brandId" element={<AdminBrandFormPage />} />
         <Route path="coupons" element={<AdminCouponPage />} />
         <Route path="coupons/create" element={<AdminCouponFormPage />} />
         <Route path="coupons/:couponId/edit" element={<AdminCouponFormPage />} />

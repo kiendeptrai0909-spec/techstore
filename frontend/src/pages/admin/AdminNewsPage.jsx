@@ -60,7 +60,7 @@ function AdminNewsPage() {
     ? pageData
     : pageData?.content || []
   const filteredNews = news.filter((item) => {
-    const keyword = filters.keyword.trim().toLowerCase()
+    const keyword = (searchParams.get('keyword') || '').trim().toLowerCase()
 
     const matchKeyword =
       !keyword ||
@@ -70,8 +70,9 @@ function AdminNewsPage() {
       item.content?.toLowerCase().includes(keyword) ||
       item.author?.toLowerCase().includes(keyword)
 
+    const statusParam = searchParams.get('status') || ''
     const matchStatus =
-      !filters.status || item.status === filters.status
+      !statusParam || item.status === statusParam
 
     return matchKeyword && matchStatus
   })

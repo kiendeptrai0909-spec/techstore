@@ -20,7 +20,8 @@ import com.example.techstore.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import com.example.techstore.dto.response.InventoryWarningResponse;
+import java.sql.Timestamp;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.Timestamp;
@@ -44,10 +45,15 @@ public class DashboardService {
     @Transactional(readOnly = true)
     public DashboardSummaryResponse getSummary() {
         BigDecimal totalRevenue = orderRepository.sumCompletedRevenue();
+        
+        LocalDateTime startOfDay = LocalDate.now().atStartOfDay();
+        LocalDateTime endOfDay = LocalDate.now().atTime(LocalTime.MAX);
+        long todayOrdersCount = orderRepository.countByCreatedAtBetween(startOfDay, endOfDay);
 
         return DashboardSummaryResponse.builder()
                 .totalRevenue(totalRevenue == null ? BigDecimal.ZERO : totalRevenue)
                 .totalOrders(orderRepository.count())
+                .todayOrders(todayOrdersCount)
                 .pendingOrders(orderRepository.countByOrderStatus(OrderStatus.PENDING))
                 .confirmedOrders(orderRepository.countByOrderStatus(OrderStatus.CONFIRMED))
                 .shippingOrders(orderRepository.countByOrderStatus(OrderStatus.SHIPPING))
@@ -116,6 +122,7 @@ public class DashboardService {
                         .productSku(String.valueOf(row[4]))
                         .totalQuantitySold(toLong(row[5]))
                         .totalRevenue(toBigDecimal(row[6]))
+                        .thumbnailUrl(row[7] == null ? null : String.valueOf(row[7]))
                         .build())
                 .toList();
     }
@@ -202,7 +209,86 @@ public class DashboardService {
                         .build())
                 .toList();
     }
+    @Transactional(readOnly = true)
+    public List<InventoryWarningResponse> getOldStockProducts(Integer limit, Integer days) {
+        int safeLimit = limit == null ? 5 : limit;
+        int safeDays = days == null ? 180 : days;
 
+        if (safeLimit < 1) {
+            safeLimit = 5;
+        }
+
+        if (safeLimit > 20) {
+            safeLimit = 20;
+        }
+
+        if (safeDays < 30) {
+            safeDays = 30;
+        }
+
+        return productVariantRepository.findOldStockProducts(safeLimit, safeDays)
+                .stream()
+                .map(row -> mapInventoryWarning(row, "Nên xem xét giảm giá hoặc tạo chương trình xả kho"))
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<InventoryWarningResponse> getStagnantProducts(Integer limit, Integer days) {
+        int safeLimit = limit == null ? 5 : limit;
+        int safeDays = days == null ? 90 : days;
+
+        if (safeLimit < 1) {
+            safeLimit = 5;
+        }
+
+        if (safeLimit > 20) {
+            safeLimit = 20;
+        }
+
+        if (safeDays < 30) {
+            safeDays = 30;
+        }
+
+        return productVariantRepository.findStagnantProducts(safeLimit, safeDays)
+                .stream()
+                .map(row -> mapInventoryWarning(row, "Nên tạo khuyến mãi để kích cầu mua hàng"))
+                .toList();
+    }
+
+    private InventoryWarningResponse mapInventoryWarning(Object[] row, String suggestion) {
+        return InventoryWarningResponse.builder()
+                .productId(toLong(row[0]))
+                .productName(String.valueOf(row[1]))
+                .productVariantId(toLong(row[2]))
+                .variantName(String.valueOf(row[3]))
+                .productSku(String.valueOf(row[4]))
+                .thumbnailUrl(row[5] == null ? null : String.valueOf(row[5]))
+                .stock(toLong(row[6]).intValue())
+                .price(toBigDecimal(row[7]))
+                .salePrice(toBigDecimal(row[8]))
+                .createdAt(toLocalDateTime(row[9]))
+                .lastSoldAt(toLocalDateTime(row[10]))
+                .daysInStock(toLong(row[11]))
+                .daysSinceLastSold(row[12] == null ? null : toLong(row[12]))
+                .suggestion(suggestion)
+                .build();
+    }
+
+    private LocalDateTime toLocalDateTime(Object value) {
+        if (value == null) {
+            return null;
+        }
+
+        if (value instanceof LocalDateTime localDateTime) {
+            return localDateTime;
+        }
+
+        if (value instanceof Timestamp timestamp) {
+            return timestamp.toLocalDateTime();
+        }
+
+        return LocalDateTime.parse(value.toString().replace(" ", "T").substring(0, 19));
+    }
     @Transactional(readOnly = true)
     public List<RecentOrderResponse> getRecentOrders(Integer limit) {
         int safeLimit = safeLimit(limit, 5, 20);
@@ -286,19 +372,6 @@ public class DashboardService {
         return Integer.parseInt(value.toString());
     }
 
-    private LocalDateTime toLocalDateTime(Object value) {
-        if (value == null) {
-            return null;
-        }
 
-        if (value instanceof LocalDateTime localDateTime) {
-            return localDateTime;
-        }
 
-        if (value instanceof Timestamp timestamp) {
-            return timestamp.toLocalDateTime();
-        }
-
-        return LocalDateTime.parse(value.toString().replace(" ", "T"));
-    }
 }

@@ -28,4 +28,6 @@ public class TopProductResponse {
      * Tổng doanh thu của sản phẩm / biến thể này.
      */
     private BigDecimal totalRevenue;
+
+    private String thumbnailUrl;
 }

@@ -30,6 +30,7 @@ public class ChatService {
     private final ChatSessionRepository chatSessionRepository;
     private final ChatMessageRepository chatMessageRepository;
     private final UserRepository userRepository;
+    private final AiChatService aiChatService;
 
     @Transactional
     public ChatSessionResponse createSession() {
@@ -124,6 +125,24 @@ public class ChatService {
                 .build();
 
         ChatMessage savedMessage = chatMessageRepository.save(message);
+
+        // Auto-reply logic via AI
+        if (session.getStaff() == null) {
+            java.util.List<ChatMessage> history = chatMessageRepository.findBySessionIdOrderByIdAsc(sessionId);
+            String aiResponse = aiChatService.generateResponse(history);
+
+            // Use system user as bot (or a specific AI user)
+            // If no SYSTEM user exists, we can pass null as sender but with role SYSTEM (assuming we can)
+            // Or create a dummy SYSTEM message. Here we will leave sender as null to represent SYSTEM bot
+            
+            ChatMessage botMessage = ChatMessage.builder()
+                    .session(session)
+                    .sender(null) // null represents the system bot
+                    .message(aiResponse)
+                    .build();
+
+            chatMessageRepository.save(botMessage);
+        }
 
         return toMessageResponse(savedMessage);
     }
@@ -247,8 +266,8 @@ public class ChatService {
                 .id(message.getId())
                 .sessionId(message.getSession().getId())
                 .senderId(sender != null ? sender.getId() : null)
-                .senderName(sender != null ? sender.getFullName() : null)
-                .senderRole(sender != null && sender.getRole() != null ? sender.getRole().name() : null)
+                .senderName(sender != null ? sender.getFullName() : "TechStore AI")
+                .senderRole(sender != null && sender.getRole() != null ? sender.getRole().name() : "ROLE_BOT")
                 .message(message.getMessage())
                 .createdAt(message.getCreatedAt())
                 .build();

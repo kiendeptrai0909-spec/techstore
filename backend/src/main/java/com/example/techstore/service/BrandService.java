@@ -22,6 +22,13 @@ public class BrandService {
                 .toList();
     }
 
+    public List<BrandResponse> getActiveBrandsByCategory(Long categoryId) {
+        return brandRepository.findActiveBrandsByCategoryId(categoryId)
+                .stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
     private BrandResponse toResponse(Brand brand) {
         return BrandResponse.builder()
                 .id(brand.getId())

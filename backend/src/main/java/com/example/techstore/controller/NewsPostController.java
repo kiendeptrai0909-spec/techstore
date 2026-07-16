@@ -20,8 +20,10 @@ public class NewsPostController {
      * GET /api/v1/news?page=0&size=10
      */
     @GetMapping
-    public Page<NewsPostResponse> getActiveNewsPosts(Pageable pageable) {
-        return newsPostService.getActiveNewsPosts(pageable);
+    public Page<NewsPostResponse> getActiveNewsPosts(
+            @RequestParam(required = false) String keyword,
+            Pageable pageable) {
+        return newsPostService.getActiveNewsPosts(keyword, pageable);
     }
 
     /*

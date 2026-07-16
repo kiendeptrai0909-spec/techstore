@@ -1,22 +1,30 @@
 package com.example.techstore.service;
 
 import com.example.techstore.dto.request.ProductRequest;
+import com.example.techstore.dto.request.ProductSpecificationRequest;
 import com.example.techstore.dto.request.ProductVariantRequest;
 import com.example.techstore.dto.response.BrandResponse;
 import com.example.techstore.dto.response.CategoryResponse;
 import com.example.techstore.dto.response.ProductResponse;
+import com.example.techstore.dto.response.ProductSpecificationResponse;
 import com.example.techstore.dto.response.ProductVariantResponse;
 import com.example.techstore.entity.Brand;
 import com.example.techstore.entity.Category;
 import com.example.techstore.entity.Product;
+import com.example.techstore.entity.ProductSpecification;
 import com.example.techstore.entity.ProductVariant;
+import com.example.techstore.entity.SpecificationKey;
 import com.example.techstore.enums.ProductStatus;
 import com.example.techstore.exception.BadRequestException;
 import com.example.techstore.exception.ResourceNotFoundException;
 import com.example.techstore.repository.BrandRepository;
 import com.example.techstore.repository.CategoryRepository;
 import com.example.techstore.repository.ProductRepository;
+import com.example.techstore.repository.ProductSpecificationRepository;
 import com.example.techstore.repository.ProductVariantRepository;
+import com.example.techstore.repository.SpecificationKeyRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,8 +41,13 @@ public class AdminProductService {
 
     private final ProductRepository productRepository;
     private final ProductVariantRepository productVariantRepository;
+    private final ProductSpecificationRepository productSpecificationRepository;
     private final CategoryRepository categoryRepository;
     private final BrandRepository brandRepository;
+    private final SpecificationKeyRepository specificationKeyRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Transactional(readOnly = true)
     public Page<ProductResponse> getProducts(
@@ -232,6 +245,34 @@ public class AdminProductService {
         return toProductResponse(savedVariant.getProduct());
     }
 
+    private void saveOrUpdateSpecifications(ProductVariant variant, List<ProductSpecificationRequest> specRequests) {
+        // Xóa toàn bộ spec cũ của biến thể và flush ngay để tránh vi phạm UNIQUE CONSTRAINT khi insert lại
+        productSpecificationRepository.deleteByProductVariantId(variant.getId());
+        entityManager.flush();
+        entityManager.clear();
+
+        if (specRequests == null || specRequests.isEmpty()) {
+            return;
+        }
+
+        for (ProductSpecificationRequest req : specRequests) {
+            if (req.getValue() == null || req.getValue().isBlank()) {
+                continue; // Bỏ qua các thông số không có giá trị
+            }
+
+            SpecificationKey key = specificationKeyRepository.findById(req.getSpecificationKeyId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy khóa thông số"));
+
+            ProductSpecification spec = ProductSpecification.builder()
+                    .productVariant(variant)
+                    .specificationKey(key)
+                    .value(req.getValue().trim())
+                    .build();
+
+            productSpecificationRepository.save(spec);
+        }
+    }
+
     private void saveOrUpdateVariants(Product product, List<ProductVariantRequest> variantRequests) {
         List<ProductVariant> existingVariants =
                 productVariantRepository.findByProductId(product.getId());
@@ -272,7 +313,7 @@ public class AdminProductService {
         }
     }
 
-    private void createNewVariant(
+    private ProductVariant createNewVariant(
             Product product,
             ProductVariantRequest request,
             String sku
@@ -289,13 +330,16 @@ public class AdminProductService {
                 .salePrice(request.getSalePrice())
                 .stock(request.getStock())
                 .thumbnailUrl(request.getThumbnailUrl())
+                .description(request.getDescription())
                 .status(request.getStatus() != null ? request.getStatus() : ProductStatus.ACTIVE)
                 .build();
 
-        productVariantRepository.save(variant);
+        ProductVariant savedVariant = productVariantRepository.save(variant);
+        saveOrUpdateSpecifications(savedVariant, request.getSpecifications());
+        return savedVariant;
     }
 
-    private void updateExistingVariant(
+    private ProductVariant updateExistingVariant(
             Product product,
             ProductVariantRequest request,
             String sku
@@ -307,12 +351,9 @@ public class AdminProductService {
             throw new BadRequestException("Biến thể không thuộc sản phẩm này");
         }
 
-        productVariantRepository.findBySku(sku)
-                .ifPresent(existingVariant -> {
-                    if (!existingVariant.getId().equals(variant.getId())) {
-                        throw new BadRequestException("SKU đã tồn tại: " + sku);
-                    }
-                });
+        if (productVariantRepository.existsBySkuAndIdNot(sku, variant.getId())) {
+            throw new BadRequestException("SKU đã tồn tại: " + sku);
+        }
 
         ProductStatus status = request.getStatus() != null
                 ? request.getStatus()
@@ -324,13 +365,16 @@ public class AdminProductService {
         variant.setSalePrice(request.getSalePrice());
         variant.setStock(request.getStock());
         variant.setThumbnailUrl(request.getThumbnailUrl());
+        variant.setDescription(request.getDescription());
         variant.setStatus(status);
 
         if (status == ProductStatus.ACTIVE) {
             variant.setDeletedAt(null);
         }
 
-        productVariantRepository.save(variant);
+        ProductVariant savedVariant = productVariantRepository.save(variant);
+        saveOrUpdateSpecifications(savedVariant, request.getSpecifications());
+        return savedVariant;
     }
 
     private void validateVariantRequest(ProductVariantRequest request) {
@@ -370,6 +414,14 @@ public class AdminProductService {
     }
 
     private ProductVariantResponse toVariantResponse(ProductVariant variant) {
+        List<ProductSpecificationResponse> specifications = productSpecificationRepository
+                .findByProductVariantIdOrderBySpecificationKeySortOrderAsc(variant.getId())
+                .stream()
+                .filter(s -> s.getDeletedAt() == null && s.getSpecificationKey() != null
+                        && s.getSpecificationKey().getDeletedAt() == null)
+                .map(ProductSpecificationResponse::from)
+                .toList();
+
         return ProductVariantResponse.builder()
                 .id(variant.getId())
                 .name(variant.getName())
@@ -378,6 +430,8 @@ public class AdminProductService {
                 .salePrice(variant.getSalePrice())
                 .stock(variant.getStock())
                 .thumbnailUrl(variant.getThumbnailUrl())
+                .description(variant.getDescription())
+                .specifications(specifications)
                 .build();
     }
 
@@ -407,6 +461,7 @@ public class AdminProductService {
                 .slug(brand.getSlug())
                 .logoUrl(brand.getLogoUrl())
                 .description(brand.getDescription())
+                .status(brand.getStatus())
                 .build();
     }
 }

@@ -45,9 +45,9 @@ function ProductDescriptionTabs({ product, selectedVariant }) {
       <div className="p-5">
         {activeTab === 'description' && (
           <div className="prose max-w-none">
-            {product?.description ? (
+            {(selectedVariant?.description || product?.description) ? (
               <div className="whitespace-pre-line leading-7 text-gray-700">
-                {product.description}
+                {selectedVariant?.description || product.description}
               </div>
             ) : (
               <p className="text-gray-500">

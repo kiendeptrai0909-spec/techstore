@@ -1,69 +1,8 @@
-import {
-  Laptop,
-  Monitor,
-  Cpu,
-  HardDrive,
-  Keyboard,
-  Mouse,
-  Headphones,
-  Speaker,
-  Gamepad2,
-  Armchair,
-  MemoryStick,
-  Fan,
-  Server,
-  Cable,
-  BatteryCharging,
-  Package,
-} from 'lucide-react'
 import { Link } from 'react-router'
-
-const icons = [
-  Laptop,
-  Server,
-  Monitor,
-  Cpu,
-  MemoryStick,
-  HardDrive,
-  Package,
-  Fan,
-  BatteryCharging,
-  Keyboard,
-  Mouse,
-  Armchair,
-  Headphones,
-  Speaker,
-  Gamepad2,
-  Cable,
-]
-
-const fallbackCategories = [
-  'Laptop',
-  'PC',
-  'Màn hình',
-  'Mainboard',
-  'CPU',
-  'VGA',
-  'RAM',
-  'Ổ cứng',
-  'Case',
-  'Tản nhiệt',
-  'Nguồn',
-  'Bàn phím',
-  'Chuột',
-  'Ghế',
-  'Tai nghe',
-  'Phụ kiện',
-]
+import { getCategoryIcon } from '../../utils/categoryIcons'
 
 function CategoryIconGrid({ categories = [] }) {
-  const items =
-    categories.length > 0
-      ? categories.slice(0, 16)
-      : fallbackCategories.map((name, index) => ({
-          id: index + 1,
-          name,
-        }))
+  const items = categories.length > 0 ? categories.slice(0, 16) : []
 
   return (
     <section className="rounded-md bg-white p-4 shadow-sm">
@@ -73,7 +12,7 @@ function CategoryIconGrid({ categories = [] }) {
 
       <div className="grid grid-cols-4 gap-4 sm:grid-cols-6 lg:grid-cols-8">
         {items.map((category, index) => {
-          const Icon = icons[index % icons.length]
+          const Icon = getCategoryIcon(category.imageUrl)
 
           return (
             <Link

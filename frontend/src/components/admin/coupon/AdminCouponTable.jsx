@@ -49,12 +49,12 @@ function AdminCouponTable({ coupons = [], loading, onDelete }) {
           <thead>
             <tr className="border-b bg-gray-50 text-sm text-gray-600">
               <th className="px-4 py-3 font-bold">Mã coupon</th>
-              <th className="px-4 py-3 font-bold">Loại</th>
+              <th className="w-30 px-4 py-3 font-bold">Loại</th>
               <th className="px-4 py-3 font-bold">Giá trị</th>
               <th className="px-4 py-3 font-bold">Đơn tối thiểu</th>
-              <th className="px-4 py-3 font-bold">Sử dụng</th>
+              <th className="w-30 px-4 py-3 font-bold">Sử dụng</th>
               <th className="px-4 py-3 font-bold">Thời gian</th>
-              <th className="px-4 py-3 font-bold">Trạng thái</th>
+              <th className="w-40 px-4 py-3 font-bold">Trạng thái</th>
               <th className="px-4 py-3 text-center font-bold">Thao tác</th>
             </tr>
           </thead>

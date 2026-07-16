@@ -25,4 +25,11 @@ public interface NewsPostRepository extends JpaRepository<NewsPost, Long> {
     );
 
     boolean existsBySlugIgnoreCase(String slug);
+
+    @org.springframework.data.jpa.repository.Query("SELECT n FROM NewsPost n WHERE n.status = :status AND n.deletedAt IS NULL AND (LOWER(n.title) LIKE LOWER(CONCAT('%', :keyword, '%')) OR LOWER(n.summary) LIKE LOWER(CONCAT('%', :keyword, '%')))")
+    Page<NewsPost> searchActiveNews(
+            @org.springframework.data.repository.query.Param("status") NewsStatus status,
+            @org.springframework.data.repository.query.Param("keyword") String keyword,
+            Pageable pageable
+    );
 }

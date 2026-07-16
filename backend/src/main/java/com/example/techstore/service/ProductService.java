@@ -131,17 +131,7 @@ public class ProductService {
                 .map(ProductDetailResponse.ImageResponse::from)
                 .toList();
 
-        List<ProductSpecificationResponse> specifications = productSpecificationRepository
-                .findByProductId(product.getId())
-                .stream()
-                .filter(specification -> specification.getDeletedAt() == null)
-                .filter(specification -> specification.getSpecificationKey() != null)
-                .filter(specification -> specification.getSpecificationKey().getDeletedAt() == null)
-                .sorted(Comparator.comparing(
-                        specification -> specification.getSpecificationKey().getSortOrder()
-                ))
-                .map(ProductSpecificationResponse::from)
-                .toList();
+        List<ProductSpecificationResponse> specifications = List.of();
 
         List<ProductReviewResponse> reviews = List.of();
 
@@ -162,6 +152,13 @@ public class ProductService {
     }
 
     private ProductVariantResponse toVariantResponse(ProductVariant variant) {
+        List<ProductSpecificationResponse> specifications = productSpecificationRepository
+                .findByProductVariantIdAndDeletedAtIsNullOrderBySpecificationKeySortOrderAsc(variant.getId())
+                .stream()
+                .filter(s -> s.getSpecificationKey() != null && s.getSpecificationKey().getDeletedAt() == null)
+                .map(ProductSpecificationResponse::from)
+                .toList();
+
         return ProductVariantResponse.builder()
                 .id(variant.getId())
                 .name(variant.getName())
@@ -170,6 +167,8 @@ public class ProductService {
                 .salePrice(variant.getSalePrice())
                 .stock(variant.getStock())
                 .thumbnailUrl(variant.getThumbnailUrl())
+                .description(variant.getDescription())
+                .specifications(specifications)
                 .build();
     }
 
@@ -199,6 +198,7 @@ public class ProductService {
                 .slug(brand.getSlug())
                 .logoUrl(brand.getLogoUrl())
                 .description(brand.getDescription())
+                .status(brand.getStatus())
                 .build();
     }
 }
