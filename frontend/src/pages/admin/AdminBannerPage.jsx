@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { Link, useSearchParams, useLocation } from 'react-router'
 import { Image, Plus } from 'lucide-react'
 
 import { adminBannerApi } from '../../api/adminBannerApi'
@@ -8,6 +8,7 @@ import AdminBannerTable from '../../components/admin/banner/AdminBannerTable'
 
 function AdminBannerPage() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const location = useLocation()
 
   const [pageData, setPageData] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -59,6 +60,14 @@ function AdminBannerPage() {
 
     fetchBanners()
   }, [searchParams])
+
+  useEffect(() => {
+    if (location.state?.successMessage) {
+      setSuccessMessage(location.state.successMessage)
+      window.history.replaceState({}, document.title)
+      setTimeout(() => setSuccessMessage(''), 5000)
+    }
+  }, [location.state])
 
   const banners = Array.isArray(pageData)
     ? pageData

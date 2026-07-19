@@ -12,4 +12,8 @@ export const adminCustomerApi = {
   updateCustomerStatus: (customerId, data) => {
     return axiosClient.put(`/admin/customers/${customerId}/status`, data)
   },
+
+  getCustomerOrders: (customerId, params) => {
+    return axiosClient.get(`/admin/customers/${customerId}/orders`, { params })
+  },
 }

@@ -17,7 +17,7 @@ function ProductVariantForm({ variants, setVariants, specificationKeys = [] }) {
         stock: '',
         thumbnailUrl: '',
         description: '',
-        specifications: {},
+        specifications: [],
       },
     ])
   }
@@ -39,16 +39,61 @@ function ProductVariantForm({ variants, setVariants, specificationKeys = [] }) {
     )
   }
 
-  const handleSpecChange = (index, keyId, value) => {
+  const handleAddSpec = (variantIndex) => {
     setVariants((prev) =>
       prev.map((variant, itemIndex) =>
-        itemIndex === index
+        itemIndex === variantIndex
           ? {
               ...variant,
-              specifications: {
-                ...(variant.specifications || {}),
-                [keyId]: value,
-              },
+              specifications: [
+                ...(variant.specifications || []),
+                { name: '', value: '' },
+              ],
+            }
+          : variant
+      )
+    )
+  }
+
+  const handleRemoveSpec = (variantIndex, specIndex) => {
+    setVariants((prev) =>
+      prev.map((variant, itemIndex) =>
+        itemIndex === variantIndex
+          ? {
+              ...variant,
+              specifications: variant.specifications.filter(
+                (_, idx) => idx !== specIndex
+              ),
+            }
+          : variant
+      )
+    )
+  }
+
+  const handleSpecNameChange = (variantIndex, specIndex, value) => {
+    setVariants((prev) =>
+      prev.map((variant, itemIndex) =>
+        itemIndex === variantIndex
+          ? {
+              ...variant,
+              specifications: variant.specifications.map((spec, idx) =>
+                idx === specIndex ? { ...spec, name: value } : spec
+              ),
+            }
+          : variant
+      )
+    )
+  }
+
+  const handleSpecValueChange = (variantIndex, specIndex, value) => {
+    setVariants((prev) =>
+      prev.map((variant, itemIndex) =>
+        itemIndex === variantIndex
+          ? {
+              ...variant,
+              specifications: variant.specifications.map((spec, idx) =>
+                idx === specIndex ? { ...spec, value: value } : spec
+              ),
             }
           : variant
       )
@@ -249,27 +294,54 @@ function ProductVariantForm({ variants, setVariants, specificationKeys = [] }) {
                   />
                 </div>
 
-                {specificationKeys.length > 0 && (
-                  <div className="md:col-span-2 bg-white rounded border p-4 mt-2">
-                    <h4 className="mb-3 text-sm font-bold text-gray-800">Thông số kỹ thuật biến thể</h4>
-                    <div className="grid gap-4 md:grid-cols-2">
-                      {specificationKeys.map((key) => (
-                        <div key={key.id}>
-                          <label className="mb-1 block text-xs font-bold text-gray-600">
-                            {key.name} {key.unit ? `(${key.unit})` : ''}
-                          </label>
+                <div className="md:col-span-2 bg-white rounded border p-4 mt-2">
+                  <div className="mb-3 flex items-center justify-between">
+                    <h4 className="text-sm font-bold text-gray-800">Thông số kỹ thuật biến thể</h4>
+                    <button
+                      type="button"
+                      onClick={() => handleAddSpec(index)}
+                      className="inline-flex items-center gap-1 rounded bg-red-600 px-3 py-1.5 text-xs font-bold text-white hover:bg-red-700"
+                    >
+                      <Plus size={14} />
+                      Thêm thông số
+                    </button>
+                  </div>
+                  
+                  {(!variant.specifications || variant.specifications.length === 0) ? (
+                    <div className="rounded border border-dashed border-gray-300 p-4 text-center text-sm text-gray-500">
+                      Chưa có thông số kỹ thuật. Nhấn "Thêm thông số" để bắt đầu.
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {variant.specifications.map((spec, specIndex) => (
+                        <div key={specIndex} className="flex items-center gap-2">
                           <input
                             type="text"
-                            value={(variant.specifications && variant.specifications[key.id]) || ''}
-                            onChange={(e) => handleSpecChange(index, key.id, e.target.value)}
-                            placeholder={`Nhập ${key.name.toLowerCase()}`}
-                            className="h-10 w-full rounded border bg-white px-3 text-xs outline-none focus:border-red-500"
+                            value={spec.name || ''}
+                            onChange={(e) => handleSpecNameChange(index, specIndex, e.target.value)}
+                            placeholder="Tên thông số"
+                            className="h-10 flex-1 rounded border bg-white px-3 text-sm outline-none focus:border-red-500"
                           />
+                          <input
+                            type="text"
+                            value={spec.value || ''}
+                            onChange={(e) => handleSpecValueChange(index, specIndex, e.target.value)}
+                            placeholder="Giá trị"
+                            className="h-10 flex-1 rounded border bg-white px-3 text-sm outline-none focus:border-red-500"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveSpec(index, specIndex)}
+                            className="flex h-10 w-10 items-center justify-center rounded border bg-white text-gray-600 hover:border-red-500 hover:text-red-600"
+                            title="Xóa thông số"
+                          >
+                            <Trash2 size={16} />
+                          </button>
                         </div>
                       ))}
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           ))}

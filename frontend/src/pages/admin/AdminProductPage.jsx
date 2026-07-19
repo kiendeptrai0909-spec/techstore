@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { Link, useSearchParams, useLocation } from 'react-router'
 import { Package, Plus } from 'lucide-react'
 
 import { adminProductApi } from '../../api/adminProductApi'
@@ -14,6 +14,7 @@ function AdminProductPage() {
   const { user } = useAuth()
   const role = user?.role || user?.authorities?.[0]?.authority
   const isStaff = role === 'ROLE_STAFF' || role === 'STAFF'
+  const location = useLocation()
 
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -102,6 +103,14 @@ function AdminProductPage() {
 
     fetchProducts()
   }, [searchParams])
+
+  useEffect(() => {
+    if (location.state?.successMessage) {
+      setSuccessMessage(location.state.successMessage)
+      window.history.replaceState({}, document.title)
+      setTimeout(() => setSuccessMessage(''), 5000)
+    }
+  }, [location.state])
 
   const products = Array.isArray(pageData)
     ? pageData

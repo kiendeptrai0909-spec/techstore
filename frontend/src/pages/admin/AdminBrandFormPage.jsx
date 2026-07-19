@@ -124,7 +124,11 @@ function AdminBrandFormPage() {
       }
 
       navigate('/admin/brands', {
-        replace: true,
+        state: {
+          successMessage: isEdit
+            ? 'Cập nhật thương hiệu thành công'
+            : 'Thêm thương hiệu thành công',
+        },
       })
     } catch (error) {
       setMessage(error.message || 'Không thể lưu thương hiệu')

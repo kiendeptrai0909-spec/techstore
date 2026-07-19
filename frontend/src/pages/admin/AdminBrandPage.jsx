@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { Link, useSearchParams, useLocation } from 'react-router'
 import { Edit, Plus, Award, Trash2 } from 'lucide-react'
 import { brandApi } from '../../api/brandApi'
 
 function AdminBrandPage() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const location = useLocation()
 
   const [pageData, setPageData] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -52,6 +53,14 @@ function AdminBrandPage() {
 
     fetchBrands()
   }, [searchParams])
+
+  useEffect(() => {
+    if (location.state?.successMessage) {
+      setSuccessMessage(location.state.successMessage)
+      window.history.replaceState({}, document.title)
+      setTimeout(() => setSuccessMessage(''), 5000)
+    }
+  }, [location.state])
 
   const brands = Array.isArray(pageData)
     ? pageData

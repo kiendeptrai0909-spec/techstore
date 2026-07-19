@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { Link, useSearchParams, useLocation } from 'react-router'
 import { Edit, Plus, Tags, Trash2 } from 'lucide-react'
 import { adminCategoryApi } from '../../api/adminCategoryApi'
 import { getCategoryIcon } from '../../utils/categoryIcons'
 
 function AdminCategoryPage() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const location = useLocation()
 
   const [pageData, setPageData] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -53,6 +54,14 @@ function AdminCategoryPage() {
 
     fetchCategories()
   }, [searchParams])
+
+  useEffect(() => {
+    if (location.state?.successMessage) {
+      setSuccessMessage(location.state.successMessage)
+      window.history.replaceState({}, document.title)
+      setTimeout(() => setSuccessMessage(''), 5000)
+    }
+  }, [location.state])
 
   const categories = Array.isArray(pageData)
     ? pageData

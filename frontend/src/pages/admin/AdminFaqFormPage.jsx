@@ -114,7 +114,11 @@ function AdminFaqFormPage() {
       }
 
       navigate('/admin/faqs', {
-        replace: true,
+        state: {
+          successMessage: isEditMode
+            ? 'Cập nhật FAQ thành công'
+            : 'Thêm FAQ thành công',
+        },
       })
     } catch (error) {
       setMessage(error.message || 'Không thể lưu FAQ')

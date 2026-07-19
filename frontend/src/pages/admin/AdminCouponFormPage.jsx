@@ -176,7 +176,11 @@ function AdminCouponFormPage() {
       }
 
       navigate('/admin/coupons', {
-        replace: true,
+        state: {
+          successMessage: isEditMode
+            ? 'Cập nhật coupon thành công'
+            : 'Thêm coupon thành công',
+        },
       })
     } catch (error) {
       setMessage(error.message || 'Không thể lưu coupon')

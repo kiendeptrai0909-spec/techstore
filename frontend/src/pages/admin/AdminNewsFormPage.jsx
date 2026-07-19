@@ -180,7 +180,11 @@ function AdminNewsFormPage() {
       }
 
       navigate('/admin/news', {
-        replace: true,
+        state: {
+          successMessage: isEditMode
+            ? 'Cập nhật bài viết thành công'
+            : 'Thêm bài viết thành công',
+        },
       })
     } catch (error) {
       setMessage(error.message || 'Không thể lưu bài viết')

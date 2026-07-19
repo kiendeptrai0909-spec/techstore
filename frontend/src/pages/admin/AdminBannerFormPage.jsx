@@ -199,7 +199,11 @@ function AdminBannerFormPage() {
       }
 
       navigate('/admin/banners', {
-        replace: true,
+        state: {
+          successMessage: isEditMode
+            ? 'Cập nhật banner thành công'
+            : 'Thêm banner thành công',
+        },
       })
     } catch (error) {
       setMessage(error.message || 'Không thể lưu banner')

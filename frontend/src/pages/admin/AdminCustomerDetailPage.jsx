@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
-import { ArrowLeft, Mail, Phone, User, Users } from 'lucide-react'
+import { ArrowLeft, Mail, Phone, User, Users, ShoppingBag } from 'lucide-react'
 import { adminCustomerApi } from '../../api/adminCustomerApi'
 
 function AdminCustomerDetailPage() {
   const { customerId } = useParams()
 
   const [customer, setCustomer] = useState(null)
+  const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(true)
+  const [loadingOrders, setLoadingOrders] = useState(true)
   const [message, setMessage] = useState('')
 
   useEffect(() => {
@@ -26,6 +28,24 @@ function AdminCustomerDetailPage() {
     }
 
     fetchCustomer()
+  }, [customerId])
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      setLoadingOrders(true)
+      try {
+        const data = await adminCustomerApi.getCustomerOrders(customerId)
+        setOrders(Array.isArray(data) ? data : data?.content || [])
+      } catch (error) {
+        console.error('Không thể tải lịch sử đơn hàng:', error)
+      } finally {
+        setLoadingOrders(false)
+      }
+    }
+
+    if (customerId) {
+      fetchOrders()
+    }
   }, [customerId])
 
   if (loading) {
@@ -151,6 +171,90 @@ function AdminCustomerDetailPage() {
                   : 'Không có'}
               </span>
             </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg bg-white p-5 shadow-sm">
+          <h3 className="text-xl font-black text-gray-900">
+            Lịch sử mua hàng
+          </h3>
+
+          <div className="mt-5">
+            {loadingOrders ? (
+              <div className="text-center text-gray-500">
+                Đang tải lịch sử đơn hàng...
+              </div>
+            ) : orders.length === 0 ? (
+              <div className="text-center text-gray-500">
+                Khách hàng chưa có đơn hàng nào.
+              </div>
+            ) : (
+              <div className="overflow-hidden rounded border">
+                <table className="w-full border-collapse text-left text-sm">
+                  <thead className="bg-gray-50 text-gray-700">
+                    <tr>
+                      <th className="px-4 py-3 font-bold">Mã đơn hàng</th>
+                      <th className="px-4 py-3 font-bold">Ngày đặt</th>
+                      <th className="px-4 py-3 font-bold">Tổng tiền</th>
+                      <th className="px-4 py-3 font-bold">Trạng thái</th>
+                      <th className="px-4 py-3 text-right font-bold">Thao tác</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {orders.map((order) => (
+                      <tr key={order.id} className="border-t">
+                        <td className="px-4 py-4 font-black text-gray-900">
+                          #{order.id}
+                        </td>
+                        <td className="px-4 py-4 text-gray-600">
+                          {order.createdAt
+                            ? new Date(order.createdAt).toLocaleString('vi-VN')
+                            : ''}
+                        </td>
+                        <td className="px-4 py-4 font-semibold text-gray-900">
+                          {order.totalAmount
+                            ? new Intl.NumberFormat('vi-VN', {
+                                style: 'currency',
+                                currency: 'VND',
+                              }).format(order.totalAmount)
+                            : ''}
+                        </td>
+                        <td className="px-4 py-4">
+                          <span
+                            className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${
+                              order.status === 'COMPLETED'
+                                ? 'border border-green-200 bg-green-50 text-green-600'
+                                : order.status === 'CANCELLED'
+                                  ? 'border border-red-200 bg-red-50 text-red-600'
+                                  : order.status === 'PENDING'
+                                    ? 'border border-yellow-200 bg-yellow-50 text-yellow-600'
+                                    : 'border border-gray-200 bg-gray-50 text-gray-600'
+                            }`}
+                          >
+                            {order.status === 'COMPLETED'
+                              ? 'Hoàn thành'
+                              : order.status === 'CANCELLED'
+                                ? 'Đã hủy'
+                                : order.status === 'PENDING'
+                                  ? 'Chờ xử lý'
+                                  : order.status || 'N/A'}
+                          </span>
+                        </td>
+                        <td className="px-4 py-4 text-right">
+                          <Link
+                            to={`/admin/orders/${order.id}`}
+                            className="inline-flex items-center gap-2 rounded border px-3 py-2 text-sm font-bold text-gray-700 hover:border-red-500 hover:text-red-600"
+                          >
+                            <ShoppingBag size={16} />
+                            Xem chi tiết
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </div>
         </div>
       </div>

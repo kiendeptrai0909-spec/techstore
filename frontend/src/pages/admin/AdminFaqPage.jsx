@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router'
+import { Link, useSearchParams, useLocation } from 'react-router'
 import { HelpCircle, Plus } from 'lucide-react'
 
 import { adminFaqApi } from '../../api/adminFaqApi'
@@ -13,6 +13,7 @@ function AdminFaqPage() {
   const isStaff = role === 'ROLE_STAFF' || role === 'STAFF'
 
   const [searchParams, setSearchParams] = useSearchParams()
+  const location = useLocation()
 
   const [pageData, setPageData] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -60,6 +61,14 @@ function AdminFaqPage() {
 
     fetchFaqs()
   }, [searchParams])
+
+  useEffect(() => {
+    if (location.state?.successMessage) {
+      setSuccessMessage(location.state.successMessage)
+      window.history.replaceState({}, document.title)
+      setTimeout(() => setSuccessMessage(''), 5000)
+    }
+  }, [location.state])
 
   const faqs = Array.isArray(pageData)
     ? pageData

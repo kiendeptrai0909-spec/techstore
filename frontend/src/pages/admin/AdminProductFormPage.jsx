@@ -97,10 +97,7 @@ function AdminProductFormPage() {
                   stock: variant.stock ?? '',
                   thumbnailUrl: variant.thumbnailUrl || '',
                   description: variant.description || '',
-                  specifications: variant.specifications?.reduce((acc, spec) => {
-                    acc[spec.specificationKeyId] = spec.value
-                    return acc
-                  }, {}) || {},
+                  specifications: variant.specifications || [],
                 }))
               : [
                   {
@@ -111,7 +108,7 @@ function AdminProductFormPage() {
                     stock: '',
                     thumbnailUrl: '',
                     description: '',
-                    specifications: {},
+                    specifications: [],
                   },
                 ]
           )
@@ -314,11 +311,11 @@ function AdminProductFormPage() {
         stock: Number(variant.stock || 0),
         thumbnailUrl: variant.thumbnailUrl?.trim(),
         description: variant.description?.trim() || '',
-        specifications: Object.keys(variant.specifications || {})
-          .filter((keyId) => variant.specifications[keyId]?.trim())
-          .map((keyId) => ({
-            specificationKeyId: Number(keyId),
-            value: variant.specifications[keyId].trim(),
+        specifications: (variant.specifications || [])
+          .filter((spec) => spec.name?.trim() && spec.value?.trim())
+          .map((spec) => ({
+            name: spec.name.trim(),
+            value: spec.value.trim(),
           })),
       })),
     }
@@ -344,7 +341,11 @@ function AdminProductFormPage() {
       }
 
       navigate('/admin/products', {
-        replace: true,
+        state: {
+          successMessage: isEditMode
+            ? 'Cập nhật sản phẩm thành công'
+            : 'Thêm sản phẩm thành công',
+        },
       })
     } catch (error) {
       setMessage(error.message || 'Không thể lưu sản phẩm')
