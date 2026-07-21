@@ -31,4 +31,16 @@ public interface ProductReviewRepository extends JpaRepository<ProductReview, Lo
               and r.status = com.example.techstore.enums.ReviewStatus.VISIBLE
             """)
     Double getAverageRatingByProductId(Long productId);
+
+    Page<ProductReview> findByStatus(ReviewStatus status, Pageable pageable);
+
+    @Query("""
+            select r from ProductReview r
+            where (:status is null or r.status = :status)
+              and (:keyword is null or 
+                   lower(r.user.fullName) like lower(concat('%', :keyword, '%')) or
+                   lower(r.product.name) like lower(concat('%', :keyword, '%')))
+              and r.deletedAt is null
+            """)
+    Page<ProductReview> searchReviews(ReviewStatus status, String keyword, Pageable pageable);
 }

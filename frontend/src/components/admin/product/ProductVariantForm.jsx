@@ -18,6 +18,7 @@ function ProductVariantForm({ variants, setVariants, specificationKeys = [] }) {
         thumbnailUrl: '',
         description: '',
         specifications: [],
+        status: 'ACTIVE',
       },
     ])
   }
@@ -241,6 +242,22 @@ function ProductVariantForm({ variants, setVariants, specificationKeys = [] }) {
                   }
                   placeholder="VD: 20"
                 />
+
+                <div>
+                  <label className="mb-2 block text-sm font-bold text-gray-700">
+                    Trạng thái
+                  </label>
+                  <select
+                    value={variant.status || 'ACTIVE'}
+                    onChange={(e) =>
+                      handleChangeVariant(index, 'status', e.target.value)
+                    }
+                    className="h-11 w-full rounded border px-4 text-sm outline-none focus:border-red-500"
+                  >
+                    <option value="ACTIVE">Đang bán</option>
+                    <option value="INACTIVE">Ngừng bán</option>
+                  </select>
+                </div>
 
                 <div className="md:col-span-2 xl:col-span-1">
                   <label className="mb-2 block text-sm font-bold text-gray-700">

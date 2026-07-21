@@ -88,17 +88,37 @@ function AdminProductFormPage() {
 
           setVariants(
             product.variants?.length > 0
-              ? product.variants.map((variant) => ({
-                  id: variant.id,
-                  name: variant.name || '',
-                  sku: variant.sku || '',
-                  price: variant.price ?? '',
-                  salePrice: variant.salePrice ?? '',
-                  stock: variant.stock ?? '',
-                  thumbnailUrl: variant.thumbnailUrl || '',
-                  description: variant.description || '',
-                  specifications: variant.specifications || [],
-                }))
+              ? product.variants.map((variant) => {
+                  // Handle both old format (specificationKeyId, value) and new format (name, value)
+                  const specs = variant.specifications || []
+                  const convertedSpecs = specs.map((spec) => {
+                    // If it's the old format with specificationKeyId, convert to new format
+                    if (spec.specificationKeyId !== undefined) {
+                      return {
+                        name: spec.specificationKey?.name || spec.name || '',
+                        value: spec.value || '',
+                      }
+                    }
+                    // If it's already in new format, keep as is
+                    return {
+                      name: spec.name || '',
+                      value: spec.value || '',
+                    }
+                  })
+
+                  return {
+                    id: variant.id,
+                    name: variant.name || '',
+                    sku: variant.sku || '',
+                    price: variant.price ?? '',
+                    salePrice: variant.salePrice ?? '',
+                    stock: variant.stock ?? '',
+                    thumbnailUrl: variant.thumbnailUrl || '',
+                    description: variant.description || '',
+                    specifications: convertedSpecs,
+                    status: variant.status || 'ACTIVE',
+                  }
+                })
               : [
                   {
                     name: '',
@@ -109,6 +129,7 @@ function AdminProductFormPage() {
                     thumbnailUrl: '',
                     description: '',
                     specifications: [],
+                    status: 'ACTIVE',
                   },
                 ]
           )
@@ -311,6 +332,7 @@ function AdminProductFormPage() {
         stock: Number(variant.stock || 0),
         thumbnailUrl: variant.thumbnailUrl?.trim(),
         description: variant.description?.trim() || '',
+        status: variant.status || 'ACTIVE',
         specifications: (variant.specifications || [])
           .filter((spec) => spec.name?.trim() && spec.value?.trim())
           .map((spec) => ({

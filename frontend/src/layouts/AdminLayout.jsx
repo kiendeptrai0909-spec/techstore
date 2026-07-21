@@ -14,6 +14,7 @@ import {
   LogOut,
   Home,
   Award,
+  Star,
 } from 'lucide-react'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -95,6 +96,11 @@ function AdminLayout() {
       label: 'Liên hệ',
       path: '/admin/contact-messages',
       icon: MessageSquare,
+    },
+    {
+      label: 'Đánh giá',
+      path: '/admin/reviews',
+      icon: Star,
     },
   ]
 

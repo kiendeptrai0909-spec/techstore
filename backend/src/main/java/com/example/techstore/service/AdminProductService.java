@@ -260,8 +260,36 @@ public class AdminProductService {
                 continue; // Bỏ qua các thông số không có giá trị
             }
 
-            SpecificationKey key = specificationKeyRepository.findById(req.getSpecificationKeyId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy khóa thông số"));
+            // Handle both old format (specificationKeyId) and new format (name)
+            SpecificationKey key;
+            if (req.getSpecificationKeyId() != null) {
+                // Old format: use specificationKeyId
+                key = specificationKeyRepository.findById(req.getSpecificationKeyId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy khóa thông số"));
+            } else {
+                // New format: find or create specification key by name
+                String specName = req.getName() != null ? req.getName().trim() : "";
+                if (specName.isBlank()) {
+                    continue; // Skip if name is blank
+                }
+
+                // Try to find existing specification key by name
+                key = specificationKeyRepository.findByCategoryIdAndNameIgnoreCaseAndDeletedAtIsNull(
+                        variant.getProduct().getCategory().getId(),
+                        specName
+                ).orElse(null);
+
+                // If not found, create a new specification key
+                if (key == null) {
+                    key = SpecificationKey.builder()
+                            .category(variant.getProduct().getCategory())
+                            .name(specName)
+                            .unit(null)
+                            .sortOrder(0)
+                            .build();
+                    key = specificationKeyRepository.save(key);
+                }
+            }
 
             ProductSpecification spec = ProductSpecification.builder()
                     .productVariant(variant)

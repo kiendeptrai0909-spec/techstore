@@ -1,6 +1,6 @@
 package com.example.techstore.dto.request;
 
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,8 +8,11 @@ import lombok.Setter;
 @Setter
 public class ProductSpecificationRequest {
 
-    @NotNull(message = "Mã khóa thông số không được để trống")
     private Long specificationKeyId;
 
+    @NotBlank(message = "Tên thông số không được để trống")
+    private String name;
+
+    @NotBlank(message = "Giá trị thông số không được để trống")
     private String value;
 }

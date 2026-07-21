@@ -20,6 +20,8 @@ public class ProductReviewResponse {
 
     private String userFullName;
 
+    private String userEmail;
+
     private Long orderItemId;
 
     private Integer rating;

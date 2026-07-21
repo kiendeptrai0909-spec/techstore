@@ -52,6 +52,7 @@ import AdminBrandFormPage from '../pages/admin/AdminBrandFormPage'
 import AdminCategoryPage from '../pages/admin/AdminCategoryPage'
 import AdminCategoryFormPage from '../pages/admin/AdminCategoryFormPage'
 import AdminChatPage from '../pages/admin/AdminChatPage'
+import AdminReviewPage from '../pages/admin/AdminReviewPage'
 function AppRoutes() {
   return (
     <Routes>
@@ -181,6 +182,8 @@ function AppRoutes() {
           path="contact-messages/:messageId"
           element={<AdminContactMessageDetailPage />}
         />
+
+        <Route path="reviews" element={<AdminReviewPage />} />
       </Route>
     </Routes>
   )
