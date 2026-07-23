@@ -70,7 +70,21 @@ public class CouponService {
                     }
                 });
 
-        validateCouponRequest(request);
+        LocalDateTime now = LocalDateTime.now();
+        boolean hasStarted = coupon.getStartAt() != null && coupon.getStartAt().isBefore(now);
+
+        if (hasStarted) {
+            if (request.getStartAt() != null && !request.getStartAt().isEqual(coupon.getStartAt())) {
+                throw new BadRequestException("Không thể sửa ngày bắt đầu của mã giảm giá đã diễn ra");
+            }
+        } else {
+            if (request.getStartAt() != null && request.getStartAt().isBefore(now)) {
+                throw new BadRequestException("Thời gian bắt đầu không được ở quá khứ");
+            }
+        }
+
+        // Validate other request attributes
+        validateCouponRequestExceptStartAtPast(request);
 
         coupon.setCode(code);
         coupon.setName(request.getName());
@@ -229,6 +243,14 @@ public class CouponService {
     }
 
     private void validateCouponRequest(CouponRequest request) {
+        validateCouponRequestExceptStartAtPast(request);
+
+        if (request.getStartAt().isBefore(LocalDateTime.now())) {
+            throw new BadRequestException("Thời gian bắt đầu không được ở quá khứ");
+        }
+    }
+
+    private void validateCouponRequestExceptStartAtPast(CouponRequest request) {
         if (request.getDiscountType() == DiscountType.PERCENTAGE) {
             if (request.getDiscountValue().compareTo(new BigDecimal("100")) > 0) {
                 throw new BadRequestException("Giảm giá theo phần trăm không được vượt quá 100%");
@@ -249,10 +271,6 @@ public class CouponService {
             throw new BadRequestException("Thời gian bắt đầu không được để trống");
         }
 
-        if (request.getStartAt().isBefore(LocalDateTime.now())) {
-            throw new BadRequestException("Thời gian bắt đầu không được ở quá khứ");
-        }
-
         if (request.getEndAt() == null) {
             throw new BadRequestException("Thời gian kết thúc không được để trống");
         }
@@ -260,7 +278,6 @@ public class CouponService {
         if (!request.getEndAt().isAfter(request.getStartAt())) {
             throw new BadRequestException("Thời gian kết thúc phải sau thời gian bắt đầu");
         }
-
     }
 
     private void validateCouponCanUse(Coupon coupon, BigDecimal subtotalAmount) {

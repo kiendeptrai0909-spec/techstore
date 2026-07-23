@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams, useLocation } from 'react-router'
 import { Edit, Plus, Award, Trash2 } from 'lucide-react'
 import { brandApi } from '../../api/brandApi'
+import AdminPagination from '../../components/admin/AdminPagination'
 
 function AdminBrandPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -303,42 +304,16 @@ function AdminBrandPage() {
             </tbody>
           </table>
 
-          {pageData?.totalPages > 1 && (
-            <div className="flex items-center justify-between border-t border-gray-100 px-6 py-4">
-              <span className="text-sm text-gray-500">
-                Trang {currentPage + 1} / {pageData.totalPages}
-              </span>
-
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  disabled={currentPage === 0}
-                  onClick={() => {
-                    const nextParams = Object.fromEntries(searchParams.entries())
-                    nextParams.page = String(currentPage - 1)
-                    setSearchParams(nextParams)
-                  }}
-                  className="rounded border px-3 py-1 text-sm font-semibold hover:bg-gray-50 disabled:opacity-50"
-                >
-                  Trước
-                </button>
-
-                <button
-                  type="button"
-                  disabled={currentPage === pageData.totalPages - 1}
-                  onClick={() => {
-                    const nextParams = Object.fromEntries(searchParams.entries())
-                    nextParams.page = String(currentPage + 1)
-                    setSearchParams(nextParams)
-                  }}
-                  className="rounded border px-3 py-1 text-sm font-semibold hover:bg-gray-50 disabled:opacity-50"
-                >
-                  Sau
-                </button>
-              </div>
-            </div>
-          )}
         </div>
+
+        <AdminPagination
+          pageData={pageData}
+          onPageChange={(page) => {
+            const nextParams = Object.fromEntries(searchParams.entries())
+            nextParams.page = String(page)
+            setSearchParams(nextParams)
+          }}
+        />
       </div>
     </div>
   )

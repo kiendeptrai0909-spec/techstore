@@ -151,7 +151,7 @@ public class OrderService {
     public Page<OrderResponse> getMyOrders(Pageable pageable) {
         User user = getCurrentUser();
 
-        return orderRepository.findByUserId(user.getId(), pageable)
+        return orderRepository.findByUserIdOrderByCreatedAtDesc(user.getId(), pageable)
                 .map(this::toOrderResponse);
     }
 

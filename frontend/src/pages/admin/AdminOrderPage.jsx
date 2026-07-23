@@ -5,6 +5,7 @@ import { ShoppingBag } from 'lucide-react'
 import { adminOrderApi } from '../../api/adminOrderApi'
 import AdminOrderFilter from '../../components/admin/order/AdminOrderFilter'
 import AdminOrderTable from '../../components/admin/order/AdminOrderTable'
+import AdminPagination from '../../components/admin/AdminPagination'
 
 function AdminOrderPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -158,54 +159,11 @@ function AdminOrderPage() {
 
         <AdminOrderTable orders={orders} loading={loading} />
 
-        <AdminOrderPagination
+        <AdminPagination
           pageData={pageData}
           onPageChange={handlePageChange}
         />
       </div>
-    </div>
-  )
-}
-
-function AdminOrderPagination({ pageData, onPageChange }) {
-  if (!pageData || pageData.totalPages <= 1) {
-    return null
-  }
-
-  const currentPage = pageData.number || 0
-  const totalPages = pageData.totalPages || 0
-
-  return (
-    <div className="flex items-center justify-center gap-2">
-      <button
-        disabled={currentPage === 0}
-        onClick={() => onPageChange(currentPage - 1)}
-        className="rounded border bg-white px-4 py-2 text-sm font-bold disabled:cursor-not-allowed disabled:opacity-50 hover:border-red-500 hover:text-red-600"
-      >
-        Trước
-      </button>
-
-      {Array.from({ length: totalPages }).map((_, index) => (
-        <button
-          key={index}
-          onClick={() => onPageChange(index)}
-          className={
-            index === currentPage
-              ? 'rounded border border-red-600 bg-red-600 px-4 py-2 text-sm font-black text-white'
-              : 'rounded border bg-white px-4 py-2 text-sm font-bold hover:border-red-500 hover:text-red-600'
-          }
-        >
-          {index + 1}
-        </button>
-      ))}
-
-      <button
-        disabled={currentPage >= totalPages - 1}
-        onClick={() => onPageChange(currentPage + 1)}
-        className="rounded border bg-white px-4 py-2 text-sm font-bold disabled:cursor-not-allowed disabled:opacity-50 hover:border-red-500 hover:text-red-600"
-      >
-        Sau
-      </button>
     </div>
   )
 }

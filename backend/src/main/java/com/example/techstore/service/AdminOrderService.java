@@ -39,11 +39,11 @@ public class AdminOrderService {
     @Transactional(readOnly = true)
     public Page<OrderResponse> getOrders(OrderStatus status, Pageable pageable) {
         if (status != null) {
-            return orderRepository.findByOrderStatus(status, pageable)
+            return orderRepository.findByOrderStatusOrderByCreatedAtDesc(status, pageable)
                     .map(this::toOrderResponse);
         }
 
-        return orderRepository.findAll(pageable)
+        return orderRepository.findAllByOrderByCreatedAtDesc(pageable)
                 .map(this::toOrderResponse);
     }
 

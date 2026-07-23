@@ -84,14 +84,28 @@ public class BannerService {
 
     @Transactional
     public BannerResponse updateBanner(Long id, BannerRequest request) {
-        validateBannerRequest(request);
-
         Banner banner = bannerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Không tìm thấy banner"));
 
         if (banner.getDeletedAt() != null) {
             throw new ResourceNotFoundException("Không tìm thấy banner");
         }
+
+        LocalDateTime now = LocalDateTime.now();
+        boolean hasStarted = banner.getStartAt() != null && banner.getStartAt().isBefore(now);
+
+        if (hasStarted) {
+            if (request.getStartAt() != null && !request.getStartAt().isEqual(banner.getStartAt())) {
+                throw new BadRequestException("Không thể sửa ngày bắt đầu của banner đã diễn ra");
+            }
+        } else {
+            if (request.getStartAt() != null && request.getStartAt().isBefore(now)) {
+                throw new BadRequestException("Thời gian bắt đầu không được ở quá khứ");
+            }
+        }
+
+        // Validate other request attributes
+        validateBannerRequestExceptStartAtPast(request);
 
         banner.setTitle(request.getTitle().trim());
         banner.setImageUrl(request.getImageUrl());
@@ -121,12 +135,16 @@ public class BannerService {
     }
 
     private void validateBannerRequest(BannerRequest request) {
-        if (request.getStartAt() == null) {
-            throw new BadRequestException("Thời gian bắt đầu không được để trống");
-        }
+        validateBannerRequestExceptStartAtPast(request);
 
         if (request.getStartAt().isBefore(LocalDateTime.now())) {
             throw new BadRequestException("Thời gian bắt đầu không được ở quá khứ");
+        }
+    }
+
+    private void validateBannerRequestExceptStartAtPast(BannerRequest request) {
+        if (request.getStartAt() == null) {
+            throw new BadRequestException("Thời gian bắt đầu không được để trống");
         }
 
         if (request.getEndAt() == null) {

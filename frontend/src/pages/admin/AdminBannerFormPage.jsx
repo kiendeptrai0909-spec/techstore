@@ -27,6 +27,7 @@ function AdminBannerFormPage() {
   const [uploadingImage, setUploadingImage] = useState(false)
   const [message, setMessage] = useState('')
   const [errors, setErrors] = useState({})
+  const [originalStartAt, setOriginalStartAt] = useState(null)
 
   const title = useMemo(
     () => (isEditMode ? 'Cập nhật banner' : 'Thêm banner'),
@@ -53,6 +54,7 @@ function AdminBannerFormPage() {
           endAt: toDateTimeLocal(banner.endAt),
           status: banner.status || 'ACTIVE',
         })
+        setOriginalStartAt(banner.startAt)
       } catch (error) {
         setMessage(error.message || 'Không thể tải banner')
       } finally {
@@ -146,8 +148,8 @@ function AdminBannerFormPage() {
     if (!formData.startAt) {
       nextErrors.startAt = 'Vui lòng chọn thời gian bắt đầu'
     }
-
-    if (formData.startAt && new Date(formData.startAt) < new Date()) {
+    const hasStarted = isEditMode && originalStartAt && new Date(originalStartAt) <= new Date()
+    if (formData.startAt && !hasStarted && new Date(formData.startAt) < new Date()) {
       nextErrors.startAt = 'Thời gian bắt đầu không được ở quá khứ'
     }
 
@@ -328,6 +330,7 @@ function AdminBannerFormPage() {
               onChange={(value) => handleChange('startAt', value)}
               error={errors.startAt}
               min={getCurrentDateTimeLocal()}
+              disabled={isEditMode && originalStartAt && new Date(originalStartAt) <= new Date()}
             />
 
             <FormField
@@ -460,6 +463,7 @@ function FormField({
   error,
   type = 'text',
   min,
+  disabled = false,
 }) {
   return (
     <div>
@@ -473,10 +477,11 @@ function FormField({
         onChange={(event) => onChange(event.target.value)}
         placeholder={placeholder}
         min={min}
+        disabled={disabled}
         className={
           error
-            ? 'h-11 w-full rounded border border-red-500 px-4 text-sm outline-none'
-            : 'h-11 w-full rounded border px-4 text-sm outline-none focus:border-red-500'
+            ? 'h-11 w-full rounded border border-red-500 px-4 text-sm outline-none disabled:bg-gray-100 disabled:cursor-not-allowed'
+            : 'h-11 w-full rounded border px-4 text-sm outline-none focus:border-red-500 disabled:bg-gray-100 disabled:cursor-not-allowed'
         }
       />
 

@@ -3,6 +3,7 @@ import { Link, useSearchParams, useLocation } from 'react-router'
 import { Edit, Plus, Tags, Trash2 } from 'lucide-react'
 import { adminCategoryApi } from '../../api/adminCategoryApi'
 import { getCategoryIcon } from '../../utils/categoryIcons'
+import AdminPagination from '../../components/admin/AdminPagination'
 
 function AdminCategoryPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -312,6 +313,15 @@ function AdminCategoryPage() {
             </tbody>
           </table>
         </div>
+
+        <AdminPagination
+          pageData={pageData}
+          onPageChange={(page) => {
+            const nextParams = Object.fromEntries(searchParams.entries())
+            nextParams.page = String(page)
+            setSearchParams(nextParams)
+          }}
+        />
       </div>
     </div>
   )
