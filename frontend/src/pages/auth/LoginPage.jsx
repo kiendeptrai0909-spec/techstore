@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../hooks/useAuth'
 import AuthCard from '../../components/auth/AuthCard'
 import FormInput from '../../components/auth/FormInput'
 
 function LoginPage() {
   const navigate = useNavigate()
   const location = useLocation()
-  const { login, loginWithGoogle } = useAuth()
+  const { login, loginWithGoogle } = useAuth()//lấy 2 hàm login và loginWithGoogle từ context AuthContext thông qua hook useAuth
 
   const googleButtonRef = useRef(null)
 
@@ -20,21 +20,21 @@ function LoginPage() {
   const [message, setMessage] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
-  const redirectTo = location.state?.from || '/'
+  const redirectTo = location.state?.from || '/'//Lấy đường dẫn mà user muốn truy cập trước đó (location.state.from). Nếu không có thì chuyển về trang gốc /.
 
   const handleGoogleLogin = useCallback(
     async (response) => {
-      if (!response?.credential) {
+      if (!response?.credential) {//là JWT token mà Google trả về.
         setMessage('Không nhận được thông tin đăng nhập từ Google')
         return
       }
 
-      setSubmitting(true)
-      setMessage('')
-      setErrors({})
+      setSubmitting(true)//Hiển thị loading hoặc disable nút đăng nhập.
+      setMessage('')//Xóa thông báo lỗi trước đó.
+      setErrors({})//Xóa các lỗi validation trước đó.
 
       try {
-        await loginWithGoogle(response.credential)
+        await loginWithGoogle(response.credential)//gửi token của Google đến server để xác thực và nhận thông tin người dùng.
 
         navigate(redirectTo, { replace: true })
       } catch (error) {
@@ -48,22 +48,22 @@ function LoginPage() {
   )
 
   useEffect(() => {
-    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID
+    const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID//lấy google client id
 
     if (!clientId) {
       console.warn('Thiếu VITE_GOOGLE_CLIENT_ID trong file .env')
       return undefined
     }
 
-    let timeoutId
+    let timeoutId//lưu ID của setTimeout để sau này có thể hủy bằng clearTimeout.
 
     const renderGoogleButton = () => {
-      if (!window.google || !googleButtonRef.current) {
-        timeoutId = window.setTimeout(renderGoogleButton, 200)
+      if (!window.google || !googleButtonRef.current) {//kiểm tra google sdk và doom đã sẵn sàng chưa
+        timeoutId = window.setTimeout(renderGoogleButton, 200)//nếu chưa thì gọi lại sau 200ms
         return
       }
 
-      googleButtonRef.current.innerHTML = ''
+      googleButtonRef.current.innerHTML = ''//xóa button cũ
 
       window.google.accounts.id.initialize({
         client_id: clientId,
@@ -117,18 +117,18 @@ function LoginPage() {
 
     setErrors(nextErrors)
 
-    return Object.keys(nextErrors).length === 0
+    return Object.keys(nextErrors).length === 0//nếu nextErrors rỗng thì form hợp lệ, ngược lại form không hợp lệ
   }
 
   const handleSubmit = async (event) => {
-    event.preventDefault()
+    event.preventDefault()//Mặc định khi submit form HTML, trình duyệt sẽ reload trang.-> Ngăn form reload trang
 
-    if (!validateForm()) {
+    if (!validateForm()) {//gọi hàm validateForm để kiểm tra
       return
     }
 
-    setSubmitting(true)
-    setMessage('')
+    setSubmitting(true)//Hiển thị loading hoặc disable nút đăng nhập.
+    setMessage('')//Xóa thông báo lỗi trước đó.
 
     try {
       await login({
@@ -136,12 +136,12 @@ function LoginPage() {
         password: formData.password,
       })
 
-      navigate(redirectTo, { replace: true })
+      navigate(redirectTo, { replace: true })//chuyển hướng người dùng đến trang mà họ muốn truy cập trước đó (redirectTo). Nếu không có thì chuyển về trang gốc /.
     } catch (error) {
       setMessage(error.message || 'Đăng nhập thất bại')
       setErrors(error.errors || {})
     } finally {
-      setSubmitting(false)
+      setSubmitting(false)//Ẩn loading hoặc enable nút đăng nhập.
     }
   }
 

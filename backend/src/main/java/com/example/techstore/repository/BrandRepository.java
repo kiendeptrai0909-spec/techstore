@@ -18,7 +18,7 @@ public interface BrandRepository extends JpaRepository<Brand, Long> {
     boolean existsBySlug(String slug);
 
     @org.springframework.data.jpa.repository.Query("SELECT DISTINCT p.brand FROM Product p WHERE p.category.id = :categoryId AND p.brand.status = 'ACTIVE' AND p.deletedAt IS NULL")
-    List<Brand> findActiveBrandsByCategoryId(@org.springframework.data.repository.query.Param("categoryId") Long categoryId);
+    List<Brand> findActiveBrandsByCategoryId(@org.springframework.data.repository.query.Param("categoryId") Long categoryId);//lấy danh sách các brand đang được active của các product thuộc 1 category
 
     @org.springframework.data.jpa.repository.Query("""
             SELECT b FROM Brand b
@@ -30,5 +30,5 @@ public interface BrandRepository extends JpaRepository<Brand, Long> {
             @org.springframework.data.repository.query.Param("keyword") String keyword,
             @org.springframework.data.repository.query.Param("status") ProductStatus status,
             org.springframework.data.domain.Pageable pageable
-    );
+    );//tìm kiếm brands dành cho quản trị viên
 }

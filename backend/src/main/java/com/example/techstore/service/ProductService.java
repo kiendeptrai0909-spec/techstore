@@ -37,6 +37,7 @@ public class ProductService {
     private final ProductVariantRepository productVariantRepository;
     private final ProductImageRepository productImageRepository;
     private final ProductSpecificationRepository productSpecificationRepository;
+    private final com.example.techstore.repository.ProductReviewRepository productReviewRepository;
 
     @Transactional(readOnly = true)
     public Page<ProductResponse> getProducts(
@@ -103,6 +104,9 @@ public class ProductService {
                 .map(this::toVariantResponse)
                 .toList();
 
+        Double avgRating = productReviewRepository.getAverageRatingByProductId(product.getId());
+        long count = productReviewRepository.findByProductIdAndStatus(product.getId(), com.example.techstore.enums.ReviewStatus.VISIBLE, Pageable.unpaged()).getTotalElements();
+
         return ProductResponse.builder()
                 .id(product.getId())
                 .name(product.getName())
@@ -112,6 +116,8 @@ public class ProductService {
                 .status(product.getStatus())
                 .category(toCategoryResponse(product.getCategory()))
                 .brand(toBrandResponse(product.getBrand()))
+                .averageRating(avgRating != null ? avgRating : 0.0)
+                .reviewCount(count)
                 .variants(variants)
                 .build();
     }

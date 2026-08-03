@@ -27,7 +27,7 @@ import {
 } from 'recharts'
 import { adminDashboardApi } from '../../api/adminDashboardApi'
 import { formatCurrency } from '../../utils/formatCurrency'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../hooks/useAuth'
 
 const CHART_COLORS = [
   '#ef4444',

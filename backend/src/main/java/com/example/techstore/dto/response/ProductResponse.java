@@ -26,5 +26,9 @@ public class ProductResponse {
 
     private BrandResponse brand;
 
+    private Double averageRating;
+
+    private Long reviewCount;
+
     private List<ProductVariantResponse> variants;
 }

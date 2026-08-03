@@ -23,10 +23,10 @@ public class AdminBrandService {
 
     @Transactional(readOnly = true)
     public Page<BrandResponse> getBrands(String keyword, ProductStatus status, Pageable pageable) {
-        String normalizedKeyword = keyword == null ? "" : keyword.trim().toLowerCase();
+        String normalizedKeyword = keyword == null ? "" : keyword.trim().toLowerCase();// chuẩn hóa keyword
         return brandRepository.searchAdminBrands(normalizedKeyword, status, pageable)
                 .map(this::toBrandResponse);
-    }
+    }// lấy danh sách thương hiệu
 
     @Transactional(readOnly = true)
     public BrandResponse getBrandById(Long brandId) {
@@ -36,7 +36,7 @@ public class AdminBrandService {
             throw new ResourceNotFoundException("Thương hiệu đã bị xóa");
         }
         return toBrandResponse(brand);
-    }
+    }// lấy thương hiệu theo id
 
     @Transactional
     public BrandResponse createBrand(BrandRequest request) {

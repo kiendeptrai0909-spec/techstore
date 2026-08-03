@@ -16,7 +16,7 @@ import {
   Award,
   Star,
 } from 'lucide-react'
-import { useAuth } from '../contexts/AuthContext'
+import { useAuth } from '../hooks/useAuth'
 
 function AdminLayout() {
   const navigate = useNavigate()
@@ -106,7 +106,7 @@ function AdminLayout() {
 
   const visibleMenuItems = isStaff 
     ? menuItems.filter(item => 
-        ['Dashboard', 'Đơn hàng', 'Khách hàng', 'Sản phẩm', 'Chat', 'FAQ', 'Liên hệ', 'Thương hiệu'].includes(item.label)
+        ['Dashboard', 'Đơn hàng', 'Khách hàng', 'Sản phẩm', 'Chat', 'FAQ', 'Liên hệ'].includes(item.label)
       )
     : menuItems;
 

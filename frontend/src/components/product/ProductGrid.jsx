@@ -4,7 +4,7 @@ function ProductGrid({ products = [], loading }) {
   if (loading) {
     return (
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {Array.from({ length: 12 }).map((_, index) => (
+        {Array.from({ length: 12 }).map((_, index) => (//hiển thị trạng thái loading
           <div
             key={index}
             className="h-[370px] animate-pulse rounded bg-gray-200"
@@ -14,7 +14,7 @@ function ProductGrid({ products = [], loading }) {
     )
   }
 
-  if (products.length === 0) {
+  if (products.length === 0) {//kiểm tra mảng có rỗng không
     return (
       <div className="rounded-md bg-white p-10 text-center shadow-sm">
         <h3 className="text-xl font-bold text-gray-800">

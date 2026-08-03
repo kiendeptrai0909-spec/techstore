@@ -1,7 +1,6 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { authApi } from '../api/authApi'
-
-const AuthContext = createContext(null)
+import { AuthContext } from './AuthContextInstance'
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => {
@@ -104,18 +103,9 @@ export function AuthProvider({ children }) {
       register,
       logout,
     }),
-    [user, loading, isAuthenticated, isAdmin, isStaff, isAdminOrStaff]
+    [user, loading, isAuthenticated, isAdmin, isStaff, isAdminOrStaff, login, loginWithGoogle, register]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-export function useAuth() {
-  const context = useContext(AuthContext)
-
-  if (!context) {
-    throw new Error('useAuth phải được dùng bên trong AuthProvider')
-  }
-
-  return context
-}

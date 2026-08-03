@@ -6,7 +6,7 @@ import { adminFaqApi } from '../../api/adminFaqApi'
 import AdminFaqFilter from '../../components/admin/faq/AdminFaqFilter'
 import AdminFaqTable from '../../components/admin/faq/AdminFaqTable'
 import AdminPagination from '../../components/admin/AdminPagination'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../hooks/useAuth'
 
 function AdminFaqPage() {
   const { user } = useAuth()

@@ -9,7 +9,7 @@ import { brandApi } from '../../api/brandApi'
 import AdminProductFilter from '../../components/admin/product/AdminProductFilter'
 import AdminProductTable from '../../components/admin/product/AdminProductTable'
 import AdminPagination from '../../components/admin/AdminPagination'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../hooks/useAuth'
 
 function AdminProductPage() {
   const { user } = useAuth()

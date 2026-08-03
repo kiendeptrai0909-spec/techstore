@@ -47,22 +47,47 @@ function AdminCategoryPage() {
     }
   }
 
-  useEffect(() => {
-    setFilters({
-      keyword: searchParams.get('keyword') || '',
-      status: searchParams.get('status') || '',
-    })
+  // Đồng bộ filters trực tiếp trong quá trình render khi searchParams thay đổi (Mẫu thiết kế React khuyên dùng để tránh useEffect setState)
+  const keywordParam = searchParams.get('keyword') || ''
+  const statusParam = searchParams.get('status') || ''
 
-    fetchCategories()
+  const [prevParams, setPrevParams] = useState({ keyword: keywordParam, status: statusParam })
+
+  if (prevParams.keyword !== keywordParam || prevParams.status !== statusParam) {
+    setPrevParams({ keyword: keywordParam, status: statusParam })
+    setFilters({ keyword: keywordParam, status: statusParam })
+  }
+
+  // Chạy việc tải dữ liệu bất đồng bộ an toàn bằng cách đưa vào hàng đợi microtask
+  useEffect(() => {
+    let active = true
+    const load = async () => {
+      // Đợi microtask tiếp theo để tránh xung đột render hiện tại
+      await Promise.resolve()
+      if (active) {
+        fetchCategories()
+      }
+    }
+    load()
+    return () => {
+      active = false
+    }
   }, [searchParams])
 
+  // Lắng nghe và hiển thị thông báo thành công một cách an toàn bằng Promise trì hoãn
   useEffect(() => {
-    if (location.state?.successMessage) {
-      setSuccessMessage(location.state.successMessage)
-      window.history.replaceState({}, document.title)
-      setTimeout(() => setSuccessMessage(''), 5000)
+    const successMsg = location.state?.successMessage
+    if (successMsg) {
+      Promise.resolve().then(() => {
+        setSuccessMessage(successMsg)
+      })
+      const state = { ...location.state }
+      delete state.successMessage
+      window.history.replaceState(state, document.title)
+      const timer = setTimeout(() => setSuccessMessage(''), 5000)
+      return () => clearTimeout(timer)
     }
-  }, [location.state])
+  }, [location.state?.successMessage])
 
   const categories = Array.isArray(pageData)
     ? pageData

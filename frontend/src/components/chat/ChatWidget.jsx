@@ -10,7 +10,7 @@ import {
   X,
 } from 'lucide-react'
 
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../hooks/useAuth'
 import { chatApi } from '../../api/chatApi'
 
 const SESSION_KEY = 'techstore_chat_session_id'

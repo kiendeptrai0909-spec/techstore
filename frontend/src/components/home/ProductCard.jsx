@@ -24,7 +24,7 @@ function ProductCard({ product }) {
     product?.brand?.name,
     product?.category?.name,
     variant?.stock !== undefined ? `Còn ${variant.stock}` : null,
-  ].filter(Boolean)
+  ].filter(Boolean)//loại bỏ các giá trị null hoặc undefined khỏi mảng specs
 
   return (
     <Link
@@ -82,9 +82,13 @@ function ProductCard({ product }) {
         </div>
 
         <div className="mt-1 flex items-center gap-1 text-sm">
-          <span className="font-bold text-orange-500">0.0</span>
+          <span className="font-bold text-orange-500">
+            {product.averageRating != null ? Number(product.averageRating).toFixed(1) : '0.0'}
+          </span>
           <Star size={14} fill="orange" className="text-orange-500" />
-          <span className="text-gray-500">(0 đánh giá)</span>
+          <span className="text-gray-500">
+            ({product.reviewCount ?? product.totalReviews ?? 0} đánh giá)
+          </span>
         </div>
       </div>
     </Link>

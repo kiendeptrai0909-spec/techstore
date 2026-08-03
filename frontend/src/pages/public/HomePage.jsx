@@ -14,11 +14,8 @@ import NewsSection from '../../components/home/NewsSection'
 function HomePage() {
   const [banners, setBanners] = useState([])
   const [categories, setCategories] = useState([])
-  const [featuredProducts, setFeaturedProducts] = useState([])
-  const [allProducts, setAllProducts] = useState([])
   const [keyboardProducts, setKeyboardProducts] = useState([])
   const [officeProducts, setOfficeProducts] = useState([])
-  const [pcProducts, setPcProducts] = useState([])
   const [mouseProducts, setMouseProducts] = useState([])
   const [news, setNews] = useState([])
   const [loading, setLoading] = useState(true)
@@ -29,38 +26,21 @@ function HomePage() {
         const [
           bannerData,
           categoryData,
-          featuredProductData,
-          productData,
           newsData,
         ] = await Promise.all([
           bannerApi.getBanners(),
           categoryApi.getCategories(),
-          productApi.getFeaturedProducts({ page: 0, size: 10 }),
-          productApi.getProducts({ page: 0, size: 20 }),
           newsApi.getNews({ page: 0, size: 4 }),
         ])
 
         const normalizedBanners = normalizeList(bannerData)
         const normalizedCategories = normalizeList(categoryData)
-        const normalizedFeaturedProducts = normalizeList(featuredProductData)
-        const normalizedProducts = normalizeList(productData)
         const normalizedNews = normalizeList(newsData)
 
         setBanners(normalizedBanners)
         setCategories(normalizedCategories)
-        setFeaturedProducts(normalizedFeaturedProducts)
-        setAllProducts(normalizedProducts)
         setNews(normalizedNews)
-        const laptopCategory = findCategoryByKeywords(normalizedCategories, [
-          'laptop',
-          'may tinh xach tay',
-        ])
 
-        const pcCategory = findCategoryByKeywords(normalizedCategories, [
-          'pc',
-          'may tinh bo',
-          'build pc',
-        ])
         const keyboardCategory = findCategoryByKeywords(normalizedCategories, [
           'ban phim',
           'ban phim co',
@@ -70,12 +50,11 @@ function HomePage() {
         const [
           keyboardData,
           officeProductData,
-          pcProductData,
         ] = await Promise.all([
           productApi.getProducts({
-            page: 0,
-            size: 5,
-            status: 'ACTIVE',
+            page: 0,//lấy trang đầu tiên
+            size: 5,//lấy 5 sản phẩm
+            status: 'ACTIVE',//chỉ lấy sản phẩm đang hoạt động
             ...(keyboardCategory?.id
               ? { categoryId: keyboardCategory.id }
               : { keyword: 'ban phim' }),
@@ -87,19 +66,11 @@ function HomePage() {
             status: 'ACTIVE',
             keyword: 'laptop',
           }),
-
-          productApi.getProducts({
-            page: 0,
-            size: 5,
-            status: 'ACTIVE',
-            ...(pcCategory?.id ? { categoryId: pcCategory.id } : { keyword: 'pc' }),
-          }),
         ])
 
         setKeyboardProducts(normalizeList(keyboardData))
         setOfficeProducts(normalizeList(officeProductData))
-        setPcProducts(normalizeList(pcProductData))
-        const mouseCategory = normalizedCategories.find((category) => {
+        const mouseCategory = normalizedCategories.find((category) => {//tìm danh mục liên quan đến chuột máy tính
           const slug = category.slug || ''
           const name = category.name || ''
 
@@ -140,8 +111,8 @@ function HomePage() {
     fetchHomeData()
   }, [])
 
-  const sortedBanners = sortBanners(banners)
-
+  const sortedBanners = sortBanners(banners)//sắp xếp banner theo thứ tự ưu tiên
+//phân loại banner theo vị trí hiển thị
   const leftBanner = findFirstBannerByPosition(sortedBanners, [
     'Banner trái',
     'HOME_LEFT',
@@ -187,6 +158,7 @@ function HomePage() {
    * - thứ tự 3      -> ô Gaming Mouse
    * - thứ tự 4      -> ô PC RX 6500XT
    */
+  // Lấy banner lớn trung tâm, 3 banner nhỏ bên phải và 2 banner dưới banner lớn
   const heroMainBanner = topBanners[0]
   const heroRightBanners = topBanners.slice(1, 4)
   const heroBottomBanners = topBanners.slice(4, 6)
@@ -198,8 +170,7 @@ function HomePage() {
     'PC RX 6500XT',
   ]
 
-  const middleSlotBanners = middleBanners.slice(0, 4)
-
+  const middleSlotBanners = middleBanners.slice(0, 4)//lấy 4 banner giữa trang
 
 
   return (
@@ -445,7 +416,7 @@ function normalizeList(data) {
   return []
 }
 
-function sortBanners(banners) {
+function sortBanners(banners) {//sắp xếp banner theo thứ tự ưu tiên
   return [...banners].sort((a, b) => {
     const orderA = Number(a.displayOrder ?? a.sortOrder ?? a.order ?? 999)
     const orderB = Number(b.displayOrder ?? b.sortOrder ?? b.order ?? 999)

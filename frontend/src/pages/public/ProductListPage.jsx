@@ -11,12 +11,12 @@ import ProductGrid from '../../components/product/ProductGrid'
 import ProductPagination from '../../components/product/ProductPagination'
 
 function ProductListPage() {
-  const [searchParams, setSearchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()//làm việc với query parameters trên URL
 
-  const [categories, setCategories] = useState([])
-  const [brands, setBrands] = useState([])
-  const [pageData, setPageData] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [categories, setCategories] = useState([])//lưu danh sách danh mục sản phẩm
+  const [brands, setBrands] = useState([])//lưu danh sách thương hiệu sản phẩm
+  const [pageData, setPageData] = useState(null)//lưu dữ liệu phân trang sản phẩm
+  const [loading, setLoading] = useState(true)//lưu trạng thái tải dữ liệu sản phẩm
 
   const [filters, setFilters] = useState({
     keyword: searchParams.get('keyword') || '',
@@ -24,11 +24,11 @@ function ProductListPage() {
     brandId: searchParams.get('brandId') || '',
     minPrice: searchParams.get('minPrice') || '',
     maxPrice: searchParams.get('maxPrice') || '',
-  })
+  })//lưu tất cả điều kiện tìm kiếm, lấy giá trị từ URL
 
-  const currentPage = Number(searchParams.get('page') || 0)
-  const pageSize = Number(searchParams.get('size') || 12)
-
+  const currentPage = Number(searchParams.get('page') || 0)//lấy trang hiện tại từ URL
+  const pageSize = Number(searchParams.get('size') || 12)//lấy số lượng sản phẩm trên mỗi trang từ URL
+//mục đích: biết người dùng xem trang nào và muốn hiển thị bao nhiêu sản phẩm trên mỗi trang, từ đó truy vấn dữ liệu sản phẩm phù hợp từ API.
   const queryObject = useMemo(() => {
     return {
       keyword: searchParams.get('keyword') || '',
@@ -40,7 +40,7 @@ function ProductListPage() {
       size: pageSize,
     }
   }, [searchParams, currentPage, pageSize])
-
+//chứa query parameters hiện tại từ URL
   useEffect(() => {
     const fetchFilterData = async () => {
       try {
@@ -52,7 +52,7 @@ function ProductListPage() {
     }
 
     fetchFilterData()
-  }, [])
+  }, [])//Chạy effect chỉ một lần duy nhất sau lần render đầu tiên.
 
   useEffect(() => {
     const fetchBrands = async () => {
@@ -79,17 +79,17 @@ function ProductListPage() {
       minPrice: searchParams.get('minPrice') || '',
       maxPrice: searchParams.get('maxPrice') || '',
     })
-  }, [searchParams])
+  }, [searchParams])//đồng bộ state filters với query parameters trên URL, đảm bảo rằng khi người dùng thay đổi URL trực tiếp hoặc sử dụng nút back/forward của trình duyệt, các bộ lọc sẽ được cập nhật chính xác.
 
   useEffect(() => {
     const fetchProducts = async () => {
       setLoading(true)
 
       try {
-        const params = buildProductParams(queryObject)
-        const data = await productApi.getProducts(params)
+        const params = buildProductParams(queryObject)//làm sạch params
+        const data = await productApi.getProducts(params)//gửi param lên API
 
-        setPageData(data)
+        setPageData(data)//lưu dữ liệu phân trang sản phẩm
       } catch (error) {
         console.error(error.message)
       } finally {
@@ -142,7 +142,7 @@ function ProductListPage() {
     })
   }
 
-  const products = pageData?.content || []
+  const products = pageData?.content || []//lấy dữ liệu content từ pageData để gán vào biến products, nếu không có thì dùng mảng rỗng [].
 
   return (
     <div className="bg-[#e9e9e9]">
@@ -208,8 +208,8 @@ function normalizeList(data) {
   return []
 }
 
-function buildProductParams(query) {
-  const params = {
+function buildProductParams(query) {//object tham số (params) cho việc gọi API lấy danh sách sản phẩm dựa trên dữ liệu tìm kiếm (query).
+  const params = {//chuyển object này thành object params sạch hơn để gửi lên API.
     page: query.page ?? 0,
     size: query.size ?? 12,
   }

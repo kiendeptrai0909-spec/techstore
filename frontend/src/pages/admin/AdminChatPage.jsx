@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { MessageSquare, Send, Trash2, XCircle } from 'lucide-react'
 import { adminChatApi } from '../../api/adminChatApi'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from '../../hooks/useAuth'
 
 function AdminChatPage() {
   const { user } = useAuth()
