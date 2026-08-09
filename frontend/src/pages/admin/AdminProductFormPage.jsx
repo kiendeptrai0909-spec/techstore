@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router'
-import { ArrowLeft, Save } from 'lucide-react'
+import { ArrowLeft, Save, X, ImagePlus, Loader2 } from 'lucide-react'
 
 import { adminProductApi } from '../../api/adminProductApi'
 import { categoryApi } from '../../api/categoryApi'
@@ -28,6 +28,7 @@ function AdminProductFormPage() {
     status: 'ACTIVE',
     featured: false,
     thumbnailUrl: '',
+    images: [],
   })
 
   const [variants, setVariants] = useState([
@@ -44,6 +45,8 @@ function AdminProductFormPage() {
   const [loading, setLoading] = useState(isEditMode)
   const [submitting, setSubmitting] = useState(false)
   const [uploadingImage, setUploadingImage] = useState(false)
+  const [uploadingMultiple, setUploadingMultiple] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState({ done: 0, total: 0 })
   const [message, setMessage] = useState('')
   const [errors, setErrors] = useState({})
 
@@ -84,22 +87,22 @@ function AdminProductFormPage() {
             status: product.status || 'ACTIVE',
             featured: Boolean(product.featured),
             thumbnailUrl: product.thumbnailUrl || product.imageUrl || '',
+            images: Array.isArray(product.images)
+              ? product.images.map((img) => img.imageUrl || img)
+              : [],
           })
 
           setVariants(
             product.variants?.length > 0
               ? product.variants.map((variant) => {
-                  // Handle both old format (specificationKeyId, value) and new format (name, value)
                   const specs = variant.specifications || []
                   const convertedSpecs = specs.map((spec) => {
-                    // If it's the old format with specificationKeyId, convert to new format
                     if (spec.specificationKeyId !== undefined) {
                       return {
                         name: spec.specificationKey?.name || spec.name || '',
                         value: spec.value || '',
                       }
                     }
-                    // If it's already in new format, keep as is
                     return {
                       name: spec.name || '',
                       value: spec.value || '',
@@ -114,6 +117,9 @@ function AdminProductFormPage() {
                     salePrice: variant.salePrice ?? '',
                     stock: variant.stock ?? '',
                     thumbnailUrl: variant.thumbnailUrl || '',
+                    images: Array.isArray(variant.images)
+                      ? variant.images.map((img) => img.imageUrl || img)
+                      : [],
                     description: variant.description || '',
                     specifications: convertedSpecs,
                     status: variant.status || 'ACTIVE',
@@ -134,7 +140,6 @@ function AdminProductFormPage() {
                 ]
           )
 
-          // Load spec keys cho category, rồi pre-fill giá trị từ sản phẩm
           const catId = product.categoryId || product.category?.id
           if (catId) {
             try {
@@ -145,7 +150,7 @@ function AdminProductFormPage() {
               const keyList = normalizeList(keys)
               setSpecificationKeys(keyList)
               setBrands(normalizeList(filteredBrands))
-              
+
               const prefilled = {}
               keyList.forEach((key) => {
                 const existing = product.specifications?.find(
@@ -222,9 +227,7 @@ function AdminProductFormPage() {
   const handleThumbnailChange = async (event) => {
     const file = event.target.files?.[0]
 
-    if (!file) {
-      return
-    }
+    if (!file) return
 
     if (!file.type.startsWith('image/')) {
       setMessage('Vui lòng chọn file hình ảnh')
@@ -275,6 +278,68 @@ function AdminProductFormPage() {
     }
   }
 
+  const handleMultipleImagesChange = async (event) => {
+    const files = Array.from(event.target.files || [])
+    if (files.length === 0) return
+
+    // Kiểm tra định dạng và kích thước
+    const invalidFile = files.find(
+      (f) => !f.type.startsWith('image/') || f.size > 5 * 1024 * 1024
+    )
+    if (invalidFile) {
+      setMessage('Chỉ được chọn ảnh và mỗi ảnh không quá 5MB')
+      event.target.value = ''
+      return
+    }
+
+    setUploadingMultiple(true)
+    setUploadProgress({ done: 0, total: files.length })
+    setMessage('')
+
+    const uploaded = []
+
+    for (const file of files) {
+      try {
+        const response = await uploadApi.uploadImage(file)
+        const imageUrl =
+          response?.data?.url ||
+          response?.url ||
+          response?.data?.secureUrl ||
+          response?.secureUrl ||
+          ''
+        if (imageUrl) {
+          uploaded.push(imageUrl)
+        }
+      } catch {
+        // bỏ qua ảnh lỗi, tiếp tục upload các ảnh còn lại
+      }
+      setUploadProgress((prev) => ({ ...prev, done: prev.done + 1 }))
+    }
+
+    if (uploaded.length > 0) {
+      setFormData((prev) => ({
+        ...prev,
+        images: [...prev.images, ...uploaded],
+      }))
+    }
+
+    if (uploaded.length < files.length) {
+      setMessage(
+        `${uploaded.length}/${files.length} ảnh đã được upload thành công. Một số ảnh bị lỗi.`
+      )
+    }
+
+    setUploadingMultiple(false)
+    event.target.value = ''
+  }
+
+  const handleRemoveImage = (index) => {
+    setFormData((prev) => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index),
+    }))
+  }
+
   const validateForm = () => {
     const nextErrors = {}
 
@@ -323,6 +388,7 @@ function AdminProductFormPage() {
       status: formData.status,
       featured: Boolean(formData.featured),
       thumbnailUrl: formData.thumbnailUrl.trim(),
+      images: formData.images.filter(Boolean),
       variants: variants.map((variant) => ({
         id: variant.id,
         name: variant.name?.trim(),
@@ -331,6 +397,7 @@ function AdminProductFormPage() {
         salePrice: variant.salePrice ? Number(variant.salePrice) : null,
         stock: Number(variant.stock || 0),
         thumbnailUrl: variant.thumbnailUrl?.trim(),
+        images: Array.isArray(variant.images) ? variant.images.filter(Boolean) : [],
         description: variant.description?.trim() || '',
         status: variant.status || 'ACTIVE',
         specifications: (variant.specifications || [])
@@ -489,6 +556,7 @@ function AdminProductFormPage() {
               </select>
             </div>
 
+            {/* Ảnh đại diện */}
             <div>
               <label className="mb-2 block text-sm font-bold text-gray-700">
                 Ảnh đại diện
@@ -504,7 +572,8 @@ function AdminProductFormPage() {
                 />
 
                 {uploadingImage && (
-                  <p className="text-sm font-semibold text-blue-600 animate-pulse">
+                  <p className="flex items-center gap-2 text-sm font-semibold text-blue-600 animate-pulse">
+                    <Loader2 size={14} className="animate-spin" />
                     Đang upload ảnh lên Cloudinary...
                   </p>
                 )}
@@ -565,6 +634,92 @@ function AdminProductFormPage() {
                 placeholder="Nhập mô tả sản phẩm..."
                 className="w-full rounded border px-4 py-3 text-sm outline-none focus:border-red-500"
               />
+            </div>
+
+            {/* Bộ sưu tập ảnh sản phẩm (multi-image gallery) */}
+            <div className="md:col-span-2">
+              <label className="mb-2 block text-sm font-bold text-gray-700">
+                Thư viện ảnh sản phẩm
+                <span className="ml-2 text-xs font-normal text-gray-400">
+                  (Có thể chọn nhiều ảnh cùng lúc, mỗi ảnh tối đa 5MB)
+                </span>
+              </label>
+
+              {/* Nút chọn nhiều ảnh */}
+              <label
+                className={`inline-flex cursor-pointer items-center gap-2 rounded border-2 border-dashed border-gray-300 px-5 py-3 text-sm font-bold text-gray-600 transition hover:border-red-400 hover:text-red-500 ${uploadingMultiple ? 'cursor-not-allowed opacity-60' : ''}`}
+              >
+                <ImagePlus size={18} />
+                {uploadingMultiple
+                  ? `Đang upload ${uploadProgress.done}/${uploadProgress.total} ảnh...`
+                  : 'Chọn nhiều ảnh để thêm vào thư viện'}
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handleMultipleImagesChange}
+                  disabled={uploadingMultiple}
+                  className="hidden"
+                />
+              </label>
+
+              {uploadingMultiple && (
+                <div className="mt-2 flex items-center gap-2 text-sm text-blue-600">
+                  <Loader2 size={14} className="animate-spin" />
+                  <span>
+                    Đang tải lên {uploadProgress.done}/{uploadProgress.total}{' '}
+                    ảnh...
+                  </span>
+                  <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-200">
+                    <div
+                      className="h-full rounded-full bg-blue-500 transition-all duration-300"
+                      style={{
+                        width: `${uploadProgress.total > 0 ? (uploadProgress.done / uploadProgress.total) * 100 : 0}%`,
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Lưới xem trước ảnh đã upload */}
+              {formData.images.length > 0 && (
+                <div className="mt-3">
+                  <p className="mb-2 text-xs font-semibold text-gray-500">
+                    {formData.images.length} ảnh trong thư viện
+                  </p>
+                  <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6">
+                    {formData.images.map((url, index) => (
+                      <div key={`${url}-${index}`} className="group relative">
+                        <div className="aspect-square overflow-hidden rounded-lg border-2 border-gray-200 bg-gray-50">
+                          <img
+                            src={url}
+                            alt={`Ảnh sản phẩm ${index + 1}`}
+                            className="h-full w-full object-cover transition-opacity group-hover:opacity-70"
+                          />
+                        </div>
+                        {/* Nút xóa ảnh */}
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveImage(index)}
+                          className="absolute -right-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-red-600 text-white shadow-md transition hover:bg-red-700"
+                          title="Xóa ảnh này"
+                        >
+                          <X size={12} />
+                        </button>
+                        <p className="mt-1 truncate text-center text-xs text-gray-400">
+                          Ảnh {index + 1}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {formData.images.length === 0 && !uploadingMultiple && (
+                <p className="mt-3 text-sm text-gray-400 italic">
+                  Chưa có ảnh nào trong thư viện. Nhấn nút trên để thêm ảnh.
+                </p>
+              )}
             </div>
           </div>
         </div>
